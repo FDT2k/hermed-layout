@@ -5,7 +5,7 @@ import './sass/style.scss';
 
 function App() {
   return (
-    <div className="customer-landing-page">
+    <div className="customer-landing-page light theme-light">
       <header className="">
       </header>
       <h1>Bienvenu</h1>

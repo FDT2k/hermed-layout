@@ -2,7 +2,6 @@
 
 $white: gray(100);
 $OuterSpace: $GKA-Theme-1-rgba;
-$bloup: #383636;
 $Elm: $GKA-Theme-2-rgba;
 $Bermuda: $GKA-Theme-3-rgba;
 $DeepSeaGreen: $UI-Color-4-rgba;
@@ -11,6 +10,14 @@ $Coral: #ff7954;
 $Oasis: $UI-Color-1-rgba;
 $OasisLight: color($Oasis, 97%);
 $SeaBuckthorn: $GKA-Theme-5-rgba;
+
+$Paradiso: $HERMED_Theme-1-rgba;
+$GrannyApple: $HERMED_Theme-2-rgba;
+$Champagne: $HERMED_Theme-3-rgba;
+$Charade: $HERMED_Theme-4-rgba;
+$Carnation: $HERMED_Theme-5-rgba;
+$Reef: $More-Colors-1-rgba;
+$PastelGreen: $More-Colors-2-rgba;
 
 $info: $UI-Color-3-rgba;
 $success: $UI-Color-5-rgba;
@@ -27,10 +34,10 @@ $gray-47: gray(47);
 
 $themes: (
   light: (
-    titleFont:'gibbs',
+    titleFont:'soleil',
     mainFont: 'soleil',
-    textColor: $OuterSpace,
-    textColorSecondary: $OuterSpace,
+    textColor: $Charade,
+    textColorSecondary: $Charade,
 
     backgroundColorSecondary: $white,
     backgroundColor: $white,
@@ -38,27 +45,27 @@ $themes: (
     shadow: $gray-72,
     fieldsText: $gray-47,
     helperText: $gray-87,
-    info: $Coral,
+    info: $Carnation,
     error: $error,
     success: $success,
-    link: $Coral,
+    link: $Carnation,
 
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
-    buttonTextHoverColor: $OuterSpace,
+    buttonTextHoverColor: $Charade,
 
-    buttonColor: $Coral,
-    buttonBorder: 2px solid $Coral,
+    buttonColor: $Carnation,
+    buttonBorder: 2px solid $Carnation,
     buttonHoverColor: $Oasis,
 
 
   ),
   dark_orange: (
-    titleFont:'gibbs',
+    titleFont:'soleil',
     mainFont: 'soleil',
-    textColor: $OuterSpace,
-    textColorSecondary: $OuterSpace,
+    textColor: $Charade,
+    textColorSecondary: $Charade,
 
     backgroundColorSecondary: $OasisLight,
     backgroundColor: $Oasis,
@@ -66,31 +73,31 @@ $themes: (
     shadow: $SeaBuckthorn,
     fieldsText: $gray-47,
     helperText: $gray-87,
-    info: $Coral,
+    info: $Carnation,
     error: $error,
     success: $success,
-    link: $Coral,
+    link: $Carnation,
 
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
-    buttonTextHoverColor: $OuterSpace,
+    buttonTextHoverColor: $Charade,
 
-    buttonColor: $Coral,
-    buttonBorder: 2px solid $Coral,
+    buttonColor: $Carnation,
+    buttonBorder: 2px solid $Carnation,
     buttonHoverColor: $SeaBuckthorn,
 
 
 
   ),
   dark: (
-    titleFont:'gibbs',
+    titleFont:'soleil',
     mainFont: 'soleil',
     textColor: $gray-99,
-    textColorSecondary: $OuterSpace,
+    textColorSecondary: $Charade,
 
     backgroundColorSecondary: $OasisLight,
-    backgroundColor: $OuterSpace,
+    backgroundColor: $Charade,
 
     shadow: $SeaBuckthorn,
     fieldsText: $gray-47,
@@ -103,10 +110,10 @@ $themes: (
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
-    buttonTextHoverColor: $OuterSpace,
+    buttonTextHoverColor: $Charade,
 
-    buttonColor: $Coral,
-    buttonBorder: 2px solid $Coral,
+    buttonColor: $Carnation,
+    buttonBorder: 2px solid $Carnation,
     buttonHoverColor: $SeaBuckthorn,
   ),
 );
