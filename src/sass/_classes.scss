@@ -47,3 +47,17 @@
 .main-header {
 
 }
+
+/* Custom sections */
+.customer-landing-page {
+  header {
+    width: 100%;
+    min-height: 60vh;
+    background-color: $Carnation;
+  }
+  h1 {
+    @include themify($themes) {
+  		color: themed('textColorSecondary');
+  	}
+  }
+}
