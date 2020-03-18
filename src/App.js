@@ -5,21 +5,14 @@ import './sass/style.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="customer-landing-page">
+      <header className="">
       </header>
+      <h1>Bienvenu</h1>
+      <p>
+        Le Dr. XXX vous invite à rejoindre sa salle d'attente pour une consultation à distance. Lorsque vous êtes prêts, cliquez sur le bouton ci-dessous pour la rejoindre.
+      </p>
+      <button>JE SUIS PRÊT !</button>
     </div>
   );
 }

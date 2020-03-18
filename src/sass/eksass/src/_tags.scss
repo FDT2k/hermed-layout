@@ -1,4 +1,3 @@
-$rembase: 14;
 *,
 *:after,
 *:before {
@@ -11,28 +10,111 @@ body {
 	width: 100%;
 	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
 	line-height: 1.5em;
+	@include themify($themes) {
+		color: themed('textColor');
+		background-color: themed('backgroundColor');
+		@include themed_font('mainFont','light');
+	}
+}
+
+section,footer {
+	@include themify($themes) {
+		color: themed('textColor');
+		background-color: themed('backgroundColor');
+		@include themed_font('mainFont','light');
+	}
+
 }
 
 h1 {
-  line-height: 1.3em;
+	line-height: 1.3em;
+	@include themify($themes) {
+		color: themed('textColor');
+		@include themed_font('titleFont','thin');
+	}
+	@include fluid-type(font-size, 320px, 1366px, 34px, 70px);
 }
 
 h2 {
-  line-height: 1.2em;
+	line-height: 1.2em;
+	@include themify($themes) {
+		color: themed('textColor');
+		@include themed_font('mainFont','thin');
+	}
+	@include fluid-type(font-size, 320px, 1366px, 32px, 40px);
 }
 
 h3 {
 	line-height: 1.2em;
+	@include themify($themes) {
+	 color: themed('textColor');
+	 @include themed_font('mainFont','bold');
+	}
+	@include fluid-type(font-size, 320px, 1366px, 18px, 38px);
 }
 
 h4 {
 	line-height: 1.2em;
+	@include themify($themes) {
+	 color: themed('textColor');
+	 @include themed_font('mainFont','semi-bold');
+	}
+	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
 }
 
 p {
+	@include themify($themes) {
+	 color: themed('textColor');
+	 @include themed_font('mainFont','thin');
+	}
+	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
 }
 
 a {
 	text-decoration: none;
-	color: $cDefaultLink;
+	@include themify($themes) {
+		color: themed('link');
+		@include themed_font('mainFont','regular');
+	}
+}
+
+b {
+	font-weight:bold;
+}
+
+button {
+	min-height: 40px;
+	padding: 1em 1.5em;
+	cursor: pointer;
+
+	&:hover, &:focus {
+		@include themify($themes) {
+			color: themed('buttonTextHoverColor');
+			border: 1px solid themed('buttonHoverColor');
+			background-color:themed('buttonHoverColor');
+		}
+	}
+}
+
+button, button:active{
+	@include themify($themes) {
+		color: themed('buttonTextColor');
+		border: 1px solid themed('buttonColor');
+		background-color:themed('buttonColor');
+		text-transform: themed('buttonTextTransform');
+		@include themed_font('mainFont', 'semi-bold');
+	}
+	outline: none;
+}
+
+footer{
+	text-align: center;
+	@include themify($themes) {
+		color: themed('textColor');
+	}
+	min-width: 100%;
+	@include themify($themes) {
+	 @include themed_font('mainFont','regular');
+	}
+	@include fluid-type(font-size, 320px, 1366px, 14px, 16px);
 }
