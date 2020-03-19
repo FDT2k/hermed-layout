@@ -19,13 +19,17 @@
   background-color:#388279;
   color: white;
   @include themify($themes) {
-		@include themed_font('titleFont','semi-bold');
+    @include themed_font('mainFont','regular');
+
     color: themed('textColorSecondary');
 		background-color: themed('backgroundColorSecondary');
 	}
   text-align:center;
 
   .average-time{
+    @include themify($themes) {
+      @include themed_font('titleFont','semi-bold');
+    }
     font-size: 40px;
   }
 }
