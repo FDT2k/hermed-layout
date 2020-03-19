@@ -1,0 +1,119 @@
+.quote {
+  padding-top:5px;
+  @include fluid-type(font-size, 320px, 1366px, 20px, 24px);
+}
+
+.info {
+  @include themify($themes) {
+    color: themed('info');
+  }
+  a {
+    @include themify($themes) {
+      color: themed('link');
+    }
+    text-decoration: none;
+  }
+}
+
+.success {
+  @include themify($themes) {
+    color: themed('success');
+  }
+}
+
+.error {
+  @include themify($themes) {
+    color: themed('error');
+  }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+/* 0.3 - GENERAL CLASSES */
+.content-container {
+	margin: 0px 20px;
+	padding-top:20px;
+}
+
+.background {
+	background-position: center;
+  background-repeat: no-repeat;
+}
+.background-cover {
+  background-size: cover;
+}
+
+.cover-container {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	padding: 0;
+}
+
+.cover {
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	margin: 0px auto;
+  @include themify($themes) {
+     color: themed('textColor');
+     background-color: themed('backgroundColor');
+   }
+  @include flex;
+  @include flex-direction(column);
+  &--align-center {
+    @include flex-align(center);
+  }
+  &--just-center{
+     @include flex-just(center);
+  }
+}
+
+.centered{
+  width: 100%;
+  margin: 0px auto;
+  @include flex;
+  @include flex-direction(column);
+  @include flex-just(center);
+	@include flex-align(center);
+}
+
+
+.separate {
+	margin: 30px 0px;
+}
+
+
+
+.text-left{
+	text-align: left !important;
+}
+
+.card {
+  padding: 3%;
+  @include themify($themes){
+    background-color: themed('backgroundColorSecondary');
+    box-shadow: 0px 0px 4px 0px themed('shadow');
+  }
+}
+
+.footer {
+  div {
+    padding: 1em;
+    min-height: 5vh;
+  }
+}
+
+/* 0.4 - PREFIXER */
+.transition {
+	-webkit-transition: all ease-in 0.2s;
+	transition: all ease-in 0.2s;
+}
+
+
+.langue-container .active{
+	font-weight: bold;
+}

@@ -1,25 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+//import './style';
+import 'sass/style.scss';
+import { Link, Route } from "wouter";
+import Catalogue from 'components/Catalogue'
+import Landing from 'components/CustomerLanding'
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Route path="/">
+
+    <section className="theme-light">
+    <h1>Menu</h1>
+    <ul>
+      <li><a href="/catalog" target="_blank"><h4>Catalogue</h4></a></li>
+      <li><a href="/CustomerLanding" target="_blank"><h4>Landing</h4></a></li>
+    </ul>
+    </section>
+    </Route>
+    <Route path="/catalog"><Catalogue/></Route>
+
+    </>
   );
 }
 
