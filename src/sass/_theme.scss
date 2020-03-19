@@ -34,6 +34,33 @@ $gray-47: gray(47);
 
 
 $themes: (
+
+chat: (
+  titleFont:'soleil',
+  mainFont: 'soleil',
+  textColor: $Charade,
+  textColorSecondary: $white,
+
+  backgroundColorSecondary: $Paradiso,
+  backgroundColor: $Champagne,
+
+  shadow: $gray-72,
+  fieldsText: $gray-47,
+  helperText: $gray-87,
+  info: $Carnation,
+  error: $error,
+  success: $success,
+  link: $Carnation,
+
+  // Buttons
+  buttonTextTransform: uppercase,
+  buttonTextColor: $white,
+  buttonTextHoverColor: $Charade,
+
+  buttonColor: $Carnation,
+  buttonBorder: 2px solid $Carnation,
+  buttonHoverColor: $Oasis,
+),
   light: (
     titleFont:'soleil',
     mainFont: 'soleil',
