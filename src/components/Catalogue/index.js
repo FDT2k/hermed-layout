@@ -1,15 +1,15 @@
 import React from 'react'
 
 
-import Exemple from 'components/Exemple'
 import Landing from 'components/CustomerLanding'
+import Footer from 'components/Footer'
 
 export default props => {
 
   return (
-    <section className="theme-default">
-      <Exemple/>
+    <main className="theme-default cover">
       <Landing/>
-    </section>
+      <Footer/>
+    </main>
   )
 }

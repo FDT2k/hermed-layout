@@ -1,6 +1,6 @@
 @import 'adobe';
 
-
+$white: gray(100);
 $OuterSpace: $GKA-Theme-1-rgba;
 $Elm: $GKA-Theme-2-rgba;
 $Bermuda: $GKA-Theme-3-rgba;
@@ -25,7 +25,6 @@ $error: $UI-Color-2-rgba;
 
 /* GRAY
 //rgba(40, 48, 51, 0.51),*/
-$white: gray(100);
 $gray-99: gray(99);
 $gray-97: gray(97);
 $gray-87: gray(87);

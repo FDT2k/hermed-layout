@@ -1,0 +1,63 @@
+/* FONTS */
+.main-title {
+
+}
+
+.quote {
+
+}
+
+.slogan{
+
+}
+
+.page-title{
+
+}
+
+/* NAV */
+
+
+/* GLOBAL CLASSES */
+.content-container{
+
+}
+
+.centered{
+
+}
+
+.cover {
+
+}
+
+.card {
+  border-radius: 4px;
+}
+
+/* Flex */
+
+.flex-row {
+  @include mq-width-and-lower(768px){
+    @include flex-direction(column);
+  }
+}
+
+/* Sections */
+.main-header {
+
+}
+
+/* Custom sections */
+.customer-landing-page {
+  header {
+    width: 100%;
+    min-height: 60vh;
+    background-color: $Carnation;
+  }
+  h1 {
+    @include themify($themes) {
+  		color: themed('textColorSecondary');
+  	}
+  }
+}

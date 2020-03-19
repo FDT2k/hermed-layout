@@ -5,7 +5,7 @@ import React from 'react'
 export default props => {
 
   return (
-    <div className="customer-landing-page theme-light cover flex flex-column just-between">
+    <div className="customer-landing-page theme-default flex flex-column just-between">
       <header className="">
       </header>
       <section className="flex flex-column align-center content-container">
