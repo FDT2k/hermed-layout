@@ -58,9 +58,35 @@ $themes: (
     buttonColor: $Carnation,
     buttonBorder: 2px solid $Carnation,
     buttonHoverColor: $Oasis,
-
-
   ),
+  
+  default: (
+    titleFont:'soleil',
+    mainFont: 'soleil',
+    textColor: $Charade,
+    textColorSecondary: $Carnation,
+
+    backgroundColorSecondary: $white,
+    backgroundColor: $white,
+
+    shadow: $gray-72,
+    fieldsText: $gray-47,
+    helperText: $gray-87,
+    info: $Carnation,
+    error: $error,
+    success: $success,
+    link: $Carnation,
+
+    // Buttons
+    buttonTextTransform: uppercase,
+    buttonTextColor: $white,
+    buttonTextHoverColor: $Charade,
+
+    buttonColor: $Carnation,
+    buttonBorder: 2px solid $Carnation,
+    buttonHoverColor: $Oasis,
+  ),
+
   dark_orange: (
     titleFont:'soleil',
     mainFont: 'soleil',
@@ -86,10 +112,8 @@ $themes: (
     buttonColor: $Carnation,
     buttonBorder: 2px solid $Carnation,
     buttonHoverColor: $SeaBuckthorn,
-
-
-
   ),
+
   dark: (
     titleFont:'soleil',
     mainFont: 'soleil',

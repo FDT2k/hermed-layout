@@ -10,7 +10,8 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "wouter": "^2.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
