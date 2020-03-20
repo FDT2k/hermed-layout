@@ -7,7 +7,7 @@ export default props => {
     <div>
       <form className="basic-form" action="">
 
-        
+        {props.children}
       </form>
     </div>
   )

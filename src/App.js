@@ -86,7 +86,12 @@ function App() {
 
     <Route path="/form">
       <div className="theme-chat">
-        <Form/>
+        <Form>
+          <Input label="Votre nom " name="name" placeholder="Votre nom complet"/>
+          <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail"/>
+          <Input label="Votre mot de passe" name="name" placeholder="mot de passe"/>
+
+        </Form>
       </div>
     </Route>
 
