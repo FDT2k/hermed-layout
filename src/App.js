@@ -74,7 +74,7 @@ function App() {
 
     <Route path="/input">
       <div className="theme-chat">
-        <Input label="Your Name" placeholder="Enter your name ..."/>
+        <Input label="Your Name" name="name" placeholder="Enter your name ..."/>
       </div>
     </Route>
 

@@ -1,6 +1,6 @@
 {
   "name": "hermed-layout",
-  "version": "0.5.6",
+  "version": "0.5.8",
   "private": false,
   "main": "dist/cjs/index.js",
   "dependencies": {
