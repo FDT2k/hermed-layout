@@ -1305,6 +1305,7 @@ textarea.floating-label-field {
   .waiting-room > header {
     /*@debug "themes: (chat: (titleFont: "soleil", mainFont: "soleil", textColor: #232532, textColorSecondary: white, backgroundColorSecondary: #277067, backgroundColor: #faedcf, backgroundColorTertiary: white, shadow: #b8b8b8, fieldsText: #787878, helperText: #dedede, info: #f25e5e, error: #f11515, success: #34a03c, warning: #fab437, link: #f25e5e, buttonTextTransform: uppercase, buttonTextColor: white, buttonTextHoverColor: #232532, buttonColor: #277067, buttonBorder: 2px solid #f25e5e, buttonHoverColor: #feeed0), light: (titleFont: "soleil", mainFont: "soleil", textColor: #232532, textColorSecondary: #f25e5e, backgroundColorSecondary: white, backgroundColor: white, shadow: #b8b8b8, fieldsText: #787878, helperText: #dedede, info: #f25e5e, error: #f11515, success: #34a03c, link: #f25e5e, buttonTextTransform: uppercase, buttonTextColor: white, buttonTextHoverColor: #232532, buttonColor: #f25e5e, buttonBorder: 2px solid #f25e5e, buttonHoverColor: #feeed0), default: (titleFont: "soleil", mainFont: "soleil", textColor: #232532, textColorSecondary: #f25e5e, backgroundColorSecondary: white, backgroundColor: white, shadow: #b8b8b8, fieldsText: #787878, helperText: #dedede, info: #f25e5e, error: #f11515, success: #34a03c, link: #f25e5e, buttonTextTransform: uppercase, buttonTextColor: white, buttonTextHoverColor: #232532, buttonColor: #f25e5e, buttonBorder: 2px solid #f25e5e, buttonHoverColor: #feeed0), dark_orange: (titleFont: "soleil", mainFont: "soleil", textColor: #232532, textColorSecondary: #232532, backgroundColorSecondary: floralwhite, backgroundColor: #feeed0, shadow: #fab437, fieldsText: #787878, helperText: #dedede, info: #f25e5e, error: #f11515, success: #34a03c, link: #f25e5e, buttonTextTransform: uppercase, buttonTextColor: white, buttonTextHoverColor: #232532, buttonColor: #f25e5e, buttonBorder: 2px solid #f25e5e, buttonHoverColor: #fab437), dark: (titleFont: "soleil", mainFont: "soleil", textColor: #fcfcfc, textColorSecondary: #232532, backgroundColorSecondary: floralwhite, backgroundColor: #232532, shadow: #fab437, fieldsText: #787878, helperText: #dedede, info: #fab437, error: #f11515, success: #34a03c, link: #fab437, buttonTextTransform: uppercase, buttonTextColor: white, buttonTextHoverColor: #232532, buttonColor: #f25e5e, buttonBorder: 2px solid #f25e5e, buttonHoverColor: #fab437))";*/ }
     .theme-chat .waiting-room > header {
+      min-height: 47px;
       font-size: 12px;
       color: white;
       background-color: #277067; }
@@ -1315,6 +1316,7 @@ textarea.floating-label-field {
         .theme-chat .waiting-room > header {
           font-size: 16px; } }
     .theme-light .waiting-room > header {
+      min-height: 47px;
       font-size: 12px;
       color: #f25e5e;
       background-color: white; }
@@ -1325,6 +1327,7 @@ textarea.floating-label-field {
         .theme-light .waiting-room > header {
           font-size: 16px; } }
     .theme-default .waiting-room > header {
+      min-height: 47px;
       font-size: 12px;
       color: #f25e5e;
       background-color: white; }
@@ -1335,6 +1338,7 @@ textarea.floating-label-field {
         .theme-default .waiting-room > header {
           font-size: 16px; } }
     .theme-dark_orange .waiting-room > header {
+      min-height: 47px;
       font-size: 12px;
       color: #232532;
       background-color: floralwhite; }
@@ -1345,6 +1349,7 @@ textarea.floating-label-field {
         .theme-dark_orange .waiting-room > header {
           font-size: 16px; } }
     .theme-dark .waiting-room > header {
+      min-height: 47px;
       font-size: 12px;
       color: #232532;
       background-color: floralwhite; }
