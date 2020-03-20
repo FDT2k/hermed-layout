@@ -1,12 +1,18 @@
 import React from 'react'
+import {cEx} from '@geekagency/gen-classes'
 
 
 export default props => {
-  const {label,placeholder,name, onChange} = props
+  const {label, id,className, type, ...rest} = props
   return (
     <div className="single-hermed-input flex flex-column">
-      <label htmlFor={name}>{label}</label>
-      <input className="hermed-input" id={name} name={name} type="text" placeholder={placeholder}/>
+      <label htmlFor={id}>{label}</label>
+      <input className={
+          cEx([
+            "hermed-input",
+            _=> className
+          ])
+        } id={id} type="text" {...rest}/>
     </div>
   )
 }
