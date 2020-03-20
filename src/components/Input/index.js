@@ -5,8 +5,8 @@ export default props => {
   const {label,placeholder,name, onChange} = props
   return (
     <div className="single-hermed-input flex flex-column">
-      <label htmlFor="">{label}</label>
-      <input className="hermed-input" type="text" placeholder={placeholder}/>
+      <label htmlFor={name}>{label}</label>
+      <input className="hermed-input" id={name} name={name} type="text" placeholder={placeholder}/>
     </div>
   )
 }
