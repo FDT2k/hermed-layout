@@ -28,7 +28,7 @@ $error: $UI-Color-2-rgba;
 $white: gray(100);
 $gray-99: gray(99);
 $gray-97: gray(97);
-$gray-87: gray(87);
+$gray-85: gray(85);
 $gray-72: gray(72);
 $gray-47: gray(47);
 
@@ -46,8 +46,9 @@ $themes: (
     backgroundColorTertiary: $white,
 
     shadow: $gray-72,
-    fieldsText: $gray-47,
-    helperText: $gray-87,
+    fieldsText: $gray-85,
+    inputBorder: $gray-85,
+    helperText: $gray-72,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -74,7 +75,8 @@ $themes: (
 
     shadow: $gray-72,
     fieldsText: $gray-47,
-    helperText: $gray-87,
+    inputBorder: $gray-85,
+    helperText: $gray-85,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -101,7 +103,8 @@ $themes: (
 
     shadow: $gray-72,
     fieldsText: $gray-47,
-    helperText: $gray-87,
+    inputBorder: $gray-85,
+    helperText: $gray-85,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -128,7 +131,8 @@ $themes: (
 
     shadow: $SeaBuckthorn,
     fieldsText: $gray-47,
-    helperText: $gray-87,
+    inputBorder: $gray-85,
+    helperText: $gray-85,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -155,7 +159,8 @@ $themes: (
 
     shadow: $SeaBuckthorn,
     fieldsText: $gray-47,
-    helperText: $gray-87,
+    inputBorder: $gray-85,
+    helperText: $gray-85,
     info: $SeaBuckthorn,
     error: $error,
     success: $success,

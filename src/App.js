@@ -1,12 +1,15 @@
 import React from 'react';
 import 'sass/style.scss';
 import { Link, Route } from "wouter";
-import Catalogue from 'components/Catalogue'
 import Landing from 'components/CustomerLanding'
 import Chat from 'components/Chat'
 import ChatBubble from 'components/ChatBubble'
 import WaitingRoom from 'components/WaitingRoom'
 import Patient from 'components/Patient'
+import Input from 'components/Input'
+import Select from 'components/Select'
+import Form from 'components/Form'
+
 
 /*const slugify = str => str.replace(/\s/g,'_').toLowerCase()
 const createMenu = name => ({path:slugify(name),name:name})
@@ -24,17 +27,18 @@ function App() {
       <section className="theme-light">
         <h1>Menu</h1>
         <ul>
-          <li><a href="/catalog" target="_blank"><h4>Catalogue</h4></a></li>
           <li><a href="/landing" target="_blank"><h4>Landing</h4></a></li>
           <li><a href="/waiting_room" target="_blank"><h4>WaitingRoom</h4></a></li>
           <li><a href="/waiting_room_patient" target="_blank"><h4>WaitingRoom with Patient</h4></a></li>
-            <li><a href="/patient" target="_blank"><h4>Patient</h4></a></li>
-            <li>
-              <h3>Forms</h3>
-              <ul>
-                <li><a href="/input" target="_blank"><h4>input</h4></a></li>
-              </ul>
-            </li>
+          <li><a href="/patient" target="_blank"><h4>Patient</h4></a></li>
+          <li>
+            <h3>Forms</h3>
+            <ul>
+              <li><a href="/input" target="_blank"><h4>input</h4></a></li>
+              <li><a href="/select" target="_blank"><h4>select</h4></a></li>
+              <li><a href="/form" target="_blank"><h4>Form</h4></a></li>
+            </ul>
+          </li>
           <li><h3>Chat</h3>
             <ul>
               <li><a href="/chatbubble" target="_blank"><h4>ChatBubble</h4></a></li>
@@ -48,12 +52,13 @@ function App() {
       </section>
     </Route>
 
-    <Route path="/catalog"><Catalogue/></Route>
+
     <Route path="/landing">
       <div className="theme-chat">
           <Landing/>
       </div>
     </Route>
+
     <Route path="/chat">
       <div className="theme-chat">
         <Chat></Chat>
@@ -67,13 +72,31 @@ function App() {
       </div>
     </Route>
 
+    <Route path="/input">
+      <div className="theme-chat">
+        <Input/>
+      </div>
+    </Route>
+
+    <Route path="/select">
+      <div className="theme-chat">
+        <Select/>
+      </div>
+    </Route>
+
+    <Route path="/form">
+      <div className="theme-chat">
+        <Form/>
+      </div>
+    </Route>
+
     <Route path="/waiting_room_patient">
       <div className="theme-chat">
         <WaitingRoom>
           <Patient status="success"/>
           <Patient status="error"/>
           <Patient status="warning"/>
-          <Patient/>
+          <Patient status="caca"/>
           <Patient/>
         </WaitingRoom>
       </div>
@@ -88,8 +111,8 @@ function App() {
     <Route path="/chat-with-bubbles">
       <div className="theme-chat">
         <Chat>
+          <ChatBubble right/>
           <ChatBubble/>
-            <ChatBubble/>
         </Chat>
       </div>
     </Route>

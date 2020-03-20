@@ -1,5 +1,4 @@
 @mixin themify($themes: $themes) {
-  /*@debug "themes: #{$themes}";*/
 
   @each $theme, $map in $themes {
     .theme-#{$theme} & {

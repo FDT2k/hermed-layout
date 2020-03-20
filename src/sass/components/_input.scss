@@ -1,0 +1,44 @@
+.single-hermed-input {
+  width: 100%;
+  margin: 5px auto;
+
+  label {
+    @include themify($themes) {
+      color: themed('textColor');
+      @include themed_font('mainFont','regular');
+    }
+    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+  }
+
+  input {
+    height: 48px;
+    max-width: 500px;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 4px;
+
+    @include themify($themes) {
+      color: themed('textColor');
+      border: solid 1px themed('inputBorder');
+      @include themed_font('mainFont','regular');
+    }
+    @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
+
+    &:focus {
+      @include themify($themes) {
+        color: themed('textColor');
+        border: solid 1px themed('textColor');
+        @include themed_font('mainFont','regular');
+      }
+    }
+
+    &::placeholder {
+      @include themify($themes) {
+        color: themed('helperText');
+        @include themed_font('mainFont','thin');
+      }
+    }
+
+  }
+
+}
