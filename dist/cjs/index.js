@@ -8,19 +8,95 @@ var React = require('react');
 var React__default = _interopDefault(React);
 var compositeJs = _interopDefault(require('@geekagency/composite-js'));
 
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(n);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 var index = (function (props) {
-  var who = props.who;
+  var who = props.who,
+      autoscroll = props.autoscroll;
+
+  var _useState = React.useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      shouldAutoscroll = _useState2[0],
+      setShouldAutoscroll = _useState2[1];
+
   var chatRef = React.useRef();
+
+  var holdScroll = function holdScroll() {
+    setShouldAutoscroll(false);
+  };
+
+  var releaseScroll = function releaseScroll() {
+    setShouldAutoscroll(true);
+  };
+
   React.useEffect(function () {
-    if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  }, [chatRef]);
+    if (chatRef.current && autoscroll && shouldAutoscroll) chatRef.current.scrollTop = chatRef.current.scrollHeight; //  chatRef.current.addEventListener('scroll',()=>console.log('scroll'))
+  });
   return /*#__PURE__*/React__default.createElement("div", {
     className: "hermed-chat"
   }, /*#__PURE__*/React__default.createElement("header", null, "Temps d'attente moyen", /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement("span", {
     className: "average-time"
   }, "xx:xx")), /*#__PURE__*/React__default.createElement("section", {
     ref: chatRef,
-    className: "chat"
+    className: "chat",
+    onTouchStart: holdScroll,
+    onTouchEnd: releaseScroll,
+    onMouseDown: holdScroll,
+    onMouseUp: releaseScroll
   }, /*#__PURE__*/React__default.createElement("div", {
     className: "welcome"
   }, "Bienvenu dans la salle d'attente ! ", who || 'Le Dr. XXX ', " vous contactera via cette application d\xE8s que possible. Ne fermez pas cette fen\xEAtre avant la fin de votre RDV. Les messages sont \xE9chang\xE9s sans interm\xE9diaire. Tous les messages \xE9chang\xE9s seront automatiquement effac\xE9s en fin de conversation."), /*#__PURE__*/React__default.createElement("div", {
