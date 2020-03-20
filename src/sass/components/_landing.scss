@@ -1,0 +1,25 @@
+
+/* Custom sections */
+.customer-landing-page {
+  height: 100%;
+
+  .content-container{
+    margin: 0px;
+    min-height:100%;
+  }
+
+  header {
+    width: 100%;
+    min-height: 60vh;
+    @include themify($themes) {
+      background-color: themed('backgroundColorSecondary');
+  		color: themed('textColorSecondary');
+  	}
+  }
+
+  h1 {
+    @include themify($themes) {
+  		color: themed('textColor');
+  	}
+  }
+}

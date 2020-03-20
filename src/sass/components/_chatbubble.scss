@@ -1,0 +1,31 @@
+.chat-bubble{
+  border: 1px solid #1B263030;
+  border-radius: 5px;
+  max-width:80%;
+  margin: 5px;
+
+  &.right{
+    text-align: right;
+    clear:both;
+    float:right;
+  }
+  &.left{
+    text-align:left;
+    clear:both;
+
+    float:left;
+  }
+
+  > .message{
+    padding:5px;
+    @include themify($themes) {
+
+      @include themed_font('mainFont','regular');
+      @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+      color: themed('textColorSecondary');
+      background-color: themed('backgroundColorSecondary');
+
+    }
+  }
+
+}

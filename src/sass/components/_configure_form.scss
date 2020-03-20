@@ -1,0 +1,35 @@
+
+/* Custom sections */
+.waiting-room {
+  @include themify($themes) {
+
+    @include themed_font('mainFont','regular');
+    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+    color: themed('textColorPrimary');
+    background-color: themed('backgroundColorPrimary');
+
+  }
+
+  > header {
+    @include themify($themes) {
+      min-height: 47px;
+      @include themed_font('titleFont','bold');
+      @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+      color: themed('textColorSecondary');
+      background-color: themed('backgroundColorSecondary');
+
+    }
+  }
+
+  >.content {
+    @include flex();
+    @include flex-direction(column);
+    @include flex-align(center);
+    padding: 5px;
+
+    &>* {
+      margin-bottom: 20px;
+    }
+  }
+
+}

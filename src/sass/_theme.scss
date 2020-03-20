@@ -34,6 +34,35 @@ $gray-47: gray(47);
 
 
 $themes: (
+
+  chat: (
+    titleFont:'soleil',
+    mainFont: 'soleil',
+    textColor: $Charade,
+    textColorSecondary: $white,
+
+    backgroundColorSecondary: $Paradiso,
+    backgroundColor: $Champagne,
+    backgroundColorTertiary: $white,
+
+    shadow: $gray-72,
+    fieldsText: $gray-47,
+    helperText: $gray-87,
+    info: $Carnation,
+    error: $error,
+    success: $success,
+    warning: $SeaBuckthorn,
+    link: $Carnation,
+
+    // Buttons
+    buttonTextTransform: uppercase,
+    buttonTextColor: $white,
+    buttonTextHoverColor: $Charade,
+
+    buttonColor: $Paradiso,
+    buttonBorder: 2px solid $Carnation,
+    buttonHoverColor: $Oasis,
+  ),
   light: (
     titleFont:'soleil',
     mainFont: 'soleil',

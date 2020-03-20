@@ -1,0 +1,100 @@
+
+
+.hermed-chat{
+    display:grid;
+    min-height: 100vh;
+    height:100vh;
+
+    grid-template-columns: 100vw;
+    grid-template-rows: 76px auto 138px;
+    grid-template-areas:
+      "header"
+      "chat"
+      "tools"
+
+}
+
+.hermed-chat > header {
+  grid-area: header;
+  background-color:#388279;
+  color: white;
+  @include themify($themes) {
+    @include themed_font('mainFont','regular');
+
+    color: themed('textColorSecondary');
+		background-color: themed('backgroundColorSecondary');
+	}
+  text-align:center;
+
+  .average-time{
+    @include themify($themes) {
+      @include themed_font('titleFont','semi-bold');
+    }
+    font-size: 40px;
+  }
+}
+
+.hermed-chat > .chat {
+  grid-area: chat;
+  align-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  height:100%;
+  @include themify($themes) {
+    @include themed_font('mainFont','regular');
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+  .welcome{
+    padding:20px;
+    @include themify($themes) {
+      @include themed_font('mainFont','regular');
+    }
+    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+    text-align: justify;
+    min-width: 300px;
+    max-width:400px;
+    margin: 0 auto;
+  }
+}
+.hermed-chat > .tools {
+  padding-left: 23px;
+  padding-right: 23px;
+  grid-area: tools;
+  height:100%;
+  @include themify($themes) {
+    @include themed_font('titleFont','semi-bold');
+    color: themed('textColorSecondary');
+    background-color: themed('backgroundColorSecondary');
+  }
+  .toolbar {
+    width:100%;
+    padding-top:10px;
+    padding-bottom:15px;
+    @include flex;
+    @include flex-direction(row);
+    @include flex-just(space-between);
+
+    button{
+      @include themify($themes) {
+        @include themed_font('titleFont','bold');
+        color: themed('textColorSecondary');
+        background-color: themed('backgroundColorSecondary');
+        border-color: themed('backgroundColorSecondary');
+
+      }
+    }
+  }
+  .text-input{
+
+    height: 40px;
+    width: 100%;
+
+    input {
+      border: 1px solid #1B263030;
+      border-radius: 4px;
+      height:100%;
+      width:100%;
+    }
+  }
+}
