@@ -1,0 +1,51 @@
+
+/* Custom sections */
+.patient-item{
+  max-width:300px;
+  min-width: 250px;
+  box-shadow: 5px 5px 4px grey;
+  min-height: 80px;
+  padding: 5px;
+
+  @include themify($themes) {
+    @include themed_font('mainFont','regular');
+    color: themed('textColorPrimary');
+		background-color: themed('backgroundColorTertiary');
+	}
+
+  @include flex();
+  @include flex-direction(row);
+  @include flex-just(space-between);
+  @include flex-align(center);
+
+  > .status{
+    min-width: 50px;
+    min-height: 50px;
+    height: 50px;
+    border-radius: 50px;
+
+    &.warning{
+      @include themify($themes) {
+        background-color: themed('warning');
+      }
+    }
+    &.success{
+      @include themify($themes) {
+        background-color: themed('success');
+      }
+    }
+    &.error{
+      @include themify($themes) {
+        background-color: themed('error');
+      }
+    }
+    &.unkown{
+      background-color: $gray-47;
+    }
+  }
+
+  >.coords{
+    @include flex();
+    @include flex-direction(column);
+  }
+}
