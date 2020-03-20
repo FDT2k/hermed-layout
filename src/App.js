@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-//import './style';
 import 'sass/style.scss';
 import { Link, Route } from "wouter";
 import Catalogue from 'components/Catalogue'
@@ -14,6 +12,9 @@ import Patient from 'components/Patient'
 const createMenu = name => ({path:slugify(name),name:name})
 */
 
+import ChatAutoScroll from 'stories/ChatAutoScroll'
+
+
 function App() {
 
   return (
@@ -25,9 +26,15 @@ function App() {
         <ul>
           <li><a href="/catalog" target="_blank"><h4>Catalogue</h4></a></li>
           <li><a href="/landing" target="_blank"><h4>Landing</h4></a></li>
-            <li><a href="/waiting_room" target="_blank"><h4>WaitingRoom</h4></a></li>
-            <li><a href="/waiting_room_patient" target="_blank"><h4>WaitingRoom with Patient</h4></a></li>
-          <li><a href="/patient" target="_blank"><h4>Patient</h4></a></li>
+          <li><a href="/waiting_room" target="_blank"><h4>WaitingRoom</h4></a></li>
+          <li><a href="/waiting_room_patient" target="_blank"><h4>WaitingRoom with Patient</h4></a></li>
+            <li><a href="/patient" target="_blank"><h4>Patient</h4></a></li>
+            <li>
+              <h3>Forms</h3>
+              <ul>
+                <li><a href="/input" target="_blank"><h4>input</h4></a></li>
+              </ul>
+            </li>
           <li><h3>Chat</h3>
             <ul>
               <li><a href="/chatbubble" target="_blank"><h4>ChatBubble</h4></a></li>
@@ -87,26 +94,7 @@ function App() {
       </div>
     </Route>
     <Route path="/chat-autoscroll">
-      <div className="theme-chat">
-        <Chat>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-          <ChatBubble/>
-        </Chat>
-      </div>
+      <ChatAutoScroll/>
     </Route>
     <Route path="/chatbubble">
       <div className="theme-chat">
