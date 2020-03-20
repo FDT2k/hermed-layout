@@ -65,9 +65,15 @@ h4 {
 p {
 	@include themify($themes) {
 	 color: themed('textColor');
-	 @include themed_font('mainFont','thin');
+	 @include themed_font('mainFont','regular');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
+}
+
+label, input {
+	@include themify($themes) {
+		@include themed_font('mainFont', 'regular');
+	}
 }
 
 a {
