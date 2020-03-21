@@ -24,6 +24,7 @@
 			background-color:themed('buttonColor');
 		}
 	}
+
 	&.outlined {
 		background-color: transparent;
 		@include themify($themes) {

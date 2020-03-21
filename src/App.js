@@ -16,7 +16,7 @@ import Button from 'components/Button'
 const createMenu = name => ({path:slugify(name),name:name})
 */
 
-import ChatAutoScroll from 'stories/ChatAutoScroll'
+//import ChatAutoScroll from 'stories/ChatAutoScroll'
 
 
 function App() {
@@ -132,9 +132,6 @@ function App() {
           <ChatBubble/>
         </Chat>
       </div>
-    </Route>
-    <Route path="/chat-autoscroll">
-      <ChatAutoScroll/>
     </Route>
     <Route path="/chatbubble">
       <div className="theme-chat">
