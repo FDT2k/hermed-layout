@@ -3,12 +3,12 @@ import {cEx} from '@geekagency/gen-classes'
 
 
 export default props => {
-  const {className,type,contained,text,outlined, ...rest} = props
+  const {className,contained,text,outlined, ...rest} = props
   return (
     <button className={
         cEx([
           "button",
-          _=> (!type && !contained&&!text && !outlined ) ? "contained": "",
+          _=> (!contained&&!text && !outlined ) ? "contained": "",
           {
             'contained':_=>contained,
             'text':_=>text,

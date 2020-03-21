@@ -1125,23 +1125,28 @@ textarea.floating-label-field {
     .theme-chat .hermed-chat > .tools .toolbar button {
       color: white;
       background-color: #277067;
-      border-color: #277067; }
+      border-color: #277067;
+      border: 1px solid #277067; }
     .theme-landing .hermed-chat > .tools .toolbar button {
       color: #f25e5e;
       background-color: white;
-      border-color: white; }
+      border-color: white;
+      border: 1px solid #f25e5e; }
     .theme-default .hermed-chat > .tools .toolbar button {
       color: #f25e5e;
       background-color: white;
-      border-color: white; }
+      border-color: white;
+      border: 1px solid #f25e5e; }
     .theme-dark_orange .hermed-chat > .tools .toolbar button {
       color: #232532;
       background-color: floralwhite;
-      border-color: floralwhite; }
+      border-color: floralwhite;
+      border: 1px solid #f25e5e; }
     .theme-dark .hermed-chat > .tools .toolbar button {
       color: #232532;
       background-color: floralwhite;
-      border-color: floralwhite; }
+      border-color: floralwhite;
+      border: 1px solid #f25e5e; }
   .hermed-chat > .tools .text-input {
     height: 40px;
     width: 100%; }

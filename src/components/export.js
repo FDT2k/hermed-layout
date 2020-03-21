@@ -7,6 +7,7 @@ import WaitingRoom from './WaitingRoom'
 import Patient from './Patient'
 import Button from './Button'
 import Form from './Form'
+import Input from './Input'
 
 export {
   Chat,
@@ -15,5 +16,6 @@ export {
   WaitingRoom,
   Patient,
   Button,
-  Form
+  Form,
+  Input
 }

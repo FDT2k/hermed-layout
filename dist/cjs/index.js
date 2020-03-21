@@ -166,21 +166,6 @@ var index = (function (props) {
   }))));
 });
 
-var index$1 = (function (props) {
-  var who = props.who;
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "customer-landing-page flex flex-column just-between"
-  }, /*#__PURE__*/React__default.createElement("header", {
-    className: ""
-  }), /*#__PURE__*/React__default.createElement("section", {
-    className: "flex flex-column align-center content-container"
-  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), /*#__PURE__*/React__default.createElement("p", null, props.who || 'Le Dr. XXX', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement("button", {
-    onClick: function onClick(_) {
-      return props.handleClick();
-    }
-  }, "JE SUIS PR\xCAT !")));
-});
-
 function unwrapExports (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
@@ -235,6 +220,45 @@ unwrapExports(cjs);
 var cjs_1 = cjs.cEx;
 var cjs_2 = cjs.uEx;
 
+var Button = (function (props) {
+  var className = props.className,
+      _contained = props.contained,
+      _text = props.text,
+      _outlined = props.outlined,
+      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined"]);
+
+  return /*#__PURE__*/React__default.createElement("button", _extends({
+    className: cjs_1(["button", function (_) {
+      return !_contained && !_text && !_outlined ? "contained" : "";
+    }, {
+      'contained': function contained(_) {
+        return _contained;
+      },
+      'text': function text(_) {
+        return _text;
+      },
+      'outlined': function outlined(_) {
+        return _outlined;
+      }
+    }])
+  }, rest), props.children);
+});
+
+var index$1 = (function (props) {
+  var who = props.who;
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "customer-landing-page flex flex-column just-between"
+  }, /*#__PURE__*/React__default.createElement("header", {
+    className: ""
+  }), /*#__PURE__*/React__default.createElement("section", {
+    className: "flex flex-column align-center content-container"
+  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), /*#__PURE__*/React__default.createElement("p", null, props.who || 'Le Dr. XXX', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Button, {
+    onClick: function onClick(_) {
+      return props.handleClick();
+    }
+  }, "JE SUIS PR\xCAT !")));
+});
+
 var index$2 = (function (props) {
   var message = props.message,
       date = props.date,
@@ -283,42 +307,52 @@ var index$4 = (function (props) {
   }, "fabien@karsegard.ch")));
 });
 
+var defaultSubmit = function defaultSubmit(e) {
+  console.warn('you didnt set onSubmit');
+  e.preventDefault();
+};
+
 var index$5 = (function (props) {
   var className = props.className,
-      type = props.type,
-      _contained = props.contained,
-      _text = props.text,
-      _outlined = props.outlined,
-      rest = _objectWithoutProperties(props, ["className", "type", "contained", "text", "outlined"]);
+      onSubmit = props.onSubmit,
+      rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
 
-  return /*#__PURE__*/React__default.createElement("button", _extends({
-    className: cjs_1(["button", function (_) {
-      return !type && !_contained && !_text && !_outlined ? "contained" : "";
-    }, {
-      'contained': function contained(_) {
-        return _contained;
-      },
-      'text': function text(_) {
-        return _text;
-      },
-      'outlined': function outlined(_) {
-        return _outlined;
-      }
-    }])
+  var _onSubmit = onSubmit || defaultSubmit;
+
+  return /*#__PURE__*/React__default.createElement("form", _extends({
+    className: cjs_1(["basic-form", function (_) {
+      return className;
+    }]),
+    onSubmit: _onSubmit
   }, rest), props.children);
 });
 
 var index$6 = (function (props) {
-  return /*#__PURE__*/React__default.createElement("form", {
-    className: "basic-form"
-  }, props.children);
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      type = props.type,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "type"]);
+
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "single-input flex flex-column"
+  }, /*#__PURE__*/React__default.createElement("label", {
+    htmlFor: id
+  }, label), /*#__PURE__*/React__default.createElement("input", _extends({
+    className: cjs_1(["input", function (_) {
+      return className;
+    }]),
+    id: id,
+    type: "text"
+  }, rest)));
 });
 
-exports.Button = index$5;
+exports.Button = Button;
 exports.Chat = index;
 exports.ChatBubble = index$2;
 exports.CustomerLanding = index$1;
-exports.Form = index$6;
+exports.Form = index$5;
+exports.Input = index$6;
 exports.Patient = index$4;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map
