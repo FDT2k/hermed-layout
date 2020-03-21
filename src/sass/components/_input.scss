@@ -14,7 +14,7 @@
     height: 48px;
     max-width: 500px;
     width: 100%;
-    padding: 16px 20px;
+    padding: 1em 1.5em;
     border-radius: 4px;
 
     @include themify($themes) {
