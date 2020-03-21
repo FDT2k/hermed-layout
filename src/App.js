@@ -88,7 +88,7 @@ function App() {
 
     <Route path="/button">
       <div className="theme-landing">
-        <Button/>
+        <Button className="contained-button"/>
       </div>
     </Route>
 
@@ -98,7 +98,8 @@ function App() {
           <Input label="Votre nom " name="name" placeholder="Votre nom complet"/>
           <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail"/>
           <Input label="Votre mot de passe" name="name" placeholder="mot de passe"/>
-          <Button/>
+          <Button className="contained-button"/>
+          <Button className="text-button"/>
         </Form>
       </div>
     </Route>

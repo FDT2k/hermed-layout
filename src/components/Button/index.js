@@ -1,13 +1,14 @@
 import React from 'react'
+import {cEx} from '@geekagency/gen-classes'
 
 
 export default props => {
-
+  const {className, ...rest} = props
   return (
-    <div className="flex flex-column">
-      <button className="contained-button">containes</button>
-      <button className="outlined-button">outlined</button>
-      <button className="text-button">Text</button>
-    </div>
+    <button className={
+        cEx([
+          _=> className
+        ])
+      }>contained</button>
   )
 }
