@@ -101,7 +101,7 @@ function App() {
           <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail"/>
           <Input label="Votre mot de passe" name="name" placeholder="mot de passe"/>
             <Button>Hello world</Button>
-              <Button text>Hello world</Button>
+            <Button text>Hello world</Button>
             <Button outlined>Hello world</Button>
         </Form>
       </div>

@@ -14,7 +14,7 @@
   "scripts": {
     "start": "yarn storybook",
     "build:lib": "rollup -c",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "start-storybook -p 9009 -s ./public ",
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
