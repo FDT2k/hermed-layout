@@ -1,4 +1,4 @@
-button {
+.button {
   max-width: 500px;
   width: 100%;
   margin: 12px 0px;
@@ -10,8 +10,8 @@ button {
 		@include themed_font('mainFont', 'semi-bold');
 	}
 
-	&.contained-button,
-	&.outlined-button
+	&.contained,
+	&.outlined
 	{
 		@include themify($themes) {
 			color: themed('buttonTextColor');
@@ -19,19 +19,20 @@ button {
 		}
 	}
 
-	&.contained-button {
+	&.contained {
 		@include themify($themes) {
 			background-color:themed('buttonColor');
 		}
 	}
-	&.outlined-button {
+
+	&.outlined {
 		background-color: transparent;
 		@include themify($themes) {
 			color:themed('buttonTextColorSecondary');
 			box-shadow: 0px 1px 5px 0px themed('shadow');
 		}
 	}
-	&.text-button {
+	&.text {
 		background-color: transparent;
 		border: none;
 		@include themify($themes) {
@@ -46,8 +47,15 @@ button {
 			background-color:themed('buttonHoverColor');
 		}
 	}
+  &:active{
+    @include themify($themes) {
+			color: themed('buttonTextColor');
+			border: 1px solid themed('buttonHoverColor');
+			background-color:themed('buttonColor');
+		}
+  }
 }
 
-button, button:active{
+.button, .button:active{
 	outline: none;
 }

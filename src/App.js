@@ -16,7 +16,7 @@ import Button from 'components/Button'
 const createMenu = name => ({path:slugify(name),name:name})
 */
 
-import ChatAutoScroll from 'stories/ChatAutoScroll'
+//import ChatAutoScroll from 'stories/ChatAutoScroll'
 
 
 function App() {
@@ -88,7 +88,9 @@ function App() {
 
     <Route path="/button">
       <div className="theme-landing">
-        <Button className="contained-button"/>
+        <Button>Hello world</Button>
+        <Button text>Hello world</Button>
+        <Button outlined>Hello world</Button>
       </div>
     </Route>
 
@@ -98,8 +100,9 @@ function App() {
           <Input label="Votre nom " name="name" placeholder="Votre nom complet"/>
           <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail"/>
           <Input label="Votre mot de passe" name="name" placeholder="mot de passe"/>
-          <Button className="contained-button"/>
-          <Button className="text-button"/>
+            <Button>Hello world</Button>
+              <Button text>Hello world</Button>
+            <Button outlined>Hello world</Button>
         </Form>
       </div>
     </Route>
@@ -110,7 +113,7 @@ function App() {
           <Patient status="success"/>
           <Patient status="error"/>
           <Patient status="warning"/>
-          <Patient status="caca"/>
+          <Patient status="not existing"/>
           <Patient/>
         </WaitingRoom>
       </div>
@@ -129,9 +132,6 @@ function App() {
           <ChatBubble/>
         </Chat>
       </div>
-    </Route>
-    <Route path="/chat-autoscroll">
-      <ChatAutoScroll/>
     </Route>
     <Route path="/chatbubble">
       <div className="theme-chat">
