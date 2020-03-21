@@ -1,6 +1,7 @@
 import React from 'react';
 import { action,notes } from '@storybook/addon-actions';
 import Button from 'components/Button'
+import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
 import componentNotes from './doc/Button.md';
 
@@ -8,11 +9,11 @@ import componentNotes from './doc/Button.md';
 
 
 export const Text = () => (
-  <div className="theme-chat">
+    <ThemePicker>
     <Button outlined>Hello Button</Button>
     <Button text>Hello Button</Button>
     <Button >Hello Button</Button>
-  </div>
+    </ThemePicker>
   );
 
 export const Emoji = () => (
