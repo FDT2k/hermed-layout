@@ -1,6 +1,6 @@
 {
   "name": "hermed-layout",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "private": false,
   "main": "dist/cjs/index.js",
   "dependencies": {
@@ -12,11 +12,8 @@
     "react": "^16.13.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "yarn storybook",
     "build:lib": "rollup -c",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
