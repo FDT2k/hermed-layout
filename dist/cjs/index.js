@@ -8,6 +8,60 @@ var React = require('react');
 var React__default = _interopDefault(React);
 var compositeJs = _interopDefault(require('@geekagency/composite-js'));
 
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
@@ -229,9 +283,42 @@ var index$4 = (function (props) {
   }, "fabien@karsegard.ch")));
 });
 
+var index$5 = (function (props) {
+  var className = props.className,
+      type = props.type,
+      _contained = props.contained,
+      _text = props.text,
+      _outlined = props.outlined,
+      rest = _objectWithoutProperties(props, ["className", "type", "contained", "text", "outlined"]);
+
+  return /*#__PURE__*/React__default.createElement("button", _extends({
+    className: cjs_1(["button", function (_) {
+      return !type && !_contained && !_text && !_outlined ? "contained" : "";
+    }, {
+      'contained': function contained(_) {
+        return _contained;
+      },
+      'text': function text(_) {
+        return _text;
+      },
+      'outlined': function outlined(_) {
+        return _outlined;
+      }
+    }])
+  }, rest), props.children);
+});
+
+var index$6 = (function (props) {
+  return /*#__PURE__*/React__default.createElement("form", {
+    className: "basic-form"
+  }, props.children);
+});
+
+exports.Button = index$5;
 exports.Chat = index;
 exports.ChatBubble = index$2;
 exports.CustomerLanding = index$1;
+exports.Form = index$6;
 exports.Patient = index$4;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map
