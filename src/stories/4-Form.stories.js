@@ -26,14 +26,15 @@ export const  Simple =()=>
 
   export const  Contained =()=>
       <div className="theme-landing">
-        <div style={{width:'300px',maxWidth:'300px', margin:'0 auto'}}>
+        <div style={{width:'300px',maxWidth:'300px', margin:'0 auto', textAlign:'center'}}>
           <Form>
             <Input label="Votre nom " name="name" placeholder="Votre nom complet" autoComplete="off"/>
             <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail" autoComplete="off"/>
             <Input label="Votre mot de passe" name="name" placeholder="mot de passe" autoComplete="off"/>
-              <Button>Hello world</Button>
-                <Button text>Hello world</Button>
-              <Button outlined>Hello world</Button>
+            <Button>Hello world</Button>
+            <p className="label"> Vous n'avez pas de compte ?</p>
+            <Button text>Hello world</Button>
+
           </Form>
         </div>
       </div>
