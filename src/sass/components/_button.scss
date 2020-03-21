@@ -1,9 +1,12 @@
-.button {
-  max-width: 500px;
+%block {
   width: 100%;
   margin: 12px 0px;
   min-height: 40px;
   padding: 1em 1.5em;
+}
+
+.button {
+  max-width: 500px;
   cursor: pointer;
 	@include themify($themes) {
 		text-transform: themed('buttonTextTransform');
@@ -13,6 +16,7 @@
 	&.contained,
 	&.outlined
 	{
+    @extend %block;
 		@include themify($themes) {
 			color: themed('buttonTextColor');
 			border: themed('buttonBorder');
@@ -43,16 +47,25 @@
 	&:hover, &:focus {
 		@include themify($themes) {
 			color: themed('buttonTextHoverColor');
-			border: 1px solid themed('buttonHoverColor');
-			background-color:themed('buttonHoverColor');
 		}
 	}
+  &:hover:not(.text), &:focus:not(.text) {
+    @include themify($themes) {
+      border: 1px solid themed('buttonHoverColor');
+      background-color:themed('buttonHoverColor');
+    }
+  }
   &:active{
     @include themify($themes) {
-			color: themed('buttonTextColor');
-			border: 1px solid themed('buttonHoverColor');
-			background-color:themed('buttonColor');
+			color: themed('buttonTextColorSecondary');
 		}
+  }
+  &:active:not(.text){
+    @include themify($themes) {
+      color: themed('buttonTextColor');
+      border: 1px solid themed('buttonBorder');
+      background-color:themed('buttonColor');
+    }
   }
 }
 

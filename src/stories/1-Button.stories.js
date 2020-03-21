@@ -10,9 +10,9 @@ import componentNotes from './doc/Button.md';
 
 export const Text = () => (
     <ThemePicker>
-    <Button outlined>Hello Button</Button>
-    <Button text>Hello Button</Button>
-    <Button >Hello Button</Button>
+      <Button >Hello Button</Button>
+      <Button outlined>Hello Button</Button>
+      <Button text>Hello Button</Button>
     </ThemePicker>
   );
 

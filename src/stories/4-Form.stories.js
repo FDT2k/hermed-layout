@@ -5,6 +5,7 @@ import 'sass/style.scss';
 import Form from 'components/Form'
 import Input from 'components/Input'
 import Button from 'components/Button'
+import ThemePicker from 'components/ThemePicker'
 
 import componentNotes from './doc/Form.md';
 
@@ -25,7 +26,7 @@ export const  Simple =()=>
     </div>
 
   export const  Contained =()=>
-      <div className="theme-landing">
+    <ThemePicker>
         <div style={{width:'300px',maxWidth:'300px', margin:'0 auto', textAlign:'center'}}>
           <Form>
             <Input label="Votre nom " name="name" placeholder="Votre nom complet" autoComplete="off"/>
@@ -37,7 +38,7 @@ export const  Simple =()=>
 
           </Form>
         </div>
-      </div>
+      </ThemePicker>
 
 
 export default {
