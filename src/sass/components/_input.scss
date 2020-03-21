@@ -1,6 +1,6 @@
-.single-hermed-input {
+.single-input {
   width: 100%;
-  margin: 5px auto;
+  padding: 6px 0px;
 
   label {
     @include themify($themes) {
@@ -14,7 +14,7 @@
     height: 48px;
     max-width: 500px;
     width: 100%;
-    padding: 16px 20px;
+    padding: 1em 1.5em;
     border-radius: 4px;
 
     @include themify($themes) {

@@ -58,13 +58,14 @@ $themes: (
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
+    buttonTextColorSecondary: $Paradiso,
     buttonTextHoverColor: $Charade,
 
     buttonColor: $Paradiso,
-    buttonBorder: 2px solid $Carnation,
-    buttonHoverColor: $Oasis,
+    buttonBorder: 1px solid $Paradiso,
+    buttonHoverColor: $GrannyApple,
   ),
-  light: (
+  landing: (
     titleFont:'soleil',
     mainFont: 'soleil',
     textColor: $Charade,
@@ -74,9 +75,9 @@ $themes: (
     backgroundColor: $white,
 
     shadow: $gray-72,
-    fieldsText: $gray-47,
+    fieldsText: $gray-85,
     inputBorder: $gray-85,
-    helperText: $gray-85,
+    helperText: $gray-72,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -85,10 +86,11 @@ $themes: (
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
+    buttonTextColorSecondary: $Carnation,
     buttonTextHoverColor: $Charade,
 
     buttonColor: $Carnation,
-    buttonBorder: 2px solid $Carnation,
+    buttonBorder: 1px solid $Carnation,
     buttonHoverColor: $Oasis,
   ),
 
@@ -102,9 +104,9 @@ $themes: (
     backgroundColor: $white,
 
     shadow: $gray-72,
-    fieldsText: $gray-47,
+    fieldsText: $gray-85,
     inputBorder: $gray-85,
-    helperText: $gray-85,
+    helperText: $gray-72,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -113,10 +115,11 @@ $themes: (
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
+    buttonTextColorSecondary: $Carnation,
     buttonTextHoverColor: $Charade,
 
     buttonColor: $Carnation,
-    buttonBorder: 2px solid $Carnation,
+    buttonBorder: 1px solid $Carnation,
     buttonHoverColor: $Oasis,
   ),
 
@@ -130,9 +133,9 @@ $themes: (
     backgroundColor: $Oasis,
 
     shadow: $SeaBuckthorn,
-    fieldsText: $gray-47,
+    fieldsText: $gray-85,
     inputBorder: $gray-85,
-    helperText: $gray-85,
+    helperText: $gray-72,
     info: $Carnation,
     error: $error,
     success: $success,
@@ -141,10 +144,11 @@ $themes: (
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
+    buttonTextColorSecondary: $Carnation,
     buttonTextHoverColor: $Charade,
 
     buttonColor: $Carnation,
-    buttonBorder: 2px solid $Carnation,
+    buttonBorder: 1px solid $Carnation,
     buttonHoverColor: $SeaBuckthorn,
   ),
 
@@ -158,9 +162,9 @@ $themes: (
     backgroundColor: $Charade,
 
     shadow: $SeaBuckthorn,
-    fieldsText: $gray-47,
+    fieldsText: $gray-85,
     inputBorder: $gray-85,
-    helperText: $gray-85,
+    helperText: $gray-72,
     info: $SeaBuckthorn,
     error: $error,
     success: $success,
@@ -169,10 +173,11 @@ $themes: (
     // Buttons
     buttonTextTransform: uppercase,
     buttonTextColor: $white,
+    buttonTextColorSecondary: $Carnation,
     buttonTextHoverColor: $Charade,
 
     buttonColor: $Carnation,
-    buttonBorder: 2px solid $Carnation,
+    buttonBorder: 1px solid $Carnation,
     buttonHoverColor: $SeaBuckthorn,
   ),
 );

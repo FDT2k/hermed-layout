@@ -88,30 +88,6 @@ b {
 	font-weight:bold;
 }
 
-button {
-	min-height: 40px;
-	padding: 1em 1.5em;
-	cursor: pointer;
-
-	&:hover, &:focus {
-		@include themify($themes) {
-			color: themed('buttonTextHoverColor');
-			border: 1px solid themed('buttonHoverColor');
-			background-color:themed('buttonHoverColor');
-		}
-	}
-}
-
-button, button:active{
-	@include themify($themes) {
-		color: themed('buttonTextColor');
-		border: 1px solid themed('buttonColor');
-		background-color:themed('buttonColor');
-		text-transform: themed('buttonTextTransform');
-		@include themed_font('mainFont', 'semi-bold');
-	}
-	outline: none;
-}
 
 footer{
 	text-align: center;

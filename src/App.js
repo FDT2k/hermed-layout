@@ -9,6 +9,7 @@ import Patient from 'components/Patient'
 import Input from 'components/Input'
 import Select from 'components/Select'
 import Form from 'components/Form'
+import Button from 'components/Button'
 
 
 /*const slugify = str => str.replace(/\s/g,'_').toLowerCase()
@@ -24,7 +25,7 @@ function App() {
     <>
     <Route path="/">
 
-      <section className="theme-light">
+      <section className="theme-landing">
         <h1>Menu</h1>
         <ul>
           <li><a href="/landing" target="_blank"><h4>Landing</h4></a></li>
@@ -36,6 +37,7 @@ function App() {
             <ul>
               <li><a href="/input" target="_blank"><h4>input</h4></a></li>
               <li><a href="/select" target="_blank"><h4>select</h4></a></li>
+              <li><a href="/button" target="_blank"><h4>button</h4></a></li>
               <li><a href="/form" target="_blank"><h4>Form</h4></a></li>
             </ul>
           </li>
@@ -84,9 +86,21 @@ function App() {
       </div>
     </Route>
 
+    <Route path="/button">
+      <div className="theme-landing">
+        <Button className="contained-button"/>
+      </div>
+    </Route>
+
     <Route path="/form">
-      <div className="theme-chat">
-        <Form/>
+      <div className="theme-landing">
+        <Form>
+          <Input label="Votre nom " name="name" placeholder="Votre nom complet"/>
+          <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail"/>
+          <Input label="Votre mot de passe" name="name" placeholder="mot de passe"/>
+          <Button className="contained-button"/>
+          <Button className="text-button"/>
+        </Form>
       </div>
     </Route>
 
