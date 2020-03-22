@@ -6,15 +6,15 @@ export default props => {
   const {who} = props;
 
   return (
-    <div className="customer-landing-page flex flex-column just-between">
-      <header className="">
+    <div className="landing-page landing-page--customer flex flex-column just-between">
+      <header className="grow-1">
       </header>
-      <section className="flex flex-column align-center content-container">
+      <section className="grow-1 flex-column align-center content-container">
         <h1>Bienvenue</h1>
-        <p>
+        <p className="text--center">
           {props.who || 'Le Dr. XXX' } vous invite à rejoindre sa salle d'attente pour une consultation à distance. Lorsque vous êtes prêts, cliquez sur le bouton ci-dessous pour la rejoindre.
         </p>
-        <Button onClick={_=> props.handleClick()}>JE SUIS PRÊT !</Button>
+        {props.children}
       </section>
 
     </div>
