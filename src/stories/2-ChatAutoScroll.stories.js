@@ -2,6 +2,7 @@ import React,{useEffect,useState,useRef} from 'react';
 
 import Chat from 'components/Chat'
 import ChatBubble from 'components/ChatBubble'
+import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
 
 
@@ -9,7 +10,7 @@ const renderchats = count => {
   const empty = new Array(count).fill(0,0,count);
 
   const chats =  empty.map(item=>{
-    return <ChatBubble message={item}/>
+    return <ChatBubble left message={item}/>
   });
   return chats
 }
@@ -27,37 +28,51 @@ const renderchats = count => {
   },[count]);
 
   return (
-    <div className="theme-chat">
       <Chat autoscroll>
         {count}
+        <ChatBubble message="this should auto scroll"/>
         {renderchats(count)}
 
       </Chat>
-    </div>)
+)
 }
 
 
 
 
 export const ChatSimple = () => (
-  <div className="theme-chat">
+  <ThemePicker picked="chat">
     <Chat>
-      <ChatBubble welcome/>
-      <ChatBubble left/>
-      <ChatBubble right/>
+      <ChatBubble welcome message="Lorem hello prout"/>
+      <ChatBubble left message="Lorem hello prout"/>
+      <ChatBubble right message="Lorem hello prout"/>
     </Chat>
-  </div>
+  </ThemePicker>
+);
+
+export const ChatEvents = () => (
+  <ThemePicker picked="chat">
+    <Chat handleSubmit={v=>alert('you sent '+v)}>
+      <ChatBubble welcome message="Lorem hello prout"/>
+      <ChatBubble left message="Lorem hello prout"/>
+      <ChatBubble right message="Lorem hello prout"/>
+    </Chat>
+  </ThemePicker>
 );
 
 export const AutoScroll = () => (
+  <ThemePicker picked="chat">
   <ChatAutoScroll/>
+  </ThemePicker>
+
 );
 
 export const  Bubble =()=>
-    <div className="theme-chat"><ChatBubble/></div>
+    <ThemePicker picked="chat">
+      <ChatBubble message="Lorem hello prout"/>
+    </ThemePicker>
 
 
 export default {
   title: 'Chat',
-  component: ChatAutoScroll,
 };

@@ -3,7 +3,7 @@ import {cEx} from '@geekagency/gen-classes'
 
 
 export default props => {
-  const {status} = props;
+  const {status, name,phone,email} = props;
 
 
   return (
@@ -15,9 +15,9 @@ export default props => {
           ])
         }></div>
       <div className="coord">
-        <div className="name">Fabien Karsegard</div>
-        <div className="phone">+41 79 000 00 00</div>
-        <div className="email">fabien@karsegard.ch</div>
+        <div className="name">{name}</div>
+        <div className="phone">{phone}</div>
+        <div className="email">{email}</div>
       </div>
     </div>
   )

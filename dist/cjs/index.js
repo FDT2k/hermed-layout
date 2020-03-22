@@ -120,12 +120,30 @@ function _nonIterableRest() {
 
 var index = (function (props) {
   var who = props.who,
-      autoscroll = props.autoscroll;
+      autoscroll = props.autoscroll,
+      handleChange = props.handleChange,
+      handleSubmit = props.handleSubmit;
 
   var _useState = React.useState(true),
       _useState2 = _slicedToArray(_useState, 2),
       shouldAutoscroll = _useState2[0],
       setShouldAutoscroll = _useState2[1];
+
+  var _useState3 = React.useState(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      inputValue = _useState4[0],
+      setInputValue = _useState4[1];
+
+  var _handleChange = function _handleChange(e) {
+    setInputValue(e.target.value);
+    handleChange && handleChange(e.target.value);
+  };
+
+  var _handleSubmit = function _handleSubmit(e) {
+    setInputValue('');
+    handleSubmit && handleSubmit(inputValue);
+    e.preventDefault();
+  };
 
   var chatRef = React.useRef();
 
@@ -146,24 +164,24 @@ var index = (function (props) {
     className: "average-time"
   }, "xx:xx")), /*#__PURE__*/React__default.createElement("section", {
     ref: chatRef,
-    className: "chat",
+    className: "chat flex-column align-center",
     onTouchStart: holdScroll,
     onTouchEnd: releaseScroll,
     onMouseDown: holdScroll,
     onMouseUp: releaseScroll
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "welcome"
-  }, "Bienvenu dans la salle d'attente ! ", who || 'Le Dr. XXX ', " vous contactera via cette application d\xE8s que possible. Ne fermez pas cette fen\xEAtre avant la fin de votre RDV. Les messages sont \xE9chang\xE9s sans interm\xE9diaire. Tous les messages \xE9chang\xE9s seront automatiquement effac\xE9s en fin de conversation."), /*#__PURE__*/React__default.createElement("div", {
-    className: "content"
-  }, props.children)), /*#__PURE__*/React__default.createElement("section", {
+  }, props.children), /*#__PURE__*/React__default.createElement("section", {
     className: "tools"
   }, /*#__PURE__*/React__default.createElement("div", {
     className: "toolbar"
   }, /*#__PURE__*/React__default.createElement("button", null, "photo"), /*#__PURE__*/React__default.createElement("button", null, "file"), /*#__PURE__*/React__default.createElement("button", null, "voice")), /*#__PURE__*/React__default.createElement("div", {
     className: "text-input"
+  }, /*#__PURE__*/React__default.createElement("form", {
+    onSubmit: _handleSubmit
   }, /*#__PURE__*/React__default.createElement("input", {
-    type: "text"
-  }))));
+    type: "text",
+    onChange: _handleChange,
+    value: inputValue
+  })))));
 });
 
 function unwrapExports (x) {
@@ -262,22 +280,24 @@ var index$1 = (function (props) {
 var index$2 = (function (props) {
   var message = props.message,
       date = props.date,
-      _right = props.right;
+      _right = props.right,
+      _left = props.left;
   var classes = cjs_1(['chat-bubble', {
     'right': function right(_) {
       return _right === true;
     },
     'left': function left(_) {
-      return _right !== true;
+      return _left === true;
+    },
+    'welcome': function welcome(_) {
+      return !_left && !_right;
     }
   }]);
   return /*#__PURE__*/React__default.createElement("div", {
     className: classes
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "message"
-  }, message || 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le fau'), /*#__PURE__*/React__default.createElement("div", {
-    className: "date"
-  }, date || '11:20'));
+  }, /*#__PURE__*/React__default.createElement("p", null, message || ''), /*#__PURE__*/React__default.createElement("span", {
+    className: "chat-bubble__date"
+  }, date || '-'));
 });
 
 var index$3 = (function (props) {
@@ -289,7 +309,10 @@ var index$3 = (function (props) {
 });
 
 var index$4 = (function (props) {
-  var status = props.status;
+  var status = props.status,
+      name = props.name,
+      phone = props.phone,
+      email = props.email;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "patient-item"
   }, /*#__PURE__*/React__default.createElement("div", {
@@ -300,11 +323,11 @@ var index$4 = (function (props) {
     className: "coord"
   }, /*#__PURE__*/React__default.createElement("div", {
     className: "name"
-  }, "Fabien Karsegard"), /*#__PURE__*/React__default.createElement("div", {
+  }, name), /*#__PURE__*/React__default.createElement("div", {
     className: "phone"
-  }, "+41 79 000 00 00"), /*#__PURE__*/React__default.createElement("div", {
+  }, phone), /*#__PURE__*/React__default.createElement("div", {
     className: "email"
-  }, "fabien@karsegard.ch")));
+  }, email)));
 });
 
 var defaultSubmit = function defaultSubmit(e) {
@@ -347,6 +370,23 @@ var index$6 = (function (props) {
   }, rest)));
 });
 
+var index$7 = (function (props) {
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["label", "id", "className"]);
+
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "single-select"
+  }, /*#__PURE__*/React__default.createElement("label", {
+    for: id
+  }, label), /*#__PURE__*/React__default.createElement("div", {
+    className: "single-select__select"
+  }, /*#__PURE__*/React__default.createElement("select", _extends({
+    id: id
+  }, rest), props.children)));
+});
+
 exports.Button = Button;
 exports.Chat = index;
 exports.ChatBubble = index$2;
@@ -354,5 +394,6 @@ exports.CustomerLanding = index$1;
 exports.Form = index$5;
 exports.Input = index$6;
 exports.Patient = index$4;
+exports.Select = index$7;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map

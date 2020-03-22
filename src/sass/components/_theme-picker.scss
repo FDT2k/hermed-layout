@@ -1,0 +1,11 @@
+.theme-picker{
+  font-family: Soleil;
+
+  >select{
+    height:30px;
+    background-color: $white;
+  }
+  >.themed-content{
+    border:2px dashed black;
+  }
+}
