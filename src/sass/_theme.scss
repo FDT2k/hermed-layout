@@ -8,10 +8,12 @@ $DeepSeaGreen: $UI-Color-4-rgba;
 $SandyBrown: $GKA-Theme-4-rgba;
 $Coral: #ff7954;
 $Oasis: $UI-Color-1-rgba;
-$OasisLight: color($Oasis, 97%);
+$OasisLight: lighting($Oasis, 97%);
 $SeaBuckthorn: $GKA-Theme-5-rgba;
 
 $Paradiso: $HERMED_Theme-1-rgba;
+$ParadisoLight: lighting($Paradiso, 90%);
+$ParadisoAlpha: alphaness($Paradiso, 0.5);
 $GrannyApple: $HERMED_Theme-2-rgba;
 $Champagne: $HERMED_Theme-3-rgba;
 $Charade: $HERMED_Theme-4-rgba;
@@ -30,8 +32,10 @@ $gray-99: gray(99);
 $gray-97: gray(97);
 $gray-85: gray(85);
 $gray-72: gray(72);
+$gray-52: gray(52);
 $gray-47: gray(47);
 
+$whiteAlpha-5: alphaness($white, 0.5);
 
 $themes: (
 
@@ -46,7 +50,7 @@ $themes: (
     backgroundColorTertiary: $white,
 
     shadow: $gray-72,
-    fieldsText: $gray-85,
+    fieldsText: $gray-52,
     inputBorder: $gray-85,
     helperText: $gray-72,
     info: $Carnation,
@@ -64,6 +68,12 @@ $themes: (
     buttonColor: $Paradiso,
     buttonBorder: 1px solid $Paradiso,
     buttonHoverColor: $GrannyApple,
+
+    //Chat
+    ChatBubbleBackgroundDefault: $whiteAlpha-5,
+    ChatBubbleBackgroundPrimary: $Reef,
+    ChatBubbleBackgroundSecondary: $white,
+
   ),
   landing: (
     titleFont:'soleil',
@@ -75,7 +85,7 @@ $themes: (
     backgroundColor: $white,
 
     shadow: $gray-72,
-    fieldsText: $gray-85,
+    fieldsText: $gray-52,
     inputBorder: $gray-85,
     helperText: $gray-72,
     info: $Carnation,
@@ -92,6 +102,12 @@ $themes: (
     buttonColor: $Carnation,
     buttonBorder: 1px solid $Carnation,
     buttonHoverColor: $Oasis,
+
+    //Chat
+    ChatBubbleBackgroundDefault: $whiteAlpha-5,
+    ChatBubbleBackgroundPrimary: $Reef,
+    ChatBubbleBackgroundSecondary: $white,
+
   ),
 
   default: (
@@ -104,7 +120,7 @@ $themes: (
     backgroundColor: $white,
 
     shadow: $gray-72,
-    fieldsText: $gray-85,
+    fieldsText: $gray-52,
     inputBorder: $gray-85,
     helperText: $gray-72,
     info: $Carnation,
@@ -133,7 +149,7 @@ $themes: (
     backgroundColor: $Oasis,
 
     shadow: $SeaBuckthorn,
-    fieldsText: $gray-85,
+    fieldsText: $gray-52,
     inputBorder: $gray-85,
     helperText: $gray-72,
     info: $Carnation,
