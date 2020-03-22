@@ -2,13 +2,13 @@ import React,{useEffect,useState,useRef} from 'react';
 import 'sass/style.scss';
 
 
-import CustomerLanding from 'components/CustomerLanding'
+import Landing from 'components/Landing'
 
 export const  Bubble =()=>
-    <div className="theme-chat"><CustomerLanding/></div>
+    <div className="theme-chat"><Landing/></div>
 
 
 export default {
   title: 'Landing',
-  component: CustomerLanding,
+  component: Landing,
 };
