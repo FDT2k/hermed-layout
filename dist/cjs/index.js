@@ -238,43 +238,30 @@ unwrapExports(cjs);
 var cjs_1 = cjs.cEx;
 var cjs_2 = cjs.uEx;
 
-var Button = (function (props) {
-  var className = props.className,
-      _contained = props.contained,
-      _text = props.text,
-      _outlined = props.outlined,
-      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined"]);
-
-  return /*#__PURE__*/React__default.createElement("button", _extends({
-    className: cjs_1(["button", function (_) {
-      return !_contained && !_text && !_outlined ? "contained" : "";
-    }, {
-      'contained': function contained(_) {
-        return _contained;
-      },
-      'text': function text(_) {
-        return _text;
-      },
-      'outlined': function outlined(_) {
-        return _outlined;
-      }
-    }])
-  }, rest), props.children);
-});
-
 var index$1 = (function (props) {
-  var who = props.who;
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "customer-landing-page flex flex-column just-between"
-  }, /*#__PURE__*/React__default.createElement("header", {
-    className: ""
-  }), /*#__PURE__*/React__default.createElement("section", {
-    className: "flex flex-column align-center content-container"
-  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), /*#__PURE__*/React__default.createElement("p", null, props.who || 'Le Dr. XXX', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Button, {
-    onClick: function onClick(_) {
-      return props.handleClick();
+  var className = props.className,
+      organiser = props.organiser,
+      customer = props.customer;
+  var isOrganiser = organiser === true || !organiser && !customer;
+  var classes = cjs_1(["landing-page", "flex-column", "just-between", className, {
+    "landing-page--customer": function landingPageCustomer(_) {
+      return isOrganiser !== true;
+    },
+    "landing-page--organiser": function landingPageOrganiser(_) {
+      return isOrganiser === true;
     }
-  }, "JE SUIS PR\xCAT !")));
+  }]);
+  var styles = {
+    '--bg-position': isOrganiser ? 'right' : 'left'
+  };
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React__default.createElement("header", {
+    className: "grow-5",
+    style: styles
+  }), /*#__PURE__*/React__default.createElement("section", {
+    className: "grow-2 flex-column just-center align-center content-container"
+  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
 var index$2 = (function (props) {
@@ -330,12 +317,37 @@ var index$4 = (function (props) {
   }, email)));
 });
 
+var index$5 = (function (props) {
+  var className = props.className,
+      _contained = props.contained,
+      _text = props.text,
+      _outlined = props.outlined,
+      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined"]);
+
+  var classes = cjs_1(["button", className, function (_) {
+    return !_contained && !_text && !_outlined ? "contained" : "";
+  }, {
+    'contained': function contained(_) {
+      return _contained === true;
+    },
+    'text': function text(_) {
+      return _text === true;
+    },
+    'outlined': function outlined(_) {
+      return _outlined === true;
+    }
+  }]);
+  return /*#__PURE__*/React__default.createElement("button", _extends({
+    className: classes
+  }, rest), props.children);
+});
+
 var defaultSubmit = function defaultSubmit(e) {
   console.warn('you didnt set onSubmit');
   e.preventDefault();
 };
 
-var index$5 = (function (props) {
+var index$6 = (function (props) {
   var className = props.className,
       onSubmit = props.onSubmit,
       rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
@@ -350,7 +362,7 @@ var index$5 = (function (props) {
   }, rest), props.children);
 });
 
-var index$6 = (function (props) {
+var index$7 = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
@@ -358,7 +370,7 @@ var index$6 = (function (props) {
       rest = _objectWithoutProperties(props, ["label", "id", "className", "type"]);
 
   return /*#__PURE__*/React__default.createElement("div", {
-    className: "single-input flex flex-column"
+    className: "single-input flex-column"
   }, /*#__PURE__*/React__default.createElement("label", {
     htmlFor: id
   }, label), /*#__PURE__*/React__default.createElement("input", _extends({
@@ -370,7 +382,7 @@ var index$6 = (function (props) {
   }, rest)));
 });
 
-var index$7 = (function (props) {
+var index$8 = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
@@ -387,13 +399,13 @@ var index$7 = (function (props) {
   }, rest), props.children)));
 });
 
-exports.Button = Button;
+exports.Button = index$5;
 exports.Chat = index;
 exports.ChatBubble = index$2;
-exports.CustomerLanding = index$1;
-exports.Form = index$5;
-exports.Input = index$6;
+exports.Form = index$6;
+exports.Input = index$7;
+exports.Landing = index$1;
 exports.Patient = index$4;
-exports.Select = index$7;
+exports.Select = index$8;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map

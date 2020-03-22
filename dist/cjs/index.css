@@ -398,7 +398,7 @@ html,
 body {
   width: 100%;
   font-size: 16px;
-  line-height: 1.2em; }
+  line-height: 1.3em; }
   @media (min-width: 320px) {
     html,
     body {
@@ -435,10 +435,10 @@ body {
 /*test*/
 h1 {
   line-height: 1.3em;
-  font-size: 34px; }
+  font-size: 40px; }
   @media (min-width: 320px) {
     h1 {
-      font-size: calc(34px + 16 * (100vw - 320px) / 1046); } }
+      font-size: calc(40px + 10 * (100vw - 320px) / 1046); } }
   @media (min-width: 1366px) {
     h1 {
       font-size: 50px; } }
@@ -577,6 +577,9 @@ footer {
 
 .underline {
   text-decoration: underline; }
+
+.text--center {
+  text-align: center; }
 
 /* 0.3 - GENERAL CLASSES */
 .content-container {
@@ -1078,7 +1081,8 @@ textarea.floating-label-field {
 
 .button.contained, .button.outlined {
   width: 100%;
-  margin: 12px 0px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   min-height: 40px;
   padding: 1em 1.5em; }
 
@@ -1164,29 +1168,37 @@ textarea.floating-label-field {
   outline: none; }
 
 /* Custom sections */
-.customer-landing-page {
-  height: 100%; }
-  .customer-landing-page .content-container {
-    margin: 0px;
-    min-height: 100%; }
-  .customer-landing-page header {
+.landing-page {
+  height: 100%;
+  height: 100vh; }
+  .landing-page header {
     width: 100%;
-    min-height: 60vh; }
-    .theme-chat .customer-landing-page header {
+    min-height: 10vh;
+    background: url("/img/landing-page.jpg") var(--bg-position) no-repeat;
+    background-size: cover; }
+    .theme-chat .landing-page header {
       background-color: #277067;
       color: white; }
-    .theme-landing .customer-landing-page header {
+    .theme-landing .landing-page header {
       background-color: white;
       color: #f25e5e; }
-    .theme-default .customer-landing-page header {
+    .theme-default .landing-page header {
       background-color: white;
       color: #f25e5e; }
-  .theme-chat .customer-landing-page h1 {
-    color: #232532; }
-  .theme-landing .customer-landing-page h1 {
-    color: #232532; }
-  .theme-default .customer-landing-page h1 {
-    color: #232532; }
+  .landing-page .content-container {
+    margin: 0px auto;
+    max-width: 500px;
+    width: 100%;
+    padding: 10px 25px; }
+  .theme-chat .landing-page h1 {
+    color: white; }
+  .theme-landing .landing-page h1 {
+    color: #f25e5e; }
+  .theme-default .landing-page h1 {
+    color: #f25e5e; }
+  .landing-page p {
+    padding: 10px 0px;
+    line-height: 1.5em; }
 
 .basic-form {
   width: 100%; }
@@ -1441,17 +1453,17 @@ textarea.floating-label-field {
     border-radius: 50px; }
     .theme-chat .patient-item > .status.warning {
       background-color: #fab437; }
-    .theme-chat .patient-item > .status.success {
+    .theme-chat .patient-item > .status.online {
       background-color: #34a03c; }
-    .theme-landing .patient-item > .status.success {
+    .theme-landing .patient-item > .status.online {
       background-color: #34a03c; }
-    .theme-default .patient-item > .status.success {
+    .theme-default .patient-item > .status.online {
       background-color: #34a03c; }
-    .theme-chat .patient-item > .status.error {
+    .theme-chat .patient-item > .status.offline {
       background-color: #f11515; }
-    .theme-landing .patient-item > .status.error {
+    .theme-landing .patient-item > .status.offline {
       background-color: #f11515; }
-    .theme-default .patient-item > .status.error {
+    .theme-default .patient-item > .status.offline {
       background-color: #f11515; }
     .theme-chat .patient-item > .status.unkown {
       background-color: #858585; }

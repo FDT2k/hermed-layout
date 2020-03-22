@@ -1,7 +1,7 @@
 import '../sass/style.scss'
 
 import Chat from './Chat'
-import CustomerLanding from './CustomerLanding'
+import Landing from './Landing'
 import ChatBubble from './ChatBubble'
 import WaitingRoom from './WaitingRoom'
 import Patient from './Patient'
@@ -12,7 +12,7 @@ import Select from './Select'
 
 export {
   Chat,
-  CustomerLanding,
+  Landing,
   ChatBubble,
   WaitingRoom,
   Patient,
