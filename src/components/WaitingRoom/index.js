@@ -7,7 +7,9 @@ export default props => {
 
     <div className="waiting-room">
 
-      <header>Votre salle d'attente</header>
+      <header>
+        <h2>Votre salle d'attente</h2>
+      </header>
       <section className="content">
         {props.children}
       </section>
