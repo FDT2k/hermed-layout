@@ -9,11 +9,11 @@ html,
 body {
 	width: 100%;
 	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
-	line-height: 1.5em;
+	line-height: 1.2em;
 	@include themify($themes) {
 		color: themed('textColor');
 		background-color: themed('backgroundColor');
-		@include themed_font('mainFont','light');
+		@include themed_font('mainFont','regular');
 	}
 }
 
@@ -65,9 +65,7 @@ h4 {
 p {
 	@include themify($themes) {
 	 color: themed('textColor');
-	 @include themed_font('mainFont','regular');
 	}
-	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
 }
 
 label, input {

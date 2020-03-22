@@ -1,53 +1,48 @@
 .chat-bubble {
-  border-radius: 5px;
   max-width:80%;
-  margin: 5px;
-  padding: 5px 13px;
+  margin-bottom: 6px;
+  padding: 8px 13px 4px;
   @include flex;
   @include flex-direction(column);
 
-
-
   &.welcome{
     padding: 10px 20px;
-    text-align: justify;
     min-width: 300px;
     max-width: 400px;
-    margin: 0 auto 10px;
     border-radius: 10px;
 
+    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
     @include themify($themes) {
-      @include themed_font('mainFont','italic');
       background-color: themed('ChatBubbleBackgroundDefault');
+      @include themed_font('mainFont','bold');
     }
-    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-    text-align: justify;
-    min-width: 300px;
-    max-width:400px;
-    margin: 0 auto;
+
+    .chat-bubble__date {
+      display: none;
+    }
+  }
+
+  &.right, &.left {
+    @include themify($themes) {
+      @include themed_font('mainFont','regular');
+      @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
+      color: themed('textColorSecondary');
+      box-shadow: 0px 1px 2px 0px themed('shadow');
+    }
   }
 
   &.right{
-    clear:both;
-    float:right;
     border-radius: 10px 0px 10px 10px;
     @include flex-align-self-children(flex-end);
     @include themify($themes) {
-      @include themed_font('mainFont','regular');
-      @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-      color: themed('textColorSecondary');
       background-color: themed('ChatBubbleBackgroundPrimary');
     }
   }
+
   &.left{
-    clear:both;
-    float:left;
     border-radius: 0px 10px 10px 10px;
     @include flex-align-self-children(flex-start);
     @include themify($themes) {
-      @include themed_font('mainFont','regular');
-      @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-      color: themed('textColorSecondary');
       background-color: themed('ChatBubbleBackgroundSecondary');
     }
   }
