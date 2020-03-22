@@ -4,6 +4,7 @@ import 'sass/style.scss';
 
 import Input from 'components/Input'
 import Select from 'components/Select'
+import InputDate from 'components/InputDate'
 
 import ThemePicker from 'components/ThemePicker'
 
@@ -20,6 +21,11 @@ export const  SingleSelect =()=>
         <option>Option 2</option>
         <option>Option 3</option>
       </Select>
+    </ThemePicker>
+
+export const  SingleInputDate =()=>
+    <ThemePicker>
+      <InputDate label="Date"/>
     </ThemePicker>
 
 export default {

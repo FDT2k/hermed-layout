@@ -1,7 +1,7 @@
 import React from 'react';
 import 'sass/style.scss';
 import { Link, Route } from "wouter";
-import Landing from 'components/CustomerLanding'
+import Landing from 'components/Landing'
 import Chat from 'components/Chat'
 import ChatBubble from 'components/ChatBubble'
 import WaitingRoom from 'components/WaitingRoom'

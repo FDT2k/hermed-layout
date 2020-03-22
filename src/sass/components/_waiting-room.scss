@@ -1,12 +1,13 @@
 
 /* Custom sections */
 .waiting-room {
+  min-height: 100vh;
+  height: 100%;
   @include themify($themes) {
-
     @include themed_font('mainFont','regular');
     @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
     color: themed('textColorPrimary');
-    background-color: themed('backgroundColorPrimary');
+    background-color: themed('backgroundColor');
 
   }
 
