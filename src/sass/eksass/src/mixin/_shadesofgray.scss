@@ -5,8 +5,16 @@
 ////////////////////////////////
 
 // Change the lightness of any color
-@function color($colorName, $percent) {
+@function lighting($colorName, $percent) {
  @return change-color($colorName, $lightness: $percent);
+}
+
+// Example
+// $ElmName: color($Elm, 50%);
+
+// Change the alphaness of any color
+@function alphaness($colorName, $unit) {
+ @return change-color($colorName, $alpha: $unit);
 }
 
 // Example

@@ -41,7 +41,11 @@ const renderchats = count => {
 
 export const ChatSimple = () => (
   <div className="theme-chat">
-    <Chat/>
+    <Chat>
+      <ChatBubble welcome/>
+      <ChatBubble left/>
+      <ChatBubble right/>
+    </Chat>
   </div>
 );
 

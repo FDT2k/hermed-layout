@@ -1,9 +1,17 @@
 import React from 'react'
 
 
-export default props => {
 
+export default props => {
+  const {label,id, className, ...rest} = props
   return (
-    <div></div>
+      <div className="single-select">
+        <label for={id}>{label}</label>
+        <div className="single-select__select">
+          <select id={id} {...rest}>
+            {props.children}
+          </select>
+        </div>
+      </div>
   )
 }

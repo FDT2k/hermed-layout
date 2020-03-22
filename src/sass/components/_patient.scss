@@ -40,7 +40,9 @@
       }
     }
     &.unkown{
-      background-color: $gray-47;
+      @include themify($themes) {
+        background-color: themed('disabled');
+      }
     }
   }
 

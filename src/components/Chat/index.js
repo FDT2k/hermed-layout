@@ -31,13 +31,8 @@ export default props => {
         <br/>
         <span className="average-time">xx:xx</span>
       </header>
-      <section ref={chatRef} className="chat" onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
-        <div className="welcome">
-            Bienvenu dans la salle d'attente ! {who || 'Le Dr. XXX '} vous contactera via cette application dès que possible. Ne fermez pas cette fenêtre avant la fin de votre RDV. Les messages sont échangés sans intermédiaire. Tous les messages échangés seront automatiquement effacés en fin de conversation.
-        </div>
-        <div className="content">
-          {props.children}
-        </div>
+      <section ref={chatRef} className="chat flex-column align-center" onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
+        {props.children}
       </section>
       <section className="tools">
         <div className="toolbar">

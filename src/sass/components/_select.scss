@@ -1,0 +1,79 @@
+.single-select {
+  width: 100%;
+  padding: 6px 0px;
+
+
+  label {
+    @include themify($themes) {
+      color: themed('textColor');
+      @include themed_font('mainFont','regular');
+    }
+    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+  }
+
+  &__select {
+    position: relative;
+    max-width: 500px;
+    height: 48px;
+    width: 100%;
+
+    &:after {
+      content:'';
+      background: url('/img/icons/expand_more-24px.svg') center no-repeat;
+      height: 48px;
+      width: 48px;
+      right: 0px;
+      border-radius: 4px 4px 0px 0px;
+      position: absolute;
+      pointer-events: none;
+    }
+  }
+
+
+  select {
+    width: 100%;
+    height: 100%;
+    padding: 0em 48px 0em 1.5em;
+    border-radius: 4px;
+
+    background-image: none;
+    -ms-word-break: normal;
+    word-break: normal;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    @include themify($themes) {
+      color: themed('textColor');
+      border: solid 1px themed('inputBorder');
+      @include themed_font('mainFont','regular');
+      background-color: themed('backgroundColor');
+    }
+    @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
+
+
+
+    &:focus {
+      @include themify($themes) {
+        color: themed('textColor');
+        border: solid 1px themed('textColor');
+        @include themed_font('mainFont','regular');
+        box-sizing: none;
+      }
+    }
+
+    &::placeholder {
+      @include themify($themes) {
+        color: themed('helperText');
+        @include themed_font('mainFont','thin');
+      }
+    }
+
+  }
+  /* to remove button from IE11 */
+  select::-ms-expand {
+     display: none;
+  }
+
+}
