@@ -10,7 +10,7 @@ import ThemePicker from 'components/ThemePicker'
 import componentNotes from './doc/Form.md';
 
 export const  Simple =()=>
-    <div className="theme-landing">
+    <ThemePicker>
       <Form>
         <Input label="Votre nom " name="name" placeholder="Votre nom complet" autoComplete="off"/>
         <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail" autoComplete="off"/>
@@ -20,7 +20,7 @@ export const  Simple =()=>
         <Button text>Hello world</Button>
         <Button outlined>Hello world</Button>
       </Form>
-    </div>
+    </ThemePicker>
 
   export const  Contained =()=>
     <ThemePicker>

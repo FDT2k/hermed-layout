@@ -5,7 +5,7 @@ import {cEx} from '@geekagency/gen-classes'
 export default props => {
   const {label, id,className, type, ...rest} = props
   return (
-    <div className="single-input flex flex-column">
+    <div className="single-input flex-column">
       <label htmlFor={id}>{label}</label>
       <input className={
           cEx([

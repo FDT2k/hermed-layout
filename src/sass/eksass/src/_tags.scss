@@ -9,7 +9,7 @@ html,
 body {
 	width: 100%;
 	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
-	line-height: 1.2em;
+	line-height: 1.3em;
 	@include themify($themes) {
 		color: themed('textColor');
 		background-color: themed('backgroundColor');
@@ -32,7 +32,7 @@ h1 {
 	@include themify($themes) {
 		@include themed_font('titleFont','semi-bold');
 	}
-	@include fluid-type(font-size, 320px, 1366px, 34px, 50px);
+	@include fluid-type(font-size, 320px, 1366px, 40px, 50px);
 }
 
 h2 {

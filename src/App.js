@@ -56,7 +56,7 @@ function App() {
 
 
     <Route path="/landing">
-      <div className="theme-chat">
+      <div className="theme-landing">
           <Landing/>
       </div>
     </Route>
@@ -97,7 +97,7 @@ function App() {
     <Route path="/form">
       <div className="theme-landing">
         <Form>
-          <Input label="Votre nom " name="name" placeholder="Votre nom complet"/>
+          <Input label="Votre nom" name="name" placeholder="Votre nom complet"/>
           <Input label="Votre adresse email" name="email" placeholder="votre@adresse.mail"/>
           <Input label="Votre mot de passe" name="name" placeholder="mot de passe"/>
             <Button>Hello world</Button>

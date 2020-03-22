@@ -1,25 +1,40 @@
 
 /* Custom sections */
-.customer-landing-page {
+.landing-page {
   height: 100%;
+  height: 100vh;
 
-  .content-container{
-    margin: 0px;
-    min-height:100%;
-  }
 
   header {
     width: 100%;
-    min-height: 60vh;
+    min-height: 10vh;
+    background: url('/img/landing-page.jpg') var(--bg-position) no-repeat;
+    background-size: cover;
     @include themify($themes) {
       background-color: themed('backgroundColorSecondary');
-  		color: themed('textColorSecondary');
-  	}
+      color: themed('textColorSecondary');
+    }
+  }
+
+  .content-container{
+    margin: 0px auto;
+    max-width: 500px;
+    width: 100%;
+    padding: 10px 25px;
   }
 
   h1 {
     @include themify($themes) {
-  		color: themed('textColor');
-  	}
+      color: themed('textColorSecondary');
+    }
   }
+
+  p {
+    padding: 10px 0px;
+    line-height: 1.5em;
+  }
+
+
+
+
 }
