@@ -11,7 +11,7 @@
 
   }
 
-  > header {
+  header {
     @include themify($themes) {
       min-height: 47px;
       @include themed_font('titleFont','bold');
@@ -19,6 +19,11 @@
       color: themed('textColorSecondary');
       background-color: themed('backgroundColorSecondary');
 
+    }
+    button.text {
+      @include themify($themes) {
+        color:themed('buttonTextColor');
+      }
     }
   }
 

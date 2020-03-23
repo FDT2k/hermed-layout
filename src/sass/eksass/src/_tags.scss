@@ -38,10 +38,10 @@ h1 {
 h2 {
 	line-height: 1.2em;
 	@include themify($themes) {
-		color: themed('textColor');
-		@include themed_font('mainFont','thin');
+		color: themed('textColorSecondary');
+		@include themed_font('mainFont','regular');
 	}
-	@include fluid-type(font-size, 320px, 1366px, 32px, 40px);
+	@include fluid-type(font-size, 320px, 1366px, 14px, 18px);
 }
 
 h3 {
