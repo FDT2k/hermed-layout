@@ -8,6 +8,7 @@ import Patient from './Patient'
 import Button from './Button'
 import Form from './Form'
 import Input from './Input'
+import Select from './Select'
 
 export {
   Chat,
@@ -17,5 +18,6 @@ export {
   Patient,
   Button,
   Form,
-  Input
+  Input,
+  Select
 }

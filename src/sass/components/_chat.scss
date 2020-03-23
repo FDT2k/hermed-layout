@@ -46,7 +46,7 @@
     color: themed('textColor');
     background-color: themed('backgroundColor');
   }
-  
+
 }
 .hermed-chat > .tools {
   padding: 10px 25px;
@@ -79,6 +79,11 @@
 
     height: 40px;
     width: 100%;
+    form{
+      height:100%;
+      margin:0px;
+      padding:0px;
+    }
 
     input {
       border: 1px solid #1B263030;

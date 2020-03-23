@@ -16,9 +16,9 @@ export default props => {
   return (
     <div className={classes}>
       <p>
-        {message || 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le fau'}
+        {message || ''}
       </p>
-      <span className="chat-bubble__date">{date || '11:20'}</span>
+      <span className="chat-bubble__date">{date || '-'}</span>
     </div>
 
   )

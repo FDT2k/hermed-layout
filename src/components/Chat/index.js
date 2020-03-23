@@ -6,8 +6,22 @@ import React,{useEffect,useRef,useState} from 'react'
 
 
 export default props => {
-  const {who, autoscroll} = props;
+  const {who, autoscroll,handleChange,handleSubmit} = props;
   const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
+
+  const [inputValue,setInputValue] = useState('');
+
+  const _handleChange = e => {
+    setInputValue(e.target.value);
+    handleChange && handleChange(e.target.value);
+  }
+
+  const _handleSubmit = e => {
+    setInputValue('')
+    handleSubmit && handleSubmit(inputValue)
+    e.preventDefault();
+  }
+
   const chatRef = useRef();
 
   const holdScroll = ()=>{
@@ -41,7 +55,9 @@ export default props => {
           <button>voice</button>
         </div>
         <div className="text-input">
-          <input type="text" />
+          <form onSubmit={_handleSubmit}>
+            <input type="text" onChange={_handleChange} value={inputValue}/>
+          </form>
         </div>
       </section>
     </div>
