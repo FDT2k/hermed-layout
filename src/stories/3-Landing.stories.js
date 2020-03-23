@@ -6,10 +6,12 @@ import Form from 'components/Form'
 import Button from 'components/Button'
 import ThemePicker from 'components/ThemePicker'
 import Landing from 'components/Landing'
+import CustomerLanding from 'components/CustomerLanding'
+
+import componentNotes from './doc/CustomerLanding.md';
 
 
-
-export const  LandingOriganiser =()=>
+export const  LandingOrganiser =()=>
     <div className="theme-landing">
       <Landing>
         <Form className="flex-column align-center">
@@ -34,13 +36,14 @@ export const  LandingCustomer =()=>
       </Landing>
     </div>
 
-export const  Callback =()=>
+export const  LandingCustomerCallBackTest =()=>
     <ThemePicker>
-      <Landing handleClick={()=>alert('clicked')}/>
+      <CustomerLanding handleClick={(val)=>alert('clicked '+val)}/>
     </ThemePicker>
 
 
 export default {
   title: 'Landing',
-  component: Landing,
+  parameters: { notes: componentNotes },
+
 };
