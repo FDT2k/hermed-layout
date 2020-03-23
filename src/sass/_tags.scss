@@ -2,7 +2,11 @@ html,
 body {
 	overflow-x: hidden;
 	overflow-y: auto;
+}
 
+header {
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
 section,footer {
@@ -14,7 +18,7 @@ h1 {
 }
 
 h2 {
-
+	text-transform: uppercase;
 }
 
 h3 {
