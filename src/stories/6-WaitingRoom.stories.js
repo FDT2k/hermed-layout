@@ -8,14 +8,15 @@ import Button from 'components/Button'
 import ThemePicker from 'components/ThemePicker'
 
 export const  Attente =()=>
-    <div className="theme-chat">
+    <ThemePicker picked="chat">
       <WaitingRoom/>
-    </div>
+   </ThemePicker>
+
 
 
 
 export const  AvecPatients =()=>
-    <div className="theme-chat">
+    <ThemePicker picked="chat">
       <WaitingRoom>
           <Patient/>
           <Patient/>
@@ -23,7 +24,7 @@ export const  AvecPatients =()=>
           <Patient/>
           <Button>inviter</Button>
       </WaitingRoom>
-    </div>
+    </ThemePicker>
 
 
 export default {

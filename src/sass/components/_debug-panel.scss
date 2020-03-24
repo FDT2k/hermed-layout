@@ -1,0 +1,36 @@
+.debug-panel{
+
+  &.pinned {
+    position:fixed;
+  }
+
+  &.pinned .top-left{
+    top:0px;
+    left:0px;
+  }
+
+  display:inline-block;
+  & > .content-closed{
+    opacity: 0.5;
+    border: 2px dashed black;
+  }
+
+
+  &.visible >.content-closed{
+    display:none;
+  }
+
+  &.hidden >.content-closed{
+    display:block;
+  }
+  &.visible >.content{
+    display:block;
+  }
+
+  &.hidden >.content{
+    display:none;
+  }
+
+
+
+}

@@ -4,11 +4,11 @@ import Button from 'components/Button'
 import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
 import componentNotes from './doc/Button.md';
+import { FiArrowRightCircle } from "react-icons/fi";
 
 
 
-
-export const Text = () => (
+export const Normal = () => (
     <ThemePicker>
       <Button >Hello Button</Button>
       <Button outlined>Hello Button</Button>
@@ -16,15 +16,34 @@ export const Text = () => (
     </ThemePicker>
   );
 
-export const Emoji = () => (
-  <div className="theme-chat">
 
-  <Button >
-    <span role="img" aria-label="so cool">
-      😀 😎 👍 💯
-    </span>
-  </Button>
-  </div>
+export const Fit = () => (
+    <ThemePicker>
+      <Button fit>Hello Button</Button>
+      <Button outlined fit>Hello Button</Button>
+      <Button text fit>Hello Button</Button>
+    </ThemePicker>
+);
+
+
+export const FitIcon = () => (
+    <ThemePicker>
+      <Button fit><FiArrowRightCircle/></Button>
+      <Button outlined fit><FiArrowRightCircle/></Button>
+      <Button text fit><FiArrowRightCircle/></Button>
+    </ThemePicker>
+);
+
+export const Emoji = () => (
+  <ThemePicker>
+
+    <Button >
+      <span role="img" aria-label="so cool">
+        😀 😎 👍 💯
+      </span>
+    </Button>
+  </ThemePicker>
+
 );
 
 
