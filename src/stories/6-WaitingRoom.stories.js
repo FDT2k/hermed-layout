@@ -5,14 +5,18 @@ import 'sass/style.scss';
 import WaitingRoom from 'components/WaitingRoom'
 import Patient from 'components/Patient'
 import Button from 'components/Button'
+import ThemePicker from 'components/ThemePicker'
 
 export const  Attente =()=>
-    <div className="theme-chat"><WaitingRoom/></div>
+    <ThemePicker picked="chat">
+      <WaitingRoom/>
+   </ThemePicker>
+
 
 
 
 export const  AvecPatients =()=>
-    <div className="theme-chat">
+    <ThemePicker picked="chat">
       <WaitingRoom>
           <Patient/>
           <Patient/>
@@ -20,7 +24,7 @@ export const  AvecPatients =()=>
           <Patient/>
           <Button>inviter</Button>
       </WaitingRoom>
-    </div>
+    </ThemePicker>
 
 
 export default {
