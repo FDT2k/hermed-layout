@@ -164,7 +164,7 @@ var index = (function (props) {
     className: "average-time"
   }, "xx:xx")), /*#__PURE__*/React__default.createElement("section", {
     ref: chatRef,
-    className: "chat flex-column align-center",
+    className: "chat flex-column just-end align-center",
     onTouchStart: holdScroll,
     onTouchEnd: releaseScroll,
     onMouseDown: holdScroll,
@@ -238,7 +238,7 @@ unwrapExports(cjs);
 var cjs_1 = cjs.cEx;
 var cjs_2 = cjs.uEx;
 
-var index$1 = (function (props) {
+var Landing = (function (props) {
   var className = props.className,
       organiser = props.organiser,
       customer = props.customer;
@@ -262,6 +262,82 @@ var index$1 = (function (props) {
   }), /*#__PURE__*/React__default.createElement("section", {
     className: "grow-2 flex-column just-center align-center content-container"
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
+});
+
+var Button = (function (props) {
+  var className = props.className,
+      _contained = props.contained,
+      _text = props.text,
+      _outlined = props.outlined,
+      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined"]);
+
+  var classes = cjs_1(["button", className, function (_) {
+    return !_contained && !_text && !_outlined ? "contained" : "";
+  }, {
+    'contained': function contained(_) {
+      return _contained === true;
+    },
+    'text': function text(_) {
+      return _text === true;
+    },
+    'outlined': function outlined(_) {
+      return _outlined === true;
+    }
+  }]);
+  return /*#__PURE__*/React__default.createElement("button", _extends({
+    className: classes
+  }, rest), props.children);
+});
+
+var Input = (function (props) {
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      type = props.type,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "type"]);
+
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "single-input flex-column"
+  }, /*#__PURE__*/React__default.createElement("label", {
+    htmlFor: id
+  }, label), /*#__PURE__*/React__default.createElement("input", _extends({
+    className: cjs_1(["input", function (_) {
+      return className;
+    }]),
+    id: id,
+    type: "text"
+  }, rest)));
+});
+
+var index$1 = (function (props) {
+  var handleClick = props.handleClick,
+      identity = props.identity;
+
+  var _useState = React.useState(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var _handleClick = function _handleClick() {
+    handleClick && handleClick(value);
+  };
+
+  return /*#__PURE__*/React__default.createElement(Landing, {
+    customer: true
+  }, /*#__PURE__*/React__default.createElement("p", {
+    className: "text--center"
+  }, identity || 'inconnu', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Input, {
+    label: "Votre date de naissance",
+    name: "birthday",
+    placeholder: "JJ.MM.YYYY",
+    onChange: function onChange(e) {
+      return setValue(e.target.value);
+    },
+    value: value,
+    autoComplete: "off"
+  }), /*#__PURE__*/React__default.createElement(Button, {
+    onClick: _handleClick
+  }, "JE SUIS PR\xCAT !"));
 });
 
 var index$2 = (function (props) {
@@ -290,7 +366,17 @@ var index$2 = (function (props) {
 var index$3 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "waiting-room"
-  }, /*#__PURE__*/React__default.createElement("header", null, "Votre salle d'attente"), /*#__PURE__*/React__default.createElement("section", {
+  }, /*#__PURE__*/React__default.createElement("header", {
+    className: "flex-row just-between align-center"
+  }, /*#__PURE__*/React__default.createElement("h2", null, "Votre salle d'attente"), /*#__PURE__*/React__default.createElement("div", {
+    className: "parameters-box"
+  }, /*#__PURE__*/React__default.createElement("button", {
+    className: "button text icon"
+  }, "X"), /*#__PURE__*/React__default.createElement("button", {
+    className: "button text icon"
+  }, "Y"), /*#__PURE__*/React__default.createElement("button", {
+    className: "button text icon"
+  }, "Z"))), /*#__PURE__*/React__default.createElement("section", {
     className: "content"
   }, props.children));
 });
@@ -317,37 +403,12 @@ var index$4 = (function (props) {
   }, email)));
 });
 
-var index$5 = (function (props) {
-  var className = props.className,
-      _contained = props.contained,
-      _text = props.text,
-      _outlined = props.outlined,
-      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined"]);
-
-  var classes = cjs_1(["button", className, function (_) {
-    return !_contained && !_text && !_outlined ? "contained" : "";
-  }, {
-    'contained': function contained(_) {
-      return _contained === true;
-    },
-    'text': function text(_) {
-      return _text === true;
-    },
-    'outlined': function outlined(_) {
-      return _outlined === true;
-    }
-  }]);
-  return /*#__PURE__*/React__default.createElement("button", _extends({
-    className: classes
-  }, rest), props.children);
-});
-
 var defaultSubmit = function defaultSubmit(e) {
   console.warn('you didnt set onSubmit');
   e.preventDefault();
 };
 
-var index$6 = (function (props) {
+var index$5 = (function (props) {
   var className = props.className,
       onSubmit = props.onSubmit,
       rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
@@ -362,27 +423,7 @@ var index$6 = (function (props) {
   }, rest), props.children);
 });
 
-var index$7 = (function (props) {
-  var label = props.label,
-      id = props.id,
-      className = props.className,
-      type = props.type,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "type"]);
-
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "single-input flex-column"
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id
-  }, label), /*#__PURE__*/React__default.createElement("input", _extends({
-    className: cjs_1(["input", function (_) {
-      return className;
-    }]),
-    id: id,
-    type: "text"
-  }, rest)));
-});
-
-var index$8 = (function (props) {
+var index$6 = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
@@ -399,13 +440,14 @@ var index$8 = (function (props) {
   }, rest), props.children)));
 });
 
-exports.Button = index$5;
+exports.Button = Button;
 exports.Chat = index;
 exports.ChatBubble = index$2;
-exports.Form = index$6;
-exports.Input = index$7;
-exports.Landing = index$1;
+exports.CustomerLanding = index$1;
+exports.Form = index$5;
+exports.Input = Input;
+exports.Landing = Landing;
 exports.Patient = index$4;
-exports.Select = index$8;
+exports.Select = index$6;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map
