@@ -5,7 +5,8 @@ module.exports = {
     '@storybook/preset-create-react-app',
     '@storybook/addon-actions',
     '@storybook/addon-links',
-    '@storybook/addon-notes/register-panel'
+    '@storybook/addon-notes/register-panel',
+    '@storybook/addon-viewport/register',
   ],
   webpackFinal: async (config, { configType }) => {
    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'

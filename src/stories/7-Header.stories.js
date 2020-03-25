@@ -8,9 +8,33 @@ import Header from 'components/Header'
 import ChatHeaderToolbar from 'components/ChatHeaderToolbar'
 import ChatFooter from 'components/ChatFooter'
 
+
+
+import { MdVideocam } from "react-icons/md";
+import { MdVideocamOff } from "react-icons/md";
+import { MdLocalPhone } from "react-icons/md";
+
+const WaitingRoomToolBar  = props => {
+
+  return (
+    <>
+    <button className="button text icon icon--32"><MdVideocam/></button>
+    <button className="button text icon icon--32"><MdLocalPhone/></button>
+    <button className="button text icon icon--32"><MdLocalPhone/></button>
+    <button className="button text icon icon--32"><MdLocalPhone/></button>
+    </>
+  )
+}
+
+
 export const SingleHeader =()=>
   <ThemePicker picked="chat">
     <Header title="Waiting Room" />
+  </ThemePicker>
+
+export const WaitingRoomHeader =()=>
+  <ThemePicker picked="chat">
+    <Header title="Waiting Room"  Toolbar={WaitingRoomToolBar}/>
   </ThemePicker>
 
 export const DoctorHeader =()=>

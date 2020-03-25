@@ -6,9 +6,9 @@ import { MdArrowBack } from "react-icons/md";
 
 import ChatHeaderStatus from '../ChatHeaderStatus';
 
-import { MdVideocam } from "react-icons/md";
+import { MdVideocam }    from "react-icons/md";
 import { MdVideocamOff } from "react-icons/md";
-import { MdLocalPhone } from "react-icons/md";
+import { MdLocalPhone }  from "react-icons/md";
 
 export default props => {
 
