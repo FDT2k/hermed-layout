@@ -1,6 +1,5 @@
 import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
-import 'sass/style.scss';
 import { MdArrowBack } from "react-icons/md";
 
 

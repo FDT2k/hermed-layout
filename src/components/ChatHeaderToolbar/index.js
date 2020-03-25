@@ -1,5 +1,4 @@
 import React from 'react'
-import 'sass/style.scss';
 
 import { MdVideocam } from "react-icons/md";
 import { MdVideocamOff } from "react-icons/md";

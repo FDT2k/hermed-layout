@@ -1,5 +1,4 @@
 import React from 'react'
-import 'sass/style.scss';
 import {cEx} from '@geekagency/gen-classes'
 
 

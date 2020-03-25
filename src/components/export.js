@@ -10,6 +10,11 @@ import Button from './Button'
 import Form from './Form'
 import Input from './Input'
 import Select from './Select'
+import OrganiserConfigurationForm from './OrganiserConfigurationForm'
+import OrganiserLanding from './OrganiserLanding'
+import Header from './Header'
+import ChatHeaderStatus from './ChatHeaderStatus'
+import ChatHeaderToolbar from './ChatHeaderToolbar'
 
 export {
   Chat,
@@ -22,5 +27,10 @@ export {
   Button,
   Form,
   Input,
-  Select
+  Select,
+  OrganiserConfigurationForm,
+  OrganiserLanding,
+  Header,
+  ChatHeaderStatus,
+  ChatHeaderToolbar
 }
