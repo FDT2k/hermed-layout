@@ -164,7 +164,7 @@ var index = (function (props) {
     className: "average-time"
   }, "xx:xx")), /*#__PURE__*/React__default.createElement("section", {
     ref: chatRef,
-    className: "chat flex-column just-end align-center",
+    className: "chat flex-column  align-center",
     onTouchStart: holdScroll,
     onTouchEnd: releaseScroll,
     onMouseDown: holdScroll,
@@ -269,7 +269,8 @@ var Button = (function (props) {
       _contained = props.contained,
       _text = props.text,
       _outlined = props.outlined,
-      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined"]);
+      _fit = props.fit,
+      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined", "fit"]);
 
   var classes = cjs_1(["button", className, function (_) {
     return !_contained && !_text && !_outlined ? "contained" : "";
@@ -282,6 +283,9 @@ var Button = (function (props) {
     },
     'outlined': function outlined(_) {
       return _outlined === true;
+    },
+    'fit': function fit(_) {
+      return _fit === true;
     }
   }]);
   return /*#__PURE__*/React__default.createElement("button", _extends({
@@ -363,6 +367,122 @@ var index$2 = (function (props) {
   }, date || '-'));
 });
 
+var DefaultContext = {
+  color: undefined,
+  size: undefined,
+  className: undefined,
+  style: undefined,
+  attr: undefined
+};
+var IconContext = React.createContext && React.createContext(DefaultContext);
+
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+  return t;
+};
+
+function Tree2Element(tree) {
+  return tree && tree.map(function (node, i) {
+    return React.createElement(node.tag, __assign({
+      key: i
+    }, node.attr), Tree2Element(node.child));
+  });
+}
+
+function GenIcon(data) {
+  return function (props) {
+    return React.createElement(IconBase, __assign({
+      attr: __assign({}, data.attr)
+    }, props), Tree2Element(data.child));
+  };
+}
+function IconBase(props) {
+  var elem = function (conf) {
+    var computedSize = props.size || conf.size || "1em";
+    var className;
+    if (conf.className) className = conf.className;
+    if (props.className) className = (className ? className + ' ' : '') + props.className;
+
+    var attr = props.attr,
+        title = props.title,
+        svgProps = __rest(props, ["attr", "title"]);
+
+    return React.createElement("svg", __assign({
+      stroke: "currentColor",
+      fill: "currentColor",
+      strokeWidth: "0"
+    }, conf.attr, attr, svgProps, {
+      className: className,
+      style: __assign({
+        color: props.color || conf.color
+      }, conf.style, props.style),
+      height: computedSize,
+      width: computedSize,
+      xmlns: "http://www.w3.org/2000/svg"
+    }), title && React.createElement("title", null, title), props.children);
+  };
+
+  return IconContext !== undefined ? React.createElement(IconContext.Consumer, null, function (conf) {
+    return elem(conf);
+  }) : elem(DefaultContext);
+}
+
+// THIS FILE IS AUTO GENERATED
+var MdPersonAdd = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "viewBox": "0 0 24 24"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "d": "M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+      }
+    }]
+  })(props);
+};
+MdPersonAdd.displayName = "MdPersonAdd";
+
+// THIS FILE IS AUTO GENERATED
+var GoGear = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "viewBox": "0 0 14 16"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "fillRule": "evenodd",
+        "d": "M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"
+      }
+    }]
+  })(props);
+};
+GoGear.displayName = "GoGear";
+
+// THIS FILE IS AUTO GENERATED
+var FaPowerOff=function(props){return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 512 512"},"child":[{"tag":"path","attr":{"d":"M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z"}}]})(props);};FaPowerOff.displayName="FaPowerOff";
+
 var index$3 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "waiting-room"
@@ -372,11 +492,11 @@ var index$3 = (function (props) {
     className: "parameters-box"
   }, /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon"
-  }, "X"), /*#__PURE__*/React__default.createElement("button", {
+  }, /*#__PURE__*/React__default.createElement(MdPersonAdd, null)), /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon"
-  }, "Y"), /*#__PURE__*/React__default.createElement("button", {
+  }, /*#__PURE__*/React__default.createElement(GoGear, null)), /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon"
-  }, "Z"))), /*#__PURE__*/React__default.createElement("section", {
+  }, /*#__PURE__*/React__default.createElement(FaPowerOff, null)))), /*#__PURE__*/React__default.createElement("section", {
     className: "content"
   }, props.children));
 });
@@ -432,7 +552,7 @@ var index$6 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "single-select"
   }, /*#__PURE__*/React__default.createElement("label", {
-    for: id
+    htmlFor: id
   }, label), /*#__PURE__*/React__default.createElement("div", {
     className: "single-select__select"
   }, /*#__PURE__*/React__default.createElement("select", _extends({

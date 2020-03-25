@@ -34,6 +34,8 @@
   }
 }
 
+
+/*Chat content, bubbles etc*/
 .hermed-chat > .chat {
   grid-area: chat;
   padding: 10px 25px;
@@ -41,6 +43,10 @@
   align-items: center;
   overflow-y: scroll;
   height:100%;
+
+  & >*:first-child{
+    margin-top: auto;
+  }
   @include themify($themes) {
     @include themed_font('mainFont','regular');
     color: themed('textColor');

@@ -51,13 +51,20 @@ export const ChatSimple = () => (
 );
 
 export const ChatEvents = () => (
-  <ThemePicker picked="chat">
+  <div className="theme-chat">
     <Chat handleSubmit={v=>alert('you sent '+v)}>
-      <ChatBubble welcome message="Lorem hello prout"/>
-      <ChatBubble left message="Lorem hello prout"/>
-      <ChatBubble right message="Lorem hello prout"/>
+          <ChatBubble welcome message="Lorem hello prout"/>
+          <ChatBubble left message="Lorem hello prout"/>
+          <ChatBubble right message="Lorem hello prout"/>
+          <ChatBubble left message="Lorem hello prout"/>
+          <ChatBubble right message="Lorem hello prout"/>
+
+
+            <ChatBubble right message="Lorem hello prout"/>
+
+              <ChatBubble right message="Lorem hello prout"/>
     </Chat>
-  </ThemePicker>
+    </div>
 );
 
 export const AutoScroll = () => (

@@ -42,7 +42,7 @@
         background-color: themed('StatusColorDefault');
       }
 
-      &.disconnect {
+      &.disconnected {
         @include themify($themes) {
           background-color: themed('StatusColorDisconnect');
         }
@@ -70,10 +70,4 @@
     }
   }
 
-}
-
-.headline--patient {
-  button.button, .headline__tool-box {
-    display: none;
-  }
 }
