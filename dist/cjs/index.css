@@ -1008,6 +1008,7 @@ textarea.floating-label-field {
   .hermed-chat > header .average-time {
     font-size: 40px; }
 
+/*Chat content, bubbles etc*/
 .hermed-chat > .chat {
   grid-area: chat;
   padding: 10px 25px;
@@ -1015,6 +1016,8 @@ textarea.floating-label-field {
   align-items: center;
   overflow-y: scroll;
   height: 100%; }
+  .hermed-chat > .chat > *:first-child {
+    margin-top: auto; }
   .theme-chat .hermed-chat > .chat {
     color: #232532;
     background-color: #faedcf; }
@@ -1102,6 +1105,8 @@ textarea.floating-label-field {
     text-transform: uppercase; }
   .theme-default .button {
     text-transform: uppercase; }
+  .button.fit {
+    width: auto; }
   .theme-chat .button.contained, .theme-chat .button.outlined {
     color: white;
     border: 1px solid #277067; }
@@ -1500,3 +1505,22 @@ textarea.floating-label-field {
     background-color: white; }
   .theme-picker > .themed-content {
     border: 2px dashed black; }
+
+.debug-panel {
+  display: inline-block; }
+  .debug-panel.pinned {
+    position: fixed; }
+  .debug-panel.pinned .top-left {
+    top: 0px;
+    left: 0px; }
+  .debug-panel > .content-closed {
+    opacity: 0.5;
+    border: 2px dashed black; }
+  .debug-panel.visible > .content-closed {
+    display: none; }
+  .debug-panel.hidden > .content-closed {
+    display: block; }
+  .debug-panel.visible > .content {
+    display: block; }
+  .debug-panel.hidden > .content {
+    display: none; }

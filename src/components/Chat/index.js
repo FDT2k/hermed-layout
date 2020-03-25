@@ -45,7 +45,7 @@ export default props => {
         <br/>
         <span className="average-time">xx:xx</span>
       </header>
-      <section ref={chatRef} className="chat flex-column just-end align-center" onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
+      <section ref={chatRef} className="chat flex-column  align-center"  onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
         {props.children}
       </section>
       <section className="tools">
