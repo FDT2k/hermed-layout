@@ -70,5 +70,10 @@
     }
   }
 
+}
 
+.headline--patient {
+  button.button, .headline__tool-box {
+    display: none;
+  }
 }

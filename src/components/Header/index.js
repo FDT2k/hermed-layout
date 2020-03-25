@@ -1,4 +1,5 @@
 import React from 'react'
+import {cEx} from '@geekagency/gen-classes'
 import 'sass/style.scss';
 
 import { MdArrowBack } from "react-icons/md";
@@ -9,14 +10,30 @@ import { MdLocalPhone } from "react-icons/md";
 
 export default props => {
 
+  const {className,doctor,patient} = props
+
+  const isDoctor= doctor===true || (!doctor && !patient);
+
+  const classes = cEx ([
+    "headline",
+    "flex-row",
+    "just-between",
+    "align-center",
+    className,
+    {
+      "headline--patient": _=>isDoctor !== true,
+      "headline--doctor":_=>isDoctor === true,
+    }
+  ])
+
   return (
-    <header className="headline headline--doctor flex-row just-between align-center">
-      <div className="flex-row align-center">
+    <header className={classes}>
+      <div className="headline__title flex-row align-center">
         <button className="button text icon icon--32"><MdArrowBack/></button>
         <div className="flex-column just-around">
           <div className="flex-row align-center">
             <span className="headline__contact-dot"></span>
-            <h2>Votre salle d'attente</h2>
+            <h2>John Doe</h2>
           </div>
           <p className="headline__contact-status">Connecté</p>
         </div>

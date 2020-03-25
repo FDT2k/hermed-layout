@@ -11,6 +11,15 @@ export const SingleHeader =()=>
     <Header/>
   </ThemePicker>
 
+export const DoctorHeader =()=>
+  <ThemePicker picked="chat">
+    <Header doctor/>
+  </ThemePicker>
+
+export const PatientHeader =()=>
+  <ThemePicker picked="chat">
+    <Header patient/>
+  </ThemePicker>
 
 export default {
   title: 'Header',
