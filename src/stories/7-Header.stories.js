@@ -6,6 +6,7 @@ import ThemePicker from 'components/ThemePicker'
 import WaitingRoom from 'components/WaitingRoom'
 import Header from 'components/Header'
 import ChatHeaderToolbar from 'components/ChatHeaderToolbar'
+import ChatFooter from 'components/ChatFooter'
 
 export const SingleHeader =()=>
   <ThemePicker picked="chat">
@@ -22,8 +23,6 @@ export const PatientHeader =()=>
   <ThemePicker picked="chat">
     <Header patient subtitle="unavailable" title="John blbo" badge="online"/>
   </ThemePicker>
-
-
 
 export default {
   title: 'Header',
