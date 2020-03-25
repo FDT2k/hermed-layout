@@ -13,11 +13,12 @@ import { MdVideocam } from "react-icons/md";
 import { MdVideocamOff } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
 
-export const BigToolBar  = props => {
+const WaitingRoomToolBar  = props => {
 
   return (
     <>
     <button className="button text icon icon--32"><MdVideocam/></button>
+    <button className="button text icon icon--32"><MdLocalPhone/></button>
     <button className="button text icon icon--32"><MdLocalPhone/></button>
     <button className="button text icon icon--32"><MdLocalPhone/></button>
     </>
@@ -32,7 +33,7 @@ export const SingleHeader =()=>
 
 export const WaitingRoomHeader =()=>
   <ThemePicker picked="chat">
-    <Header title="Waiting Room"  Toolbar={BigToolBar}/>
+    <Header title="Waiting Room"  Toolbar={WaitingRoomToolBar}/>
   </ThemePicker>
 
 export const DoctorHeader =()=>
