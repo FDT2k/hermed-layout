@@ -1,0 +1,79 @@
+.headline {
+  min-height: 63px;
+  @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+  @include themify($themes) {
+    @include themed_font('titleFont','bold');
+    color: themed('textColorSecondary');
+    background-color: themed('backgroundColorSecondary');
+  }
+
+  button {
+    &.text {
+      @include themify($themes) {
+        color:themed('buttonTextColor');
+      }
+    }
+
+    &.icon {
+      display: flex;
+      margin-right: 10px;
+    }
+
+    &.icon--32 {
+      svg {
+        width: 32px;
+        height: 32px;
+        @include mq-width-and-lower(425px){
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+  }
+
+  &__contact-dot {
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      @include themify($themes) {
+        background-color: themed('StatusColorDefault');
+      }
+
+      &.disconnect {
+        @include themify($themes) {
+          background-color: themed('StatusColorDisconnect');
+        }
+      }
+      &.waiting {
+        @include themify($themes) {
+          background-color: themed('statusColorWaiting');
+        }
+      }
+      &.online {
+        @include themify($themes) {
+          background-color: themed('statusColorOnline');
+        }
+      }
+
+
+  }
+
+  &__contact-status {
+    margin-left: calc(16px + 8px);
+    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+    @include themify($themes) {
+      @include themed_font('mainFont','light-italic');
+      color:themed('smallTextColor');
+    }
+  }
+
+}
+
+.headline--patient {
+  button.button, .headline__tool-box {
+    display: none;
+  }
+}

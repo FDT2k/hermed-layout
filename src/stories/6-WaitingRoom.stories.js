@@ -20,7 +20,7 @@ export const  AvecPatients =()=>
       <WaitingRoom>
           <Patient/>
           <Patient/>
-          <Patient/>
+          <Patient name="Fabien Karsegard"/>
           <Patient/>
           <Button>inviter</Button>
       </WaitingRoom>

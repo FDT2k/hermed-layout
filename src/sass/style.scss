@@ -9,15 +9,16 @@
 @import 'classes';
 @import 'tags';
 
-@import 'components/form-input-floating';
-@import 'components/input';
-@import 'components/select';
-@import 'components/chat';
 @import 'components/button';
-@import 'components/landing';
-@import 'components/form';
+@import 'components/chat';
 @import 'components/chatbubble';
-@import 'components/waiting-room';
-@import 'components/patient';
-@import 'components/theme-picker';
 @import 'components/debug-panel';
+@import 'components/form-input-floating';
+@import 'components/form';
+@import 'components/headers';
+@import 'components/input';
+@import 'components/landing';
+@import 'components/patient';
+@import 'components/select';
+@import 'components/theme-picker';
+@import 'components/waiting-room';

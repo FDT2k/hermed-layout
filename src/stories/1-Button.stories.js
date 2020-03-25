@@ -46,7 +46,6 @@ export const Emoji = () => (
 
 );
 
-
 export default {
   title: 'Button',
   parameters: { notes: componentNotes },

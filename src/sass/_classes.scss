@@ -42,9 +42,9 @@
 /* Flex */
 
 .flex-row {
-  @include mq-width-and-lower(768px){
-    @include flex-direction(column);
-  }
+  // @include mq-width-and-lower(768px){
+  //   @include flex-direction(column);
+  // }
 }
 
 /* Sections */
