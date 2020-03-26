@@ -1,15 +1,18 @@
 
 import React,{useEffect,useRef,useState} from 'react'
 
+import Header from '../Header'
 
 // autoScroll
 
 
 export default props => {
-  const {who, autoscroll,handleChange,handleSubmit} = props;
-  const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
+  const {autoscroll,handleChange,handleSubmit} = props;
+  const {remoteBadge,remoteName,remoteStatus} = props;
 
-  const [inputValue,setInputValue] = useState('');
+
+  const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
+  const [inputValue,setInputValue]              = useState('');
 
   const _handleChange = e => {
     setInputValue(e.target.value);
@@ -34,17 +37,12 @@ export default props => {
   useEffect(()=>{
     if(chatRef.current && autoscroll && shouldAutoscroll)
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
-
   //  chatRef.current.addEventListener('scroll',()=>console.log('scroll'))
 
   })
   return (
     <div className="hermed-chat">
-      <header>
-          Temps d'attente moyen
-        <br/>
-        <span className="average-time">xx:xx</span>
-      </header>
+      <Header  subtitle={remoteStatus} title={remoteName} badge={remoteBadge}/>
       <section ref={chatRef} className="chat flex-column  align-center"  onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
         {props.children}
       </section>

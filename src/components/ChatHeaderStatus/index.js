@@ -12,12 +12,13 @@ export default props => {
 
   return (
 
-    <>
-      <div className="flex-row align-center">
-        {badge &&<span className={badgeClasses}></span>}
-        <h2>{title}</h2>
-      </div>
-      {subtitle && <p className="headline__contact-status">{subtitle}</p>}
-    </>
+    <div className="flex-column just-around">
+        <div className="flex-row align-center">
+          {badge &&<span className={badgeClasses}></span>}
+          <h2>{title}</h2>
+        </div>
+        {subtitle && <p className="headline__contact-status">{subtitle}</p>}
+    </div>
+
   )
 }

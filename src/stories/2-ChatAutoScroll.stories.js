@@ -42,7 +42,7 @@ const renderchats = count => {
 
 export const ChatSimple = () => (
   <ThemePicker picked="chat">
-    <Chat>
+    <Chat remoteName="Fabien K" remoteStatus="connecté" >
       <ChatBubble welcome message="Lorem hello prout"/>
       <ChatBubble left message="Lorem hello prout"/>
       <ChatBubble right message="Lorem hello prout"/>
@@ -52,19 +52,16 @@ export const ChatSimple = () => (
 
 export const ChatEvents = () => (
   <div className="theme-chat">
-    <Chat handleSubmit={v=>alert('you sent '+v)}>
+    <Chat handleSubmit={v=>alert('you sent '+v)} remoteName="Fabien K" remoteStatus="connecté" remoteBadge="online">
           <ChatBubble welcome message="Lorem hello prout"/>
           <ChatBubble left message="Lorem hello prout"/>
           <ChatBubble right message="Lorem hello prout"/>
           <ChatBubble left message="Lorem hello prout"/>
           <ChatBubble right message="Lorem hello prout"/>
-
-
-            <ChatBubble right message="Lorem hello prout"/>
-
-              <ChatBubble right message="Lorem hello prout"/>
+          <ChatBubble right message="Lorem hello prout"/>
+          <ChatBubble right message="Lorem hello prout"/>
     </Chat>
-    </div>
+  </div>
 );
 
 export const AutoScroll = () => (
