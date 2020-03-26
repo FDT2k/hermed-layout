@@ -11,6 +11,7 @@ var InputMask = _interopDefault(require('react-input-mask'));
 var md = require('react-icons/md');
 var fa = require('react-icons/fa');
 var formik = require('formik');
+var ReactLoading = _interopDefault(require('react-loading'));
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -614,6 +615,31 @@ var index$8 = (function (props) {
   }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
 });
 
+var index$9 = (function (props) {
+  var label = props.label,
+      type = props.type,
+      centered = props.centered,
+      className = props.className,
+      inverse = props.inverse;
+  var classes = genClasses.cEx(['loading', {
+    'loading--align-center': function loadingAlignCenter(_) {
+      return centered === true;
+    },
+    'loading--just-center': function loadingJustCenter(_) {
+      return centered === true;
+    },
+    'loading--inverse': function loadingInverse(_) {
+      return inverse === true;
+    }
+  }, className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, label && /*#__PURE__*/React__default.createElement("h3", null, label), /*#__PURE__*/React__default.createElement(ReactLoading, {
+    color: "",
+    type: type || "bubbles"
+  }));
+});
+
 exports.Button = Button;
 exports.Chat = index;
 exports.ChatBubble = index$2;
@@ -624,6 +650,7 @@ exports.Form = Form;
 exports.Header = index$7;
 exports.Input = Input;
 exports.Landing = Landing;
+exports.Loading = index$9;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
 exports.OrganiserLanding = index$6;
 exports.Patient = index$4;

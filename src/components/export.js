@@ -15,6 +15,7 @@ import OrganiserLanding from './OrganiserLanding'
 import Header from './Header'
 import ChatHeaderStatus from './ChatHeaderStatus'
 import ChatHeaderToolbar from './ChatHeaderToolbar'
+import Loading from './Loading'
 
 export {
   Chat,
@@ -32,5 +33,6 @@ export {
   OrganiserLanding,
   Header,
   ChatHeaderStatus,
-  ChatHeaderToolbar
+  ChatHeaderToolbar,
+  Loading
 }
