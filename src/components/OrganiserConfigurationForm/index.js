@@ -9,7 +9,7 @@ export default props => {
   const {handleSubmit} = props;
   const formik = useFormik({
     initialValues: {
-      server: 'broker.hermed.gka.li',
+      server: 'broker.hermed.dev.geekagency.ch',
       port: 8712,
       key: 'peerjs',
       organiser_name: '',
