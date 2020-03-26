@@ -1,6 +1,6 @@
 {
   "name": "hermed-layout",
-  "version": "0.6.12",
+  "version": "0.6.15",
   "private": false,
   "main": "dist/cjs/index.js",
   "dependencies": {
@@ -9,6 +9,7 @@
     "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
     "react-input-mask": "^2.0.4",
+    "react-loading": "^2.0.3",
     "wouter": "^2.4.0"
   },
   "peerDependencies": {
