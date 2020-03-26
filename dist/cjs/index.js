@@ -123,11 +123,21 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+var Header = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("header", {
+    className: classes
+  }, props.children);
+});
+
 var index = (function (props) {
-  var who = props.who,
-      autoscroll = props.autoscroll,
+  var autoscroll = props.autoscroll,
       handleChange = props.handleChange,
       handleSubmit = props.handleSubmit;
+  var remoteBadge = props.remoteBadge,
+      remoteName = props.remoteName,
+      remoteStatus = props.remoteStatus;
 
   var _useState = React.useState(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -165,9 +175,11 @@ var index = (function (props) {
   });
   return /*#__PURE__*/React__default.createElement("div", {
     className: "hermed-chat"
-  }, /*#__PURE__*/React__default.createElement("header", null, "Temps d'attente moyen", /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement("span", {
-    className: "average-time"
-  }, "xx:xx")), /*#__PURE__*/React__default.createElement("section", {
+  }, /*#__PURE__*/React__default.createElement(Header, {
+    subtitle: remoteStatus,
+    title: remoteName,
+    badge: remoteBadge
+  }), /*#__PURE__*/React__default.createElement("section", {
     ref: chatRef,
     className: "chat flex-column  align-center",
     onTouchStart: holdScroll,
@@ -220,17 +232,23 @@ var Button = (function (props) {
       _contained = props.contained,
       _text = props.text,
       _outlined = props.outlined,
+      _toolbar = props.toolbar,
       _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined", "fit"]);
+      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined", "toolbar", "fit"]);
 
   var classes = genClasses.cEx(["button", className, function (_) {
-    return !_contained && !_text && !_outlined ? "contained" : "";
+    return !_contained && !_text && !_outlined && !_toolbar ? "contained" : "";
+  }, function (_) {
+    return _toolbar === true ? 'icon icon--32' : '';
   }, {
     'contained': function contained(_) {
       return _contained === true;
     },
     'text': function text(_) {
       return _text === true;
+    },
+    'toolbar': function toolbar(_) {
+      return _toolbar === true;
     },
     'outlined': function outlined(_) {
       return _outlined === true;
@@ -552,14 +570,42 @@ var index$6 = (function (props) {
   }));
 });
 
-var ChatHeaderStatus = (function (props) {
+var index$7 = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline__title flex-row ", "flex-row", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var index$8 = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline__tool-box", "flex-row", className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var index$9 = (function (props) {
+  var className = props.className,
+      handleBack = props.handleBack;
+  var classes = genClasses.cEx([className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    onClick: handleBack
+  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)));
+});
+
+var index$a = (function (props) {
   var title = props.title,
       subtitle = props.subtitle,
       badge = props.badge;
   var badgeClasses = genClasses.cEx(["headline__contact-dot", function (_) {
     return badge;
   }]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "flex-column just-around"
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "flex-row align-center"
   }, badge && /*#__PURE__*/React__default.createElement("span", {
     className: badgeClasses
@@ -568,46 +614,7 @@ var ChatHeaderStatus = (function (props) {
   }, subtitle));
 });
 
-var index$7 = (function (props) {
-  var className = props.className,
-      doctor = props.doctor,
-      patient = props.patient,
-      title = props.title,
-      subtitle = props.subtitle,
-      badge = props.badge,
-      handleBack = props.handleBack,
-      Toolbar = props.Toolbar;
-  var isDoctor = doctor === true || !doctor && !patient;
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className, {
-    "headline--patient": function headlinePatient(_) {
-      return isDoctor !== true;
-    },
-    "headline--doctor": function headlineDoctor(_) {
-      return isDoctor === true;
-    }
-  }]);
-  var badgeClasses = genClasses.cEx(["headline__contact-dot", function (_) {
-    return badge;
-  }]);
-  return /*#__PURE__*/React__default.createElement("header", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "headline__title flex-row align-center"
-  }, handleBack && /*#__PURE__*/React__default.createElement("button", {
-    className: "button text icon icon--32",
-    onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)), /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-column just-around"
-  }, /*#__PURE__*/React__default.createElement(ChatHeaderStatus, {
-    badge: badge,
-    title: title,
-    subtitle: subtitle
-  }))), /*#__PURE__*/React__default.createElement("div", {
-    className: "headline__tool-box flex-row"
-  }, Toolbar && /*#__PURE__*/React__default.createElement(Toolbar, null)));
-});
-
-var index$8 = (function (props) {
+var index$b = (function (props) {
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon icon--32"
   }, /*#__PURE__*/React__default.createElement(md.MdVideocam, null)), /*#__PURE__*/React__default.createElement("button", {
@@ -615,7 +622,7 @@ var index$8 = (function (props) {
   }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
 });
 
-var index$9 = (function (props) {
+var index$c = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -643,14 +650,17 @@ var index$9 = (function (props) {
 exports.Button = Button;
 exports.Chat = index;
 exports.ChatBubble = index$2;
-exports.ChatHeaderStatus = ChatHeaderStatus;
-exports.ChatHeaderToolbar = index$8;
+exports.ChatHeaderStatus = index$a;
+exports.ChatHeaderToolbar = index$b;
 exports.CustomerLanding = index$1;
 exports.Form = Form;
-exports.Header = index$7;
+exports.Header = Header;
+exports.HeaderBackButton = index$9;
+exports.HeaderTitle = index$7;
+exports.HeaderToolbar = index$8;
 exports.Input = Input;
 exports.Landing = Landing;
-exports.Loading = index$9;
+exports.Loading = index$c;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
 exports.OrganiserLanding = index$6;
 exports.Patient = index$4;

@@ -70,11 +70,11 @@ table {
   font-weight: 300;
   font-style: italic; }
 
-.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat footer, .theme-landing footer, .theme-default footer, .theme-chat .hermed-chat > header, .theme-landing .hermed-chat > header, .theme-default .hermed-chat > header, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room {
+.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat footer, .theme-landing footer, .theme-default footer, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room {
   font-weight: 400;
   font-style: normal; }
 
-.theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > header .average-time, .theme-landing .hermed-chat > header .average-time, .theme-default .hermed-chat > header .average-time, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message {
+.theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message {
   font-weight: 600;
   font-style: normal; }
 
@@ -699,7 +699,7 @@ footer {
   font-family: soleil, sans-serif;
   font-family: gibbs, sans-serif;
 */
-.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat section, .theme-chat footer, .theme-landing section, .theme-landing footer, .theme-default section, .theme-default footer, .theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > header, .theme-landing .hermed-chat > header, .theme-default .hermed-chat > header, .theme-chat .hermed-chat > header .average-time, .theme-landing .hermed-chat > header .average-time, .theme-default .hermed-chat > header .average-time, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .chat-bubble__date, .theme-landing .chat-bubble__date, .theme-default .chat-bubble__date, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap, .theme-landing .floating-label-wrap, .theme-default .floating-label-wrap, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .floating-label-field, .theme-landing .floating-label-field, .theme-default .floating-label-field, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .headline__contact-status, .theme-landing .headline__contact-status, .theme-default .headline__contact-status, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .single-input input::placeholder, .theme-landing .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .single-select select::placeholder, .theme-landing .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room, .theme-chat .waiting-room header, .theme-landing .waiting-room header, .theme-default .waiting-room header, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading * {
+.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat section, .theme-chat footer, .theme-landing section, .theme-landing footer, .theme-default section, .theme-default footer, .theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .chat-bubble__date, .theme-landing .chat-bubble__date, .theme-default .chat-bubble__date, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap, .theme-landing .floating-label-wrap, .theme-default .floating-label-wrap, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .floating-label-field, .theme-landing .floating-label-field, .theme-default .floating-label-field, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .headline__contact-status, .theme-landing .headline__contact-status, .theme-default .headline__contact-status, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .single-input input::placeholder, .theme-landing .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .single-select select::placeholder, .theme-landing .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room, .theme-chat .waiting-room header, .theme-landing .waiting-room header, .theme-default .waiting-room header, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading * {
   font-family: soleil, sans-serif; }
 
 /* FONTS */
@@ -784,19 +784,38 @@ button {
       color: #f25e5e; }
     .theme-default .button.text {
       color: #f25e5e; }
+  .button.toolbar {
+    background-color: transparent;
+    border: none; }
+    .theme-chat .button.toolbar {
+      color: white; }
+    .theme-landing .button.toolbar {
+      color: white; }
+    .theme-default .button.toolbar {
+      color: white; }
+  .button.icon {
+    display: flex;
+    margin-right: 10px; }
+  .button.icon--32 svg {
+    width: 32px;
+    height: 32px; }
+    @media screen and (max-width: 425px) {
+      .button.icon--32 svg {
+        width: 24px;
+        height: 24px; } }
   .theme-chat .button:hover, .theme-chat .button:focus {
     color: #232532; }
   .theme-landing .button:hover, .theme-landing .button:focus {
     color: #232532; }
   .theme-default .button:hover, .theme-default .button:focus {
     color: #232532; }
-  .theme-chat .button:hover:not(.text), .theme-chat .button:focus:not(.text) {
+  .theme-chat .button.outlined:hover, .theme-chat .button.outlined:focus, .theme-chat .button.contained:hover, .theme-chat .button.contained:focus {
     border: 1px solid #c9f2e3;
     background-color: #c9f2e3; }
-  .theme-landing .button:hover:not(.text), .theme-landing .button:focus:not(.text) {
+  .theme-landing .button.outlined:hover, .theme-landing .button.outlined:focus, .theme-landing .button.contained:hover, .theme-landing .button.contained:focus {
     border: 1px solid #feeed0;
     background-color: #feeed0; }
-  .theme-default .button:hover:not(.text), .theme-default .button:focus:not(.text) {
+  .theme-default .button.outlined:hover, .theme-default .button.outlined:focus, .theme-default .button.contained:hover, .theme-default .button.contained:focus {
     border: 1px solid #feeed0;
     background-color: #feeed0; }
   .theme-chat .button:active {
@@ -805,15 +824,15 @@ button {
     color: #f25e5e; }
   .theme-default .button:active {
     color: #f25e5e; }
-  .theme-chat .button:active:not(.text) {
+  .theme-chat .button.outlined:active, .theme-chat .button.contained:active {
     color: white;
     border: 1px solid 1px solid #277067;
     background-color: #277067; }
-  .theme-landing .button:active:not(.text) {
+  .theme-landing .button.outlined:active, .theme-landing .button.contained:active {
     color: white;
     border: 1px solid 1px solid #f25e5e;
     background-color: #f25e5e; }
-  .theme-default .button:active:not(.text) {
+  .theme-default .button.outlined:active, .theme-default .button.contained:active {
     color: white;
     border: 1px solid 1px solid #f25e5e;
     background-color: #f25e5e; }
@@ -829,23 +848,25 @@ button {
   grid-template-rows: 76px auto 138px;
   grid-template-areas: "header" "chat" "tools"; }
 
-.hermed-chat > header {
+/*.hermed-chat > header {
   grid-area: header;
-  background-color: #388279;
+  background-color:#388279;
   color: white;
-  text-align: center; }
-  .theme-chat .hermed-chat > header {
-    color: white;
-    background-color: #277067; }
-  .theme-landing .hermed-chat > header {
-    color: #f25e5e;
-    background-color: white; }
-  .theme-default .hermed-chat > header {
-    color: #f25e5e;
-    background-color: white; }
-  .hermed-chat > header .average-time {
-    font-size: 40px; }
+  @include themify($themes) {
+    @include themed_font('mainFont','regular');
 
+    color: themed('textColorSecondary');
+		background-color: themed('backgroundColorSecondary');
+	}
+  text-align:center;
+
+  .average-time{
+    @include themify($themes) {
+      @include themed_font('titleFont','semi-bold');
+    }
+    font-size: 40px;
+  }
+}*/
 /*Chat content, bubbles etc*/
 .hermed-chat > .chat {
   grid-area: chat;

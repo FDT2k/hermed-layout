@@ -13,6 +13,9 @@ import Select from './Select'
 import OrganiserConfigurationForm from './OrganiserConfigurationForm'
 import OrganiserLanding from './OrganiserLanding'
 import Header from './Header'
+import HeaderTitle from './HeaderTitle'
+import HeaderToolbar from './HeaderToolbar'
+import HeaderBackButton from './HeaderBackButton'
 import ChatHeaderStatus from './ChatHeaderStatus'
 import ChatHeaderToolbar from './ChatHeaderToolbar'
 import Loading from './Loading'
@@ -34,5 +37,6 @@ export {
   Header,
   ChatHeaderStatus,
   ChatHeaderToolbar,
-  Loading
+  Loading,
+  HeaderTitle,HeaderToolbar,HeaderBackButton
 }
