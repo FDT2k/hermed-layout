@@ -23,7 +23,6 @@ import Loading from './Loading'
 export {
   Chat,
   Landing,
-
   CustomerLanding,
   ChatBubble,
   WaitingRoom,
@@ -38,5 +37,7 @@ export {
   ChatHeaderStatus,
   ChatHeaderToolbar,
   Loading,
-  HeaderTitle,HeaderToolbar,HeaderBackButton
+  HeaderTitle,
+  HeaderToolbar,
+  HeaderBackButton
 }

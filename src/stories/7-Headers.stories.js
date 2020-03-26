@@ -20,12 +20,13 @@ import { MdLocalPhone } from "react-icons/md";
 const WaitingRoomToolBar  = props => {
 
   return (
-    <>
+    <HeaderToolbar>
+
     <Button toolbar><MdVideocam/></Button>
     <Button toolbar><MdLocalPhone/></Button>
     <Button toolbar><MdVideocamOff/></Button>
     <Button toolbar><MdLocalPhone/></Button>
-    </>
+    </HeaderToolbar>
   )
 }
 
@@ -42,7 +43,7 @@ export const WaitingRoomHeader =()=>
 
 export const DoctorHeader =()=>
   <ThemePicker picked="chat">
-    <ChatHeader handleBack={()=>alert('howdy cowboy!')} doctor subtitle="invited" title="John McAvoy" badge="waiting"   Toolbar={ChatHeaderToolbar}/>
+    <ChatHeader handleCall={_=>alert('calling ')}  handleVideoCall={_=>alert('video calling ')} handleBack={()=>alert('howdy cowboy!')} doctor subtitle="invited" title="John McAvoy" badge="waiting"   showToolbar/>
   </ThemePicker>
 
 

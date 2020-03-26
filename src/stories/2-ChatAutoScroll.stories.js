@@ -28,7 +28,9 @@ const renderchats = count => {
   },[count]);
 
   return (
-      <Chat autoscroll>
+      <Chat autoscroll
+            showToolbar
+            handleCall={_=>alert('calling')}>
         {count}
         <ChatBubble message="this should auto scroll"/>
         {renderchats(count)}
@@ -52,7 +54,13 @@ export const ChatSimple = () => (
 
 export const ChatEvents = () => (
   <div className="theme-chat">
-    <Chat handleSubmit={v=>alert('you sent '+v)} remoteName="Fabien K" remoteStatus="connecté" remoteBadge="online">
+    <Chat handleSubmit={v=>alert('you sent '+v)}
+      remoteName="Fabien K"
+      remoteStatus="connecté"
+      remoteBadge="online"
+      showToolbar
+       handleCall={_=>alert('calling')}
+       >
           <ChatBubble welcome message="Lorem hello prout"/>
           <ChatBubble left message="Lorem hello prout"/>
           <ChatBubble right message="Lorem hello prout"/>

@@ -6,9 +6,13 @@ import HeaderBackButton from '../HeaderBackButton';
 import HeaderToolbar    from '../HeaderToolbar';
 import HeaderTitle    from '../HeaderTitle';
 import ChatHeaderStatus from '../ChatHeaderStatus';
+import ChatHeaderToolbar from '../ChatHeaderToolbar';
 export default props => {
 
-  const {className, title,subtitle, badge ,handleBack,Toolbar} = props
+  const {className, title,subtitle, badge , showToolbar} = props;
+  const {handleBack, handleCall, handleVideoCall} = props;
+
+  const callHandlers = {handleCall,handleVideoCall}
 /*
     const {doctor,patient} = props
     const isDoctor= doctor===true || (!doctor && !patient);
@@ -32,9 +36,7 @@ export default props => {
         <HeaderBackButton handleBack={handleBack}/>
         <ChatHeaderStatus badge={badge} title={title} subtitle={subtitle}/>
       </HeaderTitle>
-      <HeaderToolbar>
-         {Toolbar && <Toolbar/>}
-      </HeaderToolbar>
+      {showToolbar && <ChatHeaderToolbar {...callHandlers}/>}
     </header>
   )
 }

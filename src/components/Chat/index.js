@@ -1,7 +1,7 @@
 
 import React,{useEffect,useRef,useState} from 'react'
 
-import Header from '../Header'
+import ChatHeader from '../ChatHeader'
 
 // autoScroll
 
@@ -9,8 +9,10 @@ import Header from '../Header'
 export default props => {
   const {autoscroll,handleChange,handleSubmit} = props;
   const {remoteBadge,remoteName,remoteStatus} = props;
+  const {handleCall,handleVideoCall,showToolbar} = props;
+  const headerProps = {handleCall,handleVideoCall,showToolbar}
 
-
+console.log(props)
   const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
   const [inputValue,setInputValue]              = useState('');
 
@@ -42,10 +44,12 @@ export default props => {
   })
   return (
     <div className="hermed-chat">
-      <Header  subtitle={remoteStatus} title={remoteName} badge={remoteBadge}/>
+      <ChatHeader  subtitle={remoteStatus} title={remoteName} badge={remoteBadge} {...headerProps}/>
+
       <section ref={chatRef} className="chat flex-column  align-center"  onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
         {props.children}
       </section>
+
       <section className="tools">
         <div className="toolbar">
           <button>photo</button>
