@@ -58,6 +58,7 @@ export const ChatEvents = () => (
       remoteName="Fabien K"
       remoteStatus="connecté"
       remoteBadge="online"
+      handleBack={x=>x}
       showToolbar
        handleCall={_=>alert('calling')}
        >

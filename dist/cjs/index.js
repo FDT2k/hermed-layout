@@ -260,13 +260,14 @@ var index = (function (props) {
       remoteStatus = props.remoteStatus;
   var handleCall = props.handleCall,
       handleVideoCall = props.handleVideoCall,
+      handleBack = props.handleBack,
       showToolbar = props.showToolbar;
   var headerProps = {
     handleCall: handleCall,
     handleVideoCall: handleVideoCall,
-    showToolbar: showToolbar
+    showToolbar: showToolbar,
+    handleBack: handleBack
   };
-  console.log(props);
 
   var _useState = React.useState(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -613,11 +614,12 @@ var OrganiserConfigurationForm = (function (props) {
   var handleSubmit = props.handleSubmit;
   var formik$1 = formik.useFormik({
     initialValues: {
-      server: 'broker.hermed.gka.li',
+      server: 'broker.hermed.dev.geekagency.ch',
       port: 8712,
       key: 'peerjs',
       organiser_name: '',
-      password: ''
+      password: '',
+      secure: true
     },
     onSubmit: function onSubmit(values) {
       handleSubmit(values);
@@ -647,6 +649,14 @@ var OrganiserConfigurationForm = (function (props) {
     autoComplete: "off",
     onChange: formik$1.handleChange,
     value: formik$1.values.port
+  }), /*#__PURE__*/React__default.createElement("label", {
+    htmlFor: "secure"
+  }, "SSL"), /*#__PURE__*/React__default.createElement("input", {
+    type: "checkbox",
+    id: "secure",
+    name: "secure",
+    onChange: formik$1.handleChange,
+    checked: formik$1.values.secure
   }), /*#__PURE__*/React__default.createElement(Input, {
     label: "Cl\xE9",
     name: "key",
