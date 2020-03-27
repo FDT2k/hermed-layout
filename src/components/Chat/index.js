@@ -9,10 +9,9 @@ import ChatHeader from '../ChatHeader'
 export default props => {
   const {autoscroll,handleChange,handleSubmit} = props;
   const {remoteBadge,remoteName,remoteStatus} = props;
-  const {handleCall,handleVideoCall,showToolbar} = props;
-  const headerProps = {handleCall,handleVideoCall,showToolbar}
+  const {handleCall,handleVideoCall,handleBack,showToolbar} = props;
+  const headerProps = {handleCall,handleVideoCall,showToolbar,handleBack}
 
-console.log(props)
   const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
   const [inputValue,setInputValue]              = useState('');
 

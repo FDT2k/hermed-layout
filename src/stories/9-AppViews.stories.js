@@ -1,6 +1,6 @@
 import React,{useEffect,useState,useRef} from 'react';
 import 'sass/style.scss';
-
+import { action } from '@storybook/addon-actions';
 import Input from 'components/Input'
 import Form from 'components/Form'
 import Button from 'components/Button'
@@ -20,7 +20,7 @@ export const  LandingCustomerCallBackTest =()=>
 export const  LandingOrganiser =()=>
   <>
     <ThemePicker>
-      <OrganiserLanding handleSubmit={x=>alert(x)} handleClick={(val)=>alert('clicked '+val)}/>
+      <OrganiserLanding handleSubmit={x=>action('submit')} handleClick={(val)=>action('cucu')}/>
     </ThemePicker>
   </>
 
