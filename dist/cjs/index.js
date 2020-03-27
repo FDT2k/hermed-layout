@@ -6,7 +6,12 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var compositeJs = _interopDefault(require('@geekagency/composite-js'));
+var genClasses = require('@geekagency/gen-classes');
+var md = require('react-icons/md');
+var InputMask = _interopDefault(require('react-input-mask'));
+var fa = require('react-icons/fa');
+var formik = require('formik');
+var ReactLoading = _interopDefault(require('react-loading'));
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -118,11 +123,150 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+var Button = (function (props) {
+  var className = props.className,
+      _contained = props.contained,
+      _text = props.text,
+      _outlined = props.outlined,
+      _toolbar = props.toolbar,
+      _fit = props.fit,
+      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined", "toolbar", "fit"]);
+
+  var classes = genClasses.cEx(["button", className, function (_) {
+    return !_contained && !_text && !_outlined && !_toolbar ? "contained" : "";
+  }, function (_) {
+    return _toolbar === true ? 'icon icon--32' : '';
+  }, {
+    'contained': function contained(_) {
+      return _contained === true;
+    },
+    'text': function text(_) {
+      return _text === true;
+    },
+    'toolbar': function toolbar(_) {
+      return _toolbar === true;
+    },
+    'outlined': function outlined(_) {
+      return _outlined === true;
+    },
+    'fit': function fit(_) {
+      return _fit === true;
+    }
+  }]);
+  return /*#__PURE__*/React__default.createElement("button", _extends({
+    className: classes
+  }, rest), props.children);
+});
+
+var HeaderBackButton = (function (props) {
+  var className = props.className,
+      handleBack = props.handleBack;
+  var classes = genClasses.cEx([className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    onClick: handleBack
+  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)));
+});
+
+var HeaderToolbar = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline__tool-box", "flex-row", className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var HeaderTitle = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline__title flex-row ", "flex-row", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var ChatHeaderStatus = (function (props) {
+  var title = props.title,
+      subtitle = props.subtitle,
+      badge = props.badge;
+  var badgeClasses = genClasses.cEx(["headline__contact-dot", function (_) {
+    return badge;
+  }]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "flex-column just-around"
+  }, /*#__PURE__*/React__default.createElement("div", {
+    className: "flex-row align-center"
+  }, badge && /*#__PURE__*/React__default.createElement("span", {
+    className: badgeClasses
+  }), /*#__PURE__*/React__default.createElement("h2", null, title)), subtitle && /*#__PURE__*/React__default.createElement("p", {
+    className: "headline__contact-status"
+  }, subtitle));
+});
+
+var ChatHeaderToolbar = (function (props) {
+  var handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall;
+  return /*#__PURE__*/React__default.createElement(HeaderToolbar, null, /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleVideoCall,
+    disabled: typeof handleVideoCall !== 'function',
+    toolbar: true
+  }, /*#__PURE__*/React__default.createElement(md.MdVideocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleCall,
+    disabled: typeof handleCall !== 'function',
+    toolbar: true
+  }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
+});
+
+var ChatHeader = (function (props) {
+  var className = props.className,
+      title = props.title,
+      subtitle = props.subtitle,
+      badge = props.badge,
+      showToolbar = props.showToolbar;
+  var handleBack = props.handleBack,
+      handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall;
+  var callHandlers = {
+    handleCall: handleCall,
+    handleVideoCall: handleVideoCall
+  };
+  /*
+      const {doctor,patient} = props
+      const isDoctor= doctor===true || (!doctor && !patient);
+  */
+
+  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className
+  /*  {
+      "headline--patient":  _=> isDoctor !== true,
+      "headline--doctor":   _=> isDoctor === true,
+    }*/
+  ]);
+  return /*#__PURE__*/React__default.createElement("header", {
+    className: classes
+  }, /*#__PURE__*/React__default.createElement(HeaderTitle, null, /*#__PURE__*/React__default.createElement(HeaderBackButton, {
+    handleBack: handleBack
+  }), /*#__PURE__*/React__default.createElement(ChatHeaderStatus, {
+    badge: badge,
+    title: title,
+    subtitle: subtitle
+  })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
+});
+
 var index = (function (props) {
-  var who = props.who,
-      autoscroll = props.autoscroll,
+  var autoscroll = props.autoscroll,
       handleChange = props.handleChange,
       handleSubmit = props.handleSubmit;
+  var remoteBadge = props.remoteBadge,
+      remoteName = props.remoteName,
+      remoteStatus = props.remoteStatus;
+  var handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall,
+      showToolbar = props.showToolbar;
+  var headerProps = {
+    handleCall: handleCall,
+    handleVideoCall: handleVideoCall,
+    showToolbar: showToolbar
+  };
+  console.log(props);
 
   var _useState = React.useState(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -160,9 +304,11 @@ var index = (function (props) {
   });
   return /*#__PURE__*/React__default.createElement("div", {
     className: "hermed-chat"
-  }, /*#__PURE__*/React__default.createElement("header", null, "Temps d'attente moyen", /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement("span", {
-    className: "average-time"
-  }, "xx:xx")), /*#__PURE__*/React__default.createElement("section", {
+  }, /*#__PURE__*/React__default.createElement(ChatHeader, _extends({
+    subtitle: remoteStatus,
+    title: remoteName,
+    badge: remoteBadge
+  }, headerProps)), /*#__PURE__*/React__default.createElement("section", {
     ref: chatRef,
     className: "chat flex-column  align-center",
     onTouchStart: holdScroll,
@@ -184,66 +330,12 @@ var index = (function (props) {
   })))));
 });
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var cjs = createCommonjsModule(function (module, exports) {
-
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
-  /*
-  Easy class concat
-  */
-
-  const trim = string => string.trim();
-
-  const notEmptyReducer = (accumulator, item) => {
-    if (item !== '') {
-      accumulator.push(item);
-    }
-
-    return accumulator;
-  };
-
-  const remove_empty_items = list => compositeJs.reduce([], notEmptyReducer, list); // List -> String -> String
-
-
-  const assemble = sep => compositeJs.joinList(sep);
-
-  const resolveString = compositeJs.identity;
-  const resolveObjectProp = compositeJs.curry((object, prop) => object[prop]() ? prop : '');
-  const resolveObject = compositeJs.curry((separator, x) => compositeJs.compose(trim, assemble(separator), remove_empty_items, compositeJs.map(resolveObjectProp(x)), compositeJs.keys)(x));
-
-  const resolveFunction = x => compositeJs._either(compositeJs.is_type_string, x => '', compositeJs.identity)(x()); // defaultResolver :: String Object => string
-
-
-  const conditionalResolver = separator => compositeJs.compose(compositeJs._either(compositeJs.is_type_function, compositeJs.identity, resolveFunction), compositeJs._either(compositeJs.is_type_object, compositeJs.identity, resolveObject(separator)), compositeJs._either(compositeJs.is_type_string, compositeJs.identity, resolveString)); // List -> String
-
-
-  const listResolver = compositeJs.curry((separator, resolver) => compositeJs.compose(trim, assemble(separator), remove_empty_items, compositeJs.map(resolver))); // MakeCex :: String -> Resolver -> List -> String
-
-  const MakeCex = compositeJs.curry((separator, resolve) => listResolver(separator, resolve));
-  const uEx = MakeCex('/', conditionalResolver('/'));
-  const cEx = MakeCex(' ', conditionalResolver(' '));
-  exports.cEx = cEx;
-  exports.uEx = uEx;
-});
-unwrapExports(cjs);
-var cjs_1 = cjs.cEx;
-var cjs_2 = cjs.uEx;
-
 var Landing = (function (props) {
   var className = props.className,
       organiser = props.organiser,
       customer = props.customer;
   var isOrganiser = organiser === true || !organiser && !customer;
-  var classes = cjs_1(["landing-page", "flex-column", "just-between", className, {
+  var classes = genClasses.cEx(["landing-page", "flex-column", "just-between", className, {
     "landing-page--customer": function landingPageCustomer(_) {
       return isOrganiser !== true;
     },
@@ -264,53 +356,48 @@ var Landing = (function (props) {
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
-var Button = (function (props) {
-  var className = props.className,
-      _contained = props.contained,
-      _text = props.text,
-      _outlined = props.outlined,
-      _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined", "fit"]);
-
-  var classes = cjs_1(["button", className, function (_) {
-    return !_contained && !_text && !_outlined ? "contained" : "";
-  }, {
-    'contained': function contained(_) {
-      return _contained === true;
-    },
-    'text': function text(_) {
-      return _text === true;
-    },
-    'outlined': function outlined(_) {
-      return _outlined === true;
-    },
-    'fit': function fit(_) {
-      return _fit === true;
-    }
-  }]);
-  return /*#__PURE__*/React__default.createElement("button", _extends({
-    className: classes
-  }, rest), props.children);
-});
-
 var Input = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
       type = props.type,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "type"]);
+      caretPos = props.caretPos,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "caretPos"]);
 
+  var ref = React.useRef();
   return /*#__PURE__*/React__default.createElement("div", {
     className: "single-input flex-column"
   }, /*#__PURE__*/React__default.createElement("label", {
     htmlFor: id
-  }, label), /*#__PURE__*/React__default.createElement("input", _extends({
-    className: cjs_1(["input", function (_) {
+  }, label), /*#__PURE__*/React__default.createElement(InputMask, _extends({
+    ref: ref,
+    className: genClasses.cEx(["input", function (_) {
       return className;
     }]),
     id: id,
-    type: "text"
+    type: "text",
+    autoComplete: "off"
   }, rest)));
+});
+
+var defaultSubmit = function defaultSubmit(e) {
+  console.warn('you didnt set onSubmit');
+  e.preventDefault();
+};
+
+var Form = (function (props) {
+  var className = props.className,
+      onSubmit = props.onSubmit,
+      rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
+
+  var _onSubmit = onSubmit || defaultSubmit;
+
+  return /*#__PURE__*/React__default.createElement("form", _extends({
+    className: genClasses.cEx(["basic-form", function (_) {
+      return className;
+    }]),
+    onSubmit: _onSubmit
+  }, rest), props.children);
 });
 
 var index$1 = (function (props) {
@@ -322,15 +409,19 @@ var index$1 = (function (props) {
       value = _useState2[0],
       setValue = _useState2[1];
 
-  var _handleClick = function _handleClick() {
+  var _handleClick = function _handleClick(e) {
     handleClick && handleClick(value);
+    e.preventDefault();
   };
 
   return /*#__PURE__*/React__default.createElement(Landing, {
     customer: true
   }, /*#__PURE__*/React__default.createElement("p", {
     className: "text--center"
-  }, identity || 'inconnu', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Input, {
+  }, identity || 'Votre docteur', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Form, {
+    onSubmit: _handleClick
+  }, /*#__PURE__*/React__default.createElement(Input, {
+    mask: "99.99.9999",
     label: "Votre date de naissance",
     name: "birthday",
     placeholder: "JJ.MM.YYYY",
@@ -339,9 +430,7 @@ var index$1 = (function (props) {
     },
     value: value,
     autoComplete: "off"
-  }), /*#__PURE__*/React__default.createElement(Button, {
-    onClick: _handleClick
-  }, "JE SUIS PR\xCAT !"));
+  }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
 });
 
 var index$2 = (function (props) {
@@ -349,7 +438,7 @@ var index$2 = (function (props) {
       date = props.date,
       _right = props.right,
       _left = props.left;
-  var classes = cjs_1(['chat-bubble', {
+  var classes = genClasses.cEx(['chat-bubble', {
     'right': function right(_) {
       return _right === true;
     },
@@ -446,23 +535,6 @@ function IconBase(props) {
 }
 
 // THIS FILE IS AUTO GENERATED
-var MdPersonAdd = function (props) {
-  return GenIcon({
-    "tag": "svg",
-    "attr": {
-      "viewBox": "0 0 24 24"
-    },
-    "child": [{
-      "tag": "path",
-      "attr": {
-        "d": "M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-      }
-    }]
-  })(props);
-};
-MdPersonAdd.displayName = "MdPersonAdd";
-
-// THIS FILE IS AUTO GENERATED
 var GoGear = function (props) {
   return GenIcon({
     "tag": "svg",
@@ -480,9 +552,6 @@ var GoGear = function (props) {
 };
 GoGear.displayName = "GoGear";
 
-// THIS FILE IS AUTO GENERATED
-var FaPowerOff=function(props){return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 512 512"},"child":[{"tag":"path","attr":{"d":"M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z"}}]})(props);};FaPowerOff.displayName="FaPowerOff";
-
 var index$3 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "waiting-room"
@@ -492,11 +561,11 @@ var index$3 = (function (props) {
     className: "parameters-box"
   }, /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon"
-  }, /*#__PURE__*/React__default.createElement(MdPersonAdd, null)), /*#__PURE__*/React__default.createElement("button", {
+  }, /*#__PURE__*/React__default.createElement(md.MdPersonAdd, null)), /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon"
   }, /*#__PURE__*/React__default.createElement(GoGear, null)), /*#__PURE__*/React__default.createElement("button", {
     className: "button text icon"
-  }, /*#__PURE__*/React__default.createElement(FaPowerOff, null)))), /*#__PURE__*/React__default.createElement("section", {
+  }, /*#__PURE__*/React__default.createElement(fa.FaPowerOff, null)))), /*#__PURE__*/React__default.createElement("section", {
     className: "content"
   }, props.children));
 });
@@ -509,7 +578,7 @@ var index$4 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "patient-item"
   }, /*#__PURE__*/React__default.createElement("div", {
-    className: cjs_1(['status', function (_) {
+    className: genClasses.cEx(['status', function (_) {
       return status || 'unkown';
     }])
   }), /*#__PURE__*/React__default.createElement("div", {
@@ -523,27 +592,7 @@ var index$4 = (function (props) {
   }, email)));
 });
 
-var defaultSubmit = function defaultSubmit(e) {
-  console.warn('you didnt set onSubmit');
-  e.preventDefault();
-};
-
 var index$5 = (function (props) {
-  var className = props.className,
-      onSubmit = props.onSubmit,
-      rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
-
-  var _onSubmit = onSubmit || defaultSubmit;
-
-  return /*#__PURE__*/React__default.createElement("form", _extends({
-    className: cjs_1(["basic-form", function (_) {
-      return className;
-    }]),
-    onSubmit: _onSubmit
-  }, rest), props.children);
-});
-
-var index$6 = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
@@ -560,14 +609,111 @@ var index$6 = (function (props) {
   }, rest), props.children)));
 });
 
+var OrganiserConfigurationForm = (function (props) {
+  var handleSubmit = props.handleSubmit;
+  var formik$1 = formik.useFormik({
+    initialValues: {
+      server: 'broker.hermed.gka.li',
+      port: 8712,
+      key: 'peerjs',
+      organiser_name: '',
+      password: ''
+    },
+    onSubmit: function onSubmit(values) {
+      handleSubmit(values);
+    }
+  });
+  return /*#__PURE__*/React__default.createElement(Form, {
+    className: "flex-column align-center",
+    onSubmit: formik$1.handleSubmit
+  }, /*#__PURE__*/React__default.createElement(Input, {
+    label: "Votre nom ",
+    name: "organiser_name",
+    placeholder: "Votre nom complet",
+    autoComplete: "off",
+    onChange: formik$1.handleChange,
+    value: formik$1.values.organiser_name
+  }), /*#__PURE__*/React__default.createElement(Input, {
+    label: "Serveur",
+    name: "server",
+    placeholder: "broker.cmgl.ch",
+    autoComplete: "off",
+    onChange: formik$1.handleChange,
+    value: formik$1.values.server
+  }), /*#__PURE__*/React__default.createElement(Input, {
+    label: "Port",
+    name: "port",
+    placeholder: "8712",
+    autoComplete: "off",
+    onChange: formik$1.handleChange,
+    value: formik$1.values.port
+  }), /*#__PURE__*/React__default.createElement(Input, {
+    label: "Cl\xE9",
+    name: "key",
+    placeholder: "cl\xE9 du serveur",
+    autoComplete: "off",
+    onChange: formik$1.handleChange,
+    value: formik$1.values.key
+  }), /*#__PURE__*/React__default.createElement(Button, null, "Se connecter"));
+});
+
+var index$6 = (function (props) {
+  var handleSubmit = props.handleSubmit;
+  return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
+    handleSubmit: handleSubmit
+  }));
+});
+
+var index$7 = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("header", {
+    className: classes
+  }, props.children);
+});
+
+var index$8 = (function (props) {
+  var label = props.label,
+      type = props.type,
+      centered = props.centered,
+      className = props.className,
+      inverse = props.inverse;
+  var classes = genClasses.cEx(['loading', {
+    'loading--align-center': function loadingAlignCenter(_) {
+      return centered === true;
+    },
+    'loading--just-center': function loadingJustCenter(_) {
+      return centered === true;
+    },
+    'loading--inverse': function loadingInverse(_) {
+      return inverse === true;
+    }
+  }, className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, label && /*#__PURE__*/React__default.createElement("h3", null, label), /*#__PURE__*/React__default.createElement(ReactLoading, {
+    color: "",
+    type: type || "bubbles"
+  }));
+});
+
 exports.Button = Button;
 exports.Chat = index;
 exports.ChatBubble = index$2;
+exports.ChatHeaderStatus = ChatHeaderStatus;
+exports.ChatHeaderToolbar = ChatHeaderToolbar;
 exports.CustomerLanding = index$1;
-exports.Form = index$5;
+exports.Form = Form;
+exports.Header = index$7;
+exports.HeaderBackButton = HeaderBackButton;
+exports.HeaderTitle = HeaderTitle;
+exports.HeaderToolbar = HeaderToolbar;
 exports.Input = Input;
 exports.Landing = Landing;
+exports.Loading = index$8;
+exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
+exports.OrganiserLanding = index$6;
 exports.Patient = index$4;
-exports.Select = index$6;
+exports.Select = index$5;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map

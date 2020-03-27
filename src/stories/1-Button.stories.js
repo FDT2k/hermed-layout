@@ -1,6 +1,7 @@
 import React from 'react';
 import { action,notes } from '@storybook/addon-actions';
 import Button from 'components/Button'
+import Header from 'components/Header'
 import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
 import componentNotes from './doc/Button.md';
@@ -33,6 +34,19 @@ export const FitIcon = () => (
       <Button text fit><FiArrowRightCircle/></Button>
     </ThemePicker>
 );
+
+
+export const Toolbar = () => (
+    <ThemePicker picked="chat">
+      <header className="headline">
+        <div className="headline__tool-box flex-row">
+          <Button toolbar><FiArrowRightCircle/></Button>
+          <Button toolbar><FiArrowRightCircle/></Button>
+        </div>
+      </header>
+    </ThemePicker>
+);
+
 
 export const Emoji = () => (
   <ThemePicker>

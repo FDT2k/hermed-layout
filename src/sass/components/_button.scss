@@ -41,6 +41,7 @@
 			box-shadow: 0px 1px 5px 0px themed('shadow');
 		}
 	}
+
 	&.text {
 		background-color: transparent;
 		border: none;
@@ -49,23 +50,54 @@
 		}
 	}
 
+
+  &.toolbar {
+    background-color: transparent;
+    border: none;
+
+    @include themify($themes) {
+      color:themed('buttonTextColor');
+    }
+  }
+
+  &.icon {
+    display: flex;
+    margin-right: 10px;
+  }
+
+  &.icon--32 {
+    svg {
+      width: 32px;
+      height: 32px;
+      @include mq-width-and-lower(425px){
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+
+
 	&:hover, &:focus {
 		@include themify($themes) {
 			color: themed('buttonTextHoverColor');
 		}
 	}
-  &:hover:not(.text), &:focus:not(.text) {
+
+  &.outlined:hover, &.outlined:focus,&.contained:hover, &.contained:focus {
     @include themify($themes) {
       border: 1px solid themed('buttonHoverColor');
       background-color:themed('buttonHoverColor');
     }
   }
+
   &:active{
     @include themify($themes) {
 			color: themed('buttonTextColorSecondary');
 		}
   }
-  &:active:not(.text){
+
+  &.outlined:active, &.contained:active{
     @include themify($themes) {
       color: themed('buttonTextColor');
       border: 1px solid themed('buttonBorder');

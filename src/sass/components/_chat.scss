@@ -4,7 +4,7 @@
     display:grid;
     min-height: 100vh;
     height:100vh;
-
+    max-height:100vh;
     grid-template-columns: 100vw;
     grid-template-rows: 76px auto 138px;
     grid-template-areas:
@@ -14,7 +14,7 @@
 
 }
 
-.hermed-chat > header {
+/*.hermed-chat > header {
   grid-area: header;
   background-color:#388279;
   color: white;
@@ -32,7 +32,7 @@
     }
     font-size: 40px;
   }
-}
+}*/
 
 
 /*Chat content, bubbles etc*/

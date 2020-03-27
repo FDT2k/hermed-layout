@@ -6,18 +6,15 @@ export default props => {
   const {className} = props
 
   const classes = cEx ([
-    "headline",
+    "headline__tool-box",
     "flex-row",
-    "just-between",
-    "align-center",
     className,
-
   ])
-
-
   return (
-    <header className={classes}>
-      {props.children}
-    </header>
+
+      <div className={classes}>
+         {props.children}
+      </div>
+
   )
 }

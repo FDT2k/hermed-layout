@@ -1,0 +1,44 @@
+
+/* Loading */
+.loading{
+  width: 100%;
+  height: 100%;
+  margin: 0px auto;
+
+  @include flex(); //mandatory
+  @include flex-direction(column);
+  &--align-center {
+    @include flex-align(center);
+  }
+  &--just-center{
+     @include flex-just(center);
+  }
+
+  &--inverse {
+    @include themify($themes) {
+      color:  themed('textColorSecondary');
+      fill: themed('textColorSecondary');
+      background-color: themed('backgroundColorSecondary');
+    }
+  }
+
+  & * {
+    @include themify($themes) {
+      @include themed_font('titleFont','bold');
+       color: themed('textColor');
+       fill: themed('textColorSecondary');
+       background-color: themed('backgroundColor');
+     }
+     margin: 10px;
+  }
+
+
+  &--inverse *{
+    @include themify($themes) {
+      color:  themed('textColorSecondary');
+      fill: themed('textColorSecondary');
+      background-color: themed('backgroundColorSecondary');
+    }
+  }
+
+}

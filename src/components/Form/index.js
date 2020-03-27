@@ -7,7 +7,7 @@ const defaultSubmit = e=>{
 }
 
 export default props => {
-  const {className, onSubmit,...rest} = props
+  const {className, onSubmit ,...rest} = props
 
 
   const _onSubmit  = onSubmit || defaultSubmit

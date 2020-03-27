@@ -17,7 +17,10 @@ export default [
       sourcemap: true,
       exports: 'named',
     },
-    external: ['is-dom', 'prop-types', 'react','@geekagency/composite-js'],
+    external: ['is-dom', 'prop-types',
+    'react','@geekagency/composite-js','@geekagency/gen-classes',
+    'formik','react-input-mask','react-icons','react-icons/fa',
+    'react-icons/md','react-icons/libs','react-loading'],
     plugins: [
       nodeResolve({
         mainFields: ['module', 'jsnext:main', 'main'],

@@ -1,15 +1,20 @@
 
 import React,{useEffect,useRef,useState} from 'react'
 
+import ChatHeader from '../ChatHeader'
 
 // autoScroll
 
 
 export default props => {
-  const {who, autoscroll,handleChange,handleSubmit} = props;
-  const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
+  const {autoscroll,handleChange,handleSubmit} = props;
+  const {remoteBadge,remoteName,remoteStatus} = props;
+  const {handleCall,handleVideoCall,showToolbar} = props;
+  const headerProps = {handleCall,handleVideoCall,showToolbar}
 
-  const [inputValue,setInputValue] = useState('');
+console.log(props)
+  const [shouldAutoscroll, setShouldAutoscroll] = useState(true)
+  const [inputValue,setInputValue]              = useState('');
 
   const _handleChange = e => {
     setInputValue(e.target.value);
@@ -34,20 +39,17 @@ export default props => {
   useEffect(()=>{
     if(chatRef.current && autoscroll && shouldAutoscroll)
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
-
   //  chatRef.current.addEventListener('scroll',()=>console.log('scroll'))
 
   })
   return (
     <div className="hermed-chat">
-      <header>
-          Temps d'attente moyen
-        <br/>
-        <span className="average-time">xx:xx</span>
-      </header>
+      <ChatHeader  subtitle={remoteStatus} title={remoteName} badge={remoteBadge} {...headerProps}/>
+
       <section ref={chatRef} className="chat flex-column  align-center"  onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
         {props.children}
       </section>
+
       <section className="tools">
         <div className="toolbar">
           <button>photo</button>

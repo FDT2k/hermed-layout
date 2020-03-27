@@ -10,11 +10,19 @@ import Button from './Button'
 import Form from './Form'
 import Input from './Input'
 import Select from './Select'
+import OrganiserConfigurationForm from './OrganiserConfigurationForm'
+import OrganiserLanding from './OrganiserLanding'
+import Header from './Header'
+import HeaderTitle from './HeaderTitle'
+import HeaderToolbar from './HeaderToolbar'
+import HeaderBackButton from './HeaderBackButton'
+import ChatHeaderStatus from './ChatHeaderStatus'
+import ChatHeaderToolbar from './ChatHeaderToolbar'
+import Loading from './Loading'
 
 export {
   Chat,
   Landing,
-
   CustomerLanding,
   ChatBubble,
   WaitingRoom,
@@ -22,5 +30,14 @@ export {
   Button,
   Form,
   Input,
-  Select
+  Select,
+  OrganiserConfigurationForm,
+  OrganiserLanding,
+  Header,
+  ChatHeaderStatus,
+  ChatHeaderToolbar,
+  Loading,
+  HeaderTitle,
+  HeaderToolbar,
+  HeaderBackButton
 }
