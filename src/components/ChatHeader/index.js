@@ -2,6 +2,7 @@ import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
 
 
+import Header from '../Header';
 import HeaderBackButton from '../HeaderBackButton';
 import HeaderToolbar    from '../HeaderToolbar';
 import HeaderTitle    from '../HeaderTitle';
@@ -31,12 +32,12 @@ export default props => {
 
 
   return (
-    <header className={classes}>
+    <Header>
       <HeaderTitle>
         <HeaderBackButton handleBack={handleBack}/>
         <ChatHeaderStatus badge={badge} title={title} subtitle={subtitle}/>
       </HeaderTitle>
       {showToolbar && <ChatHeaderToolbar {...callHandlers}/>}
-    </header>
+    </Header>
   )
 }

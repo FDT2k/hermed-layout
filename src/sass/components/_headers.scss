@@ -17,6 +17,8 @@
     &.icon {
       display: flex;
       margin-right: 10px;
+      @extend .flex-column;
+      @extend .align-center;
     }
 
     &.icon--32 {
