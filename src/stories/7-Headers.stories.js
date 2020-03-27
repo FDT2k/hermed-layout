@@ -31,7 +31,7 @@ const WaitingRoomToolBar  = props => {
 }
 
 
-export const SingleHeader =()=>
+export const Chat =()=>
   <ThemePicker picked="chat">
     <ChatHeader title="Waiting Room" />
   </ThemePicker>
@@ -41,13 +41,13 @@ export const WaitingRoomHeader =()=>
     <ChatHeader title="Waiting Room"  Toolbar={WaitingRoomToolBar}/>
   </ThemePicker>
 
-export const DoctorHeader =()=>
+export const DoctorChatHeader =()=>
   <ThemePicker picked="chat">
     <ChatHeader handleCall={_=>alert('calling ')}  handleVideoCall={_=>alert('video calling ')} handleBack={()=>alert('howdy cowboy!')} doctor subtitle="invited" title="John McAvoy" badge="waiting"   showToolbar/>
   </ThemePicker>
 
 
-export const PatientHeader =()=>
+export const PatientChatHeader =()=>
   <ThemePicker picked="chat">
     <ChatHeader patient subtitle="unavailable" title="John blbo" badge="online"/>
   </ThemePicker>
@@ -67,7 +67,7 @@ export const CustomHeader =()=>
       </Header>
       <br/>
       <Header>
-        <HeaderTitle><h2>My Title is fun</h2></HeaderTitle>
+          <HeaderTitle><h2>My Title is fun</h2></HeaderTitle>
           <HeaderToolbar>
             <Button toolbar><MdVideocam/></Button>
             <Button toolbar><MdVideocam/></Button>
@@ -80,5 +80,5 @@ export const CustomHeader =()=>
 
 
 export default {
-  title: 'Header',
+  title: 'Headers',
 };
