@@ -1,0 +1,17 @@
+
+/* Custom sections */
+.answer_call {
+  min-height: 100vh;
+  height: 100vh;
+  text-align: center;
+  align:center;
+  @include themify($themes) {
+    @include themed_font('mainFont','regular');
+    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+    color: themed('textColorPrimary');
+    background-color: themed('backgroundColor');
+
+  }
+
+
+}

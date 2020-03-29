@@ -575,10 +575,14 @@ var index$4 = (function (props) {
   var status = props.status,
       name = props.name,
       phone = props.phone,
-      email = props.email;
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "patient-item"
-  }, /*#__PURE__*/React__default.createElement("div", {
+      email = props.email,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["status", "name", "phone", "email", "className"]);
+
+  var classes = genClasses.cEx(["patient-item", className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), /*#__PURE__*/React__default.createElement("div", {
     className: genClasses.cEx(['status', function (_) {
       return status || 'unkown';
     }])
@@ -707,7 +711,25 @@ var index$8 = (function (props) {
   }));
 });
 
+var index$9 = (function (props) {
+  var handleAnswer = props.handleAnswer,
+      handleDiscard = props.handleDiscard,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["handleAnswer", "handleDiscard", "className"]);
+
+  var classes = genClasses.cEx(['answer_call', className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), /*#__PURE__*/React__default.createElement("h3", null, props.title), props.children, /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleAnswer
+  }, " Repondre "), /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleDiscard,
+    outlined: true
+  }, " Rejeter "));
+});
+
 exports.Button = Button;
+exports.Calling = index$9;
 exports.Chat = index;
 exports.ChatBubble = index$2;
 exports.ChatHeaderStatus = ChatHeaderStatus;

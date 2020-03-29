@@ -8,6 +8,7 @@ import ThemePicker from 'components/ThemePicker'
 import Landing from 'components/Landing'
 import CustomerLanding from 'components/CustomerLanding'
 import OrganiserLanding from 'components/OrganiserLanding'
+import Calling from 'components/Calling'
 
 import componentNotes from './doc/CustomerLanding.md';
 
@@ -23,6 +24,13 @@ export const  LandingOrganiser =()=>
       <OrganiserLanding handleSubmit={x=>action('submit')} handleClick={(val)=>action('cucu')}/>
     </ThemePicker>
   </>
+
+export const  AnsweringCall =()=>
+    <>
+      <ThemePicker>
+        <Calling title="Appel Vidéo">Monsieur Blabla vous appelle</Calling>
+      </ThemePicker>
+    </>
 
 
 export default {

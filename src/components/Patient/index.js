@@ -3,11 +3,14 @@ import {cEx} from '@geekagency/gen-classes'
 
 
 export default props => {
-  const {status, name,phone,email} = props;
+  const {status, name,phone,email, className, ...rest} = props;
 
-
+  const classes = cEx([
+    "patient-item",
+    className
+  ])
   return (
-    <div className="patient-item">
+    <div className={classes} {...rest}>
       <div className={
           cEx([
             'status',
