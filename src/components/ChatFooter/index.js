@@ -28,9 +28,9 @@ export default props => {
         </button>
       </div>
 
-      <div className="chat-footer__message-input">
+      <div className="chat-footer__message-input flex-row align-stretch">
         <Input name="message" placeholder="message" autoComplete="off"/>
-        <button className="button button--send text icon--32">
+        <button className="button button--send text icon--32 flex align-center just-center">
           <MdArrowForward/>
         </button>
       </div>
