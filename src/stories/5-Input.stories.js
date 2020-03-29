@@ -2,6 +2,7 @@ import React,{useEffect,useState,useRef} from 'react';
 import 'sass/style.scss';
 
 import Input from 'components/Input'
+import InputChatMessage from 'components/InputChatMessage'
 import Select from 'components/Select'
 
 import ThemePicker from 'components/ThemePicker'
@@ -83,6 +84,11 @@ export const  InputMaskDate =()=>{
 }
 
 
+
+export const  SingleInputChatMessage =()=>
+    <ThemePicker>
+      <InputChatMessage placeholder="Message"/>
+    </ThemePicker>
 
 export default {
   title: 'Input',
