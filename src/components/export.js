@@ -19,6 +19,7 @@ import HeaderBackButton from './HeaderBackButton'
 import ChatHeaderStatus from './ChatHeaderStatus'
 import ChatHeaderToolbar from './ChatHeaderToolbar'
 import Loading from './Loading'
+import Calling from './Calling'
 
 export {
   Chat,
@@ -39,5 +40,6 @@ export {
   Loading,
   HeaderTitle,
   HeaderToolbar,
-  HeaderBackButton
+  HeaderBackButton,
+  Calling
 }
