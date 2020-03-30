@@ -2,12 +2,12 @@ import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
 
 
-import Header from '../Header';
-import HeaderBackButton from '../HeaderBackButton';
-import HeaderToolbar    from '../HeaderToolbar';
-import HeaderTitle    from '../HeaderTitle';
-import ChatHeaderStatus from '../ChatHeaderStatus';
-import ChatHeaderToolbar from '../ChatHeaderToolbar';
+import Header from 'components/Header';
+import HeaderBackButton from 'components/HeaderBackButton';
+import HeaderToolbar    from 'components/HeaderToolbar';
+import HeaderTitle    from 'components/HeaderTitle';
+import ChatHeaderStatus from 'components/ChatHeaderStatus';
+import ChatHeaderToolbar from 'components/ChatHeaderToolbar';
 export default props => {
 
   const {className, title,subtitle, badge , showToolbar} = props;

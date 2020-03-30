@@ -91,5 +91,5 @@ export const  SingleInputChatMessage =()=>
     </ThemePicker>
 
 export default {
-  title: 'Input',
+  title: 'Form/Input',
 };

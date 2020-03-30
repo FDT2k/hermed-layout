@@ -23,8 +23,7 @@ export default props => {
 
   return (
     <div className={classes}>
-      <header className="grow-5" style={styles}>
-      </header>
+      <header className="grow-5" style={styles}></header>
       <section className="grow-2 flex-column just-center align-center content-container">
         <h1>Bienvenue</h1>
         {props.children}

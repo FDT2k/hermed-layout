@@ -1,6 +1,6 @@
 import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
-import Button from '../Button'
+import Button from 'components/Button'
 import { MdArrowBack } from "react-icons/md";
 
 export default props => {

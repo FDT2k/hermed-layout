@@ -10,6 +10,7 @@ export const  Bubble =()=>
         <ChatBubble left message="Lorem hello prout"/>
       <ChatBubble right message="Lorem hello prout"/>
     </ThemePicker>
+    
 export default {
   title: 'Chat/Bubble',
 };

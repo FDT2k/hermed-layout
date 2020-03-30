@@ -8,6 +8,7 @@ export default props => {
   const{
     srcObject,
     className,
+    preview,
     ...rest
   } = props;
 
@@ -16,7 +17,7 @@ export default props => {
       'video',
       className,
       {
-        'preview': _=> props.preview
+        'preview': _=> preview
       }
     ]
   )
@@ -29,14 +30,9 @@ export default props => {
 
   },[srcObject])
 
-  let additionalProps = {
-    mute:false
-  }
 
-  if(props.preview ===true)
-    additionalProps.mute=true
 
   return (
-    <video ref={myRef} className={classes} {...additionalProps} {...rest}/>
+    <video ref={myRef} className={classes} {...rest}/>
   )
 }

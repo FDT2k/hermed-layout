@@ -1,7 +1,7 @@
 
 import React,{useEffect,useRef,useState} from 'react'
 
-import ChatHeader from '../ChatHeader'
+import ChatHeader from 'components/ChatHeader'
 
 // autoScroll
 

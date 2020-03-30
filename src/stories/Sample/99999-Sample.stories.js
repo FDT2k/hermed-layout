@@ -1,20 +1,26 @@
 import React,{useEffect,useState,useRef} from 'react';
 import ThemePicker from 'components/ThemePicker'
+import Exemple from 'components/Exemple'
 import 'sass/style.scss';
 
 
 
 
-export const Example = () => (
+export const ExampleSimple = () => (
   <ThemePicker picked="chat">
-    {/*
-        Component
-      */}
+    <Exemple/>
   </ThemePicker>
 );
 
 
 
+
+
 export default {
-  title: 'Sample',
+  title: 'Example',
+  parameters: {
+    notes: {
+      TitreExample: 'This is something to know',
+    }
+  },
 };

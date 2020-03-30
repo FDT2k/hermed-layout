@@ -1,6 +1,6 @@
 import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
-import Button from '../Button'
+import Button from 'components/Button'
 import {MdCall,MdCallEnd} from 'react-icons/md'
 
 export default props => {
@@ -16,9 +16,10 @@ export default props => {
       <div className="children">
         {props.children}
       </div>
+
       <div className="toolbox">
-        {incoming && <Button round success onClick={handleAnswer} fit> <MdCall/> </Button>}
-        <Button round failure onClick={handleDiscard} > <MdCallEnd/> </Button>
+        {incoming && <Button round  success onClick={handleAnswer} fit> <MdCall/> </Button>}
+        <Button round fit failure onClick={handleDiscard} > <MdCallEnd/> </Button>
       </div>
     </div>
   )

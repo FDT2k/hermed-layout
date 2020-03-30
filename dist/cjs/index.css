@@ -70,7 +70,7 @@ table {
   font-weight: 400;
   font-style: normal; }
 
-.theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message {
+.theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .active-call, .theme-landing .active-call, .theme-default .active-call {
   font-weight: 600;
   font-style: normal; }
 
@@ -695,7 +695,7 @@ footer {
   font-family: soleil, sans-serif;
   font-family: gibbs, sans-serif;
 */
-.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat section, .theme-chat footer, .theme-landing section, .theme-landing footer, .theme-default section, .theme-default footer, .theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .chat-footer, .theme-landing .chat-footer, .theme-default .chat-footer, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .chat-bubble__date, .theme-landing .chat-bubble__date, .theme-default .chat-bubble__date, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap, .theme-landing .floating-label-wrap, .theme-default .floating-label-wrap, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .floating-label-field, .theme-landing .floating-label-field, .theme-default .floating-label-field, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .headline__contact-status, .theme-landing .headline__contact-status, .theme-default .headline__contact-status, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .single-input input::placeholder, .theme-landing .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .single-select select::placeholder, .theme-landing .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room, .theme-chat .waiting-room header, .theme-landing .waiting-room header, .theme-default .waiting-room header, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading *, .theme-chat .answer_call, .theme-landing .answer_call, .theme-default .answer_call {
+.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat section, .theme-chat footer, .theme-landing section, .theme-landing footer, .theme-default section, .theme-default footer, .theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .chat-footer, .theme-landing .chat-footer, .theme-default .chat-footer, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .chat-bubble__date, .theme-landing .chat-bubble__date, .theme-default .chat-bubble__date, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap, .theme-landing .floating-label-wrap, .theme-default .floating-label-wrap, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .floating-label-field, .theme-landing .floating-label-field, .theme-default .floating-label-field, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .headline__contact-status, .theme-landing .headline__contact-status, .theme-default .headline__contact-status, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .single-input input::placeholder, .theme-landing .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .single-select select::placeholder, .theme-landing .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room, .theme-chat .waiting-room header, .theme-landing .waiting-room header, .theme-default .waiting-room header, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading *, .theme-chat .answer_call, .theme-landing .answer_call, .theme-default .answer_call, .theme-chat .active-call, .theme-landing .active-call, .theme-default .active-call {
   font-family: soleil, sans-serif; }
 
 /* FONTS */
@@ -1494,7 +1494,8 @@ textarea.floating-label-field {
 /* Custom sections */
 .landing-page {
   height: 100%;
-  height: 100vh; }
+  height: 100%;
+  /*100vh must be included in MobileVHAdapter to fit screen on mobile*/ }
   .landing-page header {
     width: 100%;
     min-height: 10vh;
@@ -1839,9 +1840,9 @@ textarea.floating-label-field {
   top: 0px;
   left: 0px;
   width: 100vw;
-  min-height: 100vh;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: calc(100vh - 63px);
+  height: calc(100vh - 63px);
+  max-height: calc(100vh - 63px);
   text-align: center;
   align: center; }
   .theme-chat .answer_call {
@@ -1902,7 +1903,8 @@ textarea.floating-label-field {
     justify-content: space-around;
     position: fixed;
     bottom: 0;
-    z-index: 1000; }
+    z-index: 1000;
+    min-width: 100%; }
 
 .video-sample video {
   max-width: 100vw;
@@ -1913,3 +1915,27 @@ textarea.floating-label-field {
   bottom: 60px;
   right: 0;
   max-width: 200px; }
+
+.vh-container {
+  height: 100vh;
+  /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100); }
+
+.active-call {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 30px;
+  align: center;
+  text-align: center;
+  padding-top: 5px; }
+  .theme-chat .active-call {
+    background-color: #34a03c;
+    color: white; }
+  .theme-landing .active-call {
+    background-color: #34a03c;
+    color: #f25e5e; }
+  .theme-default .active-call {
+    background-color: #34a03c;
+    color: #f25e5e; }

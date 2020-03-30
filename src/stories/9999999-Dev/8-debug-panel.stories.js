@@ -12,7 +12,7 @@ const Visible = (props)=> {
 }
 
 
-export const Single =()=>
+export const ToggleComponent =()=>
     <div className="theme-chat">
       <div style={{width:'800px',height:'600px', border:'1px solid red'}}>
       <DebugPanel HiddenComponent={Closed}  VisibleComponent={Visible}/>
@@ -21,5 +21,5 @@ export const Single =()=>
 
 
 export default {
-  title: 'Toggle Component',
+  title: 'Dev',
 };

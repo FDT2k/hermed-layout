@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { useFormik } from 'formik';
-import Button from '../Button'
-import Input from '../Input'
-import Form from '../Form'
+import Button from 'components/Button'
+import Input from 'components/Input'
+import Form from 'components/Form'
 
 export default props => {
   const {handleSubmit} = props;

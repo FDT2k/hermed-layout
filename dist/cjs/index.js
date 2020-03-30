@@ -8,8 +8,8 @@ var React = require('react');
 var React__default = _interopDefault(React);
 var genClasses = require('@geekagency/gen-classes');
 var md = require('react-icons/md');
-var InputMask = _interopDefault(require('react-input-mask'));
 var fa = require('react-icons/fa');
+var InputMask = _interopDefault(require('react-input-mask'));
 var formik = require('formik');
 var ReactLoading = _interopDefault(require('react-loading'));
 
@@ -349,110 +349,7 @@ var index = (function (props) {
   })))));
 });
 
-var Landing = (function (props) {
-  var className = props.className,
-      organiser = props.organiser,
-      customer = props.customer;
-  var isOrganiser = organiser === true || !organiser && !customer;
-  var classes = genClasses.cEx(["landing-page", "flex-column", "just-between", className, {
-    "landing-page--customer": function landingPageCustomer(_) {
-      return isOrganiser !== true;
-    },
-    "landing-page--organiser": function landingPageOrganiser(_) {
-      return isOrganiser === true;
-    }
-  }]);
-  var styles = {
-    '--bg-position': isOrganiser ? 'right' : 'left'
-  };
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement("header", {
-    className: "grow-5",
-    style: styles
-  }), /*#__PURE__*/React__default.createElement("section", {
-    className: "grow-2 flex-column just-center align-center content-container"
-  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
-});
-
-var Input = (function (props) {
-  var label = props.label,
-      id = props.id,
-      className = props.className,
-      type = props.type,
-      caretPos = props.caretPos,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "caretPos"]);
-
-  var ref = React.useRef();
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "single-input flex-column"
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id
-  }, label), /*#__PURE__*/React__default.createElement(InputMask, _extends({
-    ref: ref,
-    className: genClasses.cEx(["input", function (_) {
-      return className;
-    }]),
-    id: id,
-    type: "text",
-    autoComplete: "off"
-  }, rest)));
-});
-
-var defaultSubmit = function defaultSubmit(e) {
-  console.warn('you didnt set onSubmit');
-  e.preventDefault();
-};
-
-var Form = (function (props) {
-  var className = props.className,
-      onSubmit = props.onSubmit,
-      rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
-
-  var _onSubmit = onSubmit || defaultSubmit;
-
-  return /*#__PURE__*/React__default.createElement("form", _extends({
-    className: genClasses.cEx(["basic-form", function (_) {
-      return className;
-    }]),
-    onSubmit: _onSubmit
-  }, rest), props.children);
-});
-
 var index$1 = (function (props) {
-  var handleClick = props.handleClick,
-      identity = props.identity;
-
-  var _useState = React.useState(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
-
-  var _handleClick = function _handleClick(e) {
-    handleClick && handleClick(value);
-    e.preventDefault();
-  };
-
-  return /*#__PURE__*/React__default.createElement(Landing, {
-    customer: true
-  }, /*#__PURE__*/React__default.createElement("p", {
-    className: "text--center"
-  }, identity || 'Votre docteur', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Form, {
-    onSubmit: _handleClick
-  }, /*#__PURE__*/React__default.createElement(Input, {
-    mask: "99.99.9999",
-    label: "Votre date de naissance",
-    name: "birthday",
-    placeholder: "JJ.MM.YYYY",
-    onChange: function onChange(e) {
-      return setValue(e.target.value);
-    },
-    value: value,
-    autoComplete: "off"
-  }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
-});
-
-var index$2 = (function (props) {
   var message = props.message,
       date = props.date,
       _right = props.right,
@@ -571,7 +468,7 @@ var GoGear = function (props) {
 };
 GoGear.displayName = "GoGear";
 
-var index$3 = (function (props) {
+var index$2 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "waiting-room"
   }, /*#__PURE__*/React__default.createElement("header", {
@@ -589,7 +486,7 @@ var index$3 = (function (props) {
   }, props.children));
 });
 
-var index$4 = (function (props) {
+var index$3 = (function (props) {
   var status = props.status,
       name = props.name,
       phone = props.phone,
@@ -615,7 +512,51 @@ var index$4 = (function (props) {
   }, email)));
 });
 
-var index$5 = (function (props) {
+var defaultSubmit = function defaultSubmit(e) {
+  console.warn('you didnt set onSubmit');
+  e.preventDefault();
+};
+
+var Form = (function (props) {
+  var className = props.className,
+      onSubmit = props.onSubmit,
+      rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
+
+  var _onSubmit = onSubmit || defaultSubmit;
+
+  return /*#__PURE__*/React__default.createElement("form", _extends({
+    className: genClasses.cEx(["basic-form", function (_) {
+      return className;
+    }]),
+    onSubmit: _onSubmit
+  }, rest), props.children);
+});
+
+var Input = (function (props) {
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      type = props.type,
+      caretPos = props.caretPos,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "caretPos"]);
+
+  var ref = React.useRef();
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "single-input flex-column"
+  }, /*#__PURE__*/React__default.createElement("label", {
+    htmlFor: id
+  }, label), /*#__PURE__*/React__default.createElement(InputMask, _extends({
+    ref: ref,
+    className: genClasses.cEx(["input", function (_) {
+      return className;
+    }]),
+    id: id,
+    type: "text",
+    autoComplete: "off"
+  }, rest)));
+});
+
+var index$4 = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
@@ -689,14 +630,7 @@ var OrganiserConfigurationForm = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "Se connecter"));
 });
 
-var index$6 = (function (props) {
-  var handleSubmit = props.handleSubmit;
-  return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
-    handleSubmit: handleSubmit
-  }));
-});
-
-var index$7 = (function (props) {
+var index$5 = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -721,7 +655,7 @@ var index$7 = (function (props) {
   }));
 });
 
-var index$8 = (function (props) {
+var index$6 = (function (props) {
   var incoming = props.incoming,
       handleAnswer = props.handleAnswer,
       handleDiscard = props.handleDiscard,
@@ -742,21 +676,23 @@ var index$8 = (function (props) {
     fit: true
   }, " ", /*#__PURE__*/React__default.createElement(md.MdCall, null), " "), /*#__PURE__*/React__default.createElement(Button, {
     round: true,
+    fit: true,
     failure: true,
     onClick: handleDiscard
   }, " ", /*#__PURE__*/React__default.createElement(md.MdCallEnd, null), " ")));
 });
 
-var index$9 = (function (props) {
+var index$7 = (function (props) {
   var myRef = React.useRef();
 
   var srcObject = props.srcObject,
       className = props.className,
-      rest = _objectWithoutProperties(props, ["srcObject", "className"]);
+      _preview = props.preview,
+      rest = _objectWithoutProperties(props, ["srcObject", "className", "preview"]);
 
   var classes = genClasses.cEx(['video', className, {
     'preview': function preview(_) {
-      return props.preview;
+      return _preview;
     }
   }]);
   React.useEffect(function () {
@@ -764,23 +700,130 @@ var index$9 = (function (props) {
       myRef.current.srcObject = srcObject;
     }
   }, [srcObject]);
-  var additionalProps = {
-    mute: false
-  };
-  if (props.preview === true) additionalProps.mute = true;
   return /*#__PURE__*/React__default.createElement("video", _extends({
     ref: myRef,
     className: classes
-  }, additionalProps, rest));
+  }, rest));
 });
 
+var index$8 = (function (props) {
+  var offset = props.offset;
+
+  if (!offset) {
+    offset = 0;
+  }
+
+  var _useState = React.useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      vh = _useState2[0],
+      setVh = _useState2[1];
+
+  var adapt = function adapt() {
+    setVh((window.innerHeight - offset) * 0.01);
+  };
+
+  React.useEffect(function () {
+    adapt();
+  }, []);
+  React.useEffect(function () {
+    window.addEventListener('resize', adapt);
+    return function () {
+      window.removeEventListener('resize', adapt);
+    };
+  }, []);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "vh-container",
+    style: {
+      '--vh': "".concat(vh, "px")
+    }
+  }, props.children);
+});
+
+var index$9 = (function (props) {
+  var className = props.className,
+      rest = _objectWithoutProperties(props, ["className"]);
+
+  var classes = genClasses.cEx(['active-call', className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), props.children);
+});
+
+var Landing = (function (props) {
+  var className = props.className,
+      organiser = props.organiser,
+      customer = props.customer;
+  var isOrganiser = organiser === true || !organiser && !customer;
+  var classes = genClasses.cEx(["landing-page", "flex-column", "just-between", className, {
+    "landing-page--customer": function landingPageCustomer(_) {
+      return isOrganiser !== true;
+    },
+    "landing-page--organiser": function landingPageOrganiser(_) {
+      return isOrganiser === true;
+    }
+  }]);
+  var styles = {
+    '--bg-position': isOrganiser ? 'right' : 'left'
+  };
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React__default.createElement("header", {
+    className: "grow-5",
+    style: styles
+  }), /*#__PURE__*/React__default.createElement("section", {
+    className: "grow-2 flex-column just-center align-center content-container"
+  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
+});
+
+var index$a = (function (props) {
+  var handleClick = props.handleClick,
+      identity = props.identity;
+
+  var _useState = React.useState(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var _handleClick = function _handleClick(e) {
+    handleClick && handleClick(value);
+    e.preventDefault();
+  };
+
+  return /*#__PURE__*/React__default.createElement(Landing, {
+    customer: true
+  }, /*#__PURE__*/React__default.createElement("p", {
+    className: "text--center"
+  }, identity || 'Votre docteur', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Form, {
+    onSubmit: _handleClick
+  }, /*#__PURE__*/React__default.createElement(Input, {
+    mask: "99.99.9999",
+    label: "Votre date de naissance",
+    name: "birthday",
+    placeholder: "JJ.MM.YYYY",
+    onChange: function onChange(e) {
+      return setValue(e.target.value);
+    },
+    value: value,
+    autoComplete: "off"
+  }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
+});
+
+var index$b = (function (props) {
+  var handleSubmit = props.handleSubmit;
+  return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
+    handleSubmit: handleSubmit
+  }));
+});
+
+exports.ActiveCallBar = index$9;
 exports.Button = Button;
-exports.Calling = index$8;
+exports.Calling = index$6;
 exports.Chat = index;
-exports.ChatBubble = index$2;
+exports.ChatBubble = index$1;
+exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
-exports.CustomerLanding = index$1;
+exports.CustomerLanding = index$a;
 exports.Form = Form;
 exports.Header = Header;
 exports.HeaderBackButton = HeaderBackButton;
@@ -788,12 +831,13 @@ exports.HeaderTitle = HeaderTitle;
 exports.HeaderToolbar = HeaderToolbar;
 exports.Input = Input;
 exports.Landing = Landing;
-exports.Loading = index$7;
+exports.Loading = index$5;
+exports.MobileVHAdapter = index$8;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
-exports.OrganiserLanding = index$6;
-exports.Patient = index$4;
-exports.Select = index$5;
-exports.Video = index$9;
-exports.VideoPreview = index$9;
-exports.WaitingRoom = index$3;
+exports.OrganiserLanding = index$b;
+exports.Patient = index$3;
+exports.Select = index$4;
+exports.Video = index$7;
+exports.VideoPreview = index$7;
+exports.WaitingRoom = index$2;
 //# sourceMappingURL=index.js.map

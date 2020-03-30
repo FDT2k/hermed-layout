@@ -5,9 +5,9 @@
   top:0px;
   left:0px;
   width:100vw;
-  min-height: 100vh;
-  height: 100vh;
-  max-height:100vh;
+  min-height:calc(100vh - 63px);
+  height:calc(100vh - 63px);
+  max-height:calc(100vh - 63px);
   text-align: center;
   align:center;
   @include themify($themes) {
@@ -33,6 +33,7 @@
     position:fixed;
     bottom: 0;
     z-index: 1000;
+    min-width:100%;
   }
 
 }

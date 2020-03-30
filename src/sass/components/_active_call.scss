@@ -1,0 +1,17 @@
+.active-call{
+  position: fixed;
+  top:0px;
+  left:0px;
+  width: 100vw;
+  height: 30px;
+  @include themify($themes) {
+		background-color:  themed('success');
+    color : themed('textColorSecondary');
+    @include themed_font('mainFont', 'semi-bold');
+	}
+
+  align:center;
+  text-align: center;
+  padding-top: 5px;
+
+}
