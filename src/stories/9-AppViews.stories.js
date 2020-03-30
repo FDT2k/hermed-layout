@@ -9,6 +9,7 @@ import Landing from 'components/Landing'
 import CustomerLanding from 'components/CustomerLanding'
 import OrganiserLanding from 'components/OrganiserLanding'
 import Calling from 'components/Calling'
+import VideoPreview from 'components/VideoPreview'
 
 import componentNotes from './doc/CustomerLanding.md';
 
@@ -28,7 +29,15 @@ export const  LandingOrganiser =()=>
 export const  AnsweringCall =()=>
     <>
       <ThemePicker>
-        <Calling title="Appel Vidéo">Monsieur Blabla vous appelle</Calling>
+        <Calling title="Appel Vidéo" incoming>
+
+          <div className="video-sample">
+            <div>Monsieur Blabla vous appelle</div>
+            <video autoPlay loop src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"/>
+          </div>
+      </Calling>
+      <VideoPreview autoPlay loop src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4" />
+
       </ThemePicker>
     </>
 

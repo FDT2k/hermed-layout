@@ -20,6 +20,7 @@ import ChatHeaderStatus from './ChatHeaderStatus'
 import ChatHeaderToolbar from './ChatHeaderToolbar'
 import Loading from './Loading'
 import Calling from './Calling'
+import VideoPreview from './VideoPreview'
 
 export {
   Chat,
@@ -41,5 +42,6 @@ export {
   HeaderTitle,
   HeaderToolbar,
   HeaderBackButton,
-  Calling
+  Calling,
+  VideoPreview
 }

@@ -123,6 +123,14 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+var Header = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("header", {
+    className: classes
+  }, props.children);
+});
+
 var Button = (function (props) {
   var className = props.className,
       _contained = props.contained,
@@ -240,9 +248,7 @@ var ChatHeader = (function (props) {
       "headline--doctor":   _=> isDoctor === true,
     }*/
   ]);
-  return /*#__PURE__*/React__default.createElement("header", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement(HeaderTitle, null, /*#__PURE__*/React__default.createElement(HeaderBackButton, {
+  return /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(HeaderTitle, null, /*#__PURE__*/React__default.createElement(HeaderBackButton, {
     handleBack: handleBack
   }), /*#__PURE__*/React__default.createElement(ChatHeaderStatus, {
     badge: badge,
@@ -679,14 +685,6 @@ var index$6 = (function (props) {
 });
 
 var index$7 = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
-  return /*#__PURE__*/React__default.createElement("header", {
-    className: classes
-  }, props.children);
-});
-
-var index$8 = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -711,41 +709,82 @@ var index$8 = (function (props) {
   }));
 });
 
-var index$9 = (function (props) {
-  var handleAnswer = props.handleAnswer,
+var index$8 = (function (props) {
+  var incoming = props.incoming,
+      handleAnswer = props.handleAnswer,
       handleDiscard = props.handleDiscard,
       className = props.className,
-      rest = _objectWithoutProperties(props, ["handleAnswer", "handleDiscard", "className"]);
+      rest = _objectWithoutProperties(props, ["incoming", "handleAnswer", "handleDiscard", "className"]);
 
   var classes = genClasses.cEx(['answer_call', className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
     className: classes
-  }, rest), /*#__PURE__*/React__default.createElement("h3", null, props.title), props.children, /*#__PURE__*/React__default.createElement(Button, {
-    onClick: handleAnswer
-  }, " Repondre "), /*#__PURE__*/React__default.createElement(Button, {
+  }, rest), /*#__PURE__*/React__default.createElement("h3", null, props.title), /*#__PURE__*/React__default.createElement("div", {
+    className: "children"
+  }, props.children), /*#__PURE__*/React__default.createElement("div", {
+    className: "toolbox"
+  }, incoming && /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleAnswer,
+    fit: true
+  }, " R\xE9pondre "), /*#__PURE__*/React__default.createElement(Button, {
     onClick: handleDiscard,
-    outlined: true
-  }, " Rejeter "));
+    outlined: true,
+    fit: true
+  }, " Raccrocher ")));
+});
+
+var index$9 = (function (props) {
+  var myRef = React.useRef();
+
+  var className = props.className,
+      rest = _objectWithoutProperties(props, ["className"]);
+
+  var classes = genClasses.cEx(['video-preview', className]);
+
+  var onDragStart = function onDragStart(e) {
+    console.log(e);
+  };
+
+  var onDragEnd = function onDragEnd(e) {
+    var shiftX = e.clientX;
+    var shiftY = e.clientY;
+    myRef.current.style.top = "".concat(shiftY, "px");
+    myRef.current.style.left = "".concat(shiftX, "px");
+  };
+
+  var onDrag = function onDrag(e) {
+    console.log(myRef.current.offsetTop);
+  };
+
+  return /*#__PURE__*/React__default.createElement("video", _extends({
+    ref: myRef,
+    className: classes,
+    draggable: "true",
+    onDrag: onDrag,
+    onDragEnd: onDragEnd,
+    onDragStart: onDragStart
+  }, rest));
 });
 
 exports.Button = Button;
-exports.Calling = index$9;
+exports.Calling = index$8;
 exports.Chat = index;
 exports.ChatBubble = index$2;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
 exports.CustomerLanding = index$1;
 exports.Form = Form;
-exports.Header = index$7;
+exports.Header = Header;
 exports.HeaderBackButton = HeaderBackButton;
 exports.HeaderTitle = HeaderTitle;
 exports.HeaderToolbar = HeaderToolbar;
 exports.Input = Input;
 exports.Landing = Landing;
-exports.Loading = index$8;
+exports.Loading = index$7;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
 exports.OrganiserLanding = index$6;
 exports.Patient = index$4;
 exports.Select = index$5;
+exports.VideoPreview = index$9;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map

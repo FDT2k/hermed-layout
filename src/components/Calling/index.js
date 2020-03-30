@@ -5,7 +5,7 @@ import Button from '../Button'
 
 export default props => {
   const{
-    handleAnswer,handleDiscard,className,...rest
+    incoming,handleAnswer,handleDiscard,className,...rest
   } = props;
 
   const classes=  cEx(
@@ -15,11 +15,13 @@ export default props => {
     <div className={classes} {...rest}>
       <h3>{props.title}</h3>
 
-
-      {props.children}
-
-      <Button onClick={handleAnswer}> Repondre </Button>
-      <Button onClick={handleDiscard} outlined> Rejeter </Button>
+      <div className="children">
+        {props.children}
+      </div>
+      <div className="toolbox">
+        {incoming && <Button onClick={handleAnswer} fit> Répondre </Button>}
+        <Button onClick={handleDiscard} outlined fit> Raccrocher </Button>
+      </div>
     </div>
   )
 }
