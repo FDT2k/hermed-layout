@@ -2,6 +2,8 @@ import React from 'react';
 import { action,notes } from '@storybook/addon-actions';
 import Button from 'components/Button'
 import Header from 'components/Header'
+import HeaderToolbar from 'components/HeaderToolbar'
+
 import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
 import componentNotes from './doc/Button.md';
@@ -27,38 +29,18 @@ export const Fit = () => (
 );
 
 
-export const FitIcon = () => (
-    <ThemePicker>
-      <Button fit><FiArrowRightCircle/></Button>
-      <Button outlined fit><FiArrowRightCircle/></Button>
-      <Button text fit><FiArrowRightCircle/></Button>
-    </ThemePicker>
-);
-
 
 export const Toolbar = () => (
     <ThemePicker picked="chat">
-      <header className="headline">
-        <div className="headline__tool-box flex-row">
+      <Header>
+        <HeaderToolbar>
           <Button toolbar><FiArrowRightCircle/></Button>
           <Button toolbar><FiArrowRightCircle/></Button>
-        </div>
-      </header>
+        </HeaderToolbar>
+      </Header>
     </ThemePicker>
 );
 
-
-export const Emoji = () => (
-  <ThemePicker>
-
-    <Button >
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  </ThemePicker>
-
-);
 
 export default {
   title: 'Button',

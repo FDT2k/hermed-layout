@@ -8,14 +8,15 @@ export default props => {
     "button",
     className,
     _=> (!contained&&!text && !outlined  && !toolbar) ? "contained": "",
-    _=> (toolbar === true) ? 'icon icon--32': '',
     {
       'contained':_=>contained === true,
       'text':_=>text === true ,
       'toolbar': _=> toolbar===true,
       'outlined':_=>outlined === true,
       'fit':_=>fit === true,
-    }
+    },
+    _=> (toolbar === true) ? 'icon icon--32': '',
+
 
   ])
   return (

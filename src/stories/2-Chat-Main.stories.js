@@ -80,12 +80,6 @@ export const AutoScroll = () => (
 
 );
 
-export const  Bubble =()=>
-    <ThemePicker picked="chat">
-      <ChatBubble message="Lorem hello prout"/>
-        <ChatBubble left message="Lorem hello prout"/>
-      <ChatBubble right message="Lorem hello prout"/>
-    </ThemePicker>
 
 
 export default {

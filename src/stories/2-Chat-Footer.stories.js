@@ -13,5 +13,5 @@ export const SingleChatFooter =()=>
   </ThemePicker>
 
 export default {
-  title: 'Footer',
+  title: 'Chat/Footer',
 };
