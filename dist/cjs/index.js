@@ -134,16 +134,17 @@ var Header = (function (props) {
 var Button = (function (props) {
   var className = props.className,
       _contained = props.contained,
+      _round = props.round,
       _text = props.text,
       _outlined = props.outlined,
       _toolbar = props.toolbar,
+      _success = props.success,
+      _failure = props.failure,
       _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "text", "outlined", "toolbar", "fit"]);
+      rest = _objectWithoutProperties(props, ["className", "contained", "round", "text", "outlined", "toolbar", "success", "failure", "fit"]);
 
   var classes = genClasses.cEx(["button", className, function (_) {
-    return !_contained && !_text && !_outlined && !_toolbar ? "contained" : "";
-  }, function (_) {
-    return _toolbar === true ? 'icon icon--32' : '';
+    return !_contained && !_text && !_round && !_outlined && !_toolbar ? "contained" : "";
   }, {
     'contained': function contained(_) {
       return _contained === true;
@@ -159,7 +160,18 @@ var Button = (function (props) {
     },
     'fit': function fit(_) {
       return _fit === true;
+    },
+    'round': function round(_) {
+      return _round === true;
+    },
+    'success': function success(_) {
+      return _success === true;
+    },
+    'failure': function failure(_) {
+      return _failure === true;
     }
+  }, function (_) {
+    return _toolbar === true ? 'icon icon--32' : '';
   }]);
   return /*#__PURE__*/React__default.createElement("button", _extends({
     className: classes
@@ -719,51 +731,47 @@ var index$8 = (function (props) {
   var classes = genClasses.cEx(['answer_call', className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
     className: classes
-  }, rest), /*#__PURE__*/React__default.createElement("h3", null, props.title), /*#__PURE__*/React__default.createElement("div", {
+  }, rest), /*#__PURE__*/React__default.createElement("div", {
     className: "children"
   }, props.children), /*#__PURE__*/React__default.createElement("div", {
     className: "toolbox"
   }, incoming && /*#__PURE__*/React__default.createElement(Button, {
+    round: true,
+    success: true,
     onClick: handleAnswer,
     fit: true
-  }, " R\xE9pondre "), /*#__PURE__*/React__default.createElement(Button, {
-    onClick: handleDiscard,
-    outlined: true,
-    fit: true
-  }, " Raccrocher ")));
+  }, " ", /*#__PURE__*/React__default.createElement(md.MdCall, null), " "), /*#__PURE__*/React__default.createElement(Button, {
+    round: true,
+    failure: true,
+    onClick: handleDiscard
+  }, " ", /*#__PURE__*/React__default.createElement(md.MdCallEnd, null), " ")));
 });
 
 var index$9 = (function (props) {
   var myRef = React.useRef();
 
-  var className = props.className,
-      rest = _objectWithoutProperties(props, ["className"]);
+  var srcObject = props.srcObject,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["srcObject", "className"]);
 
-  var classes = genClasses.cEx(['video-preview', className]);
-
-  var onDragStart = function onDragStart(e) {
-    console.log(e);
+  var classes = genClasses.cEx(['video', className, {
+    'preview': function preview(_) {
+      return props.preview;
+    }
+  }]);
+  React.useEffect(function () {
+    if (srcObject && myRef.current) {
+      myRef.current.srcObject = srcObject;
+    }
+  }, [srcObject]);
+  var additionalProps = {
+    mute: false
   };
-
-  var onDragEnd = function onDragEnd(e) {
-    var shiftX = e.clientX;
-    var shiftY = e.clientY;
-    myRef.current.style.top = "".concat(shiftY, "px");
-    myRef.current.style.left = "".concat(shiftX, "px");
-  };
-
-  var onDrag = function onDrag(e) {
-    console.log(myRef.current.offsetTop);
-  };
-
+  if (props.preview === true) additionalProps.mute = true;
   return /*#__PURE__*/React__default.createElement("video", _extends({
     ref: myRef,
-    className: classes,
-    draggable: "true",
-    onDrag: onDrag,
-    onDragEnd: onDragEnd,
-    onDragStart: onDragStart
-  }, rest));
+    className: classes
+  }, additionalProps, rest));
 });
 
 exports.Button = Button;
@@ -785,6 +793,7 @@ exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
 exports.OrganiserLanding = index$6;
 exports.Patient = index$4;
 exports.Select = index$5;
+exports.Video = index$9;
 exports.VideoPreview = index$9;
 exports.WaitingRoom = index$3;
 //# sourceMappingURL=index.js.map

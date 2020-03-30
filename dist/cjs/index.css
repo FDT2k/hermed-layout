@@ -727,7 +727,7 @@ footer {
 button {
   border-radius: 4px; }
 
-.button.contained, .button.outlined {
+.button.round, .button.contained, .button.outlined {
   width: 100%;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -743,6 +743,40 @@ button {
     text-transform: uppercase; }
   .theme-default .button {
     text-transform: uppercase; }
+  .button.round {
+    border-radius: 50px;
+    margin: 0px; }
+    .theme-chat .button.round {
+      border: 1px solid #277067; }
+    .theme-landing .button.round {
+      border: 1px solid #f25e5e; }
+    .theme-default .button.round {
+      border: 1px solid #f25e5e; }
+    .button.round svg {
+      width: 32px;
+      height: 32px; }
+      @media screen and (max-width: 425px) {
+        .button.round svg {
+          width: 24px;
+          height: 24px; } }
+  .theme-chat .button.success {
+    background-color: #34a03c;
+    color: white; }
+  .theme-landing .button.success {
+    background-color: #34a03c;
+    color: white; }
+  .theme-default .button.success {
+    background-color: #34a03c;
+    color: white; }
+  .theme-chat .button.failure {
+    background-color: #f11515;
+    color: white; }
+  .theme-landing .button.failure {
+    background-color: #f11515;
+    color: white; }
+  .theme-default .button.failure {
+    background-color: #f11515;
+    color: white; }
   .button.fit {
     width: auto; }
   .theme-chat .button.contained, .theme-chat .button.outlined {
@@ -862,13 +896,33 @@ button {
     margin: 0px auto; }
   .chat-footer .chat-footer__message-input {
     position: relative; }
+    .chat-footer .chat-footer__message-input .single-input input {
+      border-radius: 4px 0px 0px 4px;
+      border-right: none; }
     .chat-footer .chat-footer__message-input .button--send {
-      position: absolute;
-      right: 0px;
-      top: 6px;
-      background-attachment: red; }
-    .chat-footer .chat-footer__message-input svg {
-      color: green; }
+      border-radius: 0px 4px 4px 0px;
+      margin: 6px 0px;
+      padding-top: 0px;
+      padding-bottom: 0px; }
+      .theme-chat .chat-footer .chat-footer__message-input .button--send {
+        color: white;
+        background-color: white;
+        border: solid 1px #d9d9d9;
+        border-left: none; }
+      .theme-landing .chat-footer .chat-footer__message-input .button--send {
+        color: white;
+        border: solid 1px #d9d9d9;
+        border-left: none; }
+      .theme-default .chat-footer .chat-footer__message-input .button--send {
+        color: white;
+        border: solid 1px #d9d9d9;
+        border-left: none; }
+    .theme-chat .chat-footer .chat-footer__message-input svg {
+      color: #277067; }
+    .theme-landing .chat-footer .chat-footer__message-input svg {
+      color: #f25e5e; }
+    .theme-default .chat-footer .chat-footer__message-input svg {
+      color: #f25e5e; }
   .theme-chat .chat-footer button.text {
     color: white; }
   .theme-landing .chat-footer button.text {
@@ -1850,12 +1904,12 @@ textarea.floating-label-field {
     bottom: 0;
     z-index: 1000; }
 
-.video-sample {
-  padding: 20px;
-  border: 2px dashed black; }
+.video-sample video {
+  max-width: 100vw;
+  max-height: 100vh; }
 
-.video-preview {
+.video.preview {
   position: fixed;
   bottom: 60px;
   right: 0;
-  width: 200px; }
+  max-width: 200px; }
