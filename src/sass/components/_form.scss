@@ -1,6 +1,10 @@
 .basic-form {
   width: 100%;
 
+  > div {
+    width: 100%;
+  }
+
   .label {
     @include themify($themes) {
       color: themed('textColor');
