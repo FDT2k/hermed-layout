@@ -345,7 +345,9 @@ var Button = (function (props) {
 });
 
 var index$1 = (function (props) {
-  var className = props.className,
+  var title = props.title,
+      className = props.className,
+      handleBack = props.handleBack,
       handleAdd = props.handleAdd,
       handleConfig = props.handleConfig,
       handleShutdown = props.handleShutdown;
@@ -353,8 +355,9 @@ var index$1 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: classes
   }, /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(Content, null, /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(GiHamburgerMenu, null)), /*#__PURE__*/React__default.createElement(Title, null, "Votre salle d'attente")), /*#__PURE__*/React__default.createElement(Toolbar, null, /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    onClick: handleBack
+  }, /*#__PURE__*/React__default.createElement(GiHamburgerMenu, null)), /*#__PURE__*/React__default.createElement(Title, null, title)), /*#__PURE__*/React__default.createElement(Toolbar, null, /*#__PURE__*/React__default.createElement(Button, {
     toolbar: true,
     onClick: handleAdd
   }, /*#__PURE__*/React__default.createElement(md.MdPersonAdd, null)), /*#__PURE__*/React__default.createElement(Button, {
@@ -397,11 +400,12 @@ var Badge = (function (props) {
 
 var index$2 = (function (props) {
   var status = props.status,
+      secondaryStatus = props.secondaryStatus,
       name = props.name,
       phone = props.phone,
       email = props.email,
       className = props.className,
-      rest = _objectWithoutProperties(props, ["status", "name", "phone", "email", "className"]);
+      rest = _objectWithoutProperties(props, ["status", "secondaryStatus", "name", "phone", "email", "className"]);
 
   var classes = genClasses.cEx(["patient-item", className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
@@ -419,9 +423,9 @@ var index$2 = (function (props) {
   }, phone), /*#__PURE__*/React__default.createElement("div", {
     className: "email"
   }, email))), /*#__PURE__*/React__default.createElement(Content, null, /*#__PURE__*/React__default.createElement(Badge, {
-    className: "status",
+    className: "status secondary",
     medium: true,
-    status: status
+    status: secondaryStatus
   }), /*#__PURE__*/React__default.createElement(Button, {
     clear: true,
     icon: true

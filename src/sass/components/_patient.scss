@@ -37,6 +37,10 @@
     @include flex-direction(column);
   }
 
+  .status.secondary{
+    background-color:transparent;
+  }
+
   .name{
 
     @include themify($themes) {

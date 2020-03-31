@@ -12,7 +12,7 @@ import Toolbar from 'components/Header/Toolbar'
 import Button from 'components/Button'
 export default props => {
 
-    const {className,handleAdd,handleConfig,handleShutdown} = props
+    const { title, className,handleBack,handleAdd,handleConfig,handleShutdown} = props
 
     const classes = cEx ([
       "waiting-room",
@@ -22,8 +22,8 @@ export default props => {
     <div className={classes}>
       <Header>
         <Content>
-            <Button toolbar><GiHamburgerMenu/></Button>
-            <Title>Votre salle d'attente</Title>
+            <Button toolbar onClick={handleBack}><GiHamburgerMenu/></Button>
+              <Title>{title}</Title>
         </Content>
         <Toolbar>
           <Button toolbar onClick={handleAdd}><MdPersonAdd/></Button>
