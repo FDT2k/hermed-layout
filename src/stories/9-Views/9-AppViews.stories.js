@@ -1,6 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react';
 import 'sass/style.scss';
 import ThemePicker from 'components/ThemePicker'
+import MobileVHAdapter from 'components/MobileVHAdapter'
 
 
 import Landing from 'views/Landing'
@@ -13,15 +14,21 @@ const action = alert;
 
 
 export const  LandingCustomerCallBackTest =()=>
-    <ThemePicker>
+<div className="theme-landing">
+<MobileVHAdapter>
       <CustomerLanding handleClick={(val)=>alert('clicked '+val)}/>
-    </ThemePicker>
+      </MobileVHAdapter>
+    </div>
 
 export const  LandingOrganiser =()=>
   <>
-    <ThemePicker>
+  <div className="theme-landing">
+  <MobileVHAdapter>
+
       <OrganiserLanding handleSubmit={x=>action('submit')} handleClick={(val)=>action('cucu')}/>
-    </ThemePicker>
+      </MobileVHAdapter>
+      
+    </div>
   </>
 
 

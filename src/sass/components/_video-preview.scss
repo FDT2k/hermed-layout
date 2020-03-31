@@ -3,6 +3,19 @@
     position:fixed;
     bottom: 60px;
     right: 0;
-    max-width: 200px;
+    min-width:200px;
+    max-width:200px;
+
+    @include mq-width-and-lower(425px){
+      max-width: 120px;
+      min-width:120px;
+
+    }
+    @include mq-width-and-lower(321px){
+      max-width: 100px;
+      min-width:100px;
+
+    }
+
   }
 }

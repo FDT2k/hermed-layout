@@ -943,11 +943,12 @@ button {
     width: 48px;
     height: 48px; }
 
+/*must use MobileVHAdapter*/
 .hermed-chat {
   display: grid;
-  min-height: 100vh;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
   grid-template-columns: 100vw;
   grid-template-rows: 76px auto 138px;
   grid-template-areas: "header" "chat" "tools"; }
@@ -1840,11 +1841,9 @@ textarea.floating-label-field {
   top: 0px;
   left: 0px;
   width: 100vw;
-  min-height: calc(100vh - 63px);
-  height: calc(100vh - 63px);
-  max-height: calc(100vh - 63px);
-  text-align: center;
-  align: center; }
+  min-height: calc(100% - 63px);
+  height: calc(100% - 63px);
+  max-height: calc(100% - 63px); }
   .theme-chat .answer_call {
     font-size: 12px;
     background-color: #faedcf; }
@@ -1908,7 +1907,8 @@ textarea.floating-label-field {
 
 .video-sample video {
   max-width: 100vw;
-  max-height: 100vh; }
+  width: 100vw;
+  max-height: 100%; }
 
 .video.preview {
   position: fixed;

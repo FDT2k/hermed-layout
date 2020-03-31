@@ -7,13 +7,11 @@ import Calling from 'components/Calling'
 import Video from 'components/Video'
 import Draggable from 'react-draggable'
 import ChatHeader from 'components/ChatHeader';
-import MobileVHAdapter from 'components/MobileVHAdapter';
 import ActiveCallBar from 'components/ActiveCallBar';
 
 export const  AnsweringCall =()=>
     <>
-      <div className="theme-chat">
-        <MobileVHAdapter >
+    <ThemePicker picked="chat">
           <ChatHeader title="Appel avec Bobybobbob" handleBack={_=>alert('back')}/>
           <Calling  incoming>
             <div className="video-sample">
@@ -23,13 +21,14 @@ export const  AnsweringCall =()=>
           <Draggable  bounds='.answer_call'>
             <Video preview autoPlay loop src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4" />
           </Draggable>
-        </MobileVHAdapter>
-    </div>
+    </ThemePicker>
+
     </>
 
   export const CallBar=()=>{
 
-    return (<ThemePicker picked="chat">
+    return (
+      <ThemePicker picked="chat">
       this should be clickable
       <ActiveCallBar onClick={_=>alert('click')}>Bablou</ActiveCallBar>
     </ThemePicker>)

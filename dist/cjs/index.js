@@ -13,343 +13,7 @@ var InputMask = _interopDefault(require('react-input-mask'));
 var formik = require('formik');
 var ReactLoading = _interopDefault(require('react-loading'));
 
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(n);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-  return arr2;
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-var Header = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
-  return /*#__PURE__*/React__default.createElement("header", {
-    className: classes
-  }, props.children);
-});
-
-var Button = (function (props) {
-  var className = props.className,
-      _contained = props.contained,
-      _round = props.round,
-      _text = props.text,
-      _outlined = props.outlined,
-      _toolbar = props.toolbar,
-      _success = props.success,
-      _failure = props.failure,
-      _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "round", "text", "outlined", "toolbar", "success", "failure", "fit"]);
-
-  var classes = genClasses.cEx(["button", className, function (_) {
-    return !_contained && !_text && !_round && !_outlined && !_toolbar ? "contained" : "";
-  }, {
-    'contained': function contained(_) {
-      return _contained === true;
-    },
-    'text': function text(_) {
-      return _text === true;
-    },
-    'toolbar': function toolbar(_) {
-      return _toolbar === true;
-    },
-    'outlined': function outlined(_) {
-      return _outlined === true;
-    },
-    'fit': function fit(_) {
-      return _fit === true;
-    },
-    'round': function round(_) {
-      return _round === true;
-    },
-    'success': function success(_) {
-      return _success === true;
-    },
-    'failure': function failure(_) {
-      return _failure === true;
-    }
-  }, function (_) {
-    return _toolbar === true ? 'icon icon--32' : '';
-  }]);
-  return /*#__PURE__*/React__default.createElement("button", _extends({
-    className: classes
-  }, rest), props.children);
-});
-
-var HeaderBackButton = (function (props) {
-  var className = props.className,
-      handleBack = props.handleBack;
-  var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
-    onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)));
-});
-
-var HeaderToolbar = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline__tool-box", "flex-row", className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, props.children);
-});
-
-var HeaderTitle = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline__title flex-row ", "flex-row", "align-center", className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, props.children);
-});
-
-var ChatHeaderStatus = (function (props) {
-  var title = props.title,
-      subtitle = props.subtitle,
-      badge = props.badge;
-  var badgeClasses = genClasses.cEx(["headline__contact-dot", function (_) {
-    return badge;
-  }]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-column just-around"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-row align-center"
-  }, badge && /*#__PURE__*/React__default.createElement("span", {
-    className: badgeClasses
-  }), /*#__PURE__*/React__default.createElement("h2", null, title)), subtitle && /*#__PURE__*/React__default.createElement("p", {
-    className: "headline__contact-status"
-  }, subtitle));
-});
-
-var ChatHeaderToolbar = (function (props) {
-  var handleCall = props.handleCall,
-      handleVideoCall = props.handleVideoCall;
-  return /*#__PURE__*/React__default.createElement(HeaderToolbar, null, /*#__PURE__*/React__default.createElement(Button, {
-    onClick: handleVideoCall,
-    disabled: typeof handleVideoCall !== 'function',
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(md.MdVideocam, null)), /*#__PURE__*/React__default.createElement(Button, {
-    onClick: handleCall,
-    disabled: typeof handleCall !== 'function',
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
-});
-
-var ChatHeader = (function (props) {
-  var className = props.className,
-      title = props.title,
-      subtitle = props.subtitle,
-      badge = props.badge,
-      showToolbar = props.showToolbar;
-  var handleBack = props.handleBack,
-      handleCall = props.handleCall,
-      handleVideoCall = props.handleVideoCall;
-  var callHandlers = {
-    handleCall: handleCall,
-    handleVideoCall: handleVideoCall
-  };
-  /*
-      const {doctor,patient} = props
-      const isDoctor= doctor===true || (!doctor && !patient);
-  */
-
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className
-  /*  {
-      "headline--patient":  _=> isDoctor !== true,
-      "headline--doctor":   _=> isDoctor === true,
-    }*/
-  ]);
-  return /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(HeaderTitle, null, /*#__PURE__*/React__default.createElement(HeaderBackButton, {
-    handleBack: handleBack
-  }), /*#__PURE__*/React__default.createElement(ChatHeaderStatus, {
-    badge: badge,
-    title: title,
-    subtitle: subtitle
-  })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
-});
-
 var index = (function (props) {
-  var autoscroll = props.autoscroll,
-      handleChange = props.handleChange,
-      handleSubmit = props.handleSubmit;
-  var remoteBadge = props.remoteBadge,
-      remoteName = props.remoteName,
-      remoteStatus = props.remoteStatus;
-  var handleCall = props.handleCall,
-      handleVideoCall = props.handleVideoCall,
-      handleBack = props.handleBack,
-      showToolbar = props.showToolbar;
-  var headerProps = {
-    handleCall: handleCall,
-    handleVideoCall: handleVideoCall,
-    showToolbar: showToolbar,
-    handleBack: handleBack
-  };
-
-  var _useState = React.useState(true),
-      _useState2 = _slicedToArray(_useState, 2),
-      shouldAutoscroll = _useState2[0],
-      setShouldAutoscroll = _useState2[1];
-
-  var _useState3 = React.useState(''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      inputValue = _useState4[0],
-      setInputValue = _useState4[1];
-
-  var _handleChange = function _handleChange(e) {
-    setInputValue(e.target.value);
-    handleChange && handleChange(e.target.value);
-  };
-
-  var _handleSubmit = function _handleSubmit(e) {
-    setInputValue('');
-    handleSubmit && handleSubmit(inputValue);
-    e.preventDefault();
-  };
-
-  var chatRef = React.useRef();
-
-  var holdScroll = function holdScroll() {
-    setShouldAutoscroll(false);
-  };
-
-  var releaseScroll = function releaseScroll() {
-    setShouldAutoscroll(true);
-  };
-
-  React.useEffect(function () {
-    if (chatRef.current && autoscroll && shouldAutoscroll) chatRef.current.scrollTop = chatRef.current.scrollHeight; //  chatRef.current.addEventListener('scroll',()=>console.log('scroll'))
-  });
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "hermed-chat"
-  }, /*#__PURE__*/React__default.createElement(ChatHeader, _extends({
-    subtitle: remoteStatus,
-    title: remoteName,
-    badge: remoteBadge
-  }, headerProps)), /*#__PURE__*/React__default.createElement("section", {
-    ref: chatRef,
-    className: "chat flex-column  align-center",
-    onTouchStart: holdScroll,
-    onTouchEnd: releaseScroll,
-    onMouseDown: holdScroll,
-    onMouseUp: releaseScroll
-  }, props.children), /*#__PURE__*/React__default.createElement("section", {
-    className: "tools"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "toolbar"
-  }, /*#__PURE__*/React__default.createElement("button", null, "photo"), /*#__PURE__*/React__default.createElement("button", null, "file"), /*#__PURE__*/React__default.createElement("button", null, "voice")), /*#__PURE__*/React__default.createElement("div", {
-    className: "text-input"
-  }, /*#__PURE__*/React__default.createElement("form", {
-    onSubmit: _handleSubmit
-  }, /*#__PURE__*/React__default.createElement("input", {
-    type: "text",
-    onChange: _handleChange,
-    value: inputValue
-  })))));
-});
-
-var index$1 = (function (props) {
   var message = props.message,
       date = props.date,
       _right = props.right,
@@ -468,7 +132,7 @@ var GoGear = function (props) {
 };
 GoGear.displayName = "GoGear";
 
-var index$2 = (function (props) {
+var index$1 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "waiting-room"
   }, /*#__PURE__*/React__default.createElement("header", {
@@ -486,7 +150,117 @@ var index$2 = (function (props) {
   }, props.children));
 });
 
-var index$3 = (function (props) {
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(n);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var index$2 = (function (props) {
   var status = props.status,
       name = props.name,
       phone = props.phone,
@@ -510,6 +284,53 @@ var index$3 = (function (props) {
   }, phone), /*#__PURE__*/React__default.createElement("div", {
     className: "email"
   }, email)));
+});
+
+var Button = (function (props) {
+  var className = props.className,
+      _contained = props.contained,
+      _round = props.round,
+      _text = props.text,
+      _outlined = props.outlined,
+      _toolbar = props.toolbar,
+      _success = props.success,
+      _failure = props.failure,
+      _fit = props.fit,
+      rest = _objectWithoutProperties(props, ["className", "contained", "round", "text", "outlined", "toolbar", "success", "failure", "fit"]);
+
+  var classes = genClasses.cEx(["button", className, function (_) {
+    return !_contained && !_text && !_round && !_outlined && !_toolbar ? "contained" : "";
+  }, {
+    'contained': function contained(_) {
+      return _contained === true;
+    },
+    'text': function text(_) {
+      return _text === true;
+    },
+    'toolbar': function toolbar(_) {
+      return _toolbar === true;
+    },
+    'outlined': function outlined(_) {
+      return _outlined === true;
+    },
+    'fit': function fit(_) {
+      return _fit === true;
+    },
+    'round': function round(_) {
+      return _round === true;
+    },
+    'success': function success(_) {
+      return _success === true;
+    },
+    'failure': function failure(_) {
+      return _failure === true;
+    }
+  }, function (_) {
+    return _toolbar === true ? 'icon icon--32' : '';
+  }]);
+  return /*#__PURE__*/React__default.createElement("button", _extends({
+    className: classes
+  }, rest), props.children);
 });
 
 var defaultSubmit = function defaultSubmit(e) {
@@ -556,7 +377,7 @@ var Input = (function (props) {
   }, rest)));
 });
 
-var index$4 = (function (props) {
+var index$3 = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
@@ -630,7 +451,106 @@ var OrganiserConfigurationForm = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "Se connecter"));
 });
 
-var index$5 = (function (props) {
+var Header = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("header", {
+    className: classes
+  }, props.children);
+});
+
+var HeaderTitle = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline__title flex-row ", "flex-row", "align-center", className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var HeaderToolbar = (function (props) {
+  var className = props.className;
+  var classes = genClasses.cEx(["headline__tool-box", "flex-row", className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var HeaderBackButton = (function (props) {
+  var className = props.className,
+      handleBack = props.handleBack;
+  var classes = genClasses.cEx([className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    onClick: handleBack
+  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)));
+});
+
+var ChatHeaderStatus = (function (props) {
+  var title = props.title,
+      subtitle = props.subtitle,
+      badge = props.badge;
+  var badgeClasses = genClasses.cEx(["headline__contact-dot", function (_) {
+    return badge;
+  }]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "flex-column just-around"
+  }, /*#__PURE__*/React__default.createElement("div", {
+    className: "flex-row align-center"
+  }, badge && /*#__PURE__*/React__default.createElement("span", {
+    className: badgeClasses
+  }), /*#__PURE__*/React__default.createElement("h2", null, title)), subtitle && /*#__PURE__*/React__default.createElement("p", {
+    className: "headline__contact-status"
+  }, subtitle));
+});
+
+var ChatHeaderToolbar = (function (props) {
+  var handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall;
+  return /*#__PURE__*/React__default.createElement(HeaderToolbar, null, /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleVideoCall,
+    disabled: typeof handleVideoCall !== 'function',
+    toolbar: true
+  }, /*#__PURE__*/React__default.createElement(md.MdVideocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleCall,
+    disabled: typeof handleCall !== 'function',
+    toolbar: true
+  }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
+});
+
+var ChatHeader = (function (props) {
+  var className = props.className,
+      title = props.title,
+      subtitle = props.subtitle,
+      badge = props.badge,
+      showToolbar = props.showToolbar;
+  var handleBack = props.handleBack,
+      handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall;
+  var callHandlers = {
+    handleCall: handleCall,
+    handleVideoCall: handleVideoCall
+  };
+  /*
+      const {doctor,patient} = props
+      const isDoctor= doctor===true || (!doctor && !patient);
+  */
+
+  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className
+  /*  {
+      "headline--patient":  _=> isDoctor !== true,
+      "headline--doctor":   _=> isDoctor === true,
+    }*/
+  ]);
+  return /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(HeaderTitle, null, /*#__PURE__*/React__default.createElement(HeaderBackButton, {
+    handleBack: handleBack
+  }), /*#__PURE__*/React__default.createElement(ChatHeaderStatus, {
+    badge: badge,
+    title: title,
+    subtitle: subtitle
+  })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
+});
+
+var index$4 = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -655,7 +575,7 @@ var index$5 = (function (props) {
   }));
 });
 
-var index$6 = (function (props) {
+var index$5 = (function (props) {
   var incoming = props.incoming,
       handleAnswer = props.handleAnswer,
       handleDiscard = props.handleDiscard,
@@ -682,7 +602,7 @@ var index$6 = (function (props) {
   }, " ", /*#__PURE__*/React__default.createElement(md.MdCallEnd, null), " ")));
 });
 
-var index$7 = (function (props) {
+var index$6 = (function (props) {
   var myRef = React.useRef();
 
   var srcObject = props.srcObject,
@@ -706,7 +626,7 @@ var index$7 = (function (props) {
   }, rest));
 });
 
-var index$8 = (function (props) {
+var index$7 = (function (props) {
   var offset = props.offset;
 
   if (!offset) {
@@ -739,7 +659,7 @@ var index$8 = (function (props) {
   }, props.children);
 });
 
-var index$9 = (function (props) {
+var index$8 = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -747,6 +667,86 @@ var index$9 = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", _extends({
     className: classes
   }, rest), props.children);
+});
+
+var index$9 = (function (props) {
+  var autoscroll = props.autoscroll,
+      handleChange = props.handleChange,
+      handleSubmit = props.handleSubmit;
+  var remoteBadge = props.remoteBadge,
+      remoteName = props.remoteName,
+      remoteStatus = props.remoteStatus;
+  var handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall,
+      handleBack = props.handleBack,
+      showToolbar = props.showToolbar;
+  var headerProps = {
+    handleCall: handleCall,
+    handleVideoCall: handleVideoCall,
+    showToolbar: showToolbar,
+    handleBack: handleBack
+  };
+
+  var _useState = React.useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      shouldAutoscroll = _useState2[0],
+      setShouldAutoscroll = _useState2[1];
+
+  var _useState3 = React.useState(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      inputValue = _useState4[0],
+      setInputValue = _useState4[1];
+
+  var _handleChange = function _handleChange(e) {
+    setInputValue(e.target.value);
+    handleChange && handleChange(e.target.value);
+  };
+
+  var _handleSubmit = function _handleSubmit(e) {
+    setInputValue('');
+    handleSubmit && handleSubmit(inputValue);
+    e.preventDefault();
+  };
+
+  var chatRef = React.useRef();
+
+  var holdScroll = function holdScroll() {
+    setShouldAutoscroll(false);
+  };
+
+  var releaseScroll = function releaseScroll() {
+    setShouldAutoscroll(true);
+  };
+
+  React.useEffect(function () {
+    if (chatRef.current && autoscroll && shouldAutoscroll) chatRef.current.scrollTop = chatRef.current.scrollHeight; //  chatRef.current.addEventListener('scroll',()=>console.log('scroll'))
+  });
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "hermed-chat"
+  }, /*#__PURE__*/React__default.createElement(ChatHeader, _extends({
+    subtitle: remoteStatus,
+    title: remoteName,
+    badge: remoteBadge
+  }, headerProps)), /*#__PURE__*/React__default.createElement("section", {
+    ref: chatRef,
+    className: "chat flex-column  align-center",
+    onTouchStart: holdScroll,
+    onTouchEnd: releaseScroll,
+    onMouseDown: holdScroll,
+    onMouseUp: releaseScroll
+  }, props.children), /*#__PURE__*/React__default.createElement("section", {
+    className: "tools"
+  }, /*#__PURE__*/React__default.createElement("div", {
+    className: "toolbar"
+  }, /*#__PURE__*/React__default.createElement("button", null, "photo"), /*#__PURE__*/React__default.createElement("button", null, "file"), /*#__PURE__*/React__default.createElement("button", null, "voice")), /*#__PURE__*/React__default.createElement("div", {
+    className: "text-input"
+  }, /*#__PURE__*/React__default.createElement("form", {
+    onSubmit: _handleSubmit
+  }, /*#__PURE__*/React__default.createElement("input", {
+    type: "text",
+    onChange: _handleChange,
+    value: inputValue
+  })))));
 });
 
 var Landing = (function (props) {
@@ -815,11 +815,11 @@ var index$b = (function (props) {
   }));
 });
 
-exports.ActiveCallBar = index$9;
+exports.ActiveCallBar = index$8;
 exports.Button = Button;
-exports.Calling = index$6;
-exports.Chat = index;
-exports.ChatBubble = index$1;
+exports.Calling = index$5;
+exports.Chat = index$9;
+exports.ChatBubble = index;
 exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
@@ -831,13 +831,13 @@ exports.HeaderTitle = HeaderTitle;
 exports.HeaderToolbar = HeaderToolbar;
 exports.Input = Input;
 exports.Landing = Landing;
-exports.Loading = index$5;
-exports.MobileVHAdapter = index$8;
+exports.Loading = index$4;
+exports.MobileVHAdapter = index$7;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
 exports.OrganiserLanding = index$b;
-exports.Patient = index$3;
-exports.Select = index$4;
-exports.Video = index$7;
-exports.VideoPreview = index$7;
-exports.WaitingRoom = index$2;
+exports.Patient = index$2;
+exports.Select = index$3;
+exports.Video = index$6;
+exports.VideoPreview = index$6;
+exports.WaitingRoom = index$1;
 //# sourceMappingURL=index.js.map

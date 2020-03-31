@@ -11,14 +11,13 @@ import ChatHeader from 'components/ChatHeader';
 import MobileVHAdapter from 'components/MobileVHAdapter';
 
 
-export const  AnsweringCall =()=>
-    <>
+export const  AnsweringCallAssembly =()=>
       <div className="theme-chat">
         <MobileVHAdapter >
           <ChatHeader title="Appel avec Bobybobbob" handleBack={_=>alert('back')}/>
           <Calling  incoming>
             <div className="video-sample">
-              <video autoPlay loop src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"/>
+              <Video autoPlay loop src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"/>
             </div>
           </Calling>
           <Draggable  bounds='.answer_call'>
@@ -26,7 +25,6 @@ export const  AnsweringCall =()=>
           </Draggable>
         </MobileVHAdapter>
     </div>
-    </>
 
 
 export default {

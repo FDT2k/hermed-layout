@@ -3,6 +3,7 @@ import React,{useEffect,useState,useRef} from 'react';
 import Chat from 'views/Chat'
 import ChatBubble from 'components/ChatBubble'
 import ThemePicker from 'components/ThemePicker'
+import MobileVHAdapter from 'components/MobileVHAdapter'
 import 'sass/style.scss';
 
 
@@ -75,7 +76,9 @@ export const ChatEvents = () => (
 
 export const AutoScroll = () => (
   <ThemePicker picked="chat">
+  <MobileVHAdapter>
     <ChatAutoScroll/>
+    </MobileVHAdapter>
   </ThemePicker>
 
 );
