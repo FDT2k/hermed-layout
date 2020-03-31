@@ -1,7 +1,7 @@
 import React from 'react'
 
-import HeaderToolbar from '../HeaderToolbar'
-import Button from '../Button'
+import HeaderToolbar from 'components/HeaderToolbar'
+import Button from 'components/Button'
 import { MdVideocam } from "react-icons/md";
 import { MdVideocamOff } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";

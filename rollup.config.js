@@ -7,6 +7,13 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import scss from 'rollup-plugin-scss'
+import includePaths from 'rollup-plugin-includepaths';
+let includePathOptions = {
+    include: {},
+    paths: ['src'],
+    external: [],
+    extensions: ['.js', '.json', '.html']
+};
 export default [
   {
     input: 'src/components/export',
@@ -20,7 +27,7 @@ export default [
     external: ['is-dom', 'prop-types',
     'react','@geekagency/composite-js','@geekagency/gen-classes',
     'formik','react-input-mask','react-icons','react-icons/fa',
-    'react-icons/md','react-icons/libs','react-loading'],
+    'react-icons/md','react-icons/libs','react-loading','react-draggable'],
     plugins: [
       nodeResolve({
         mainFields: ['module', 'jsnext:main', 'main'],
@@ -29,7 +36,8 @@ export default [
         include: 'node_modules/**',
       }),
       babel({ runtimeHelpers: true }),
-      scss()
+      scss(),
+      includePaths(includePathOptions)
     ],
   }/*,{
     input:'src/sass/style.scss',

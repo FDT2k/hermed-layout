@@ -14,6 +14,37 @@
 		@include themed_font('mainFont', 'semi-bold');
 	}
 
+  &.round{
+    @extend %block;
+    border-radius: 50px;
+    margin: 0px;
+    @include themify($themes) {
+      border: themed('buttonBorder');
+    }
+      
+    svg {
+      width: 32px;
+      height: 32px;
+      @include mq-width-and-lower(425px){
+        width: 24px;
+        height: 24px;
+
+      }
+    }
+  }
+
+  &.success{
+    @include themify($themes) {
+      background-color: themed('success');
+      color: white;
+    }
+  }
+  &.failure{
+    @include themify($themes) {
+      background-color: themed('error');
+      color: white;
+    }
+  }
   &.fit{
     width:auto;
   }

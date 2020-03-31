@@ -2,7 +2,7 @@
 /* Custom sections */
 .landing-page {
   height: 100%;
-  height: 100vh;
+  height: 100%; /*100vh must be included in MobileVHAdapter to fit screen on mobile*/
 
 
   header {

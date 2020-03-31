@@ -1,8 +1,9 @@
 import React,{useEffect,useState,useRef} from 'react';
 
-import Chat from 'components/Chat'
+import Chat from 'views/Chat'
 import ChatBubble from 'components/ChatBubble'
 import ThemePicker from 'components/ThemePicker'
+import MobileVHAdapter from 'components/MobileVHAdapter'
 import 'sass/style.scss';
 
 
@@ -75,7 +76,9 @@ export const ChatEvents = () => (
 
 export const AutoScroll = () => (
   <ThemePicker picked="chat">
-  <ChatAutoScroll/>
+  <MobileVHAdapter>
+    <ChatAutoScroll/>
+    </MobileVHAdapter>
   </ThemePicker>
 
 );
@@ -83,5 +86,11 @@ export const AutoScroll = () => (
 
 
 export default {
-  title: 'Chat',
+  title: 'Chat/EventsTests',
+  parameters: {
+    notes: {
+      AutoScroll: 'The view should auto scroll',
+      ChatEvents: 'The elements should display alerts',
+    }
+  },
 };

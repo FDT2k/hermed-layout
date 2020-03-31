@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import 'sass/style.scss';
 import {cEx} from '@geekagency/gen-classes'
 import Button from 'components/Button'
 

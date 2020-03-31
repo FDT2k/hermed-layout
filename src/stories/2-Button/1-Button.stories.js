@@ -6,7 +6,6 @@ import HeaderToolbar from 'components/HeaderToolbar'
 
 import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
-import componentNotes from './doc/Button.md';
 import { FiArrowRightCircle } from "react-icons/fi";
 
 
@@ -30,7 +29,7 @@ export const Fit = () => (
 
 
 
-export const Toolbar = () => (
+export const ToolbarForHeader = () => (
     <ThemePicker picked="chat">
       <Header>
         <HeaderToolbar>
@@ -42,7 +41,13 @@ export const Toolbar = () => (
 );
 
 
+
 export default {
   title: 'Button',
-  parameters: { notes: componentNotes },
+  parameters: {
+    notes: {
+      ToolbarForHeader: 'prout',
+      test: 'asdgasd'
+    }
+  },
 };

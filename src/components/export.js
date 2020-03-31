@@ -1,31 +1,41 @@
 import '../sass/style.scss'
 
-import Chat from './Chat'
-import Landing from './Landing'
-import CustomerLanding from './CustomerLanding'
-import ChatBubble from './ChatBubble'
-import WaitingRoom from './WaitingRoom'
-import Patient from './Patient'
-import Button from './Button'
-import Form from './Form'
-import Input from './Input'
-import Select from './Select'
-import OrganiserConfigurationForm from './OrganiserConfigurationForm'
-import OrganiserLanding from './OrganiserLanding'
-import Header from './Header'
-import HeaderTitle from './HeaderTitle'
-import HeaderToolbar from './HeaderToolbar'
-import HeaderBackButton from './HeaderBackButton'
-import ChatHeaderStatus from './ChatHeaderStatus'
-import ChatHeaderToolbar from './ChatHeaderToolbar'
-import Loading from './Loading'
-import Calling from './Calling'
+import ChatBubble from 'components/ChatBubble'
+import WaitingRoom from 'components/WaitingRoom'
+import Patient from 'components/Patient'
+import Button from 'components/Button'
+import Form from 'components/Form'
+import Input from 'components/Input'
+import Select from 'components/Select'
+import OrganiserConfigurationForm from 'components/OrganiserConfigurationForm'
+
+import Header from 'components/Header'
+import HeaderTitle from 'components/HeaderTitle'
+import HeaderToolbar from 'components/HeaderToolbar'
+import HeaderBackButton from 'components/HeaderBackButton'
+import ChatHeaderStatus from 'components/ChatHeaderStatus'
+import ChatHeaderToolbar from 'components/ChatHeaderToolbar'
+import ChatHeader from 'components/ChatHeader'
+import Loading from 'components/Loading'
+import Calling from 'components/Calling'
+import Video from 'components/Video'
+import MobileVHAdapter from 'components/MobileVHAdapter'
+import ActiveCallBar from 'components/ActiveCallBar'
+
+
+/* Full views exporting */
+import Chat from 'views/Chat'
+import Landing from 'views/Landing'
+import CustomerLanding from 'views/Landing/Customer'
+import OrganiserLanding from 'views/Landing/Organiser'
+
 
 export {
   Chat,
   Landing,
   CustomerLanding,
   ChatBubble,
+  ChatHeader,
   WaitingRoom,
   Patient,
   Button,
@@ -41,5 +51,9 @@ export {
   HeaderTitle,
   HeaderToolbar,
   HeaderBackButton,
-  Calling
+  Calling,
+  Video as VideoPreview,
+  Video,
+  MobileVHAdapter,
+  ActiveCallBar
 }

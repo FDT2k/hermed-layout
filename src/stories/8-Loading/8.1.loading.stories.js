@@ -2,7 +2,6 @@ import React from 'react';
 import { action,notes } from '@storybook/addon-actions';
 import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
-import componentNotes from './doc/Button.md';
 
 
 import Loading from 'components/Loading'
@@ -66,5 +65,4 @@ export const CenteredInverseLabelSpinning = () => (
 
 export default {
   title: 'Loading',
-  parameters: { notes: componentNotes },
 };

@@ -1,11 +1,11 @@
 import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
-import Button from '../Button'
-
+import Button from 'components/Button'
+import {MdCall,MdCallEnd} from 'react-icons/md'
 
 export default props => {
   const{
-    handleAnswer,handleDiscard,className,...rest
+    incoming,handleAnswer,handleDiscard,className,...rest
   } = props;
 
   const classes=  cEx(
@@ -13,13 +13,14 @@ export default props => {
   )
   return (
     <div className={classes} {...rest}>
-      <h3>{props.title}</h3>
+      <div className="children">
+        {props.children}
+      </div>
 
-
-      {props.children}
-
-      <Button onClick={handleAnswer}> Repondre </Button>
-      <Button onClick={handleDiscard} outlined> Rejeter </Button>
+      <div className="toolbox">
+        {incoming && <Button round  success onClick={handleAnswer} fit> <MdCall/> </Button>}
+        <Button round fit failure onClick={handleDiscard} > <MdCallEnd/> </Button>
+      </div>
     </div>
   )
 }

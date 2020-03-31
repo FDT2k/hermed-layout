@@ -5,10 +5,9 @@ import Input from 'components/Input'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import ThemePicker from 'components/ThemePicker'
-import Landing from 'components/Landing'
-import CustomerLanding from 'components/CustomerLanding'
+import Landing from 'views/Landing'
+import CustomerLanding from 'views/Landing/Customer'
 
-import componentNotes from './doc/CustomerLanding.md';
 
 
 export const  LandingOrganiser =()=>
@@ -25,7 +24,7 @@ export const  LandingOrganiser =()=>
       </Landing>
     </div>
 
-export const  LandingEmpty =()=>
+export const  LandingContainer =()=>
     <div className="theme-landing">
       <Landing customer>
         <p className="text--center">
@@ -45,6 +44,5 @@ export const  LandingCustomerCallBackTest =()=>
 
 export default {
   title: 'Landing',
-  parameters: { notes: componentNotes },
 
 };

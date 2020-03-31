@@ -7,8 +7,6 @@ import Input from 'components/Input'
 import Button from 'components/Button'
 import ThemePicker from 'components/ThemePicker'
 
-import componentNotes from './doc/Form.md';
-
 export const  Simple =()=>
     <ThemePicker>
       <Form>
@@ -41,6 +39,5 @@ export const  Simple =()=>
 
 
 export default {
-  title: 'Form',
-  parameters: { notes: componentNotes },
+  title: 'Form/Layout',
 };

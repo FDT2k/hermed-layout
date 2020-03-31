@@ -28,5 +28,5 @@ export const  AvecPatients =()=>
 
 
 export default {
-  title: 'Waiting room',
+  title: 'Waiting Room Elements',
 };
