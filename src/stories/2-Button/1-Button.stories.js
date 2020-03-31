@@ -2,7 +2,7 @@ import React from 'react';
 import { action,notes } from '@storybook/addon-actions';
 import Button from 'components/Button'
 import Header from 'components/Header'
-import HeaderToolbar from 'components/HeaderToolbar'
+import Toolbar from 'components/Header/Toolbar'
 
 import ThemePicker from 'components/ThemePicker'
 import 'sass/style.scss';
@@ -32,10 +32,10 @@ export const Fit = () => (
 export const ToolbarForHeader = () => (
     <ThemePicker picked="chat">
       <Header>
-        <HeaderToolbar>
+        <Toolbar>
           <Button toolbar><FiArrowRightCircle/></Button>
           <Button toolbar><FiArrowRightCircle/></Button>
-        </HeaderToolbar>
+        </Toolbar>
       </Header>
     </ThemePicker>
 );

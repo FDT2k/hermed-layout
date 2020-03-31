@@ -70,11 +70,11 @@ table {
   font-weight: 400;
   font-style: normal; }
 
-.theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .active-call, .theme-landing .active-call, .theme-default .active-call {
+.theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .patient-item .name, .theme-landing .patient-item .name, .theme-default .patient-item .name, .theme-chat .active-call, .theme-landing .active-call, .theme-default .active-call {
   font-weight: 600;
   font-style: normal; }
 
-.theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat .chat-footer, .theme-landing .chat-footer, .theme-default .chat-footer, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .waiting-room header, .theme-landing .waiting-room header, .theme-default .waiting-room header, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading * {
+.theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat .chat-footer, .theme-landing .chat-footer, .theme-default .chat-footer, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading * {
   font-weight: 700;
   font-style: normal; }
 
@@ -695,7 +695,7 @@ footer {
   font-family: soleil, sans-serif;
   font-family: gibbs, sans-serif;
 */
-.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat section, .theme-chat footer, .theme-landing section, .theme-landing footer, .theme-default section, .theme-default footer, .theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .chat-footer, .theme-landing .chat-footer, .theme-default .chat-footer, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .chat-bubble__date, .theme-landing .chat-bubble__date, .theme-default .chat-bubble__date, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap, .theme-landing .floating-label-wrap, .theme-default .floating-label-wrap, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .floating-label-field, .theme-landing .floating-label-field, .theme-default .floating-label-field, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .headline__contact-status, .theme-landing .headline__contact-status, .theme-default .headline__contact-status, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .single-input input::placeholder, .theme-landing .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .single-select select::placeholder, .theme-landing .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room, .theme-chat .waiting-room header, .theme-landing .waiting-room header, .theme-default .waiting-room header, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading *, .theme-chat .answer_call, .theme-landing .answer_call, .theme-default .answer_call, .theme-chat .active-call, .theme-landing .active-call, .theme-default .active-call {
+.theme-chat html, .theme-chat body, .theme-landing html, .theme-landing body, .theme-default html, .theme-default body, .theme-chat section, .theme-chat footer, .theme-landing section, .theme-landing footer, .theme-default section, .theme-default footer, .theme-chat h1, .theme-landing h1, .theme-default h1, .theme-chat h2, .theme-landing h2, .theme-default h2, .theme-chat h3, .theme-landing h3, .theme-default h3, .theme-chat h4, .theme-landing h4, .theme-default h4, .theme-chat label, .theme-chat input, .theme-landing label, .theme-landing input, .theme-default label, .theme-default input, .theme-chat a, .theme-landing a, .theme-default a, .theme-chat .button, .theme-landing .button, .theme-default .button, .theme-chat .chat-footer, .theme-landing .chat-footer, .theme-default .chat-footer, .theme-chat .hermed-chat > .chat, .theme-landing .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-chat .hermed-chat > .tools, .theme-landing .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-chat .hermed-chat > .tools .toolbar button, .theme-landing .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-chat .chat-bubble.welcome, .theme-landing .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-chat .chat-bubble.right, .theme-chat .chat-bubble.left, .theme-landing .chat-bubble.right, .theme-landing .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-chat .chat-bubble__date, .theme-landing .chat-bubble__date, .theme-default .chat-bubble__date, .theme-chat .send-message-state h4, .theme-landing .send-message-state h4, .theme-default .send-message-state h4, .theme-chat .floating-label-wrap, .theme-landing .floating-label-wrap, .theme-default .floating-label-wrap, .theme-chat .floating-label-wrap.invalid .error-message, .theme-landing .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-chat .floating-label-field, .theme-landing .floating-label-field, .theme-default .floating-label-field, .theme-chat .basic-form .label, .theme-landing .basic-form .label, .theme-default .basic-form .label, .theme-chat .headline, .theme-landing .headline, .theme-default .headline, .theme-chat .headline__contact-status, .theme-landing .headline__contact-status, .theme-default .headline__contact-status, .theme-chat .single-input label, .theme-landing .single-input label, .theme-default .single-input label, .theme-chat .single-input input, .theme-landing .single-input input, .theme-default .single-input input, .theme-chat .single-input input:focus, .theme-landing .single-input input:focus, .theme-default .single-input input:focus, .theme-chat .single-input input::placeholder, .theme-landing .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-chat .patient-item, .theme-landing .patient-item, .theme-default .patient-item, .theme-chat .patient-item .name, .theme-landing .patient-item .name, .theme-default .patient-item .name, .theme-chat .single-select label, .theme-landing .single-select label, .theme-default .single-select label, .theme-chat .single-select select, .theme-landing .single-select select, .theme-default .single-select select, .theme-chat .single-select select:focus, .theme-landing .single-select select:focus, .theme-default .single-select select:focus, .theme-chat .single-select select::placeholder, .theme-landing .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-chat .waiting-room, .theme-landing .waiting-room, .theme-default .waiting-room, .theme-chat .loading *, .theme-landing .loading *, .theme-default .loading *, .theme-chat .answer_call, .theme-landing .answer_call, .theme-default .answer_call, .theme-chat .active-call, .theme-landing .active-call, .theme-default .active-call {
   font-family: soleil, sans-serif; }
 
 /* FONTS */
@@ -824,7 +824,6 @@ button {
     .theme-default .button.toolbar {
       color: white; }
   .button.icon {
-    display: flex;
     margin-right: 10px; }
   .button.icon--32 svg {
     width: 32px;
@@ -833,6 +832,9 @@ button {
       .button.icon--32 svg {
         width: 24px;
         height: 24px; } }
+  .button.clear {
+    background-color: transparent;
+    border-color: transparent; }
   .theme-chat .button:hover, .theme-chat .button:focus {
     color: #232532; }
   .theme-landing .button:hover, .theme-landing .button:focus {
@@ -1354,20 +1356,10 @@ textarea.floating-label-field {
       .headline button.icon--32 svg {
         width: 24px;
         height: 24px; } }
-  .headline__contact-dot {
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    display: inline-block;
+  .headline .badge-dot {
     margin-right: 8px; }
-    .theme-chat .headline__contact-dot {
-      background-color: #d9d9d9; }
-    .theme-chat .headline__contact-dot.disconnected {
-      background-color: #f25e5e; }
-    .theme-chat .headline__contact-dot.waiting {
-      background-color: #ffe354; }
-    .theme-chat .headline__contact-dot.online {
-      background-color: #44e54e; }
+    .theme-chat .headline .badge-dot {
+      background-color: #858585; }
   .headline__contact-status {
     margin-left: calc(16px + 8px);
     font-size: 12px; }
@@ -1528,11 +1520,11 @@ textarea.floating-label-field {
 
 /* Custom sections */
 .patient-item {
-  max-width: 300px;
-  min-width: 250px;
-  box-shadow: 5px 5px 4px grey;
-  min-height: 80px;
-  padding: 5px;
+  min-width: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
+  width: 100%;
+  height: 75px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -1544,38 +1536,27 @@ textarea.floating-label-field {
   -moz-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   justify-content: space-between;
-  -ms-align-items: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center; }
+  font-size: 14px; }
   .theme-chat .patient-item {
-    background-color: white; }
-  .patient-item > .status {
-    min-width: 50px;
-    min-height: 50px;
-    height: 50px;
-    border-radius: 50px; }
-    .theme-chat .patient-item > .status.warning {
-      background-color: #fab437; }
-    .theme-chat .patient-item > .status.online {
-      background-color: #34a03c; }
-    .theme-landing .patient-item > .status.online {
-      background-color: #34a03c; }
-    .theme-default .patient-item > .status.online {
-      background-color: #34a03c; }
-    .theme-chat .patient-item > .status.offline {
-      background-color: #f11515; }
-    .theme-landing .patient-item > .status.offline {
-      background-color: #f11515; }
-    .theme-default .patient-item > .status.offline {
-      background-color: #f11515; }
-    .theme-chat .patient-item > .status.unkown {
-      background-color: #858585; }
+    background-color: white;
+    outline: 1px solid #616161; }
+  .theme-landing .patient-item {
+    outline: 1px solid #616161; }
+  .theme-default .patient-item {
+    outline: 1px solid #616161; }
+  .patient-item > .headline__content > * {
+    padding-left: 20px; }
+  .patient-item .button {
+    height: 34px; }
   .patient-item > .coords {
     display: -webkit-box;
     display: -moz-box;
@@ -1588,6 +1569,8 @@ textarea.floating-label-field {
     -moz-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column; }
+  .patient-item .name {
+    font-size: 14px; }
 
 .single-select {
   width: 100%;
@@ -1681,8 +1664,13 @@ textarea.floating-label-field {
 
 /* Custom sections */
 .waiting-room {
-  min-height: 100vh;
-  height: 100%; }
+  display: grid;
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
+  grid-template-columns: 100vw;
+  grid-template-rows: 76px auto;
+  grid-template-areas: "header" "content"; }
   .theme-chat .waiting-room {
     font-size: 12px;
     background-color: #faedcf; }
@@ -1710,46 +1698,10 @@ textarea.floating-label-field {
     @media (min-width: 1366px) {
       .theme-default .waiting-room {
         font-size: 16px; } }
-  .theme-chat .waiting-room header {
-    min-height: 47px;
-    font-size: 12px;
-    color: white;
-    background-color: #277067; }
-    @media (min-width: 320px) {
-      .theme-chat .waiting-room header {
-        font-size: calc(12px + 4 * (100vw - 320px) / 1046); } }
-    @media (min-width: 1366px) {
-      .theme-chat .waiting-room header {
-        font-size: 16px; } }
-  .theme-landing .waiting-room header {
-    min-height: 47px;
-    font-size: 12px;
-    color: #f25e5e;
-    background-color: white; }
-    @media (min-width: 320px) {
-      .theme-landing .waiting-room header {
-        font-size: calc(12px + 4 * (100vw - 320px) / 1046); } }
-    @media (min-width: 1366px) {
-      .theme-landing .waiting-room header {
-        font-size: 16px; } }
-  .theme-default .waiting-room header {
-    min-height: 47px;
-    font-size: 12px;
-    color: #f25e5e;
-    background-color: white; }
-    @media (min-width: 320px) {
-      .theme-default .waiting-room header {
-        font-size: calc(12px + 4 * (100vw - 320px) / 1046); } }
-    @media (min-width: 1366px) {
-      .theme-default .waiting-room header {
-        font-size: 16px; } }
-  .theme-chat .waiting-room header button.text {
-    color: white; }
-  .theme-landing .waiting-room header button.text {
-    color: white; }
-  .theme-default .waiting-room header button.text {
-    color: white; }
+  .waiting-room > .headline {
+    grid-area: header; }
   .waiting-room > .content {
+    grid-area: content;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -1765,9 +1717,8 @@ textarea.floating-label-field {
     -webkit-align-items: center;
     -moz-align-items: center;
     align-items: center;
-    padding: 5px; }
-    .waiting-room > .content > * {
-      margin-bottom: 20px; }
+    overflow-y: scroll;
+    height: 100%; }
 
 /* Loading */
 .loading {
@@ -1914,7 +1865,16 @@ textarea.floating-label-field {
   position: fixed;
   bottom: 60px;
   right: 0;
+  min-width: 200px;
   max-width: 200px; }
+  @media screen and (max-width: 425px) {
+    .video.preview {
+      max-width: 120px;
+      min-width: 120px; } }
+  @media screen and (max-width: 321px) {
+    .video.preview {
+      max-width: 100px;
+      min-width: 100px; } }
 
 .vh-container {
   height: 100vh;
@@ -1939,3 +1899,35 @@ textarea.floating-label-field {
   .theme-default .active-call {
     background-color: #34a03c;
     color: #f25e5e; }
+
+.badge-dot {
+  height: 16px;
+  width: 16px;
+  min-height: 16px;
+  min-width: 16px;
+  border-radius: 50%;
+  display: block;
+  font-size: 10px;
+  line-height: 16px;
+  /*
+    par defaut la couleur est disabled*/
+  text-align: center; }
+  .theme-chat .badge-dot {
+    background-color: #858585; }
+  .theme-chat .badge-dot {
+    background-color: #d9d9d9; }
+  .theme-chat .badge-dot.red {
+    background-color: #f25e5e; }
+  .theme-chat .badge-dot.orange {
+    background-color: #ffe354; }
+  .theme-chat .badge-dot.green {
+    background-color: #44e54e; }
+  .theme-chat .badge-dot.unkown {
+    background-color: #858585; }
+  .badge-dot.medium {
+    font-size: 14px;
+    line-height: 23px;
+    min-height: 24px;
+    min-width: 24px;
+    width: 24px;
+    height: 24px; }

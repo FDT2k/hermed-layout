@@ -6,7 +6,7 @@ import ThemePicker from 'components/ThemePicker'
 import Calling from 'components/Calling'
 import Video from 'components/Video'
 import Draggable from 'react-draggable'
-import ChatHeader from 'components/ChatHeader';
+import ChatHeader from 'components/Header/Chat';
 import ActiveCallBar from 'components/ActiveCallBar';
 
 export const  AnsweringCall =()=>

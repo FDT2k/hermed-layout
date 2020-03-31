@@ -27,7 +27,7 @@ export default [
     external: ['is-dom', 'prop-types',
     'react','@geekagency/composite-js','@geekagency/gen-classes',
     'formik','react-input-mask','react-icons','react-icons/fa',
-    'react-icons/md','react-icons/libs','react-loading','react-draggable'],
+    'react-icons/md','react-icons/libs','react-loading','react-draggable','react-icons/lib'],
     plugins: [
       nodeResolve({
         mainFields: ['module', 'jsnext:main', 'main'],

@@ -8,7 +8,7 @@ import ChatBubble from 'components/ChatBubble';
 export const ChatSimple = () => (
   <div className="theme-chat">
   <MobileVHAdapter>
-    <Chat remoteName="Fabien K" remoteStatus="connecté" >
+    <Chat remoteName="Fabien K" remoteStatus="connecté"  remoteBadge="orange">
       <ChatBubble welcome message="Lorem hello "/>
       <ChatBubble left message="Lorem hello "/>
       <ChatBubble right message="Lorem hello "/>
@@ -20,7 +20,7 @@ export const ChatSimple = () => (
 export const DoctorChat = () => (
   <div className="theme-chat">
   <MobileVHAdapter>
-    <Chat showToolbar handleBack={_=>alert('going back')} remoteName="Fabien K" remoteBadge="online" remoteStatus="connecté" >
+    <Chat showToolbar handleBack={_=>alert('going back')} remoteName="Fabien K" remoteBadge="green" remoteStatus="connecté" >
       <ChatBubble welcome message="Lorem hello "/>
       <ChatBubble left message="Lorem hello "/>
       <ChatBubble right message="Lorem hello "/>
@@ -31,7 +31,7 @@ export const DoctorChat = () => (
 export const PatientChat = () => (
   <div className="theme-chat">
   <MobileVHAdapter>
-    <Chat remoteName="Dr Karsegard" remoteBadge="online" remoteStatus="connecté" >
+    <Chat remoteName="Dr Karsegard" remoteBadge="green" remoteStatus="connecté" >
       <ChatBubble welcome message="Lorem hello"/>
       <ChatBubble left message="Lorem hello"  date="20:39"/>
       <ChatBubble right message="Lorem hello"  date="20:39"/>

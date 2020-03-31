@@ -3,13 +3,12 @@ import 'sass/style.scss';
 import ThemePicker from 'components/ThemePicker'
 
 
-import WaitingRoom from 'components/WaitingRoom'
 import Header from 'components/Header'
-import HeaderTitle from 'components/HeaderTitle'
-import HeaderToolbar from 'components/HeaderToolbar'
-import ChatHeader from 'components/ChatHeader'
+import Content from 'components/Header/Content'
+import Toolbar from 'components/Header/Toolbar'
+import Title from 'components/Header/Title'
+import ChatHeader from 'components/Header/Chat'
 import Button from 'components/Button'
-import ChatHeaderToolbar from 'components/ChatHeaderToolbar'
 
 
 
@@ -20,13 +19,13 @@ import { MdLocalPhone } from "react-icons/md";
 const WaitingRoomToolBar  = props => {
 
   return (
-    <HeaderToolbar>
+    <Toolbar>
 
     <Button toolbar><MdVideocam/></Button>
     <Button toolbar><MdLocalPhone/></Button>
     <Button toolbar><MdVideocamOff/></Button>
     <Button toolbar><MdLocalPhone/></Button>
-    </HeaderToolbar>
+    </Toolbar>
   )
 }
 
@@ -39,24 +38,24 @@ export const WaitingRoomHeader =()=>
 export const CustomHeader =()=>
     <ThemePicker picked="chat">
       <Header>
-        <HeaderToolbar>
+        <Toolbar>
           <Button toolbar><MdVideocam/></Button>
           <Button toolbar><MdVideocam/></Button>
           <Button toolbar><MdVideocam/></Button>
           <Button toolbar><MdVideocam/></Button>
-        </HeaderToolbar>
-        <HeaderTitle><h2>My Title is fun</h2></HeaderTitle>
+        </Toolbar>
+        <Content><Title>My Title is fun</Title></Content>
 
       </Header>
       <br/>
       <Header>
-          <HeaderTitle><h2>My Title is fun</h2></HeaderTitle>
-          <HeaderToolbar>
-            <Button toolbar><MdVideocam/></Button>
-            <Button toolbar><MdVideocam/></Button>
-            <Button toolbar><MdVideocam/></Button>
-            <Button toolbar><MdVideocam/></Button>
-          </HeaderToolbar>
+      <Content><Title>My Title is fun</Title></Content>
+      <Toolbar>
+          <Button toolbar><MdVideocam/></Button>
+          <Button toolbar><MdVideocam/></Button>
+          <Button toolbar><MdVideocam/></Button>
+          <Button toolbar><MdVideocam/></Button>
+        </Toolbar>
       </Header>
 
     </ThemePicker>

@@ -34,33 +34,11 @@
 
   }
 
-  &__contact-dot {
-      height: 16px;
-      width: 16px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-      @include themify($themes) {
-        background-color: themed('StatusColorDefault');
-      }
-
-      &.disconnected {
-        @include themify($themes) {
-          background-color: themed('StatusColorDisconnect');
-        }
-      }
-      &.waiting {
-        @include themify($themes) {
-          background-color: themed('statusColorWaiting');
-        }
-      }
-      &.online {
-        @include themify($themes) {
-          background-color: themed('statusColorOnline');
-        }
-      }
-
-
+  .badge-dot{
+    @include themify($themes) {
+        background-color: themed('disabled');
+    }
+    margin-right: 8px;
   }
 
   &__contact-status {

@@ -1,7 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react';
 import ThemePicker from 'components/ThemePicker'
 
-import ChatHeader from 'components/ChatHeader'
+import ChatHeader from 'components/Header/Chat'
 
 import 'sass/style.scss';
 

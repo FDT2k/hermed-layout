@@ -7,7 +7,7 @@ import Button from 'components/Button'
 import Calling from 'components/Calling'
 import Video from 'components/Video'
 import Draggable from 'react-draggable'
-import ChatHeader from 'components/ChatHeader';
+import ChatHeader from 'components/Header/Chat';
 import MobileVHAdapter from 'components/MobileVHAdapter';
 
 
