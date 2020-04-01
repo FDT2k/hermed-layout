@@ -1940,7 +1940,6 @@ textarea.floating-label-field {
 .sidebar {
   position: absolute;
   max-width: 50vw;
-  top: 0px;
   left: 0px;
   min-width: 270px;
   height: 100%;

@@ -1554,7 +1554,7 @@ var index$a = (function (props) {
 
 
   var classes = genClasses.cEx(['sidebar', function (_) {
-    return closed === false ? 'sidebar--state-closed' : '';
+    return closed === true ? 'sidebar--state-closed' : '';
   }, className]);
   return /*#__PURE__*/React__default.createElement("aside", {
     className: classes

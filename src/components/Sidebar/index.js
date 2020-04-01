@@ -14,7 +14,7 @@ export default props => {
 */
   const classes = cEx ([
     'sidebar',
-    _=> closed===false ? 'sidebar--state-closed' : '',
+    _=> closed===true ? 'sidebar--state-closed' : '',
     className,
   ])
   return (

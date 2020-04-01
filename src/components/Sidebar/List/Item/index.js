@@ -12,7 +12,7 @@ export default props => {
     className,
   ])
   return (
-      <div className={classes}>
+      <div className={classes} {...rest}>
         <div className="list-item-content">
           <div className="list-item__icon">{Icon && <Icon/>}</div>
           <div className="list-item__title">{props.children}</div>
