@@ -5,14 +5,16 @@ import HeaderContent from 'components/Header/Content'
 import Button from 'components/Button'
 import {GoKebabVertical} from 'react-icons/go'
 export default props => {
-  const {status,secondaryStatus, name,phone,email, className, ...rest} = props;
+  const {status,secondaryStatus, name,phone,email, handleClick, className ,handleContextual, ...rest} = props;
 
   const classes = cEx([
     "patient-item",
     className
   ])
+
+  
   return (
-    <div className={classes} {...rest}>
+    <div className={classes}  onClick={handleClick} {...rest}>
       <HeaderContent>
         <Badge className="status" medium status={status}/>
         <div className="coord">
@@ -23,8 +25,10 @@ export default props => {
       </HeaderContent>
       <HeaderContent>
 
-      <Badge className="status secondary" medium status={secondaryStatus}/>
-      <Button clear icon ><GoKebabVertical/></Button>
+        <Badge className="status secondary" medium status={secondaryStatus}/>
+        <Button clear onClick={e=>{
+          handleContextual(e)
+          e.stopPropagation()}}><GoKebabVertical/></Button>
       </HeaderContent>
 
     </div>

@@ -22,6 +22,7 @@ import Video from 'components/Video'
 import MobileVHAdapter from 'components/MobileVHAdapter'
 import ActiveCallBar from 'components/ActiveCallBar'
 import Badge from 'components/Badge'
+import DebugPanel from 'components/DebugPanel'
 
 
 /* Full views exporting */
@@ -56,5 +57,7 @@ export {
   Video as VideoPreview,
   Video,
   MobileVHAdapter,
-  ActiveCallBar
+  ActiveCallBar,
+  Badge,
+  DebugPanel
 }
