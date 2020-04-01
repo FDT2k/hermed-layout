@@ -23,6 +23,9 @@ import MobileVHAdapter from 'components/MobileVHAdapter'
 import ActiveCallBar from 'components/ActiveCallBar'
 import Badge from 'components/Badge'
 import DebugPanel from 'components/DebugPanel'
+import Sidebar from 'components/Sidebar'
+import SidebarList from 'components/Sidebar/List'
+import SidebarListItem from 'components/Sidebar/List/Item'
 
 
 /* Full views exporting */
@@ -59,5 +62,8 @@ export {
   MobileVHAdapter,
   ActiveCallBar,
   Badge,
-  DebugPanel
+  DebugPanel,
+  Sidebar,
+  SidebarList,
+  SidebarListItem
 }

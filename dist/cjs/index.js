@@ -1542,6 +1542,57 @@ var index$9 = (function (props) {
 });
 
 var index$a = (function (props) {
+  var className = props.className,
+      closed = props.closed,
+      rest = _objectWithoutProperties(props, ["className", "closed"]);
+  /*  const [visible,setVisible] = useState(closed || true)
+  
+    useEffect(()=>{
+      setVisible(closed || true)
+    },[closed])
+  */
+
+
+  var classes = genClasses.cEx(['sidebar', function (_) {
+    return closed === false ? 'sidebar--state-closed' : '';
+  }, className]);
+  return /*#__PURE__*/React__default.createElement("aside", {
+    className: classes
+  }, props.children);
+});
+
+var index$b = (function (props) {
+  var className = props.className,
+      rest = _objectWithoutProperties(props, ["className"]);
+
+  var classes = genClasses.cEx(['list', className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, props.children);
+});
+
+var index$c = (function (props) {
+  var className = props.className,
+      Icon = props.Icon,
+      label = props.label,
+      Optional = props.Optional,
+      rest = _objectWithoutProperties(props, ["className", "Icon", "label", "Optional"]);
+
+  var classes = genClasses.cEx(['list-item', className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React__default.createElement("div", {
+    className: "list-item-content"
+  }, /*#__PURE__*/React__default.createElement("div", {
+    className: "list-item__icon"
+  }, Icon && /*#__PURE__*/React__default.createElement(Icon, null)), /*#__PURE__*/React__default.createElement("div", {
+    className: "list-item__title"
+  }, props.children)), /*#__PURE__*/React__default.createElement("div", {
+    className: "list-item__optional"
+  }, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
+});
+
+var index$d = (function (props) {
   var autoscroll = props.autoscroll,
       handleChange = props.handleChange,
       handleSubmit = props.handleSubmit;
@@ -1647,7 +1698,7 @@ var Landing = (function (props) {
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
-var index$b = (function (props) {
+var index$e = (function (props) {
   var handleClick = props.handleClick,
       identity = props.identity;
 
@@ -1680,7 +1731,7 @@ var index$b = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
 });
 
-var index$c = (function (props) {
+var index$f = (function (props) {
   var handleSubmit = props.handleSubmit;
   return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
     handleSubmit: handleSubmit
@@ -1691,12 +1742,12 @@ exports.ActiveCallBar = index$8;
 exports.Badge = Badge;
 exports.Button = Button;
 exports.Calling = index$5;
-exports.Chat = index$a;
+exports.Chat = index$d;
 exports.ChatBubble = index;
 exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
-exports.CustomerLanding = index$b;
+exports.CustomerLanding = index$e;
 exports.DebugPanel = index$9;
 exports.Form = Form;
 exports.Header = Header;
@@ -1708,9 +1759,12 @@ exports.Landing = Landing;
 exports.Loading = index$4;
 exports.MobileVHAdapter = index$7;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
-exports.OrganiserLanding = index$c;
+exports.OrganiserLanding = index$f;
 exports.Patient = index$2;
 exports.Select = index$3;
+exports.Sidebar = index$a;
+exports.SidebarList = index$b;
+exports.SidebarListItem = index$c;
 exports.Video = index$6;
 exports.VideoPreview = index$6;
 exports.WaitingRoom = index$1;
