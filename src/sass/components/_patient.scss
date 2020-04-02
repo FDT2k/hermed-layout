@@ -3,14 +3,14 @@
 .patient-item{
   max-width:300px;
   min-width: 250px;
-  box-shadow: 5px 5px 4px grey;
   min-height: 80px;
   padding: 5px;
 
   @include themify($themes) {
-    @include themed_font('mainFont','regular');
-    color: themed('textColorPrimary');
-		background-color: themed('backgroundColorTertiary');
+    @include themed_font('secondaryFont','regular');
+    color: themed('primaryBasic');
+		background-color: themed('secondaryBasic');
+    box-shadow: 5px 5px 4px themed('gray');
 	}
 
   @include flex();
@@ -26,22 +26,22 @@
 
     &.warning{
       @include themify($themes) {
-        background-color: themed('warning');
+        background-color: themed('red');
       }
     }
     &.online{
       @include themify($themes) {
-        background-color: themed('success');
+        background-color: themed('green');
       }
     }
     &.offline{
       @include themify($themes) {
-        background-color: themed('error');
+        background-color: themed('red');
       }
     }
     &.unkown{
       @include themify($themes) {
-        background-color: themed('disabled');
+        background-color: themed('grayLight');
       }
     }
   }

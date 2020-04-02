@@ -7,8 +7,8 @@
 
   .label {
     @include themify($themes) {
-      color: themed('textColor');
-      @include themed_font('mainFont','regular');
+      color: themed('primaryBasic');
+      @include themed_font('secondaryFont','regular');
     }
     @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
   }

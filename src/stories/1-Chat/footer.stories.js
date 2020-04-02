@@ -8,7 +8,7 @@ import WaitingRoom from 'components/WaitingRoom'
 
 
 export const SingleChatFooter =()=>
-  <ThemePicker picked="chat">
+  <ThemePicker picked="blue-light">
     <ChatFooter/>
   </ThemePicker>
 

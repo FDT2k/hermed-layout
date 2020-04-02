@@ -14,22 +14,20 @@ const action = alert;
 
 
 export const  LandingCustomerCallBackTest =()=>
-<div className="theme-landing">
-<MobileVHAdapter>
+  <ThemePicker picked="pink-light">
+    <MobileVHAdapter>
       <CustomerLanding handleClick={(val)=>alert('clicked '+val)}/>
-      </MobileVHAdapter>
-    </div>
+    </MobileVHAdapter>
+  </ThemePicker>
 
 export const  LandingOrganiser =()=>
-  <>
-  <div className="theme-landing">
-  <MobileVHAdapter>
+  <ThemePicker picked="pink-light">
+    <MobileVHAdapter>
 
       <OrganiserLanding handleSubmit={x=>action('submit')} handleClick={(val)=>action('cucu')}/>
-      </MobileVHAdapter>
-      
-    </div>
-  </>
+    </MobileVHAdapter>
+
+  </ThemePicker>
 
 
 export default {

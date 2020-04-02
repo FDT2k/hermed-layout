@@ -11,17 +11,17 @@ body {
 	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
 	line-height: 1.3em;
 	@include themify($themes) {
-		color: themed('textColor');
-		background-color: themed('backgroundColor');
-		@include themed_font('mainFont','regular');
+		color: themed('primaryBasic');
+		background-color: themed('secondaryBasic');
+		@include themed_font('secondaryFont','regular');
 	}
 }
 
 section,footer {
 	@include themify($themes) {
-		color: themed('textColor');
-		background-color: themed('backgroundColor');
-		@include themed_font('mainFont','light');
+		color: themed('primaryBasic');
+		background-color: themed('secondaryBasic');
+		@include themed_font('secondaryFont','light');
 	}
 
 }
@@ -30,7 +30,7 @@ section,footer {
 h1 {
 	line-height: 1.3em;
 	@include themify($themes) {
-		@include themed_font('titleFont','semi-bold');
+		@include themed_font('primaryFont','semi-bold');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 40px, 50px);
 }
@@ -38,8 +38,8 @@ h1 {
 h2 {
 	line-height: 1.2em;
 	@include themify($themes) {
-		color: themed('textColorSecondary');
-		@include themed_font('mainFont','regular');
+		color: themed('secondaryBasic');
+		@include themed_font('secondaryFont','regular');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 14px, 18px);
 }
@@ -47,8 +47,8 @@ h2 {
 h3 {
 	line-height: 1.2em;
 	@include themify($themes) {
-	 color: themed('textColor');
-	 @include themed_font('mainFont','bold');
+	 color: themed('primaryBasic');
+	 @include themed_font('secondaryFont','bold');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 18px, 38px);
 }
@@ -56,29 +56,29 @@ h3 {
 h4 {
 	line-height: 1.2em;
 	@include themify($themes) {
-	 color: themed('textColor');
-	 @include themed_font('mainFont','semi-bold');
+	 color: themed('primaryBasic');
+	 @include themed_font('secondaryFont','semi-bold');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 16px, 18px);
 }
 
 p {
 	@include themify($themes) {
-	 color: themed('textColor');
+	 color: themed('primaryBasic');
 	}
 }
 
 label, input {
 	@include themify($themes) {
-		@include themed_font('mainFont', 'regular');
+		@include themed_font('secondaryFont', 'regular');
 	}
 }
 
 a {
 	text-decoration: none;
 	@include themify($themes) {
-		color: themed('link');
-		@include themed_font('mainFont','regular');
+		color: themed('primaryColor');
+		@include themed_font('secondaryFont','regular');
 	}
 }
 
@@ -90,11 +90,11 @@ b {
 footer{
 	text-align: center;
 	@include themify($themes) {
-		color: themed('textColor');
+		color: themed('primaryBasic');
 	}
 	min-width: 100%;
 	@include themify($themes) {
-	 @include themed_font('mainFont','regular');
+	 @include themed_font('secondaryFont','regular');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 14px, 16px);
 }

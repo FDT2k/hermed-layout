@@ -5,7 +5,7 @@ import ChatBubble from 'components/ChatBubble'
 
 
 export const  Bubble =()=>
-    <ThemePicker picked="chat">
+    <ThemePicker picked="blue-light">
       <ChatBubble message="Lorem hello prout"/>
         <ChatBubble left message="Lorem hello prout"/>
       <ChatBubble right message="Lorem hello prout"/>

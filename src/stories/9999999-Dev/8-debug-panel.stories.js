@@ -1,6 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react';
 import 'sass/style.scss';
 
+import ThemePicker from 'components/ThemePicker'
 import DebugPanel from 'components/DebugPanel'
 
 const Closed = (props)=> {
@@ -13,11 +14,11 @@ const Visible = (props)=> {
 
 
 export const ToggleComponent =()=>
-    <div className="theme-chat">
+    <ThemePicker picked="blue-light">
       <div style={{width:'800px',height:'600px', border:'1px solid red'}}>
       <DebugPanel HiddenComponent={Closed}  VisibleComponent={Visible}/>
       </div>
-    </div>
+    </ThemePicker>
 
 
 export default {

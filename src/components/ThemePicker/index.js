@@ -9,16 +9,16 @@ export default props => {
   useEffect(()=>{
     console.log(theme,picked)
     if(!theme){
-      setTheme(picked || 'landing')
+      setTheme(picked || 'pink-light')
     }
   },[])
   return (
     <div className="theme-picker">
      <label htmlFor="theme">pick a theme:</label>
      <select id="theme" defaultValue={theme} value={theme} onChange={e=>setTheme(e.target.value)}>
-        <option value="chat">chat</option>
-        <option value="landing">landing</option>
-        <option value="">no theme</option>
+        <option value="blue-light">blue-light</option>
+        <option value="pink-light">pink-light</option>
+        <option value="default">default</option>
       </select>
       <div className={cEx([
         'themed-content',
