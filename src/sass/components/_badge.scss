@@ -10,33 +10,33 @@
     /*
     par defaut la couleur est disabled*/
     @include themify($themes) {
-        background-color: themed('disabled');
+        background-color: themed('grayDarker');
     }
     @include themify($themes) {
-      background-color: themed('StatusColorDefault');
+      background-color: themed('grayDarker');
     }
 
     &.red {
       @include themify($themes) {
-        background-color: themed('StatusColorDisconnect');
+        background-color: themed('red');
       }
     }
 
     &.orange {
       @include themify($themes) {
-        background-color: themed('statusColorWaiting');
+        background-color: themed('yellow');
       }
     }
 
     &.green {
       @include themify($themes) {
-        background-color: themed('statusColorOnline');
+        background-color: themed('green');
       }
     }
 
     &.unkown{
         @include themify($themes) {
-            background-color: themed('disabled');
+            background-color: themed('grayDarker');
         }
     }
 

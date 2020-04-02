@@ -24,14 +24,7 @@ export default props => {
   const [toolbarProps,remaining] =  spreadObjectBeginWith('toolbar',rest)
 
 
-  let res = reduce({},(acc,item)=>{
-    
-    acc[key(item).replace('toolbar','')] = item[key(item)]
 
-    return acc
-  },enlist(toolbarProps))
-
-console.log(res)
   return (
     <div className={classes} {...remaining}>
       <Header>
