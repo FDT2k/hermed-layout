@@ -10,9 +10,9 @@
   cursor:pointer;
 
   @include themify($themes) {
-    @include themed_font("mainFont", "regular");
-    color: themed("textColorPrimary");
-    background-color: themed("backgroundColorTertiary");
+    @include themed_font("secondaryFont", "regular");
+    color: themed("primaryBasic");
+    background-color: themed("primaryBasic");
 
     outline: 1px solid #00000029;
   }
@@ -42,7 +42,7 @@
 
   .name {
     @include themify($themes) {
-      @include themed_font("mainFont", "semi-bold");
+      @include themed_font("secondaryFont", "semi-bold");
     }
     font-size: 14px;
   }

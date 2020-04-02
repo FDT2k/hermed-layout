@@ -10,7 +10,7 @@
 
   @include themify($themes) {
     text-transform: themed('buttonTextTransform');
-    @include themed_font('mainFont', 'semi-bold');
+    @include themed_font('secondaryFont', 'semi-bold');
     @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
     outline-color: themed('shadowColor');
   }
