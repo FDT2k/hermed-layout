@@ -26,7 +26,7 @@ export default props => {
     <Form className="flex-column align-center" onSubmit={formik.handleSubmit}>
       <Input label="Votre nom " name="organiser_name" placeholder="Votre nom complet" autoComplete="off" onChange={formik.handleChange} value={formik.values.organiser_name}/>
       <Input label="Serveur" name="server" placeholder="broker.cmgl.ch" autoComplete="off" onChange={formik.handleChange} value={formik.values.server}/>
-      <div className="flex-row just-start align-center">
+      <div className="flex-row just-start align-baseline columns-2">
         <Input className="grow-1" label="Port" name="port" placeholder="8712" autoComplete="off" onChange={formik.handleChange} value={formik.values.port}/>
         <InputCheckbox label="SSL" name="secure" type="checkbox"  id="secure" onChange={formik.handleChange} checked={formik.values.secure}/>
       </div>

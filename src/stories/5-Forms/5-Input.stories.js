@@ -31,7 +31,7 @@ export const  SingleSelect =()=>
 
 export const  SingleCheckbox =()=>
     <ThemePicker>
-      <Input label="SSL"/>
+      <InputCheckbox label="SSL"/>
     </ThemePicker>
 
 export const  InputMaskDate =()=>{
