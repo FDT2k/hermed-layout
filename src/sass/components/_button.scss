@@ -32,7 +32,7 @@
       }
     }
   }
-
+ 
   &.success{
     @include themify($themes) {
       background-color: themed('green');
@@ -92,7 +92,6 @@
   }
 
   &.icon {
-    display: flex;
     margin-right: 10px;
   }
 
@@ -108,7 +107,10 @@
   }
 
 
-
+  &.clear{
+    background-color: transparent;
+    border-color: transparent;
+  }
 	&:hover, &:focus {
 		@include themify($themes) {
 			color: themed('primaryBasic');

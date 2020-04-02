@@ -10,17 +10,22 @@ import Select from 'components/Select'
 import OrganiserConfigurationForm from 'components/OrganiserConfigurationForm'
 
 import Header from 'components/Header'
-import HeaderTitle from 'components/HeaderTitle'
-import HeaderToolbar from 'components/HeaderToolbar'
-import HeaderBackButton from 'components/HeaderBackButton'
-import ChatHeaderStatus from 'components/ChatHeaderStatus'
-import ChatHeaderToolbar from 'components/ChatHeaderToolbar'
-import ChatHeader from 'components/ChatHeader'
+import HeaderTitle from 'components/Header/Title'
+import HeaderToolbar from 'components/Header/Toolbar'
+import HeaderBackButton from 'components/Header/BackButton'
+import ChatHeaderStatus from 'components/Header/Chat/UserStatus'
+import ChatHeaderToolbar from 'components/Header/Chat/Toolbar'
+import ChatHeader from 'components/Header/Chat'
 import Loading from 'components/Loading'
 import Calling from 'components/Calling'
 import Video from 'components/Video'
 import MobileVHAdapter from 'components/MobileVHAdapter'
 import ActiveCallBar from 'components/ActiveCallBar'
+import Badge from 'components/Badge'
+import DebugPanel from 'components/DebugPanel'
+import Sidebar from 'components/Sidebar'
+import SidebarList from 'components/Sidebar/List'
+import SidebarListItem from 'components/Sidebar/List/Item'
 
 
 /* Full views exporting */
@@ -55,5 +60,10 @@ export {
   Video as VideoPreview,
   Video,
   MobileVHAdapter,
-  ActiveCallBar
+  ActiveCallBar,
+  Badge,
+  DebugPanel,
+  Sidebar,
+  SidebarList,
+  SidebarListItem
 }

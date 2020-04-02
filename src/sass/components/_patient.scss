@@ -1,53 +1,51 @@
-
 /* Custom sections */
-.patient-item{
-  max-width:300px;
-  min-width: 250px;
-  min-height: 80px;
-  padding: 5px;
+.patient-item {
+  min-width: 100%;
+  width: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
+  height: 75px;
+  min-height: 75px;
+  max-height: 75px;
+  cursor:pointer;
 
   @include themify($themes) {
-    @include themed_font('secondaryFont','regular');
-    color: themed('primaryBasic');
-		background-color: themed('secondaryBasic');
-    box-shadow: 5px 5px 4px themed('gray');
-	}
+    @include themed_font("mainFont", "regular");
+    color: themed("textColorPrimary");
+    background-color: themed("backgroundColorTertiary");
+
+    outline: 1px solid #00000029;
+  }
 
   @include flex();
   @include flex-direction(row);
-  @include flex-just(space-between);
   @include flex-align(center);
 
-  > .status{
-    min-width: 50px;
-    min-height: 50px;
-    height: 50px;
-    border-radius: 50px;
+  @include flex-just(space-between);
 
-    &.warning{
-      @include themify($themes) {
-        background-color: themed('red');
-      }
-    }
-    &.online{
-      @include themify($themes) {
-        background-color: themed('green');
-      }
-    }
-    &.offline{
-      @include themify($themes) {
-        background-color: themed('red');
-      }
-    }
-    &.unkown{
-      @include themify($themes) {
-        background-color: themed('grayLight');
-      }
-    }
+  & > .headline__content > * {
+    padding-left: 20px;
   }
 
-  >.coords{
+  & .button {
+    height: 34px;
+  }
+
+  > .coords {
     @include flex();
     @include flex-direction(column);
   }
+
+  .status.secondary {
+    background-color: transparent;
+  }
+
+  .name {
+    @include themify($themes) {
+      @include themed_font("mainFont", "semi-bold");
+    }
+    font-size: 14px;
+  }
+
+  font-size: 14px;
 }
