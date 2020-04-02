@@ -1,0 +1,36 @@
+.drag-drop-zone{
+  display: 'inline-block';
+  position: 'relative';
+  * {pointer-events: none;}
+}
+
+.drop_overlay{
+
+  position:absolute;
+  z-index:99;
+  border: 5px dashed black;
+  display: none ;
+  min-width:100%;
+  min-height:100%;
+  top:0px;
+  left:0px;
+  margin: 0px auto;
+
+  background-color: rgba(255,255,255,0.8);
+  &.drop{
+    @include flex;
+    @include flex-direction(column);
+    @include flex-align(center);
+    @include flex-just(center);
+  }
+  &> *{
+    @include themify($themes) {
+      color: themed('primaryBasic');
+    }
+  }
+
+  & > svg{
+    width: 100px;
+    height: 100px;
+  }
+}

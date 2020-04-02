@@ -9,7 +9,7 @@ import WaitingRoom from 'components/WaitingRoom'
 
 export const SingleChatFooter =()=>
   <ThemePicker picked="blue-light">
-    <ChatFooter/>
+    <ChatFooter toolbarHandlePhoto={x=>alert('photo')}/>
   </ThemePicker>
 
 export default {

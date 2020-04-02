@@ -7,23 +7,23 @@
   @include flex-direction(row);
   @include flex-align(center);
   @include flex-just(space-between);
+  text-transform: uppercase;
 
   @include themify($themes) {
-    text-transform: themed('buttonTextTransform');
     @include themed_font('secondaryFont', 'semi-bold');
     @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
-    outline-color: themed('shadowColor');
+    border-color: themed('grayLight');
   }
 
   &:hover{
     @include themify($themes) {
-      background-color: $gray-72;
+      background-color: themed('grayLight');
     }
     transition: background-color 0.2s ease-out;
   }
 
 
-  outline: 1px solid;
+  border-bottom: 1px solid;
 
   .list-item-content {
     @include flex();

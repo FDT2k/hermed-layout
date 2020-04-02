@@ -16,6 +16,7 @@ import DefaultToolbar from 'components/WaitingRoom/Toolbar';
 export default props => {
 
   const { title, className,handleBack,Toolbar, defaultToolbar, ...rest} = props
+
   const classes = cEx ([
     "waiting-room",
     className,

@@ -16,29 +16,29 @@
       background-color: themed('grayDarker');
     }
 
-    &.red {
-      @include themify($themes) {
-        background-color: themed('red');
-      }
-    }
-
-    &.orange {
-      @include themify($themes) {
-        background-color: themed('yellow');
-      }
-    }
-
-    &.green {
-      @include themify($themes) {
-        background-color: themed('green');
-      }
-    }
-
-    &.unkown{
+      &.red {
         @include themify($themes) {
-            background-color: themed('grayDarker');
+          background-color: themed('statusRed');
         }
-    }
+      }
+
+      &.orange {
+        @include themify($themes) {
+          background-color: themed('statusYellow');
+        }
+      }
+
+      &.green {
+        @include themify($themes) {
+          background-color: themed('statusGreen');
+        }
+      }
+
+      &.unkown{
+          @include themify($themes) {
+              background-color: themed('grayDarker');
+          }
+      }
 
     &.medium{
         font-size: 14px;

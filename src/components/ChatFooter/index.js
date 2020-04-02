@@ -1,13 +1,13 @@
 import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
-import {spreadObjectBeginWith} from '@geekagency/composite-js/ReactUtils'
+import {spreadObjectBeginWith,forwardPropsRemovingHeader} from '@geekagency/composite-js/ReactUtils'
 
-import Input from 'components/Input'
-
-import { MdCameraAlt } from "react-icons/md";
-import { MdAttachFile } from "react-icons/md";
-import { MdKeyboardVoice } from "react-icons/md";
+import ChatInput from 'components/ChatFooter/Input'
+import DefaultToolbar from 'components/ChatFooter/Toolbar'
 import { MdArrowForward } from "react-icons/md";
+
+const __toolbar_header= 'toolbar'
+const __input_header= 'input'
 
 export default props => {
   const {className,...rest} = props
@@ -17,28 +17,12 @@ export default props => {
     className,
   ])
 
+  const [toolbarProps, _veryRest ] = spreadObjectBeginWith(__toolbar_header,rest);
+  const [inputProps, veryRest ] = spreadObjectBeginWith(__input_header,_veryRest);
   return (
-    <footer className={classes}>
-      <div className="chat-footer__tools flex-row just-between">
-        <button className="button text icon icon--32">
-          <MdCameraAlt/>
-          <h2>photo</h2>
-        </button>
-        <button className="button text icon icon--32">
-          <MdAttachFile/>
-          <h2>Fichier</h2>
-        </button>
-        <button className="button text icon icon--32">
-          <MdKeyboardVoice/>
-          <h2>audio</h2>
-        </button>
-      </div>
-      <div className="chat-footer__message-input flex-row align-stretch">
-        <Input name="message" placeholder="message" autoComplete="off"/>
-        <button className="button button--send text icon--32 flex align-center just-center">
-          <MdArrowForward/>
-        </button>
-      </div>
+    <footer className={classes} {...veryRest}>
+      <DefaultToolbar {...forwardPropsRemovingHeader(__toolbar_header,toolbarProps)}/>
+      <ChatInput {...forwardPropsRemovingHeader(__input_header,inputProps)}/>
     </footer>
   )
 }
