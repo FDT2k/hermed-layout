@@ -30,7 +30,7 @@ export const Fit = () => (
 
 
 export const ToolbarForHeader = () => (
-    <ThemePicker picked="chat">
+    <ThemePicker picked="blue-light">
       <Header>
         <Toolbar>
           <Button toolbar><FiArrowRightCircle/></Button>

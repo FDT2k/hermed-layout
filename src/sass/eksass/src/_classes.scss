@@ -5,11 +5,11 @@
 
 .info {
   @include themify($themes) {
-    color: themed('info');
+    color: themed('primaryColor');
   }
   a {
     @include themify($themes) {
-      color: themed('link');
+      color: themed('primaryColor');
     }
     text-decoration: none;
   }
@@ -17,13 +17,13 @@
 
 .success {
   @include themify($themes) {
-    color: themed('success');
+    color: themed('green');
   }
 }
 
 .error {
   @include themify($themes) {
-    color: themed('error');
+    color: themed('red');
   }
 }
 
@@ -63,8 +63,8 @@
 	min-height: 100vh;
 	margin: 0px auto;
   @include themify($themes) {
-     color: themed('textColor');
-     background-color: themed('backgroundColor');
+     color: themed('primaryBasic');
+     background-color: themed('secondaryBasic');
    }
   @include flex;
   @include flex-direction(column);
@@ -99,7 +99,7 @@
 .card {
   padding: 3%;
   @include themify($themes){
-    background-color: themed('backgroundColorSecondary');
+    background-color: themed('primaryBasic');
     box-shadow: 0px 0px 4px 0px themed('shadow');
   }
 }

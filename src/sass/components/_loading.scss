@@ -16,18 +16,18 @@
 
   &--inverse {
     @include themify($themes) {
-      color:  themed('textColorSecondary');
-      fill: themed('textColorSecondary');
-      background-color: themed('backgroundColorSecondary');
+      color:  themed('primaryColor');
+      fill: themed('primaryColor');
+      background-color: themed('secondaryBasic');
     }
   }
 
   & * {
     @include themify($themes) {
-      @include themed_font('titleFont','bold');
-       color: themed('textColor');
-       fill: themed('textColorSecondary');
-       background-color: themed('backgroundColor');
+      @include themed_font('primaryFont','bold');
+       color: themed('primaryBasic');
+       fill: themed('primaryColor');
+       background-color: themed('secondaryBasic');
      }
      margin: 10px;
   }
@@ -35,9 +35,9 @@
 
   &--inverse *{
     @include themify($themes) {
-      color:  themed('textColorSecondary');
-      fill: themed('textColorSecondary');
-      background-color: themed('backgroundColorSecondary');
+      color:  themed('primaryColor');
+      fill: themed('primaryColor');
+      background-color: themed('secondaryBasic');
     }
   }
 

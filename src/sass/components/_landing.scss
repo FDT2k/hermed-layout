@@ -11,8 +11,8 @@
     background: url('/img/landing-page.jpg') var(--bg-position) no-repeat;
     background-size: cover;
     @include themify($themes) {
-      background-color: themed('backgroundColorSecondary');
-      color: themed('textColorSecondary');
+      background-color: themed('secondaryBasic');
+      color: themed('primaryColor');
     }
   }
 
@@ -25,7 +25,7 @@
 
   h1 {
     @include themify($themes) {
-      color: themed('textColorSecondary');
+      color: themed('primaryColor');
     }
   }
 

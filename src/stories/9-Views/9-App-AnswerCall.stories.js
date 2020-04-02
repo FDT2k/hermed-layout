@@ -12,7 +12,7 @@ import MobileVHAdapter from 'components/MobileVHAdapter';
 
 
 export const  AnsweringCallAssembly =()=>
-      <div className="theme-chat">
+      <ThemePicker picked="blue-light">
         <MobileVHAdapter >
           <ChatHeader title="Appel avec Bobybobbob" handleBack={_=>alert('back')}/>
           <Calling  incoming>
@@ -24,7 +24,7 @@ export const  AnsweringCallAssembly =()=>
             <Video preview autoPlay loop src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4" />
           </Draggable>
         </MobileVHAdapter>
-    </div>
+    </ThemePicker>
 
 
 export default {

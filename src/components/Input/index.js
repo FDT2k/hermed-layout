@@ -4,19 +4,26 @@ import InputMask from  'react-input-mask'
 
 
 export default props => {
-  const {label, id,className, type,caretPos, ...rest} = props
+  const {label, id,className, labelClassName, inputClassName, type,caretPos, ...rest} = props
   const ref = useRef()
+  const classes = cEx([
+    "single-input flex-column",
+    className
+  ])
 
+  const labelClasses = cEx([
+   labelClassName
+  ])
+  
+  const inputClasses = cEx([
+    "input",
+   inputClassName
+  ])
 
   return (
-    <div className="single-input flex-column">
-      <label htmlFor={id}>{label}</label>
-      <InputMask ref={ref} className={
-          cEx([
-            "input",
-            _=> className
-          ])
-        } id={id} type="text" autoComplete="off" {...rest}/>
+    <div className={classes}>
+      <label htmlFor={id} className={labelClasses}>{label}</label>
+      <InputMask ref={ref} className={inputClasses} id={id} type="text" autoComplete="off" {...rest}/>
     </div>
   )
 }

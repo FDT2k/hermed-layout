@@ -10,7 +10,6 @@ $cDefaultInfo: green;
 
 $white: gray(100);
 $OuterSpace: $GKA-Theme-1-rgba;
-$bloup: #383636;
 $Elm: $GKA-Theme-2-rgba;
 $Bermuda: $GKA-Theme-3-rgba;
 $DeepSeaGreen: $UI-Color-4-rgba;
@@ -20,10 +19,12 @@ $Oasis: $UI-Color-1-rgba;
 $OasisLight: lighting($Oasis, 97%);
 $SeaBuckthorn: $GKA-Theme-5-rgba;
 
-$info: $UI-Color-3-rgba;
-$link: $UI-Color-3-rgba;
-$success: $UI-Color-5-rgba;
-$error: $UI-Color-2-rgba;
+
+$blue: $UI-Color-3-rgba;
+$green: $UI-Color-5-rgba;
+$red: $UI-Color-2-rgba;
+$yellow: $UI-Color-1-rgba;
+
 
 /* GRAY
 //rgba(40, 48, 51, 0.51),*/
@@ -59,5 +60,42 @@ $themes: (
     buttonColor: $Coral,
     buttonBorder: 2px solid $Coral,
     buttonHoverColor: $Oasis,
+
+    //NEW
+    primaryFont:'soleil',
+    secondaryFont: 'soleil',
+
+    primaryBasic: $OuterSpace,
+    secondaryBasic: $white,
+
+    primaryColor: $Coral,
+    primaryColorLight: $Oasis,
+    primaryColorLighter: $OasisLight,
+    primaryColorDark: $SeaBuckthorn,
+
+    secondaryColor: $Elm,
+    secondaryColorLight: $Bermuda,
+    secondaryColorDark: $red,
+
+    thirdColor:$DeepSeaGreen,
+    thirdColorLight:$red,
+    thirdColorDark:$red,
+
+    blue:$blue,
+    red:$red,
+    green:$green,
+    yellow:$yellow,
+
+    light: $white,
+
+    grayLightest:$red,
+    grayLight: $gray-87,
+    grayLighter:$red,
+    gray: $gray-72,
+    grayDark:$red,
+    grayDarker:$gray-47,
+    grayDarkest:$red,
+
+    dark: $OuterSpace,
   ),
 );

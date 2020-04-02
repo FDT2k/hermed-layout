@@ -5,9 +5,9 @@
   width: 100vw;
   height: 30px;
   @include themify($themes) {
-		background-color:  themed('success');
-    color : themed('textColorSecondary');
-    @include themed_font('mainFont', 'semi-bold');
+		background-color:  themed('green');
+    color : themed('secondaryBasic');
+    @include themed_font('secondaryFont', 'semi-bold');
 	}
 
   align:center;

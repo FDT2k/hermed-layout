@@ -11,7 +11,7 @@ import CustomerLanding from 'views/Landing/Customer'
 
 
 export const  LandingOrganiser =()=>
-    <div className="theme-landing">
+    <ThemePicker picked="pink-light">
       <Landing>
         <Form className="flex-column align-center">
           <Input label="Votre nom " name="name" placeholder="Votre nom complet" autoComplete="off"/>
@@ -22,10 +22,10 @@ export const  LandingOrganiser =()=>
           <Button text>Hello world</Button>
         </Form>
       </Landing>
-    </div>
+    </ThemePicker>
 
 export const  LandingContainer =()=>
-    <div className="theme-landing">
+    <ThemePicker picked="pink-light">
       <Landing customer>
         <p className="text--center">
 
@@ -34,7 +34,7 @@ export const  LandingContainer =()=>
 
         <Button>JE SUIS PRÊT !</Button>
       </Landing>
-    </div>
+    </ThemePicker>
 
 export const  LandingCustomerCallBackTest =()=>
     <ThemePicker>

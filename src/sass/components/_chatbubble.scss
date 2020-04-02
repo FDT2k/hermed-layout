@@ -13,8 +13,8 @@
 
     @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
     @include themify($themes) {
-      background-color: themed('ChatBubbleBackgroundDefault');
-      @include themed_font('mainFont','bold');
+      background-color: themed('secondaryBasicAlpha');
+      @include themed_font('secondaryFont','bold');
     }
 
     .chat-bubble__date {
@@ -24,10 +24,10 @@
 
   &.right, &.left {
     @include themify($themes) {
-      @include themed_font('mainFont','regular');
+      @include themed_font('secondaryFont','regular');
       @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
-      color: themed('textColorSecondary');
-      box-shadow: 0px 1px 2px 0px themed('shadow');
+      color: themed('secondaryBasic');
+      box-shadow: 0px 1px 2px 0px themed('gray');
     }
   }
 
@@ -35,7 +35,7 @@
     border-radius: 10px 0px 10px 10px;
     @include flex-align-self-children(flex-end);
     @include themify($themes) {
-      background-color: themed('ChatBubbleBackgroundPrimary');
+      background-color: themed('primaryColorDark');
     }
   }
 
@@ -43,16 +43,16 @@
     border-radius: 0px 10px 10px 10px;
     @include flex-align-self-children(flex-start);
     @include themify($themes) {
-      background-color: themed('ChatBubbleBackgroundSecondary');
+      background-color: themed('secondaryBasic');
     }
   }
 
   &__date {
     @include flex-align-self-children(flex-end);
     @include themify($themes) {
-      @include themed_font('mainFont','light');
+      @include themed_font('secondaryFont','light');
       @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
-      color: themed('fieldsText');
+      color: themed('grayDarker');
     }
   }
 

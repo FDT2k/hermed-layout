@@ -31,12 +31,12 @@ const WaitingRoomToolBar  = props => {
 
 
 export const WaitingRoomHeader =()=>
-  <ThemePicker picked="chat">
+  <ThemePicker picked="blue-light">
     <ChatHeader title="Waiting Room"  Toolbar={WaitingRoomToolBar}/>
   </ThemePicker>
 
 export const CustomHeader =()=>
-    <ThemePicker picked="chat">
+    <ThemePicker picked="blue-light">
       <Header>
         <Toolbar>
           <Button toolbar><MdVideocam/></Button>

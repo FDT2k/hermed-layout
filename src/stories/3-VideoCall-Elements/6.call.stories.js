@@ -11,7 +11,7 @@ import ActiveCallBar from 'components/ActiveCallBar';
 
 export const  AnsweringCall =()=>
     <>
-    <ThemePicker picked="chat">
+    <ThemePicker picked="blue-light">
           <ChatHeader title="Appel avec Bobybobbob" handleBack={_=>alert('back')}/>
           <Calling  incoming>
             <div className="video-sample">
@@ -28,7 +28,7 @@ export const  AnsweringCall =()=>
   export const CallBar=()=>{
 
     return (
-      <ThemePicker picked="chat">
+      <ThemePicker picked="blue-light">
       this should be clickable
       <ActiveCallBar onClick={_=>alert('click')}>Bablou</ActiveCallBar>
     </ThemePicker>)

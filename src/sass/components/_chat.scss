@@ -19,16 +19,16 @@
   background-color:#388279;
   color: white;
   @include themify($themes) {
-    @include themed_font('mainFont','regular');
+    @include themed_font('secondaryFont','regular');
 
-    color: themed('textColorSecondary');
+    color: themed('secondaryBasic');
 		background-color: themed('backgroundColorSecondary');
 	}
   text-align:center;
 
   .average-time{
     @include themify($themes) {
-      @include themed_font('titleFont','semi-bold');
+      @include themed_font('primaryFont','semi-bold');
     }
     font-size: 40px;
   }
@@ -48,9 +48,9 @@
     margin-top: auto;
   }
   @include themify($themes) {
-    @include themed_font('mainFont','regular');
-    color: themed('textColor');
-    background-color: themed('backgroundColor');
+    @include themed_font('secondaryFont','regular');
+    color: themed('primaryBasic');
+    background-color: themed('primaryColorLight');
   }
 
 }
@@ -59,9 +59,9 @@
   grid-area: tools;
   height:100%;
   @include themify($themes) {
-    @include themed_font('titleFont','semi-bold');
-    color: themed('textColorSecondary');
-    background-color: themed('backgroundColorSecondary');
+    @include themed_font('primaryFont','semi-bold');
+    color: themed('secondaryBasic');
+    background-color: themed('primaryColor');
   }
   .toolbar {
     width:100%;
@@ -73,11 +73,11 @@
 
     button{
       @include themify($themes) {
-        @include themed_font('titleFont','bold');
-        color: themed('textColorSecondary');
-        background-color: themed('backgroundColorSecondary');
-        border-color: themed('backgroundColorSecondary');
-        border: themed('buttonBorder');
+        @include themed_font('primaryFont','bold');
+        color: themed('secondaryBasic');
+        background-color: themed('primaryColor');
+        border-color: themed('primaryColor');
+        border: 1px solid themed('primaryColor');
       }
     }
   }

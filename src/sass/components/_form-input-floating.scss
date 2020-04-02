@@ -3,7 +3,7 @@
   h4 {
     margin: 1.5em 0;
     @include themify($themes) {
-      @include themed_font('mainFont','semi-bold');
+      @include themed_font('secondaryFont','semi-bold');
     }
 
   }
@@ -13,7 +13,7 @@
 .floating-label-wrap {
   position: relative;
   @include themify($themes) {
-   @include themed_font('mainFont','light');
+   @include themed_font('secondaryFont','light');
 
   }
   width: 100%;
@@ -31,18 +31,18 @@
       font-size: 12px;
       line-height: 1.2em;
       @include themify($themes) {
-        color: themed('error');
-       @include themed_font('mainFont','semi-bold');
+        color: themed('red');
+       @include themed_font('secondaryFont','semi-bold');
       }
     }
     .floating-label-field {
       @include themify($themes) {
-        border-bottom: 2px solid themed('error');
+        border-bottom: 2px solid themed('red');
       }
     }
     // .floating-label {
     //   @include themify($themes) {
-    //     color: themed('error');
+    //     color: themed('red');
     //   }
     // }
   }
@@ -55,9 +55,9 @@
   border-width: 0;
   border-radius: 0px;
   @include themify($themes) {
-	 color: themed('textColorSecondary');
-   border-bottom: 1px solid themed('fieldsText');
-	 @include themed_font('mainFont','light');
+	 color: themed('secondaryBasic');
+   border-bottom: 1px solid themed('grayDarker');
+	 @include themed_font('secondaryFont','light');
 	}
   background-color: transparent;
   line-height: 1.5em;
@@ -74,7 +74,7 @@
   &:focus,
   &:not(:placeholder-shown) {
     // @include themify($themes) {
-  	//  border-bottom: 2px solid themed('textColor');
+  	//  border-bottom: 2px solid themed('primaryBasic');
   	// }
 
     & + .floating-label {
@@ -129,7 +129,7 @@
 }
 .floating-label {
   @include themify($themes) {
-   color: themed('fieldsText');
+   color: themed('grayDarker');
   }
   line-height: 1.3em;
 }

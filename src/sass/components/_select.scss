@@ -5,8 +5,8 @@
 
   label {
     @include themify($themes) {
-      color: themed('textColor');
-      @include themed_font('mainFont','regular');
+      color: themed('primaryBasic');
+      @include themed_font('secondaryFont','regular');
     }
     @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
   }
@@ -45,10 +45,10 @@
     appearance: none;
 
     @include themify($themes) {
-      color: themed('textColor');
-      border: solid 1px themed('inputBorder');
-      @include themed_font('mainFont','regular');
-      background-color: themed('backgroundColor');
+      color: themed('primaryBasic');
+      border: solid 1px themed('grayLight');
+      @include themed_font('secondaryFont','regular');
+      background-color: themed('secondaryBasic');
     }
     @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
 
@@ -56,17 +56,17 @@
 
     &:focus {
       @include themify($themes) {
-        color: themed('textColor');
-        border: solid 1px themed('textColor');
-        @include themed_font('mainFont','regular');
+        color: themed('primaryBasic');
+        border: solid 1px themed('primaryBasic');
+        @include themed_font('secondaryFont','regular');
         box-sizing: none;
       }
     }
 
     &::placeholder {
       @include themify($themes) {
-        color: themed('helperText');
-        @include themed_font('mainFont','thin');
+        color: themed('grayDark');
+        @include themed_font('secondaryFont','thin');
       }
     }
 

@@ -1,6 +1,7 @@
 @import 'eksass/src/base.scss';
 
-@import 'theme';
+/*@import 'theme';*/
+@import 'theme-2';
 
 @import 'eksass/src/tags';
 @import 'eksass/src/classes';
@@ -18,6 +19,7 @@
 @import 'components/form';
 @import 'components/headers';
 @import 'components/input-chat-message';
+@import 'components/input-checkbox';
 @import 'components/input';
 @import 'components/landing';
 @import 'components/patient';

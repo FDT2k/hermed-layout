@@ -39,6 +39,12 @@
   border-radius: 4px;
 }
 
+.columns-2 {
+  > *:last-child {
+    margin-left: 20px;
+  }
+}
+
 /* Flex */
 
 .flex-row {

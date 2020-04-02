@@ -7,7 +7,7 @@ import 'sass/style.scss';
 
 
 export const ExampleSimple = () => (
-  <ThemePicker picked="chat">
+  <ThemePicker picked="blue-light">
     <Exemple/>
   </ThemePicker>
 );

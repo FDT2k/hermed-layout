@@ -2,6 +2,7 @@ import React,{useEffect,useState,useRef} from 'react';
 import 'sass/style.scss';
 
 import Input from 'components/Input'
+import InputCheckbox from 'components/InputCheckbox'
 import InputChatMessage from 'components/InputChatMessage'
 import Select from 'components/Select'
 
@@ -28,7 +29,10 @@ export const  SingleSelect =()=>
       </Select>
     </ThemePicker>
 
-
+export const  SingleCheckbox =()=>
+    <ThemePicker>
+      <InputCheckbox label="SSL"/>
+    </ThemePicker>
 
 export const  InputMaskDate =()=>{
   /*  const ref = useRef();
