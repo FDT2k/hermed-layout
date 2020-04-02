@@ -39,7 +39,7 @@ export const  AvecPatients =()=>
 export const  DefaultToolbar =()=>
     <div className="theme-chat">
       <MobileVHAdapter>
-        <WaitingRoom handleBack={_=>alert('hey burger')} defaultToolbar={true}>
+        <WaitingRoom handleBack={_=>alert('hey burger')} defaultToolbar={true} toolbarHandleAdd={x=>x}>
             <Patient handleClick={x_=>alert('hey')} name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>
             <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>
             <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>

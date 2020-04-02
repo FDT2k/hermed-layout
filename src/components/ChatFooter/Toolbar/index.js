@@ -2,7 +2,6 @@ import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
 import {spreadObjectBeginWith} from '@geekagency/composite-js/ReactUtils'
 
-import Input from 'components/Input'
 
 import { MdCameraAlt } from "react-icons/md";
 import { MdAttachFile } from "react-icons/md";
@@ -13,14 +12,13 @@ export default props => {
   const {className,...rest} = props
 
   const classes = cEx ([
-    'chat-footer',
+    'chat-footer__tools flex-row just-between',
     className,
   ])
 
   return (
-    <footer className={classes}>
-      <div className="chat-footer__tools flex-row just-between">
-        <button className="button text icon icon--32">
+      <div className={className} {...rest}>
+        <button className="button text icon icon--32" >
           <MdCameraAlt/>
           <h2>photo</h2>
         </button>
@@ -33,12 +31,6 @@ export default props => {
           <h2>audio</h2>
         </button>
       </div>
-      <div className="chat-footer__message-input flex-row align-stretch">
-        <Input name="message" placeholder="message" autoComplete="off"/>
-        <button className="button button--send text icon--32 flex align-center just-center">
-          <MdArrowForward/>
-        </button>
-      </div>
-    </footer>
+
   )
 }
