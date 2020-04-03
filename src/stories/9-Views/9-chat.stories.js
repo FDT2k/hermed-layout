@@ -8,7 +8,7 @@ import ChatBubble from 'components/ChatBubble';
 export const ChatSimple = () => (
   <div className="theme-blue-light">
   <MobileVHAdapter>
-    <Chat dragAndDrop remoteName="Fabien K" remoteStatus="connecté"  remoteBadge="orange">
+    <Chat dragAndDrop handleDrop={x=>alert(x)} remoteName="Fabien K" remoteStatus="connecté"  remoteBadge="orange">
       <ChatBubble welcome message="Lorem hello "/>
       <ChatBubble left message="Lorem hello "/>
       <ChatBubble right message="Lorem hello "/>
