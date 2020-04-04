@@ -46,8 +46,6 @@ export default {
   title: 'Button',
   parameters: {
     notes: {
-      ToolbarForHeader: 'prout',
-      test: 'asdgasd'
     }
   },
 };

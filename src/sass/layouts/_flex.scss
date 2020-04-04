@@ -1,0 +1,34 @@
+.layout-flex{
+
+    @include flex();
+    @include flex-direction(row);
+    @include flex-align(center);
+    width: 100%;
+
+    &--column{
+      @include flex-direction(column);
+    }
+
+    &--list{
+        @include flex-direction(column);
+        @include flex-align(center);
+        height:100%;
+        width: 100%;
+    }
+
+    &--between{
+        @include flex-just(space-between);
+    }
+    &--around{
+        @include flex-just(space-around);
+    }
+    &--centered{
+        @include flex-align(center);
+        @include flex-just(center);
+    }
+
+    &--cover{
+        width:100%;
+        height:100%;
+    }
+}

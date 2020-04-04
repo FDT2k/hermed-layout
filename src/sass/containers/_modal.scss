@@ -1,0 +1,11 @@
+.container-modal{
+  position: absolute;
+  
+  z-index:100;
+  z-index: var(--zindex);
+
+  &--cover{
+    width:100%;
+    height:100%;
+  }
+}
