@@ -1,15 +1,6 @@
 .chat-footer {
-  padding-top: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
-  @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-  @include themify($themes) {
-    @include themed_font('primaryFont','bold');
-    color: themed('secondaryBasic');
-    background-color: themed('primaryColor');
-  }
-
   .chat-footer__tools {
+    
     max-width: 400px;
   }
 
@@ -17,7 +8,9 @@
   .chat-footer__message-input {
     margin: 0px auto;
   }
-
+  .chat-footer__tools > *:last-child {
+    margin-right: 0px;
+  }
   .chat-footer__message-input {
     position: relative;
 
@@ -32,52 +25,19 @@
       padding-bottom: 0px;
 
       @include themify($themes) {
-        color:themed('secondaryBasic');
-        background-color: themed('secondaryBasic');
-        border: solid 1px themed('grayLight');
+        color: themed("secondaryBasic");
+        background-color: themed("secondaryBasic");
+        border: solid 1px themed("grayLight");
         border-left: none;
       }
-
     }
+
+   
 
     svg {
       @include themify($themes) {
-        color:themed('primaryColor');
+        color: themed("primaryColor");
       }
     }
   }
-
-  button {
-    &.text {
-      @include themify($themes) {
-        color:themed('secondaryBasic');
-      }
-    }
-
-    &.icon {
-      display: flex;
-      margin-right: 10px;
-      @extend .flex-column;
-      @extend .align-center;
-    }
-
-    &.icon--32 {
-      svg {
-        width: 32px;
-        height: 32px;
-        @include mq-width-and-lower(425px){
-          width: 24px;
-          height: 24px;
-        }
-      }
-    }
-    &.icon--48 {
-      svg {
-        width: 48px;
-        height: 48px;
-      }
-    }
-
-  }
-
 }

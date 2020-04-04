@@ -2,6 +2,8 @@ import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
 import Button from 'components/Button'
 import {MdCall,MdCallEnd} from 'react-icons/md'
+import Footer from 'components/Footer'
+
 
 export default props => {
   const{

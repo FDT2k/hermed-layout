@@ -5,7 +5,7 @@
   width: 100vw;
   height: 30px;
   @include themify($themes) {
-		background-color:  themed('green');
+		background-color:  themed('statusGreen');
     color : themed('secondaryBasic');
     @include themed_font('secondaryFont', 'semi-bold');
 	}

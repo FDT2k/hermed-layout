@@ -637,6 +637,7 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
     });
     return o;
   });
+  var ensure_object_copy = assign2({});
   /*
     String -> String -> Object -> Object
   */
@@ -797,8 +798,8 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys);
-  var objectReduce = reduce({}); //  String -> a -> Object -> Bool
+  var key = compose(head, keys); //export const objectReduce = reduce({});
+  //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
     return compose(isStrictlyEqual(value), prop(_prop))(item);
@@ -812,21 +813,24 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
     return compose(test(re), prop(key));
   }); // Object -> Object -> Object 
 
-  var matchReducer = curry(function (match, acc, item) {
-    //  console.log(head(keys(item)))
-    if (match(key(item))) {
-      return assign2(acc, item);
-    }
+  var matchReducer = function matchReducer(match) {
+    return function (acc, item) {
+      //  console.log(head(keys(item)))
+      if (match(key(item))) {
+        return assign2(acc, item);
+      }
 
-    return acc;
-  }); // 
+      return acc;
+    };
+  }; // 
+
 
   var keepMatching = function keepMatching(match) {
-    return objectReduce(matchReducer(match));
+    return reduce({}, matchReducer(match));
   };
 
   var spreadFilterByKey = function spreadFilterByKey(match) {
-    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist);
+    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist, ensure_object_copy);
   };
 
   var regex = function regex(str) {
@@ -841,15 +845,18 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   var endWith = compose(test, regex, append('$'));
   var equals = compose(test, regex, append('$'), concat('^'));
   var spreadObject = spreadFilterByKey;
-  var spreadObjectBeginWith = curry(function (str, obj) {
+
+  var spreadObjectBeginWith = function spreadObjectBeginWith(str, obj) {
     return spreadFilterByKey(beginWith(str))(obj);
-  });
-  var spreadObjectContaining = curry(function (str, obj) {
+  };
+
+  var spreadObjectContaining = function spreadObjectContaining(str, obj) {
     return spreadFilterByKey(contains(str))(obj);
-  });
-  var spreadObjectEndingWith = curry(function (str, obj) {
+  };
+
+  var spreadObjectEndingWith = function spreadObjectEndingWith(str, obj) {
     return spreadFilterByKey(endWith(str))(obj);
-  });
+  };
 
   var transformReplace = function transformReplace(re, repl) {
     return replace(re, repl);
@@ -866,7 +873,7 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
 
 
   var transformProps = function transformProps(transform) {
-    return objectReduce(replaceKeyReducer(transform));
+    return reduce({}, replaceKeyReducer(transform));
   }; // Fn ->  Object -> Object
 
 
@@ -1397,6 +1404,7 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
     });
     return o;
   });
+  var ensure_object_copy = assign2({});
   /*
     String -> String -> Object -> Object
   */
@@ -1557,8 +1565,8 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys);
-  var objectReduce = reduce({}); //  String -> a -> Object -> Bool
+  var key = compose(head, keys); //export const objectReduce = reduce({});
+  //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
     return compose(isStrictlyEqual(value), prop(_prop))(item);
@@ -1572,25 +1580,28 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
     return compose(test(re), prop(key));
   }); // Object -> Object -> Object 
 
-  var matchReducer = curry(function (match, acc, item) {
-    //  console.log(head(keys(item)))
-    if (match(key(item))) {
-      return assign2(acc, item);
-    }
+  var matchReducer = function matchReducer(match) {
+    return function (acc, item) {
+      //  console.log(head(keys(item)))
+      if (match(key(item))) {
+        return assign2(acc, item);
+      }
 
-    return acc;
-  }); // 
+      return acc;
+    };
+  }; // 
+
 
   var keepMatching = function keepMatching(match) {
-    return objectReduce(matchReducer(match));
+    return reduce({}, matchReducer(match));
   };
 
   var filterByKey = function filterByKey(match) {
-    return compose(keepMatching(match), enlist);
+    return compose(keepMatching(match), enlist, ensure_object_copy);
   };
 
   var spreadFilterByKey = function spreadFilterByKey(match) {
-    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist);
+    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist, ensure_object_copy);
   };
 
   exports.filterByKey = filterByKey;
@@ -1599,7 +1610,6 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   exports.keepMatching = keepMatching;
   exports.key = key;
   exports.matchReducer = matchReducer;
-  exports.objectReduce = objectReduce;
   exports.propMatch = propMatch;
   exports.spreadFilterByKey = spreadFilterByKey;
 });
@@ -1610,9 +1620,8 @@ var ObjectUtils_3 = ObjectUtils.isPropStrictlyNotEqual;
 var ObjectUtils_4 = ObjectUtils.keepMatching;
 var ObjectUtils_5 = ObjectUtils.key;
 var ObjectUtils_6 = ObjectUtils.matchReducer;
-var ObjectUtils_7 = ObjectUtils.objectReduce;
-var ObjectUtils_8 = ObjectUtils.propMatch;
-var ObjectUtils_9 = ObjectUtils.spreadFilterByKey;
+var ObjectUtils_7 = ObjectUtils.propMatch;
+var ObjectUtils_8 = ObjectUtils.spreadFilterByKey;
 
 var DefaultContext = {
   color: undefined,
@@ -2017,7 +2026,7 @@ var InputCheckbox = (function (props) {
     id: id,
     type: "checkbox"
   }, rest)), /*#__PURE__*/React__default.createElement("span", {
-    class: "checkmark"
+    className: "checkmark"
   })));
 });
 
@@ -2403,23 +2412,23 @@ var __toolbar_header = 'toolbar';
 var __input_header = 'input';
 var ChatFooter = (function (props) {
   var className = props.className,
-      rest = _objectWithoutProperties(props, ["className"]);
+      afterMainComponent = _objectWithoutProperties(props, ["className"]);
 
   var classes = genClasses.cEx(['chat-footer', className]);
 
-  var _spreadObjectBeginWit = ReactUtils_10(__toolbar_header, rest),
+  var _spreadObjectBeginWit = ReactUtils_10(__toolbar_header, afterMainComponent),
       _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
       toolbarProps = _spreadObjectBeginWit2[0],
-      _veryRest = _spreadObjectBeginWit2[1];
+      notSuitableForToolbar = _spreadObjectBeginWit2[1];
 
-  var _spreadObjectBeginWit3 = ReactUtils_10(__input_header, _veryRest),
+  var _spreadObjectBeginWit3 = ReactUtils_10(__input_header, notSuitableForToolbar),
       _spreadObjectBeginWit4 = _slicedToArray(_spreadObjectBeginWit3, 2),
       inputProps = _spreadObjectBeginWit4[0],
-      veryRest = _spreadObjectBeginWit4[1];
+      rest = _spreadObjectBeginWit4[1];
 
   return /*#__PURE__*/React__default.createElement("footer", _extends({
     className: classes
-  }, veryRest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_header, toolbarProps)), /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_header, inputProps)));
+  }, rest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_header, toolbarProps)), /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_header, inputProps)));
 });
 
 var index$d = (function (props) {

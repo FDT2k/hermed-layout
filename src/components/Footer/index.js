@@ -1,12 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react'
+import {cEx} from '@geekagency/gen-classes'
 
-export default ({t}) => {
-  const version_string = `${process.env.GKA_FRONT_VERSION}-${process.env.NODE_ENV}`
-  return  (
-    <footer class="footer theme-light">
-      <div>
-        <p alt={version_string} title={version_string}>2020 - Designed with love, cocoa and coffe by GeekAgency - Switzerland</p>
-      </div>
-    </footer>
+
+export default props => {
+
+  const {className, ...rest} = props
+
+  const classes = cEx ([
+    'layout-footer',
+    className,
+  ])
+  return (
+      <>
+        <footer className={classes} {...rest}>
+            {props.children}
+        </footer>
+      </>
   )
 }

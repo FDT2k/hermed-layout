@@ -471,11 +471,11 @@ h2 {
   line-height: 1.2em;
   font-size: 14px; }
   .theme-blue-light h2 {
-    color: white; }
+    color: #232532; }
   .theme-pink-light h2 {
-    color: white; }
+    color: #232532; }
   .theme-default h2 {
-    color: white; }
+    color: #232532; }
   @media (min-width: 320px) {
     h2 {
       font-size: calc(14px + 4 * (100vw - 320px) / 1046); } }
