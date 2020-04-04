@@ -8,11 +8,21 @@
     &--3r{
 
         grid-template-columns: 100%;
-        grid-template-rows: 76px auto 138px;
         grid-template-areas:
         "top"
         "center"
         "bottom"
     }
 
+}
+
+
+//test
+
+.testviewprout{
+    grid-template-rows: 76px auto 138px;
+}
+
+.force-header{
+    grid-area: top;
 }
