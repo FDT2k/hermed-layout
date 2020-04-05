@@ -19,7 +19,7 @@ import ChatHeader from 'components/Header/Chat'
 import Loading from 'components/Loading'
 import Calling from 'components/Calling'
 import Video from 'components/Video'
-import MobileVHAdapter from 'components/MobileVHAdapter'
+import MobileViewCover from 'components/Views/MobileViewCover'
 import ActiveCallBar from 'components/ActiveCallBar'
 import Badge from 'components/Badge'
 import DebugPanel from 'components/DebugPanel'
@@ -59,7 +59,7 @@ export {
   Calling,
   Video as VideoPreview,
   Video,
-  MobileVHAdapter,
+  MobileVHAdapter:MobileViewCover,
   ActiveCallBar,
   Badge,
   DebugPanel,

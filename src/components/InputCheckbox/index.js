@@ -25,7 +25,7 @@ export default props => {
       <label htmlFor={id} className={labelClasses}>{label}</label>
       <div className="container">
         <InputMask checked="checked" ref={ref} className={inputClasses} id={id} type="checkbox"  {...rest}/>
-        <span class="checkmark"></span>
+        <span className="checkmark"></span>
       </div>
     </div>
   )

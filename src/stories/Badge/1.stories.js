@@ -7,7 +7,7 @@ import 'sass/style.scss';
 
 
 export const ExampleSimple = () => (
-  <ThemePicker picked="chat">
+  <ThemePicker picked="blue-light">
     <Badge/>
     <Badge red/>
     <Badge orange/>
@@ -23,7 +23,7 @@ export const ExampleSimple = () => (
 
 
 export const ExampleWithContent= () => (
-  <ThemePicker picked="chat">
+  <ThemePicker picked="blue-light">
     <Badge>1</Badge>
     <Badge red>2</Badge>
     <Badge orange>3</Badge>
@@ -38,5 +38,5 @@ export const ExampleWithContent= () => (
 
 export default {
   title: 'Badge',
- 
+
 };

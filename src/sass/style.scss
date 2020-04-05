@@ -10,6 +10,17 @@
 @import 'classes';
 @import 'tags';
 
+/* containers*/
+
+@import 'containers/fullscreen';
+
+/*Layouts*/
+
+@import 'layouts/layout-grid.scss';
+@import 'layouts/layout-chat.scss';
+
+
+
 @import 'components/button';
 @import 'components/chat-footer';
 @import 'components/chat';
@@ -36,3 +47,5 @@
 @import 'components/list';
 @import 'components/list-item';
 @import 'components/contextualmenu';
+@import 'components/drag-drop-zone';
+@import 'components/footer';

@@ -10,7 +10,6 @@ export default props => {
 
     const classes = cEx([
         'badge-dot',
-        className,
         { 'medium': _ => medium === true },
         _ => {
             if (red)
@@ -20,7 +19,9 @@ export default props => {
             if (green)
                 return 'green'
         },
-        _ => status
+        _ => status,
+        className,
+        
     ])
     return (
         <span className={classes} {...veryRest}>{props.children}</span>

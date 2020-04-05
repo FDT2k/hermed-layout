@@ -33,7 +33,6 @@ $red: $UI-Color-2-rgba;
 $yellow: $Mustard;
 
 
-
 $themes: (
   blue-light: (
     primaryFont:'soleil',
@@ -55,10 +54,10 @@ $themes: (
     thirdColorLight:$Reef,
     thirdColorDark:$red,
 
-    blue:$blue,
-    red:$red,
-    green:$green,
-    yellow:$yellow,
+    statusBlue:$blue,
+    statusRed:$red,
+    statusGreen:$green,
+    statusYellow:$yellow,
 
     light: $white,
 
@@ -93,10 +92,10 @@ $themes: (
     thirdColorLight:$Reef,
     thirdColorDark:$red,
 
-    blue:$blue,
-    red:$red,
-    green:$green,
-    yellow:$yellow,
+    statusBlue:$blue,
+    statusRed:$red,
+    statusGreen:$green,
+    statusYellow:$yellow,
 
     light: $white,
 

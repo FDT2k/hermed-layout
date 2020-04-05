@@ -1,40 +1,31 @@
 import React from 'react'
-import 'sass/style.scss';
-
-import Input from 'components/Input'
-
-import { MdCameraAlt } from "react-icons/md";
-import { MdAttachFile } from "react-icons/md";
-import { MdKeyboardVoice } from "react-icons/md";
+import {cEx} from '@geekagency/gen-classes'
+import {spreadObjectBeginWith,forwardPropsRemovingHeader} from '@geekagency/composite-js/ReactUtils'
+import Footer from 'components/Footer';
+import ChatInput from 'components/ChatFooter/Input'
+import DefaultToolbar from 'components/ChatFooter/Toolbar'
 import { MdArrowForward } from "react-icons/md";
 
+const __toolbar_prefix= 'toolbar'
+const __input_prefix= 'input'
+
 export default props => {
+  const {className,...afterMainComponent} = props
 
+  const classes = cEx ([
+    'chat-footer',
+    className,
+  ])
+
+
+  const [toolbarProps, notSuitableForToolbar ] = spreadObjectBeginWith(__toolbar_prefix,afterMainComponent);
+
+  const [inputProps, rest ] = spreadObjectBeginWith(__input_prefix,notSuitableForToolbar);
   return (
-    <footer className="chat-footer">
-
-      <div className="chat-footer__tools flex-row just-between">
-        <button className="button text icon icon--32">
-          <MdCameraAlt/>
-          <h2>photo</h2>
-        </button>
-        <button className="button text icon icon--32">
-          <MdAttachFile/>
-          <h2>Fichier</h2>
-        </button>
-        <button className="button text icon icon--32">
-          <MdKeyboardVoice/>
-          <h2>audio</h2>
-        </button>
-      </div>
-
-      <div className="chat-footer__message-input flex-row align-stretch">
-        <Input name="message" placeholder="message" autoComplete="off"/>
-        <button className="button button--send text icon--32 flex align-center just-center">
-          <MdArrowForward/>
-        </button>
-      </div>
-
-    </footer>
+    <Footer className={classes} {...rest}>
+      <DefaultToolbar {...forwardPropsRemovingHeader(__toolbar_prefix,toolbarProps)}/>
+      <ChatInput {...forwardPropsRemovingHeader(__input_prefix,inputProps)}/>
+    </Footer>
   )
 }
+

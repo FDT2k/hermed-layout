@@ -5,6 +5,8 @@
 	box-sizing: border-box;
 }
 
+
+
 html,
 body {
 	width: 100%;
@@ -38,7 +40,7 @@ h1 {
 h2 {
 	line-height: 1.2em;
 	@include themify($themes) {
-		color: themed('secondaryBasic');
+		color: themed('primaryBasic');
 		@include themed_font('secondaryFont','regular');
 	}
 	@include fluid-type(font-size, 320px, 1366px, 14px, 18px);

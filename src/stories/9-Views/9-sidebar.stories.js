@@ -11,7 +11,7 @@ import { MdVideocam } from "react-icons/md";
 
 export const PatientChat = () => {
   const [visible,setVisible] = useState(true)
-  return (<div className="theme-chat">
+  return (<div className="theme-blue-light">
   <MobileVHAdapter>
     <Sidebar closed={!visible}>
       <List>

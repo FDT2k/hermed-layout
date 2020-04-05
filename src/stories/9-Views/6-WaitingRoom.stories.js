@@ -10,7 +10,7 @@ import ThemePicker from 'components/ThemePicker'
 import MobileVHAdapter from 'components/MobileVHAdapter';
 
 export const  Attente =()=>
-      <div className="theme-chat">
+      <div className="theme-blue-light">
         <MobileVHAdapter>
             <WaitingRoom/>
       </MobileVHAdapter>
@@ -22,7 +22,7 @@ const Bar = _=>{
 }
 
 export const  AvecPatients =()=>
-    <div className="theme-chat">
+    <div className="theme-blue-light">
       <MobileVHAdapter>
         <WaitingRoom handleBack={_=>alert('hey burger')} Toolbar={Bar}>
             <Patient handleContextual={x=>alert('menu')} handleClick={x_=>alert('hey')} name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>
@@ -37,9 +37,9 @@ export const  AvecPatients =()=>
    </div>
 
 export const  DefaultToolbar =()=>
-    <div className="theme-chat">
+    <div className="theme-blue-light">
       <MobileVHAdapter>
-        <WaitingRoom handleBack={_=>alert('hey burger')} defaultToolbar={true}>
+        <WaitingRoom handleBack={_=>alert('hey burger')} defaultToolbar={true} toolbarHandleAdd={x=>x}>
             <Patient handleClick={x_=>alert('hey')} name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>
             <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>
             <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch"/>
