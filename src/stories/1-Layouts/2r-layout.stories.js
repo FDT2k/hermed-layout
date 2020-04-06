@@ -3,7 +3,6 @@ import ThemePicker from 'components/ThemePicker'
 import LayoutGrid from 'layouts/Grid'
 import Fullscreen from 'containers/Fullscreen'
 import 'sass/style.scss';
-import './test.scss'
 
 const FakeHeader = props => <div className={props.className}> <h2>header</h2></div>
 const FakeContent = props => <div className={props.className}> content</div>

@@ -8,7 +8,6 @@ export default props => {
 
   const classes = cEx ([
     'layout-video-call',
-    'layout-grid--3r',
     className,
   ])
   return (

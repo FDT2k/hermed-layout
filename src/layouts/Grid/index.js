@@ -4,13 +4,13 @@ import {cEx} from '@geekagency/gen-classes'
 
 export default props => {
 
-  const {className,layout3r,layout2r, ...rest} = props
+  const {className,layout3,layout2, ...rest} = props
 
   const classes = cEx ([
     'layout-grid',
     className,
-    _=> layout3r ? 'layout-grid--3r': '',
-    _=> layout2r ? 'layout-grid--2r': ''
+    _=> layout3 ? 'layout-grid--3r': '',
+    _=> layout2 ? 'layout-grid--2r': ''
   ])
   return (
       <>

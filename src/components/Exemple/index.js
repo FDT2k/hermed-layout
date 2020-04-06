@@ -1,18 +1,24 @@
-import React,{useState} from 'react'
-import {cEx} from '@geekagency/gen-classes'
+import React, { useState, useEffect, useRef } from 'react'
 
 
-export default props => {
+import {filterPropStartingWith,forwardProps,bem, cEx} from 'utils'
 
-  const {className, ...rest} = props
+export const [__base_class,modifier] = bem('example-component');
 
-  const classes = cEx ([
-    'my-super-class',
-    className,
+export default ({ className, children , cover,fit, /* other props,*/ ...rest }) => {
+
+  const classes = cEx([
+    __base_class,
+    {
+      [modifier('modifier-1')]: _ => cover,
+      [modifier('modifier-2')]: _ => fit,
+    },
+    className
   ])
+
   return (
-      <>
-        <div className={classes} {...rest}> Example component</div>
-      </>
+    <div className={classes}  {...rest}>
+      {children}
+    </div>
   )
 }

@@ -1,19 +1,19 @@
 /*** PARENTS ***/
 @mixin flex() {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
 }
 
 /* Order */
 @mixin flex-order($val) {
-  -webkit-box-ordinal-group: $val;
-  -moz-box-ordinal-group: $val;
-  -ms-flex-order: $val;
-  -webkit-order: $val;
-  order: $val;
+	-webkit-box-ordinal-group: $val;
+	-moz-box-ordinal-group: $val;
+	-ms-flex-order: $val;
+	-webkit-order: $val;
+	order: $val;
 }
 
 /* Direction */
@@ -58,11 +58,12 @@
 	} @else if $value == flex-end {
 		-webkit-box-pack: end;
 		-ms-flex-pack: end;
-  } @else if $value == space-between {
+	} @else if $value == space-between {
 		-webkit-box-pack: justify;
 		-ms-flex-pack: justify;
 	} @else if $value == space-around {
 		-ms-flex-pack: distribute;
+	} @else if $value == space-evenly {
 	} @else {
 		-webkit-box-pack: $value;
 		-ms-flex-pack: $value;
@@ -80,8 +81,8 @@
 	} @else if $value == flex-end {
 		-webkit-box-align: end;
 		-ms-flex-align: end;
-  } @else if $value == center {
-  		-ms-align-items: $value;
+	} @else if $value == center {
+		-ms-align-items: $value;
 	} @else {
 		-webkit-box-align: $value;
 		-ms-flex-align: $value;
@@ -90,7 +91,6 @@
 	-moz-align-items: $value;
 	align-items: $value;
 }
-
 
 /* Align-Content */
 @mixin flex-align-content($value: stretch) {
@@ -111,7 +111,6 @@
 	align-content: $value;
 }
 
-
 /*** CHILDREN ***/
 
 @mixin flex-order-children($int: 0) {
@@ -124,18 +123,18 @@
 
 /* Flex-Grow */
 @mixin flex-grow-children($int) {
-  -webkit-flex-grow: $int;
-  -ms-flex-positive: $int;
-  -webkit-box-flex: $int;
-  flex-grow: $int;
+	-webkit-flex-grow: $int;
+	-ms-flex-positive: $int;
+	-webkit-box-flex: $int;
+	flex-grow: $int;
 }
 
 /* Flex-Shrink */
 @mixin flex-shrink-children($int) {
-  -webkit-flex-shrink: $int;
-  	-moz-flex-shrink: $int;
-  	-ms-flex-negative: $int;
-  	flex-shrink: $int;
+	-webkit-flex-shrink: $int;
+	-moz-flex-shrink: $int;
+	-ms-flex-negative: $int;
+	flex-shrink: $int;
 }
 
 /* Align-Self */

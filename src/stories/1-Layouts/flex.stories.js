@@ -3,8 +3,7 @@ import ThemePicker from 'components/ThemePicker'
 import LayoutFlex from 'layouts/Flex'
 import Fullscreen from 'containers/Fullscreen'
 import 'sass/style.scss';
-import './test.scss'
-const FakeContent = props => <div className={props.className}> {props.children}</div>
+const FakeContent = props => <div className={props.className} style={{display:'inline-block'}}> {props.children}</div>
 
 
 export const ExampleSimple = () => (
@@ -71,6 +70,29 @@ export const SpreadedElements = () => (
   </div>
 );
 
+
+export const AspectFit = () => (
+  <div className="theme-blue-light">
+    <Fullscreen>
+      <LayoutFlex className="layout-flex layout-flex--between layout-flex--aspect-fit">
+         <img src="/4k.jpg"/>
+      </LayoutFlex>
+    </Fullscreen>
+    
+  </div>
+);
+
+
+export const AspectFill = () => (
+  <div className="theme-blue-light">
+    <Fullscreen>
+      <LayoutFlex className="layout-flex layout-flex--between layout-flex--aspect-fill">
+         <img src="/4k.jpg"/>
+      </LayoutFlex>
+    </Fullscreen>
+    
+  </div>
+);
 
 export default {
   title: 'Layout/Flex',

@@ -11,13 +11,13 @@
         grid-template-areas:
         "top"
         "center"
-        "bottom"
+        "bottom";
     }
     &--2r{
         grid-template-columns: 100%;
         grid-template-areas:
         "top"
-        "bottom"
+        "bottom";
     }
 
     &--chat{

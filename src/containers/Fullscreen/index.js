@@ -1,41 +1,38 @@
-import React,{useState,useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-import {cEx} from '@geekagency/gen-classes'
+import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
+
+const [__base_class, modifier]= bem('container-fullscreen')
 
 export default props => {
-  let {offset,className,...rest} = props;
-  if(!offset){
+  let { offset, className, ...rest } = props;
+  if (!offset) {
     offset = 0;
   }
   const [vh, setVh] = useState();
 
-    const adapt = ()=>{
+  const adapt = () => {
+    setVh((window.innerHeight - offset) * 0.01)
+  }
 
-      setVh((window.innerHeight-offset) * 0.01)
-    }
-
-
-  useEffect(()=>{
-
+  useEffect(() => {
     adapt();
-  },[])
+  }, [])
 
-
-  useEffect(()=>{
-    window.addEventListener('resize',adapt);
-    return ()=> {
-      window.removeEventListener('resize',adapt)
+  useEffect(() => {
+    window.addEventListener('resize', adapt);
+    return () => {
+      window.removeEventListener('resize', adapt)
     }
-  },[])
+  }, [])
 
-
-  const classes = cEx ([
-    'container-fullscreen',
+  const classes = cEx([
+    __base_class,
     className
   ])
 
   return (
-    <div className={classes} style={{'--vh': `${vh}px`}}>
+    <div className={classes} style={{ '--vh': `${vh}px` }}>
       {props.children}
     </div>
   )

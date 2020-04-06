@@ -5,7 +5,7 @@ import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import {makeThemeSelect} from 'stories/theme-knobs'
  
 export default {
-  title: "Base",
+  title: "Base Elements/tags",
   decorators: [withKnobs]
 };
 
