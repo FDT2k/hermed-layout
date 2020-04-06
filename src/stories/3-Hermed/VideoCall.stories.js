@@ -16,7 +16,7 @@ import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import {makeThemeSelect} from 'stories/theme-knobs'
  
 export default {
-  title: "Views/VideoCall",
+  title: "Hermed/VideoCall",
   decorators: [withKnobs]
 };
 

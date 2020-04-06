@@ -1,14 +1,21 @@
 import React,{useState} from 'react'
-import {cEx} from '@geekagency/gen-classes'
+import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
 
+export const [__base_class, modifier] = bem('layout-flex')
 
 export default props => {
 
-  const {className, ...rest} = props
+  const {className, justBetween, justEvenly, alignCenter, justCenter, ...rest} = props
 
   const classes = cEx ([
-    'layout-flex',
+   __base_class,
+    {
+      [modifier('between')]: _=> justBetween,
+      [modifier('evenly')]: _=> justEvenly,
+      [modifier('center')]: _=> justCenter
+    },
     className,
+    
   ])
   return (
       <>
