@@ -24,27 +24,16 @@ export const Normal = ()=>{
 
   return (
     <div className={makeThemeSelect()}>
-      <div className="scheme-header">
+      <div className="scheme-normal">
         <Flex justBetween>
           <h2>Hello</h2>
           <span>Lalala</span>
         </Flex>
       </div>
-    </div>
-
-  )
-}
-
-
-export const Reverse = ()=>{
-
-  return (
-    <div className={makeThemeSelect()}>
-      <div className="scheme-header scheme-header__reverse">
+      <div className="scheme-contrasted">
         <Flex justBetween>
           <h2>Hello</h2>
           <span>Lalala</span>
-          <p>lorem ipsum youpi lala</p>
         </Flex>
       </div>
     </div>

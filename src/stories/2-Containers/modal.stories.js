@@ -9,7 +9,7 @@ import { withKnobs, text, boolean, number, optionsKnob as options } from "@story
 import { makeThemeSelect } from 'stories/theme-knobs'
 
 export default {
-  title: 'Containers/Modal',
+  title: 'Containers/Modal/Absolute',
   parameters: {
     notes: {
       InheritedViewReorderViaCSS: 'Here the order should be Header, footer,content',
@@ -127,6 +127,25 @@ export const FitContainingViewCenteredWithBigHeight = () => {
             <div><p style={{ textAlign: 'center' }}>...---...</p></div>
             <div><p style={{ textAlign: 'center' }}>...---...</p></div>
             <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+          </Flex>
+        </Modal>
+      </Fullscreen>
+    </div>
+
+  );
+}
+
+export const Bottom = () => {
+  
+  return (
+
+    <div className={makeThemeSelect()}>
+      <Fullscreen>
+        <Modal fit bottom hcenter  style={{ backgroundColor: 'red' }}>
+          <Flex>
+            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+    
           </Flex>
         </Modal>
       </Fullscreen>

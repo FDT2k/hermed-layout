@@ -1,0 +1,19 @@
+.scheme-contrasted,
+.scheme-contrasted h2 {
+    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+
+    @include themify($themes) {
+        @include themed_font("primaryFont", "bold");
+        color: themed("primaryColorLight");
+        background-color: themed("primaryColor");
+    }
+
+    &__subtitle {
+        @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+        @include themify($themes) {
+            @include themed_font("secondaryFont", "light-italic");
+            color: themed("grayLight");
+        }
+    }
+  
+}
