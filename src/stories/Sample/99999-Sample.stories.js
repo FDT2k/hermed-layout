@@ -1,26 +1,16 @@
-import React,{useEffect,useState,useRef} from 'react';
-import ThemePicker from 'components/ThemePicker'
-import Exemple from 'components/Exemple'
+import React, { useEffect, useState, useRef } from 'react';
 import 'sass/style.scss';
 
-
-
-
-export const ExampleSimple = () => (
-  <ThemePicker picked="blue-light">
-    <Exemple/>
-  </ThemePicker>
-);
-
-
-
-
+import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
+import { makeThemeSelect } from 'stories/theme-knobs'
 
 export default {
-  title: 'Example',
-  parameters: {
-    notes: {
-      TitreExample: 'This is something to know',
-    }
-  },
+  title: "Example",
+  decorators: [withKnobs]
 };
+
+export const HTag = () =>
+  <div className={makeThemeSelect()}>
+   
+    Example story
+  </div>
