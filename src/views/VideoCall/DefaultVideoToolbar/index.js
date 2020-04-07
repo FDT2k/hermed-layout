@@ -12,8 +12,9 @@ import Button from 'components/Button'
 const [__base_class, modifier] = bem('video-call__toolbar');
 
 
-export default ({ className, microEnabled, camEnabled, handleChat, handleMicro, handleCamera, handleSwitch, ...rest }) => {
-
+export default (props) => {
+    console.log (props)
+    const { className, microEnabled, camEnabled, handleChat, handleMicro, handleCamera, handleSwitch, ...rest } = props;
     const [_microEnabled, setMicroEnabled] = useState(microEnabled === true || false);
     const [_cameraEnabled, setCameraEnabled] = useState(camEnabled === true || false);
     //const [preferredCam,setPreferredCam]     = useState(camDevice === true || false);

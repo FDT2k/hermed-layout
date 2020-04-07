@@ -28,9 +28,10 @@ export const VideoCallView = () => {
 
 
   const valuesCheck = {
-    MicMuted: 'mic_muted',
-    CamMuted: 'cam_muted',
+    'Mic Enabled': 'mic_muted',
+    'Cam Enabled': 'cam_muted',
     SwitchSwitched: 'switch_switched',
+    incomingCall:'incoming'
   };
   const optionsCheck = options('Status', valuesCheck, [], { display: 'check' },'Main');
 
@@ -39,8 +40,11 @@ export const VideoCallView = () => {
     <Fullscreen >
 
       <VideoCall
-        toolbarMuted={optionsCheck.indexOf('mic_muted') > -1}
-        toolbarCamMuted={optionsCheck.indexOf('cam_muted') > -1}
+        toolbarMicroEnabled={optionsCheck.indexOf('mic_muted') > -1}
+        toolbarCamEnabled={optionsCheck.indexOf('cam_muted') > -1}
+        incoming={optionsCheck.indexOf('incoming') > -1}
+        handleAnswer={x=>alert('answer')}
+        handleDiscard={x=>alert('discard')}
         videoSrc="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"
         feedbackSrc="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"
       />

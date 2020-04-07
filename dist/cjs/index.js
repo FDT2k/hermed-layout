@@ -4245,15 +4245,17 @@ var _bem$2 = bem('video-call__toolbar'),
     __base_class$2 = _bem2$2[0],
     modifier$2 = _bem2$2[1];
 
-var DefaultToolbar$2 = (function (_ref) {
-  var className = _ref.className,
-      microEnabled = _ref.microEnabled,
-      camEnabled = _ref.camEnabled,
-      handleChat = _ref.handleChat,
-      handleMicro = _ref.handleMicro,
-      handleCamera = _ref.handleCamera,
-      handleSwitch = _ref.handleSwitch,
-      rest = _objectWithoutProperties(_ref, ["className", "microEnabled", "camEnabled", "handleChat", "handleMicro", "handleCamera", "handleSwitch"]);
+var DefaultToolbar$2 = (function (props) {
+  console.log(props);
+
+  var className = props.className,
+      microEnabled = props.microEnabled,
+      camEnabled = props.camEnabled,
+      handleChat = props.handleChat,
+      handleMicro = props.handleMicro,
+      handleCamera = props.handleCamera,
+      handleSwitch = props.handleSwitch,
+      rest = _objectWithoutProperties(props, ["className", "microEnabled", "camEnabled", "handleChat", "handleMicro", "handleCamera", "handleSwitch"]);
 
   var _useState = React.useState(microEnabled === true || false),
       _useState2 = _slicedToArray(_useState, 2),
