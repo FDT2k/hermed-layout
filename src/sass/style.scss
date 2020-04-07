@@ -53,5 +53,9 @@
 @import 'components/list';
 @import 'components/list-item';
 @import 'components/contextualmenu';
-@import 'components/drag-drop-zone';
+@import 'components/drag-drop-zone'; //not an actual component but used in chat
 @import 'components/footer';
+
+/* new components */
+@import 'components/video_call';
+@import 'components/navbar';

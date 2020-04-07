@@ -11,7 +11,6 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
   if (!offset) {
     offset = 0;
   }
-  console.log(relative)
 
   const adapt = () => {
     if (bottom === true || centered === true || vcenter === true || hcenter===true || cover==true) {
@@ -19,7 +18,7 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
       
       if ( relative !==true) {
 
-        const windowHeight = window.innerHeight;
+       /* const windowHeight = window.innerHeight;
         const windowWidth = window.innerWidth;
               
         const rect = modalRef.current.getBoundingClientRect();
@@ -37,8 +36,8 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
         if(cover){
           modalRef.current.style.top = `0px`;
           modalRef.current.style.left = `0px`;
-        }
-      }else if (relative ===true){
+        }*/
+      }/*else if (relative ===true){
         const parentRect = modalRef.current.parentNode.getBoundingClientRect();
         const rect = modalRef.current.getBoundingClientRect();
         const top = (parentRect.height / 2) - (rect.height / 2) + rect.height
@@ -49,6 +48,7 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
         if(centered || hcenter){
          modalRef.current.style.left = `${left}px`;
         }
+        console.log(parentRect,rect)
 
         if(bottom){
           modalRef.current.style.top = `${parentRect.y + parentRect.height - rect.height}px`;
@@ -63,7 +63,11 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
           }
         }
 
-      }
+
+        if(top < 0 )
+          modalRef.current.style.top = `0px`;
+
+      }*/
     }
   }
 
@@ -74,9 +78,11 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
 
 
   useEffect(() => {
+    document.addEventListener('load', adapt);
     window.addEventListener('resize', adapt);
     return () => {
       window.removeEventListener('resize', adapt)
+      document.removeEventListener('load', adapt)
     }
   }, [])
 
@@ -90,7 +96,6 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
     },
     className
   ])
-
   return (
     <div className={classes} ref={modalRef} style={{ zIndex }} {...rest}>
       {children}

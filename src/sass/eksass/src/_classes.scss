@@ -121,3 +121,25 @@
 .langue-container .active{
 	font-weight: bold;
 }
+
+
+/* positions for usage with MQ in special cases */
+
+.position-relative{
+  position:relative;
+}
+
+.position-absolute{
+  position:absolute;
+}
+
+.position-fixed{
+  position:fixed;
+}
+.position-sticky{
+  position:sticky;
+}
+
+.position-static{
+  position:static;
+}

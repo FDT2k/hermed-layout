@@ -33,6 +33,7 @@ import Chat from 'views/Chat'
 import Landing from 'views/Landing'
 import CustomerLanding from 'views/Landing/Customer'
 import OrganiserLanding from 'views/Landing/Organiser'
+import VideoCall from 'views/VideoCall'
 
 
 export {
@@ -65,5 +66,6 @@ export {
   DebugPanel,
   Sidebar,
   SidebarList,
-  SidebarListItem
+  SidebarListItem,
+  VideoCall
 }

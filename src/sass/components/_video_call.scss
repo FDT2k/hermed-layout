@@ -1,0 +1,19 @@
+.video-call{
+    height:100%;
+    background-color: black;
+
+    .layout-video-call{
+        grid-template-rows: auto 79px;
+    }
+
+    &__controls{
+        position:absolute;
+        padding:10px;
+        bottom:0px; 
+    }
+
+    &> .video.video--preview{
+      border: 2px solid white;
+
+    }
+}
