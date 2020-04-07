@@ -5,7 +5,7 @@ import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
 import LayoutFlex from 'layouts/Flex'
 
 import { FaMicrophone, FaMicrophoneSlash, FaVideoSlash, FaVideo } from 'react-icons/fa'
-import { MdChat, MdVideocam, MdVideocamOff } from 'react-icons/md'
+import { MdChat } from 'react-icons/md'
 import Button from 'components/Button'
 
 
