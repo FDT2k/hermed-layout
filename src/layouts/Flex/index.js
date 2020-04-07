@@ -1,4 +1,6 @@
 import React,{useState} from 'react'
+
+
 import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
 
 export const [__base_class, modifier] = bem('layout-flex')
@@ -15,7 +17,6 @@ export default props => {
       [modifier('center')]: _=> justCenter
     },
     className,
-    
   ])
   return (
       <>
