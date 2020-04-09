@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import {filterPropStartingWith,forwardProps,bem, cEx} from 'utils'
 
-export const [__base_class,modifier] = bem('example-component');
+export const [__base_class,element,modifier] = bem('example-component');
 
 export default ({ className, children , cover,fit, /* other props,*/ ...rest }) => {
 

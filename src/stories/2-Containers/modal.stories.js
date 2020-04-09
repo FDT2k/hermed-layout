@@ -19,7 +19,7 @@ export default {
   decorators: [withKnobs]
 };
 
-export const FullScreen = () => {
+export const S1FullScreen = () => {
   const fullscreen = options('size', {
     fullscreen: 'fullscreen',
     centered: 'centered',
@@ -40,7 +40,29 @@ export const FullScreen = () => {
   );
 }
 
-export const FitContainingView = () => {
+export const S1DefaultFit = () => {
+  const fullscreen = options('size', {
+    fullscreen: 'fullscreen',
+    centered: 'centered',
+
+  }, 'fullscreen', { display: 'radio' })
+  return (
+
+    <div className={makeThemeSelect()}>
+      <Fullscreen>
+        <Modal style={{ backgroundColor: 'red' }}>
+          <Flex className="layout-flex--cover layout-flex--centered">
+            <p style={{ width:'100px', textAlign: 'center' }}>Modal should fit children by default</p>
+          </Flex>
+        </Modal>
+      </Fullscreen>
+    </div>
+
+  );
+}
+
+
+export const S2AbsoluteFit = () => {
   const fullscreen = options('size', {
     fullscreen: 'fullscreen',
     centered: 'centered',
@@ -52,7 +74,7 @@ export const FitContainingView = () => {
       <Fullscreen>
         <Modal fit style={{ backgroundColor: 'red' }}>
           <Flex className="layout-flex--cover layout-flex--centered">
-            <p style={{ textAlign: 'center' }}>this screen should be on top and fitting this text</p>
+            <p style={{ width:'100px', textAlign: 'center' }}>this screen should be on top and fitting this text</p>
           </Flex>
         </Modal>
       </Fullscreen>
@@ -61,7 +83,35 @@ export const FitContainingView = () => {
   );
 }
 
-export const FitContainingViewCentered = () => {
+
+export const S2RelativeFit = () => {
+  const fullscreen = options('size', {
+    fullscreen: 'fullscreen',
+    centered: 'centered',
+
+  }, 'fullscreen', { display: 'radio' })
+  return (
+
+    <div className={makeThemeSelect()}>
+      <p> some disturbing stuff</p>
+      <div style={{
+        width:'200px;',
+        height:'200px',
+        backgroundColor:'blue'
+      }}>
+        <Modal relative fit style={{ backgroundColor: 'red' }}>
+          <Flex className="layout-flex--cover layout-flex--centered">
+            <p style={{ width:'100px', textAlign: 'center' }}>this screen should be on top and fitting this text</p>
+          </Flex>
+        </Modal>
+      </div>
+    </div>
+
+  );
+}
+
+
+export const S3AbsoluteFitCentered = () => {
   const fullscreen = options('size', {
     fullscreen: 'fullscreen',
     centered: 'centered',
@@ -73,7 +123,7 @@ export const FitContainingViewCentered = () => {
       <Fullscreen>
         <Modal fit centered style={{ backgroundColor: 'red' }}>
           <Flex className="layout-flex--cover layout-flex--centered">
-            <p style={{ textAlign: 'center' }}>this screen should centered in viewport and fitting this text</p>
+            <p style={{  width:'100px',textAlign: 'center' }}>this screen should centered in viewport and fitting this text</p>
           </Flex>
         </Modal>
       </Fullscreen>
@@ -82,7 +132,72 @@ export const FitContainingViewCentered = () => {
   );
 }
 
-export const FitContainingViewCenteredWithBigHeight = () => {
+
+export const S3RelativeFitCentered = () => {
+  const fullscreen = options('size', {
+    fullscreen: 'fullscreen',
+    centered: 'centered',
+
+  }, 'fullscreen', { display: 'radio' })
+  return (
+
+    <div className={makeThemeSelect()}>
+      <p> some disturbing stuff</p>
+      <div style={{
+        width:'200px;',
+        height:'200px',
+        backgroundColor:'blue'
+      }}>
+        <Modal fit  relative centered style={{ backgroundColor: 'red' }}>
+          <Flex className="layout-flex--cover layout-flex--centered">
+            <p style={{  width:'100px',textAlign: 'center' }}>this screen should centered in viewport and fitting this text</p>
+          </Flex>
+        </Modal>
+      </div>
+    </div>
+
+  );
+}
+
+const LotOfStuff = _=> (
+  <Flex className="layout-flex--cover layout-flex--centered layout-flex--list">
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>This should scroll if</p></div>
+  <div><p style={{ textAlign: 'center' }}>bigger</p></div>
+  <div><p style={{ textAlign: 'center' }}>than viewport</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+  <div><p style={{ textAlign: 'center' }}>...---...</p></div>
+</Flex>
+)
+
+export const S4AbsoluteFitCenteredWithBigHeight = () => {
   const fullscreen = options('size', {
     fullscreen: 'fullscreen',
     centered: 'centered',
@@ -93,45 +208,35 @@ export const FitContainingViewCenteredWithBigHeight = () => {
     <div className={makeThemeSelect()}>
       <Fullscreen>
         <Modal fit centered style={{ backgroundColor: 'red' }}>
-          <Flex className="layout-flex--cover layout-flex--centered layout-flex--list">
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>This should scroll if</p></div>
-            <div><p style={{ textAlign: 'center' }}>bigger</p></div>
-            <div><p style={{ textAlign: 'center' }}>than viewport</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-            <div><p style={{ textAlign: 'center' }}>...---...</p></div>
-          </Flex>
+          <LotOfStuff></LotOfStuff>
         </Modal>
       </Fullscreen>
     </div>
 
+  );
+}
+
+export const S4RelativeitCenteredWithBigHeight = () => {
+  const fullscreen = options('size', {
+    fullscreen: 'fullscreen',
+    centered: 'centered',
+
+  }, 'fullscreen', { display: 'radio' })
+  return (
+    <div>
+    <p> some disturbing stuff</p>  <p> some disturbing stuff</p>
+    <div className={makeThemeSelect()}>
+       <div style={{
+        width:'200px;',
+        height:'200px',
+        backgroundColor:'blue'
+      }}>
+        <Modal relative fit centered style={{ backgroundColor: 'red' }}>
+          <LotOfStuff></LotOfStuff>
+        </Modal>
+      </div>
+    </div>
+    </div>
   );
 }
 

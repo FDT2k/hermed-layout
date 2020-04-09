@@ -127,33 +127,31 @@ export default props => {
   return (
     <div className="hermed-chat">
 
-      <ChatHeader subtitle={remoteStatus} title={remoteName} badge={remoteBadge} {...headerProps} />
+      <ChatHeader
+        subtitle={remoteStatus}
+        title={remoteName}
+        badge={remoteBadge}
+        {...headerProps}
+      />
       <section ref={chatRef} className={classes} onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
         <div className={classesOverlay}> <h2> lachez pour envoyer </h2> <MdCloudUpload /></div>
         {props.children}
       </section>
 
-      <ChatFooter recording={isRecording}
+      <ChatFooter
+        recording={isRecording}
         record={record}
         toolbarHandleAudio={handleAudio}
         inputHandleSubmit={_handleSubmit}
         toolbarHandlePhoto={handlePhoto}
         toolbarHandleFile={handleFile}
         recordHandleDelete={x => setRecord(null)}
-        recordHandleSend={_=>{handleSound(record); setRecord(null)}}
-        inputHandleChange={_handleChange} inputValue={inputValue} />
-      {/*  <section className="tools">
-        <div className="toolbar">
-          <button>photo</button>
-          <button>file</button>
-          <button>voice</button>
-        </div>
-        <div className="text-input">
-          <form onSubmit={_handleSubmit}>
-            <input type="text" onChange={_handleChange} value={inputValue}/>
-          </form>
-        </div>
-      </section>*/}
+        recordHandleSend={_ => { handleSound(record); setRecord(null) }}
+        inputHandleChange={_handleChange}
+        inputValue={inputValue}
+      />
+
+
     </div>
   )
 }

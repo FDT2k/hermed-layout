@@ -31,7 +31,6 @@ export default props => {
   },[srcObject])
 
 
-
   return (
     <video ref={myRef} className={classes} {...rest}/>
   )

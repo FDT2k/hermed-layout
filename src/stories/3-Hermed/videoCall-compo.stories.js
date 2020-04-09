@@ -47,6 +47,7 @@ export const VideoCallView = () => {
         handleDiscard={x=>alert('discard')}
         videoSrc="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"
         feedbackSrc="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"
+        feedbackMuted
       />
 
     </Fullscreen>

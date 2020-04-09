@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
 
-const [__base_class, modifier]= bem('container-fullscreen')
+const [__base_class, element,modifier]= bem('container-fullscreen')
 
 export default props => {
-  let { offset, className, ...rest } = props;
+  let { offset, className, style:otherStyle, ...rest } = props;
   if (!offset) {
     offset = 0;
   }
@@ -32,7 +32,7 @@ export default props => {
   ])
 
   return (
-    <div className={classes} style={{ '--vh': `${vh}px` }}>
+    <div className={classes} style={{ '--vh': `${vh}px` ,...otherStyle}} {...rest}>
       {props.children}
     </div>
   )

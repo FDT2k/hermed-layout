@@ -6,7 +6,9 @@ const bem = main => {
     return (
     [   
         main,
+        block=> `${main}__${block}`,
         modifier=> `${main}--${modifier}`
+        
     ])
 }
 

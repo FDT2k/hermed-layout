@@ -9,7 +9,7 @@ import { MdChat } from 'react-icons/md'
 import Button from 'components/Button'
 
 
-const [__base_class, modifier] = bem('video-call__toolbar');
+const [__base_class,element, modifier] = bem('video-call__toolbar');
 
 
 export default (props) => {
@@ -33,14 +33,12 @@ export default (props) => {
 
     const classes = cEx([
         __base_class,
-        "navbar",
-        "navbar--toolbar",
         className
     ])
 
     return (
 
-        <LayoutFlex justEvenly className="navbar navbar--toolbar" {...rest}>
+        <LayoutFlex justBetween className={classes} {...rest}>
             <Button fit toolbar onClick={handleChat}> <MdChat /><h2>Chat</h2></Button>
             <Button fit toolbar onClick={_toggleMicro}>
                 {_microEnabled && <FaMicrophone />}

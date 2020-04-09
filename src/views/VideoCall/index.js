@@ -14,7 +14,7 @@ import Button from 'components/Button'
 import DefaultToolbar from 'views/VideoCall/DefaultVideoToolbar'
 
 
-export const [__base_class, modifier] = bem('video-call');
+export const [__base_class, element,modifier] = bem('video-call');
 
 
 
@@ -67,7 +67,7 @@ export default ({ className, Toolbar, handleAnswer, handleDiscard, incoming, ...
                     preview
                     autoPlay
                     loop
-                    mute="true"
+                    muted
                     {...forwardProps('feedback', feedbackVideoProps)} />
             </Draggable>
 

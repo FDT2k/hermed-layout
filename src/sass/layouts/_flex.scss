@@ -29,6 +29,10 @@
         @include flex-align(center);
         @include flex-just(center);
     }
+    &--align-stretch{
+        @include flex-align(stretch);
+       
+    }
 
     &--cover{
         width:100%;

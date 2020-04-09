@@ -67,5 +67,6 @@ export {
   Sidebar,
   SidebarList,
   SidebarListItem,
-  VideoCall
+  VideoCall,
+  Fullscreen
 }

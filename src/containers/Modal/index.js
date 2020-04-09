@@ -2,73 +2,59 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
 
-export const [__base_class, modifier] = bem('container-modal')
+export const [__base_class, element, modifier] = bem('container-modal')
 
-export default ({ offset, children, className, cover, fit, bottom, vcenter,hcenter, centered , relative, zIndex, ...rest }) => {
+export default ({ children, debug,className, cover, bottom, relative, centered, fit, vcenter, hcenter/* fit, vcenter,hcenter, centered , relative, zIndex,*/, ...rest }) => {
 
   const modalRef = useRef();
 
-  if (!offset) {
-    offset = 0;
-  }
 
   const adapt = () => {
-    if (bottom === true || centered === true || vcenter === true || hcenter===true || cover==true) {
+    if (modalRef.current) {
+      const parentNode = modalRef.current.parentNode;
 
-      
-      if ( relative !==true) {
+      let modalRect = { x: 0, y: 0, height: 0, width: 0 };
+      const currentModalRect = modalRef.current.getBoundingClientRect();
+      const parentRect = modalRef.current.parentNode.getBoundingClientRect();
+      const windowRect = { x: 0, y: 0, height: window.innerHeight, width: window.innerWidth, top: 0, left: 0 }
 
-       /* const windowHeight = window.innerHeight;
-        const windowWidth = window.innerWidth;
-              
-        const rect = modalRef.current.getBoundingClientRect();
-        const top = (windowHeight / 2) - (rect.height / 2)
-        const left = (windowWidth / 2) - (rect.width / 2)
-        if(centered || vcenter){
-          modalRef.current.style.top = `${top}px`;
-        }
-        if(centered || hcenter){
-          modalRef.current.style.left = `${left}px`;
-        }
-        if(bottom){
-          modalRef.current.style.bottom = `0px`;
-        }
-        if(cover){
-          modalRef.current.style.top = `0px`;
-          modalRef.current.style.left = `0px`;
-        }*/
-      }/*else if (relative ===true){
-        const parentRect = modalRef.current.parentNode.getBoundingClientRect();
-        const rect = modalRef.current.getBoundingClientRect();
-        const top = (parentRect.height / 2) - (rect.height / 2) + rect.height
-        const left = (parentRect.width / 2) - (rect.width / 2)
-        if(centered || vcenter){
-          modalRef.current.style.top = `${top}px`;
-        }
-        if(centered || hcenter){
-         modalRef.current.style.left = `${left}px`;
-        }
-        console.log(parentRect,rect)
+      if(debug)
+        console.table({ parentRect, windowRect });
 
-        if(bottom){
-          modalRef.current.style.top = `${parentRect.y + parentRect.height - rect.height}px`;
+      const refRect = relative ? parentRect : windowRect;
 
-        }else{ 
+      if (relative) {
+        parentNode.style.position = 'relative';
+      }
 
-          if(cover){
-            modalRef.current.style.top = `${parentRect.y}px`;
-            modalRef.current.style.left = `${parentRect.x}px`;
-            modalRef.current.style.width = `${parentRect.width }px`
-            modalRef.current.style.height = `${parentRect.height }px`
-          }
-        }
+      if (centered) {
+        modalRect.y = (refRect.height / 2) - (currentModalRect.height / 2)
+        modalRect.x = (refRect.width / 2) - (currentModalRect.width / 2)
+      }
 
+      if (vcenter) {
+        modalRect.y = (refRect.height / 2) - (currentModalRect.height / 2)
+      }
 
-        if(top < 0 )
-          modalRef.current.style.top = `0px`;
+      if (hcenter) {
+        modalRect.x = (refRect.width / 2) - (currentModalRect.width / 2)
 
-      }*/
+      }
+
+      if(debug)
+        console.table({ refRect, modalRect })
+
+      if (modalRect.y < 0) {
+        modalRect.y = 0;
+      }
+
+      if (!bottom) {
+        modalRef.current.style.top = `${modalRect.y}px`;
+      }
+      modalRef.current.style.left = `${modalRect.x}px`;
+
     }
+
   }
 
 
@@ -91,13 +77,13 @@ export default ({ offset, children, className, cover, fit, bottom, vcenter,hcent
     __base_class,
     {
       [modifier('cover')]: _ => cover,
-      [modifier('fit')]: _ => fit,
+      [modifier('centered')]: _ => centered,
       [modifier('bottom')]: _ => bottom,
     },
     className
   ])
   return (
-    <div className={classes} ref={modalRef} style={{ zIndex }} {...rest}>
+    <div className={classes} ref={modalRef} {...rest}>
       {children}
     </div>
   )

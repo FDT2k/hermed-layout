@@ -4358,7 +4358,7 @@ var index$f = (function (_ref) {
     preview: true,
     autoPlay: true,
     loop: true,
-    mute: "true"
+    muted: true
   }, ReactUtils_5('feedback', feedbackVideoProps)))));
 });
 

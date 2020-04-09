@@ -1,8 +1,10 @@
 .video-call{
+   
+
     height:100%;
     background-color: black;
 
-    .layout-video-call{
+    & .layout-video-call{
         grid-template-rows: auto 79px;
     }
 
@@ -12,8 +14,13 @@
         bottom:0px; 
     }
 
-    &> .video.video--preview{
+    & .video.video--preview{
       border: 2px solid white;
 
+    }
+
+    &  &__toolbar{ /*dont forget the !optional*/
+        @extend .scheme-navbar;
+        @extend .scheme-navbar--toolbar !optional;
     }
 }

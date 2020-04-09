@@ -1,18 +1,24 @@
 .chat-footer {
-  .chat-footer__tools {
-    
-    max-width: 400px;
-  }
+  
+  @extend .scheme-navbar;
 
-  .chat-footer__tools,
+  &__toolbar{
+    @extend .scheme-navbar--toolbar;
+  }
+  
   .chat-footer__message-input {
     margin: 0px auto;
   }
-  .chat-footer__tools > *:last-child {
+
+
+  .chat-footer__toolbar > *:last-child {
     margin-right: 0px;
   }
+
+
   .chat-footer__message-input {
     position: relative;
+    width:100%;
 
     .single-input input {
       border-radius: 4px 0px 0px 4px;

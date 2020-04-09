@@ -6,7 +6,7 @@
     height:100%;
     max-height:100%;
     grid-template-columns: 100vw;
-    grid-template-rows: 76px auto 138px;
+    grid-template-rows: 76px auto 126px;
     grid-template-areas:
       "header"
       "chat"
@@ -49,49 +49,4 @@
     background-color: themed('primaryColorLight');
   }
 
-}
-.hermed-chat > .tools {
-  padding: 10px 25px;
-  grid-area: tools;
-  height:100%;
-  @include themify($themes) {
-    @include themed_font('primaryFont','semi-bold');
-    color: themed('secondaryBasic');
-    background-color: themed('primaryColor');
-  }
-  .toolbar {
-    width:100%;
-    padding-top:10px;
-    padding-bottom:15px;
-    @include flex;
-    @include flex-direction(row);
-    @include flex-just(space-between);
-
-    button{
-      @include themify($themes) {
-        @include themed_font('primaryFont','bold');
-        color: themed('secondaryBasic');
-        background-color: themed('primaryColor');
-        border-color: themed('primaryColor');
-        border: 1px solid themed('primaryColor');
-      }
-    }
-  }
-  .text-input{
-
-    height: 40px;
-    width: 100%;
-    form{
-      height:100%;
-      margin:0px;
-      padding:0px;
-    }
-
-    input {
-      border: 1px solid #1B263030;
-      border-radius: 4px;
-      height:100%;
-      width:100%;
-    }
-  }
 }
