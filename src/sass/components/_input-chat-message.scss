@@ -2,14 +2,6 @@
   width: 100%;
   padding: 6px 0px;
 
-  label {
-    @include themify($themes) {
-      color: themed('primaryBasic');
-      @include themed_font('secondaryFont','regular');
-    }
-    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
-  }
-
   input {
     height: 48px;
     //max-width: 500px;

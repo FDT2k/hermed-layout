@@ -25,12 +25,20 @@
     &--evenly{
         @include flex-just(space-evenly);
     }
+    &--center{
+        @include flex-just(center);
+    }
     &--centered{
         @include flex-align(center);
         @include flex-just(center);
     }
     &--align-stretch{
         @include flex-align(stretch);
+       
+    }
+
+    &--align-center{
+        @include flex-align(center);
        
     }
 

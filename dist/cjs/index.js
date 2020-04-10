@@ -71,6 +71,40 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -1971,18 +2005,126 @@ var Form = (function (props) {
   }, rest), props.children);
 });
 
+var bem = function bem(main) {
+  return [main, function (block) {
+    return "".concat(main, "__").concat(block);
+  }, function (modifier) {
+    return "".concat(main, "--").concat(modifier);
+  }];
+};
+
+var parent = bem('single-input');
+
+var _parent = _slicedToArray(parent, 3),
+    b = _parent[0],
+    e = _parent[1],
+    m = _parent[2];
+
+var bem$1 = bem(e('label'));
+
+var _bem = _slicedToArray(bem$1, 3),
+    __base_class = _bem[0],
+    element = _bem[1],
+    modifier = _bem[2];
+
+var Label = (function (props) {
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      error = props.error,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "error"]);
+
+  var classes = genClasses.cEx([__base_class, // "flex-column",
+  className, function (_) {
+    return error ? modifier('error') : '';
+  }]);
+  return /*#__PURE__*/React__default.createElement("label", _extends({
+    htmlFor: id,
+    className: classes
+  }, rest), label);
+});
+
+var _bem$1 = bem('single-input'),
+    _bem2 = _slicedToArray(_bem$1, 3),
+    __base_class$1 = _bem2[0],
+    element$1 = _bem2[1],
+    modifier$1 = _bem2[2];
+
+var _bem3 = bem(element$1('input')),
+    _bem4 = _slicedToArray(_bem3, 3),
+    __input_class = _bem4[0],
+    inpElement = _bem4[1],
+    inpModifier = _bem4[2];
+
 var Input = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
+      type = props.type,
+      error = props.error,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "error"]);
+
+  var _filterPropStartingWi = ReactUtils_10('label', rest),
+      _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
+      labelClassName = _filterPropStartingWi2[0].labelClassName,
+      notLabelProps = _filterPropStartingWi2[1];
+
+  var _filterPropStartingWi3 = ReactUtils_10('input', notLabelProps),
+      _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
+      inputClassName = _filterPropStartingWi4[0].inputClassName,
+      notInputProps = _filterPropStartingWi4[1]; // default type to text 
+
+
+  var _type = type || 'text';
+
+  var classes = genClasses.cEx([__base_class$1, // "flex-column",
+  className, function (_) {
+    return error ? modifier$1('error') : '';
+  }]);
+  var inputClasses = genClasses.cEx([__input_class, inputClassName, function (_) {
+    return error ? inpModifier('error') : '';
+  }]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React__default.createElement(Label, {
+    htmlFor: id,
+    className: labelClassName,
+    error: error,
+    label: label
+  }), type !== "checkbox" && /*#__PURE__*/React__default.createElement(InputMask, _extends({
+    className: inputClasses,
+    id: id,
+    type: _type,
+    autoComplete: "off"
+  }, rest)), type === "checkbox" && /*#__PURE__*/React__default.createElement("input", _extends({
+    className: inputClasses,
+    id: id,
+    type: _type,
+    autoComplete: "off"
+  }, rest)));
+});
+
+var InputCheckbox = (function (props) {
+  var _extends2;
+
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      checked = props.checked,
       labelClassName = props.labelClassName,
       inputClassName = props.inputClassName,
+      onClick = props.onClick,
       type = props.type,
-      caretPos = props.caretPos,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "labelClassName", "inputClassName", "type", "caretPos"]);
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "checked", "labelClassName", "inputClassName", "onClick", "type"]);
 
-  var ref = React.useRef();
-  var classes = genClasses.cEx(["single-input flex-column", className]);
+  var cb = React.useRef();
+
+  var _useState = React.useState(checked),
+      _useState2 = _slicedToArray(_useState, 2),
+      check = _useState2[0],
+      setChecked = _useState2[1];
+
+  var classes = genClasses.cEx(["single-input --checkbox flex-column", className]);
   var labelClasses = genClasses.cEx([labelClassName]);
   var inputClasses = genClasses.cEx(["input", inputClassName]);
   return /*#__PURE__*/React__default.createElement("div", {
@@ -1990,13 +2132,19 @@ var Input = (function (props) {
   }, /*#__PURE__*/React__default.createElement("label", {
     htmlFor: id,
     className: labelClasses
-  }, label), /*#__PURE__*/React__default.createElement(InputMask, _extends({
-    ref: ref,
-    className: inputClasses,
-    id: id,
-    type: "text",
-    autoComplete: "off"
-  }, rest)));
+  }, label), /*#__PURE__*/React__default.createElement("div", {
+    className: "container",
+    onClick: function onClick(_) {
+      cb.current.click();
+      setChecked(cb.current.checked);
+    }
+  }, /*#__PURE__*/React__default.createElement("input", _extends((_extends2 = {
+    checked: "checked",
+    ref: cb,
+    className: inputClasses
+  }, _defineProperty(_extends2, "checked", check), _defineProperty(_extends2, "id", id), _defineProperty(_extends2, "type", "checkbox"), _extends2), rest)), /*#__PURE__*/React__default.createElement("span", {
+    className: "checkmark"
+  })));
 });
 
 var index$3 = (function (props) {
@@ -2007,45 +2155,11 @@ var index$3 = (function (props) {
 
   return /*#__PURE__*/React__default.createElement("div", {
     className: "single-select"
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id
-  }, label), /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "single-select__select"
   }, /*#__PURE__*/React__default.createElement("select", _extends({
     id: id
   }, rest), props.children)));
-});
-
-var InputCheckbox = (function (props) {
-  var label = props.label,
-      id = props.id,
-      className = props.className,
-      labelClassName = props.labelClassName,
-      inputClassName = props.inputClassName,
-      type = props.type,
-      caretPos = props.caretPos,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "labelClassName", "inputClassName", "type", "caretPos"]);
-
-  var ref = React.useRef();
-  var classes = genClasses.cEx(["single-input --checkbox flex-column", className]);
-  var labelClasses = genClasses.cEx([labelClassName]);
-  var inputClasses = genClasses.cEx(["input", inputClassName]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id,
-    className: labelClasses
-  }, label), /*#__PURE__*/React__default.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/React__default.createElement(InputMask, _extends({
-    checked: "checked",
-    ref: ref,
-    className: inputClasses,
-    id: id,
-    type: "checkbox"
-  }, rest)), /*#__PURE__*/React__default.createElement("span", {
-    className: "checkmark"
-  })));
 });
 
 var OrganiserConfigurationForm = (function (props) {
@@ -2204,16 +2318,6 @@ var index$4 = (function (props) {
   }));
 });
 
-var Footer = (function (props) {
-  var className = props.className,
-      rest = _objectWithoutProperties(props, ["className"]);
-
-  var classes = genClasses.cEx(['layout-footer', className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("footer", _extends({
-    className: classes
-  }, rest), props.children));
-});
-
 var index$5 = (function (props) {
   var incoming = props.incoming,
       handleAnswer = props.handleAnswer,
@@ -2265,54 +2369,7 @@ var Video = (function (props) {
   }, rest));
 });
 
-var bem = function bem(main) {
-  return [main, function (modifier) {
-    return "".concat(main, "--").concat(modifier);
-  }];
-};
-
-var _bem = bem('container-fullscreen'),
-    _bem2 = _slicedToArray(_bem, 2),
-    __base_class = _bem2[0],
-    modifier = _bem2[1];
-
 var index$6 = (function (props) {
-  var offset = props.offset,
-      className = props.className,
-      rest = _objectWithoutProperties(props, ["offset", "className"]);
-
-  if (!offset) {
-    offset = 0;
-  }
-
-  var _useState = React.useState(),
-      _useState2 = _slicedToArray(_useState, 2),
-      vh = _useState2[0],
-      setVh = _useState2[1];
-
-  var adapt = function adapt() {
-    setVh((window.innerHeight - offset) * 0.01);
-  };
-
-  React.useEffect(function () {
-    adapt();
-  }, []);
-  React.useEffect(function () {
-    window.addEventListener('resize', adapt);
-    return function () {
-      window.removeEventListener('resize', adapt);
-    };
-  }, []);
-  var classes = genClasses.cEx([__base_class, className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes,
-    style: {
-      '--vh': "".concat(vh, "px")
-    }
-  }, props.children);
-});
-
-var index$7 = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2322,7 +2379,7 @@ var index$7 = (function (props) {
   }, rest), props.children);
 });
 
-var index$8 = (function (props) {
+var index$7 = (function (props) {
   var HiddenComponent = props.HiddenComponent,
       VisibleComponent = props.VisibleComponent;
 
@@ -2355,7 +2412,7 @@ var index$8 = (function (props) {
   })));
 });
 
-var index$9 = (function (props) {
+var index$8 = (function (props) {
   var className = props.className,
       closed = props.closed,
       rest = _objectWithoutProperties(props, ["className", "closed"]);
@@ -2370,12 +2427,12 @@ var index$9 = (function (props) {
   var classes = genClasses.cEx(['sidebar', function (_) {
     return closed === true ? 'sidebar--state-closed' : '';
   }, className]);
-  return /*#__PURE__*/React__default.createElement("aside", {
+  return /*#__PURE__*/React__default.createElement("aside", _extends({
     className: classes
-  }, props.children);
+  }, rest), props.children);
 });
 
-var index$a = (function (props) {
+var index$9 = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2385,7 +2442,7 @@ var index$a = (function (props) {
   }, props.children);
 });
 
-var index$b = (function (props) {
+var index$a = (function (props) {
   var className = props.className,
       Icon = props.Icon,
       label = props.label,
@@ -2404,6 +2461,75 @@ var index$b = (function (props) {
   }, props.children)), /*#__PURE__*/React__default.createElement("div", {
     className: "list-item__optional"
   }, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
+});
+
+var _bem$2 = bem('layout-flex'),
+    _bem2$1 = _slicedToArray(_bem$2, 3),
+    __base_class$2 = _bem2$1[0],
+    element$2 = _bem2$1[1],
+    modifier$2 = _bem2$1[2];
+var LayoutFlex = (function (props) {
+  var _ref;
+
+  var className = props.className,
+      cover = props.cover,
+      centered = props.centered,
+      alignCenter = props.alignCenter,
+      alignStretch = props.alignStretch,
+      justBetween = props.justBetween,
+      justAround = props.justAround,
+      justEvenly = props.justEvenly,
+      justCenter = props.justCenter,
+      column = props.column,
+      rest = _objectWithoutProperties(props, ["className", "cover", "centered", "alignCenter", "alignStretch", "justBetween", "justAround", "justEvenly", "justCenter", "column"]);
+
+  var classes = genClasses.cEx([__base_class$2, (_ref = {}, _defineProperty(_ref, modifier$2('between'), function (_) {
+    return justBetween;
+  }), _defineProperty(_ref, modifier$2('evenly'), function (_) {
+    return justEvenly;
+  }), _defineProperty(_ref, modifier$2('center'), function (_) {
+    return justCenter;
+  }), _defineProperty(_ref, modifier$2('column'), function (_) {
+    return column;
+  }), _defineProperty(_ref, modifier$2('align-stretch'), function (_) {
+    return alignStretch;
+  }), _defineProperty(_ref, modifier$2('align-center'), function (_) {
+    return alignCenter;
+  }), _defineProperty(_ref, modifier$2('centered'), function (_) {
+    return centered;
+  }), _defineProperty(_ref, modifier$2('cover'), function (_) {
+    return cover;
+  }), _ref), className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), props.children));
+});
+
+var ChatInput = (function (props) {
+  var className = props.className,
+      handleChange = props.handleChange,
+      handleSubmit = props.handleSubmit,
+      value = props.value,
+      rest = _objectWithoutProperties(props, ["className", "handleChange", "handleSubmit", "value"]);
+
+  var classes = genClasses.cEx(['chat-footer__message-input', className]);
+  return /*#__PURE__*/React__default.createElement("form", {
+    className: classes,
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    alignStretch: true
+  }, /*#__PURE__*/React__default.createElement(Input, {
+    name: "message",
+    placeholder: "message",
+    autoComplete: "off",
+    onChange: handleChange,
+    value: value
+  }), /*#__PURE__*/React__default.createElement(Button, {
+    fit: true,
+    text: true,
+    toolbar: true,
+    className: "button--send  flex align-center just-center"
+  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
 });
 
 var build = createCommonjsModule(function (module, exports) {
@@ -3735,13 +3861,13 @@ var DefaultToolbar$1 = (function (props) {
     handleFile && handleFile(e);
   };
 
-  var classes = genClasses.cEx(["chat-footer__tools", "flex-row", "just-between", className]); //toolbarHandlePhoto={_=>setCapturePic(true)} toolbarHandleFile={_=>  fileUploader.current.click() } 
-
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  var classes = genClasses.cEx(["chat-footer__toolbar", className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    justBetween: true,
     className: classes
   }, rest), capturePic && /*#__PURE__*/React__default.createElement(Camera, {
     onTakePhoto: function onTakePhoto(x) {
-      handlePhoto(x);
+      handlePhoto && handlePhoto(x);
       setCapturePic(false);
     }
   }), /*#__PURE__*/React__default.createElement("input", {
@@ -3752,42 +3878,23 @@ var DefaultToolbar$1 = (function (props) {
     style: {
       display: "none"
     }
-  }), /*#__PURE__*/React__default.createElement("button", {
+  }), /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    icon: true,
     onClick: function onClick(x) {
       return setCapturePic(true);
-    },
-    className: "button text icon icon--32"
-  }, /*#__PURE__*/React__default.createElement(md.MdCameraAlt, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement("button", {
+    }
+  }, /*#__PURE__*/React__default.createElement(md.MdCameraAlt, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    icon: true,
     onClick: function onClick(_) {
       return fileUploader.current.click();
-    },
-    className: "button text icon icon--32"
-  }, /*#__PURE__*/React__default.createElement(md.MdAttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement("button", {
-    onClick: handleAudio,
-    className: "button text icon icon--32"
+    }
+  }, /*#__PURE__*/React__default.createElement(md.MdAttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button, {
+    toolbar: true,
+    icon: true,
+    onClick: handleAudio
   }, /*#__PURE__*/React__default.createElement(md.MdKeyboardVoice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
-});
-
-var ChatInput = (function (props) {
-  var className = props.className,
-      handleChange = props.handleChange,
-      handleSubmit = props.handleSubmit,
-      value = props.value,
-      rest = _objectWithoutProperties(props, ["className", "handleChange", "handleSubmit", "value"]);
-
-  var classes = genClasses.cEx(['chat-footer__message-input', 'flex-row', 'align-stretch', className]);
-  return /*#__PURE__*/React__default.createElement("form", {
-    className: classes,
-    onSubmit: handleSubmit
-  }, /*#__PURE__*/React__default.createElement(Input, {
-    name: "message",
-    placeholder: "message",
-    autoComplete: "off",
-    onChange: handleChange,
-    value: value
-  }), /*#__PURE__*/React__default.createElement("button", {
-    className: "button button--send text icon--32 flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null)));
 });
 
 var ChatRecord = (function (props) {
@@ -3841,7 +3948,8 @@ var ChatFooter = (function (props) {
       rest = _spreadObjectBeginWit6[1];
 
   console.log(recordProps, rest);
-  return /*#__PURE__*/React__default.createElement(Footer, _extends({
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    column: true,
     className: classes
   }, rest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_prefix, toolbarProps)), !recording && !record && /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_prefix, inputProps)), (recording || record) && /*#__PURE__*/React__default.createElement(ChatRecord, _extends({
     recording: recording,
@@ -3956,7 +4064,7 @@ const useVoiceRecorder = cb => {
   };
 };
 
-var index$c = (function (props) {
+var index$b = (function (props) {
   var autoscroll = props.autoscroll,
       dragAndDrop = props.dragAndDrop,
       handleChange = props.handleChange,
@@ -4158,7 +4266,7 @@ var Landing = (function (props) {
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
-var index$d = (function (props) {
+var index$c = (function (props) {
   var handleClick = props.handleClick,
       identity = props.identity;
 
@@ -4191,37 +4299,11 @@ var index$d = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
 });
 
-var index$e = (function (props) {
+var index$d = (function (props) {
   var handleSubmit = props.handleSubmit;
   return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
     handleSubmit: handleSubmit
   }));
-});
-
-var _bem$1 = bem('layout-flex'),
-    _bem2$1 = _slicedToArray(_bem$1, 2),
-    __base_class$1 = _bem2$1[0],
-    modifier$1 = _bem2$1[1];
-var LayoutFlex = (function (props) {
-  var _ref;
-
-  var className = props.className,
-      justBetween = props.justBetween,
-      justEvenly = props.justEvenly,
-      alignCenter = props.alignCenter,
-      justCenter = props.justCenter,
-      rest = _objectWithoutProperties(props, ["className", "justBetween", "justEvenly", "alignCenter", "justCenter"]);
-
-  var classes = genClasses.cEx([__base_class$1, (_ref = {}, _defineProperty(_ref, modifier$1('between'), function (_) {
-    return justBetween;
-  }), _defineProperty(_ref, modifier$1('evenly'), function (_) {
-    return justEvenly;
-  }), _defineProperty(_ref, modifier$1('center'), function (_) {
-    return justCenter;
-  }), _ref), className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
-  }, rest), props.children));
 });
 
 var LayoutGrid = (function (props) {
@@ -4240,10 +4322,11 @@ var LayoutGrid = (function (props) {
   }, rest), props.children));
 });
 
-var _bem$2 = bem('video-call__toolbar'),
-    _bem2$2 = _slicedToArray(_bem$2, 2),
-    __base_class$2 = _bem2$2[0],
-    modifier$2 = _bem2$2[1];
+var _bem$3 = bem('video-call__toolbar'),
+    _bem2$2 = _slicedToArray(_bem$3, 3),
+    __base_class$3 = _bem2$2[0],
+    element$3 = _bem2$2[1],
+    modifier$3 = _bem2$2[2];
 
 var DefaultToolbar$2 = (function (props) {
   console.log(props);
@@ -4280,10 +4363,10 @@ var DefaultToolbar$2 = (function (props) {
     handleCamera && handleCamera(newState);
   };
 
-  var classes = genClasses.cEx([__base_class$2, "navbar", "navbar--toolbar", className]);
+  var classes = genClasses.cEx([__base_class$3, className]);
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
-    justEvenly: true,
-    className: "navbar navbar--toolbar"
+    justBetween: true,
+    className: classes
   }, rest), /*#__PURE__*/React__default.createElement(Button, {
     fit: true,
     toolbar: true,
@@ -4303,11 +4386,12 @@ var DefaultToolbar$2 = (function (props) {
   }, /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Switch")));
 });
 
-var _bem$3 = bem('video-call'),
-    _bem2$3 = _slicedToArray(_bem$3, 2),
-    __base_class$3 = _bem2$3[0],
-    modifier$3 = _bem2$3[1];
-var index$f = (function (_ref) {
+var _bem$4 = bem('video-call'),
+    _bem2$3 = _slicedToArray(_bem$4, 3),
+    __base_class$4 = _bem2$3[0],
+    element$4 = _bem2$3[1],
+    modifier$4 = _bem2$3[2];
+var index$e = (function (_ref) {
   var className = _ref.className,
       Toolbar = _ref.Toolbar,
       handleAnswer = _ref.handleAnswer,
@@ -4315,7 +4399,7 @@ var index$f = (function (_ref) {
       incoming = _ref.incoming,
       rest = _objectWithoutProperties(_ref, ["className", "Toolbar", "handleAnswer", "handleDiscard", "incoming"]);
 
-  var classes = genClasses.cEx([__base_class$3, className]);
+  var classes = genClasses.cEx([__base_class$4, className]);
 
   var _filterPropStartingWi = ReactUtils_10('video', rest),
       _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
@@ -4343,7 +4427,7 @@ var index$f = (function (_ref) {
     loop: true
   }, ReactUtils_5('video', mainVideoProps))), /*#__PURE__*/React__default.createElement(LayoutFlex, {
     justEvenly: true,
-    className: "".concat(__base_class$3, "__controls")
+    className: "".concat(__base_class$4, "__controls")
   }, incoming && /*#__PURE__*/React__default.createElement(Button, {
     round: true,
     success: true,
@@ -4353,7 +4437,7 @@ var index$f = (function (_ref) {
     failure: true,
     onClick: handleDiscard
   }, /*#__PURE__*/React__default.createElement(md.MdCallEnd, null)))), !Toolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar$2, ReactUtils_5('toolbar', toolbarProps))), /*#__PURE__*/React__default.createElement(Draggable, {
-    bounds: '.' + __base_class$3
+    bounds: '.' + __base_class$4
   }, /*#__PURE__*/React__default.createElement(Video, _extends({
     preview: true,
     autoPlay: true,
@@ -4362,35 +4446,257 @@ var index$f = (function (_ref) {
   }, ReactUtils_5('feedback', feedbackVideoProps)))));
 });
 
-exports.ActiveCallBar = index$7;
+var _bem$5 = bem('container-fullscreen'),
+    _bem2$4 = _slicedToArray(_bem$5, 3),
+    __base_class$5 = _bem2$4[0],
+    element$5 = _bem2$4[1],
+    modifier$5 = _bem2$4[2];
+
+var index$f = (function (props) {
+  var offset = props.offset,
+      className = props.className,
+      otherStyle = props.style,
+      rest = _objectWithoutProperties(props, ["offset", "className", "style"]);
+
+  if (!offset) {
+    offset = 0;
+  }
+
+  var _useState = React.useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      vh = _useState2[0],
+      setVh = _useState2[1];
+
+  var adapt = function adapt() {
+    setVh((window.innerHeight - offset) * 0.01);
+  };
+
+  React.useEffect(function () {
+    adapt();
+  }, []);
+  React.useEffect(function () {
+    window.addEventListener('resize', adapt);
+    return function () {
+      window.removeEventListener('resize', adapt);
+    };
+  }, []);
+  var classes = genClasses.cEx([__base_class$5, className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes,
+    style: _objectSpread2({
+      '--vh': "".concat(vh, "px")
+    }, otherStyle)
+  }, rest), props.children);
+});
+
+var _bem$6 = bem('container-stack'),
+    _bem2$5 = _slicedToArray(_bem$6, 3),
+    __base_class$6 = _bem2$5[0],
+    element$6 = _bem2$5[1],
+    modifier$6 = _bem2$5[2];
+
+var index$g = (function (props) {
+  var className = props.className,
+      baseKey = props.baseKey,
+      baseIndex = props.baseIndex,
+      rest = _objectWithoutProperties(props, ["className", "baseKey", "baseIndex"]);
+
+  var classes = genClasses.cEx([__base_class$6, className]);
+
+  var _baseIndex = baseIndex || 1000;
+
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, React__default.Children.toArray(props.children).map(function (children, idx) {
+    return React__default.cloneElement(children, {
+      className: genClasses.cEx([children.props.className, element$6('stacked')]),
+      key: "".concat(baseKey).concat(idx),
+      style: _objectSpread2({}, children.props.style, {
+        position: 'absolute',
+        zIndex: _baseIndex + idx
+      })
+    });
+  }));
+});
+
+var _bem$7 = bem('container-modal'),
+    _bem2$6 = _slicedToArray(_bem$7, 3),
+    __base_class$7 = _bem2$6[0],
+    element$7 = _bem2$6[1],
+    modifier$7 = _bem2$6[2];
+var index$h = (function (_ref) {
+  var _ref2;
+
+  var children = _ref.children,
+      debug = _ref.debug,
+      className = _ref.className,
+      cover = _ref.cover,
+      bottom = _ref.bottom,
+      relative = _ref.relative,
+      centered = _ref.centered,
+      fit = _ref.fit,
+      vcenter = _ref.vcenter,
+      hcenter = _ref.hcenter,
+      rest = _objectWithoutProperties(_ref, ["children", "debug", "className", "cover", "bottom", "relative", "centered", "fit", "vcenter", "hcenter"]);
+
+  var modalRef = React.useRef();
+
+  var adapt = function adapt() {
+    if (modalRef.current) {
+      var parentNode = modalRef.current.parentNode;
+      var modalRect = {
+        x: 0,
+        y: 0,
+        height: 0,
+        width: 0
+      };
+      var currentModalRect = modalRef.current.getBoundingClientRect();
+      var parentRect = modalRef.current.parentNode.getBoundingClientRect();
+      var windowRect = {
+        x: 0,
+        y: 0,
+        height: window.innerHeight,
+        width: window.innerWidth,
+        top: 0,
+        left: 0
+      };
+      if (debug) console.table({
+        parentRect: parentRect,
+        windowRect: windowRect
+      });
+      var refRect = relative ? parentRect : windowRect;
+
+      if (relative) {
+        parentNode.style.position = 'relative';
+      }
+
+      if (centered) {
+        modalRect.y = refRect.height / 2 - currentModalRect.height / 2;
+        modalRect.x = refRect.width / 2 - currentModalRect.width / 2;
+      }
+
+      if (vcenter) {
+        modalRect.y = refRect.height / 2 - currentModalRect.height / 2;
+      }
+
+      if (hcenter) {
+        modalRect.x = refRect.width / 2 - currentModalRect.width / 2;
+      }
+
+      if (debug) console.table({
+        refRect: refRect,
+        modalRect: modalRect
+      });
+
+      if (modalRect.y < 0) {
+        modalRect.y = 0;
+      }
+
+      if (!bottom) {
+        modalRef.current.style.top = "".concat(modalRect.y, "px");
+      }
+
+      modalRef.current.style.left = "".concat(modalRect.x, "px");
+    }
+  };
+
+  React.useEffect(function () {
+    adapt();
+  }, []);
+  React.useEffect(function () {
+    document.addEventListener('load', adapt);
+    window.addEventListener('resize', adapt);
+    return function () {
+      window.removeEventListener('resize', adapt);
+      document.removeEventListener('load', adapt);
+    };
+  }, []);
+  var classes = genClasses.cEx([__base_class$7, (_ref2 = {}, _defineProperty(_ref2, modifier$7('cover'), function (_) {
+    return cover;
+  }), _defineProperty(_ref2, modifier$7('centered'), function (_) {
+    return centered;
+  }), _defineProperty(_ref2, modifier$7('bottom'), function (_) {
+    return bottom;
+  }), _ref2), className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes,
+    ref: modalRef
+  }, rest), children);
+});
+
+var _bem$8 = bem('card'),
+    _bem2$7 = _slicedToArray(_bem$8, 3),
+    __base_class$8 = _bem2$7[0],
+    element$8 = _bem2$7[1],
+    modifier$8 = _bem2$7[2];
+var index$i = (function (_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      rest = _objectWithoutProperties(_ref, ["className", "children"]);
+
+  var classes = genClasses.cEx([__base_class$8, className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    justBetween: true,
+    column: true,
+    className: classes
+  }, rest), children);
+});
+
+var _bem$9 = bem('card-container'),
+    _bem2$8 = _slicedToArray(_bem$9, 3),
+    __base_class$9 = _bem2$8[0],
+    element$9 = _bem2$8[1],
+    modifier$9 = _bem2$8[2];
+var index$j = (function (_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      rest = _objectWithoutProperties(_ref, ["className", "children"]);
+
+  var classes = genClasses.cEx([__base_class$9, className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    cover: true,
+    centered: true,
+    className: classes
+  }, rest), children);
+});
+
+exports.ActiveCallBar = index$6;
 exports.Badge = Badge;
 exports.Button = Button;
 exports.Calling = index$5;
-exports.Chat = index$c;
+exports.Card = index$i;
+exports.CardContainer = index$j;
+exports.Chat = index$b;
 exports.ChatBubble = index;
 exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
-exports.CustomerLanding = index$d;
-exports.DebugPanel = index$8;
+exports.CustomerLanding = index$c;
+exports.DebugPanel = index$7;
 exports.Form = Form;
+exports.Fullscreen = index$f;
 exports.Header = Header;
 exports.HeaderBackButton = BackButton;
 exports.HeaderTitle = Title;
 exports.HeaderToolbar = Toolbar;
 exports.Input = Input;
+exports.InputCheckbox = InputCheckbox;
 exports.Landing = Landing;
+exports.LayoutFlex = LayoutFlex;
+exports.LayoutGrid = LayoutGrid;
 exports.Loading = index$4;
-exports.MobileVHAdapter = index$6;
+exports.MobileVHAdapter = index$f;
+exports.Modal = index$h;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
-exports.OrganiserLanding = index$e;
+exports.OrganiserLanding = index$d;
 exports.Patient = index$2;
 exports.Select = index$3;
-exports.Sidebar = index$9;
-exports.SidebarList = index$a;
-exports.SidebarListItem = index$b;
+exports.Sidebar = index$8;
+exports.SidebarList = index$9;
+exports.SidebarListItem = index$a;
+exports.Stack = index$g;
 exports.Video = Video;
-exports.VideoCall = index$f;
+exports.VideoCall = index$e;
 exports.VideoPreview = Video;
 exports.WaitingRoom = index$1;
 //# sourceMappingURL=index.js.map

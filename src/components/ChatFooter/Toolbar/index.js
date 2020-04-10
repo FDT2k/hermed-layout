@@ -6,8 +6,7 @@ import { MdCameraAlt } from "react-icons/md";
 import { MdAttachFile } from "react-icons/md";
 import { MdKeyboardVoice } from "react-icons/md";
 
-import {Button} from 'hermed-layout'
-
+import Button from 'components/Button'
 
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';

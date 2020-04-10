@@ -70,6 +70,8 @@ $themes: (
     grayDarkest:$red,
 
     dark: $Charade,
+
+    disabled:$gray-79 // keywords like grey or red doesnt work
   ),
 
   pink-light: (
@@ -108,6 +110,9 @@ $themes: (
     grayDarkest:$red,
 
     dark: $Charade,
+
+    disabled:$gray-79
+
   ),
 
   default: (

@@ -22,9 +22,11 @@
 @import 'layouts/flex.scss';
 @import 'layouts/hermed-chat.scss';
 @import 'layouts/video-call.scss';
+@import 'layouts/card.scss';
 
 /* schemes*/
 @import 'schemes/navbar';
+@import 'schemes/card';
 
 @import 'components/button';
 @import 'components/chat-footer';
@@ -55,6 +57,8 @@
 @import 'components/drag-drop-zone'; //not an actual component but used in chat
 @import 'components/footer';
 
+
 /* new components */
 @import 'components/video_call';
 
+@import 'components/card';

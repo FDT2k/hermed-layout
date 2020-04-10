@@ -6,7 +6,7 @@ import Input from 'components/Input'
 import LayoutFlex from 'layouts/Flex'
 
 import { MdArrowForward } from "react-icons/md";
-import {Button} from 'hermed-layout'
+import Button from 'components/Button';
 export default props => {
   const {className,handleChange,handleSubmit,value,...rest} = props
 

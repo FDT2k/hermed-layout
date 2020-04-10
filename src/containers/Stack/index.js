@@ -22,7 +22,7 @@ export default props => {
     return (
         <div className={classes}>
             {
-                props.children.map(
+                React.Children.toArray(props.children).map(
                     (children, idx) =>
                         React.cloneElement(children, {
                             className: cEx([children.props.className, element('stacked')]),

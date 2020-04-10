@@ -20,3 +20,13 @@ export{
 
      
 }
+
+export const bemO = main=>{
+    return  {  
+            block:main,
+            element:block=> `${main}__${block}`,
+            modifier: modifier=> `${main}--${modifier}`
+            
+        }
+    
+}
