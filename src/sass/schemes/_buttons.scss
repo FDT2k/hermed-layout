@@ -1,0 +1,95 @@
+
+.scheme-button{
+
+
+    @include themify($themes) {
+		@include themed_font('secondaryFont', 'semi-bold');
+    }
+    
+    &--round{
+        @include themify($themes) {
+            border:0px solid themed('primaryColor');
+        }
+    }
+
+    &--success{
+        @include themify($themes) {
+          background-color: themed('statusGreen');
+          color: white;
+        }
+      }
+      
+      &--failure{
+        @include themify($themes) {
+          background-color: themed('statusRed');
+          color: white;
+        }
+      }
+    
+        &--contained,&--outlined
+        {
+            @include themify($themes) {
+                color: themed('secondaryBasic');
+                border: 1px solid themed('primaryColor');
+            }
+        }
+    
+        &--contained {
+            @include themify($themes) {
+                background-color:themed('primaryColor');
+            }
+        }
+    
+        &--outlined,&--text,--toolbar {
+            background-color: transparent;
+            @include themify($themes) {
+                color:themed('primaryColor');
+            }
+        }
+    
+        &--text,--toolbar {
+            border: none;
+        }
+    
+    
+      &--toolbar {
+         
+        @include themify($themes) {
+          color:themed('secondaryBasic');
+        }
+      }
+    
+      &--clear{
+        background-color: transparent;
+        border-color: transparent;
+      }
+
+
+    &:hover, &:focus {
+        @include themify($themes) {
+            color: themed('primaryBasic');
+        }
+    }
+
+      &--outlined:hover, &--outlined:focus,&--contained:hover, &--contained:focus {
+        @include themify($themes) {
+          border: 1px solid themed('primaryColorDark');
+          background-color:themed('primaryColorDark');
+        }
+      }
+    
+      &:active{
+        @include themify($themes) {
+                color: themed('primaryColor');
+            }
+      }
+    
+      &--outlined:active, &--contained:active{
+        @include themify($themes) {
+          color: themed('secondaryBasic');
+          border: 1px solid themed('primaryColor');
+          background-color:themed('primaryColor');
+        }
+      }
+
+}

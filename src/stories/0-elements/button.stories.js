@@ -1,5 +1,5 @@
 import React from 'react';
-import { action,notes } from '@storybook/addon-actions';
+import { action, notes } from '@storybook/addon-actions';
 import Button from 'components/Button'
 import Header from 'components/Header'
 import Toolbar from 'components/Header/Toolbar'
@@ -18,19 +18,19 @@ export default {
 
 export const Normal = () => (
   <div className={makeThemeSelect()}>
-      <Button >Hello Button</Button>
-      <Button outlined>Hello Button</Button>
-      <Button text>Hello Button</Button>
-</div>
-  );
+    <Button >Hello Button</Button>
+    <Button outlined>Hello Button</Button>
+    <Button text>Hello Button</Button>
+  </div>
+);
 
 
 export const Fit = () => (
   <div className={makeThemeSelect()}>
-      <Button fit>Hello Button</Button>
-      <Button outlined fit>Hello Button</Button>
-      <Button text fit>Hello Button</Button>
-      </div>
+    <Button fit>Hello Button</Button>
+    <Button outlined fit>Hello Button</Button>
+    <Button text fit>Hello Button</Button>
+  </div>
 
 );
 
@@ -38,13 +38,12 @@ export const Fit = () => (
 
 export const ToolbarForHeader = () => (
   <div className={makeThemeSelect()}>
-      <Header>
-        <Toolbar>
-          <Button toolbar><FiArrowRightCircle/></Button>
-          <Button toolbar><FiArrowRightCircle/></Button>
-        </Toolbar>
-      </Header>
-      </div>
+    <div className="scheme-navbar layout-navbar">
+      <Button toolbar><FiArrowRightCircle /></Button>
+      <Button toolbar><FiArrowRightCircle /></Button>
+      <Button toolbar><FiArrowRightCircle /><h2>Hello</h2></Button>
+    </div>
+  </div>
 
 );
 

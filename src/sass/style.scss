@@ -23,6 +23,7 @@
 @import 'layouts/hermed-chat.scss';
 @import 'layouts/video-call.scss';
 @import 'layouts/card.scss';
+@import 'layouts/navbar.scss';
 
 /* schemes*/
 @import 'schemes/navbar';
@@ -56,6 +57,7 @@
 @import 'components/contextualmenu';
 @import 'components/drag-drop-zone'; //not an actual component but used in chat
 @import 'components/footer';
+@import 'components/icons';
 
 
 /* new components */

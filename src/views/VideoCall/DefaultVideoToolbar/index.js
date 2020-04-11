@@ -39,19 +39,18 @@ export default (props) => {
     return (
 
         <LayoutFlex justBetween className={classes} {...rest}>
-            <Button fit toolbar onClick={handleChat}> <MdChat /><h2>Chat</h2></Button>
-            <Button fit toolbar onClick={_toggleMicro}>
+            <Button fit navbar className="icon--s" onClick={handleChat}> <MdChat /><h2>Chat</h2></Button>
+            <Button fit navbar className="icon--s" onClick={_toggleMicro}>
                 {_microEnabled && <FaMicrophone />}
                 {!_microEnabled && <FaMicrophoneSlash />}
                 <h2>Micro</h2>
             </Button>
-            <Button fit toolbar onClick={_toggleCamera}>
+            <Button fit navbar className="icon--s" onClick={_toggleCamera}>
                 {_cameraEnabled && <FaVideo />}
                 {!_cameraEnabled && <FaVideoSlash />}
-
                 <h2>Camera</h2>
             </Button>
-            <Button fit toolbar onClick={handleSwitch}><MdChat /><h2>Switch</h2></Button>
+            <Button fit navbar className="icon--s" onClick={handleSwitch}><MdChat /><h2>Switch</h2></Button>
         </LayoutFlex>
 
     )

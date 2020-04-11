@@ -1,45 +1,5 @@
 .headline {
-  min-height: 63px;
-  @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-  @include themify($themes) {
-    @include themed_font('primaryFont','bold');
-    color: themed('secondaryBasic');
-    background-color: themed('primaryColor');
-  }
-
-  button {
-    &.text {
-      @include themify($themes) {
-        color:themed('secondaryBasic');
-      }
-    }
-
-    &.icon {
-      display: flex;
-      margin-right: 10px;
-      @extend .flex-column;
-      @extend .align-center;
-    }
-
-    &.icon--32 {
-      svg {
-        width: 32px;
-        height: 32px;
-        @include mq-width-and-lower(425px){
-          width: 24px;
-          height: 24px;
-        }
-      }
-    }
-
-  }
-
-  .badge-dot{
-    @include themify($themes) {
-        background-color: themed('disabled');
-    }
-    margin-right: 8px;
-  }
+  
 
   &__contact-status {
     margin-left: calc(16px + 8px);

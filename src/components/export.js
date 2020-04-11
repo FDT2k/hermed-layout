@@ -46,7 +46,7 @@ import LayoutFlex from 'layouts/Flex'
 
 import Card from 'components/Card'
 import CardContainer from 'components/Card/Container'
-
+import * as Icons from 'components/Icons'
 export {
   Chat,
   Landing,
@@ -80,12 +80,15 @@ export {
   SidebarListItem,
   VideoCall,
   Fullscreen as MobileVHAdapter,
+
   Container,
   Fullscreen,
   Stack,
   Modal,
+  
   LayoutGrid,
   LayoutFlex,
   Card,
-  CardContainer
+  CardContainer,
+  Icons
 }
