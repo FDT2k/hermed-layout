@@ -1,8 +1,8 @@
 import React from 'react'
-
+import {  withModifiers, cEx } from 'utils'
 import { TiWarning } from 'react-icons/ti'
 import { MdCall, MdCallEnd } from 'react-icons/md'
-import { MdArrowForward,MdArrowBack } from "react-icons/md";
+import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { MdCameraAlt } from "react-icons/md";
 import { MdAttachFile } from "react-icons/md";
 import { MdKeyboardVoice } from "react-icons/md";
@@ -17,23 +17,44 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 
 
+const withIconsModifiers = withModifiers(x => `icon--${x}`, ['xs', 's', 'm', 'l', 'xl'])
+
+
+
+const Hamburger = withIconsModifiers(GiHamburgerMenu)
+const Warning = withIconsModifiers(TiWarning)
+const Call = withIconsModifiers(MdCall)
+const CallEnd = withIconsModifiers(MdCallEnd)
+const ArrowForward = withIconsModifiers(MdArrowForward)
+const ArrowBack = withIconsModifiers(MdArrowBack)
+const Camera = withIconsModifiers(MdCameraAlt)
+const AttachFile = withIconsModifiers(MdAttachFile)
+const Voice = withIconsModifiers(MdKeyboardVoice)
+const Videocam = withIconsModifiers(MdVideocam)
+const PersonAdd = withIconsModifiers(MdPersonAdd)
+const LocalPhone = withIconsModifiers(MdLocalPhone)
+const Trash = withIconsModifiers(FaRegTrashAlt)
+const PowerOff = withIconsModifiers(FaPowerOff)
+const Kebab = withIconsModifiers(GoKebabVertical)
+const Gear = withIconsModifiers(GoGear)
+
 
 export {
 
-    TiWarning as Warning,
-    MdCall as Call,
-    MdCallEnd as CallEnd,
-    MdArrowForward as ArrowForward,
-    MdArrowBack as ArrowBack,
-    MdCameraAlt as Camera,
-    MdAttachFile as AttachFile,
-    MdKeyboardVoice as Voice,
-    MdVideocam as Videocam,
-    MdPersonAdd as PersonAdd,
-    MdLocalPhone as LocalPhone,
-    FaRegTrashAlt as Trash,
-    FaPowerOff as PowerOff,
-    GoKebabVertical as Kebab,
-    GoGear as Gear,
-    GiHamburgerMenu as Hamburger
+    Warning,
+    Call,
+    CallEnd,
+    ArrowForward,
+    ArrowBack,
+    Camera,
+    AttachFile,
+    Voice,
+    Videocam,
+    PersonAdd,
+    LocalPhone,
+    Trash,
+    PowerOff,
+    Kebab,
+    Gear,
+    Hamburger
 }

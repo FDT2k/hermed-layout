@@ -12,7 +12,7 @@ export default props => {
   ])
   return (
       <>
-        {handleBack && <Button toolbar onClick={handleBack}><MdArrowBack/></Button>}
+        {handleBack && <Button navbar onClick={handleBack}><MdArrowBack/></Button>}
       </>
   )
 }

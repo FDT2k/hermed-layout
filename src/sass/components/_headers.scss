@@ -1,5 +1,7 @@
 .headline {
-  
+  @extend .layout-navbar;
+  @extend .layout-navbar--header;
+  @extend .scheme-navbar;
 
   &__contact-status {
     margin-left: calc(16px + 8px);

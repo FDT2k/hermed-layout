@@ -21,6 +21,7 @@
 
     &  &__toolbar{ 
         @extend .layout-navbar;
+        @extend .layout-navbar--footer;
         @extend .scheme-navbar;
     //    @extend .scheme-navbar--toolbar ;
     }

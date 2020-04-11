@@ -13,7 +13,6 @@ const [__base_class,element, modifier] = bem('video-call__toolbar');
 
 
 export default (props) => {
-    console.log (props)
     const { className, microEnabled, camEnabled, handleChat, handleMicro, handleCamera, handleSwitch, ...rest } = props;
     const [_microEnabled, setMicroEnabled] = useState(microEnabled === true || false);
     const [_cameraEnabled, setCameraEnabled] = useState(camEnabled === true || false);
@@ -38,7 +37,7 @@ export default (props) => {
 
     return (
 
-        <LayoutFlex justBetween className={classes} {...rest}>
+        <LayoutFlex justEvenly className={classes} {...rest}>
             <Button fit navbar className="icon--s" onClick={handleChat}> <MdChat /><h2>Chat</h2></Button>
             <Button fit navbar className="icon--s" onClick={_toggleMicro}>
                 {_microEnabled && <FaMicrophone />}
