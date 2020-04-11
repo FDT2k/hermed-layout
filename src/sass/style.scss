@@ -13,13 +13,20 @@
 /* containers*/
 
 @import 'containers/fullscreen';
+@import 'containers/modal';
+@import 'containers/stack';
 
 /*Layouts*/
 
-@import 'layouts/layout-grid.scss';
-@import 'layouts/layout-chat.scss';
+@import 'layouts/grid.scss';
+@import 'layouts/flex.scss';
+@import 'layouts/hermed-chat.scss';
+@import 'layouts/video-call.scss';
+@import 'layouts/card.scss';
 
-
+/* schemes*/
+@import 'schemes/navbar';
+@import 'schemes/card';
 
 @import 'components/button';
 @import 'components/chat-footer';
@@ -47,5 +54,11 @@
 @import 'components/list';
 @import 'components/list-item';
 @import 'components/contextualmenu';
-@import 'components/drag-drop-zone';
+@import 'components/drag-drop-zone'; //not an actual component but used in chat
 @import 'components/footer';
+
+
+/* new components */
+@import 'components/video_call';
+
+@import 'components/card';

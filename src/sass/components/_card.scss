@@ -1,0 +1,14 @@
+
+.card {
+    @extend .layout-card;
+    @extend .scheme-card__content;
+    min-width: 200px;
+    min-height: 300px;
+
+
+}
+
+.card-container {
+    @extend .scheme-card__background;
+    padding:20px;
+}

@@ -4,20 +4,18 @@ import LayoutGrid from 'layouts/Grid'
 import Fullscreen from 'containers/Fullscreen'
 import 'sass/style.scss';
 
-
 const FakeHeader = props => <div className={props.className}> <h2>header</h2></div>
 const FakeContent = props => <div className={props.className}> content</div>
 const FakeFooter = props => <div className={props.className}> footer</div>
 
-const SpecificView = props => <LayoutGrid layout3r className="testviewprout">{props.children}</LayoutGrid>
+const SpecificView = props => <LayoutGrid layout2r className="testview--2r">{props.children}</LayoutGrid>
 
 export const ExampleSimple = () => (
   <div className="theme-blue-light">
     <Fullscreen >
-      <LayoutGrid layout3r>
+      <LayoutGrid layout2r>
          <FakeHeader/>
          <FakeContent/>
-         <FakeFooter/>
       </LayoutGrid>
     </Fullscreen>
   </div>
@@ -29,7 +27,6 @@ export const SuperChargedExample = () => (
       <SpecificView>
          <FakeHeader/>
          <FakeContent/>
-         <FakeFooter/>
       </SpecificView>
     </Fullscreen>
   </div>
@@ -41,7 +38,6 @@ export const NotInOrder = () => (
   <div className="theme-blue-light">
     <Fullscreen >
       <SpecificView>
-         <FakeFooter/>
          <FakeContent/>
          <FakeHeader />
       </SpecificView>
@@ -52,12 +48,11 @@ export const NotInOrder = () => (
 
 
 
-export const ReorderViaCSS = () => (
+export const InheritedViewReorderViaCSS = () => (
   <div className="theme-blue-light">
     <Fullscreen >
       <SpecificView>
          <FakeFooter/>
-         <FakeContent/>
          <FakeHeader className="force-header"/>
       </SpecificView>
     </Fullscreen>
@@ -65,12 +60,23 @@ export const ReorderViaCSS = () => (
 );
 
 
+export const WithoutContainer = () => (
+  <div className="theme-blue-light">
+      <SpecificView>
+         <FakeFooter/>
+         <FakeContent/>
+         <FakeHeader className="force-header"/>
+      </SpecificView>
+  </div>
+);
+
 
 export default {
-  title: 'Layout/Grid',
+  title: 'Layout/Grid/TwoRows',
   parameters: {
     notes: {
-      TitreExample: 'This is something to know',
+      InheritedViewReorderViaCSS:'Here the order should be Header, footer,content',
+      NotInOrder:'Here the order should be reversed'
     }
   },
 };

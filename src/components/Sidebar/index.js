@@ -18,7 +18,7 @@ export default props => {
     className,
   ])
   return (
-      <aside className={classes}>
+      <aside className={classes} {...rest}>
       {props.children}
 
       </aside>

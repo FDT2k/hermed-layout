@@ -6,7 +6,8 @@ import Patient from 'components/Patient'
 import Button from 'components/Button'
 import Form from 'components/Form'
 import Input from 'components/Input'
-import Select from 'components/Select'
+import InputCheckbox from 'components/InputCheckbox'
+import Select from 'components/Input/Select'
 import OrganiserConfigurationForm from 'components/OrganiserConfigurationForm'
 
 import Header from 'components/Header'
@@ -19,7 +20,6 @@ import ChatHeader from 'components/Header/Chat'
 import Loading from 'components/Loading'
 import Calling from 'components/Calling'
 import Video from 'components/Video'
-import MobileViewCover from 'components/Views/MobileViewCover'
 import ActiveCallBar from 'components/ActiveCallBar'
 import Badge from 'components/Badge'
 import DebugPanel from 'components/DebugPanel'
@@ -33,7 +33,19 @@ import Chat from 'views/Chat'
 import Landing from 'views/Landing'
 import CustomerLanding from 'views/Landing/Customer'
 import OrganiserLanding from 'views/Landing/Organiser'
+import VideoCall from 'views/VideoCall'
 
+import Fullscreen from 'containers/Fullscreen'
+import Stack from 'containers/Stack'
+import Modal from 'containers/Modal'
+import Container from 'containers/Container'
+
+
+import LayoutGrid from 'layouts/Grid'
+import LayoutFlex from 'layouts/Flex'
+
+import Card from 'components/Card'
+import CardContainer from 'components/Card/Container'
 
 export {
   Chat,
@@ -46,6 +58,7 @@ export {
   Button,
   Form,
   Input,
+  InputCheckbox,
   Select,
   OrganiserConfigurationForm,
   OrganiserLanding,
@@ -59,11 +72,20 @@ export {
   Calling,
   Video as VideoPreview,
   Video,
-  MobileVHAdapter:MobileViewCover,
   ActiveCallBar,
   Badge,
   DebugPanel,
   Sidebar,
   SidebarList,
-  SidebarListItem
+  SidebarListItem,
+  VideoCall,
+  Fullscreen as MobileVHAdapter,
+  Container,
+  Fullscreen,
+  Stack,
+  Modal,
+  LayoutGrid,
+  LayoutFlex,
+  Card,
+  CardContainer
 }

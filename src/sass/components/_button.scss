@@ -7,6 +7,7 @@
 }
 
 .button {
+  
   max-width: 500px;
   cursor: pointer;
   text-transform: uppercase;
@@ -16,7 +17,7 @@
 
   &.round{
     border-radius: 50%;
-    padding: 1em 1.3em;
+    padding: 1em 1.25em;
     margin: 0px;
     @include themify($themes) {
       border:0px solid themed('primaryColor');

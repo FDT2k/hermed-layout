@@ -49,6 +49,9 @@
 .just-around {
   @include flex-just(space-around);
 }
+.just-evenly {
+  @include flex-just(space-evenly);
+}
 
 /* Align-Items */
 .align-start {
