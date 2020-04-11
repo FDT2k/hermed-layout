@@ -19,8 +19,9 @@
 
     }
 
-    &  &__toolbar{ /*dont forget the !optional*/
+    &  &__toolbar{ 
+        @extend .layout-navbar;
         @extend .scheme-navbar;
-        @extend .scheme-navbar--toolbar !optional;
+    //    @extend .scheme-navbar--toolbar ;
     }
 }

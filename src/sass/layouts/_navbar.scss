@@ -1,0 +1,22 @@
+.layout-navbar {
+    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+
+    min-height: 63px;
+
+    &--toolbar {
+        min-height: 79px;
+        padding: 10px 25px 0px;
+    }
+
+    &--header {
+        .button {
+           
+            &--icon {
+                margin-right: 10px;
+            }
+            &--icon:last-child {
+                margin: inherit;
+            }
+        }
+    }
+}

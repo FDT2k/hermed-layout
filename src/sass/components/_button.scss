@@ -83,7 +83,7 @@
 	}
 
 
-  &.toolbar {
+  &.navbar {
     background-color: transparent;
     border: none;
 
@@ -92,26 +92,14 @@
     }
   }
 
-  &.icon {
-    margin-right: 10px;
+
+  &--icon {
+    display: flex;
+    @extend .flex-column;
+    @extend .align-center;
   }
 
-  &.icon--32 {
-    svg {
-      width: 32px;
-      height: 32px;
-      @include mq-width-and-lower(425px){
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
-  &.icon--48 {
-    svg {
-      width: 48px;
-      height: 48px;
-    }
-  }
+ 
 
 
   &.clear{
