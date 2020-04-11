@@ -4624,12 +4624,22 @@ var index$h = (function (_ref) {
   }, rest), children);
 });
 
+var index$i = (function (props) {
+  var className = props.className,
+      rest = _objectWithoutProperties(props, ["className"]);
+
+  var classes = genClasses.cEx(['container', className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), props.children);
+});
+
 var _bem$8 = bem('card'),
     _bem2$7 = _slicedToArray(_bem$8, 3),
     __base_class$8 = _bem2$7[0],
     element$8 = _bem2$7[1],
     modifier$8 = _bem2$7[2];
-var index$i = (function (_ref) {
+var index$j = (function (_ref) {
   var className = _ref.className,
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["className", "children"]);
@@ -4647,7 +4657,7 @@ var _bem$9 = bem('card-container'),
     __base_class$9 = _bem2$8[0],
     element$9 = _bem2$8[1],
     modifier$9 = _bem2$8[2];
-var index$j = (function (_ref) {
+var index$k = (function (_ref) {
   var className = _ref.className,
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["className", "children"]);
@@ -4660,17 +4670,59 @@ var index$j = (function (_ref) {
   }, rest), children);
 });
 
+// THIS FILE IS AUTO GENERATED
+var TiWarning = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "version": "1.2",
+      "baseProfile": "tiny",
+      "viewBox": "0 0 24 24"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "d": "M21.171 15.398l-5.912-9.854c-.776-1.293-1.963-2.033-3.259-2.033s-2.483.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83.636 1.126 1.878 1.772 3.406 1.772h12c1.528 0 2.77-.646 3.406-1.771.637-1.125.551-2.521-.235-3.831zm-9.171 2.151c-.854 0-1.55-.695-1.55-1.549 0-.855.695-1.551 1.55-1.551s1.55.696 1.55 1.551c0 .854-.696 1.549-1.55 1.549zm1.633-7.424c-.011.031-1.401 3.468-1.401 3.468-.038.094-.13.156-.231.156s-.193-.062-.231-.156l-1.391-3.438c-.09-.233-.129-.443-.129-.655 0-.965.785-1.75 1.75-1.75s1.75.785 1.75 1.75c0 .212-.039.422-.117.625z"
+      }
+    }]
+  })(props);
+};
+TiWarning.displayName = "TiWarning";
+
+
+
+var index$l = /*#__PURE__*/Object.freeze({
+__proto__: null,
+Warning: TiWarning,
+Call: md.MdCall,
+CallEnd: md.MdCallEnd,
+ArrowForward: md.MdArrowForward,
+ArrowBack: md.MdArrowBack,
+Camera: md.MdCameraAlt,
+AttachFile: md.MdAttachFile,
+Voice: md.MdKeyboardVoice,
+Videocam: md.MdVideocam,
+PersonAdd: md.MdPersonAdd,
+LocalPhone: md.MdLocalPhone,
+Trash: fa.FaRegTrashAlt,
+PowerOff: fa.FaPowerOff,
+Kebab: GoKebabVertical,
+Gear: GoGear,
+Hamburger: GiHamburgerMenu
+});
+
 exports.ActiveCallBar = index$6;
 exports.Badge = Badge;
 exports.Button = Button;
 exports.Calling = index$5;
-exports.Card = index$i;
-exports.CardContainer = index$j;
+exports.Card = index$j;
+exports.CardContainer = index$k;
 exports.Chat = index$b;
 exports.ChatBubble = index;
 exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
+exports.Container = index$i;
 exports.CustomerLanding = index$c;
 exports.DebugPanel = index$7;
 exports.Form = Form;
@@ -4679,6 +4731,7 @@ exports.Header = Header;
 exports.HeaderBackButton = BackButton;
 exports.HeaderTitle = Title;
 exports.HeaderToolbar = Toolbar;
+exports.Icons = index$l;
 exports.Input = Input;
 exports.InputCheckbox = InputCheckbox;
 exports.Landing = Landing;

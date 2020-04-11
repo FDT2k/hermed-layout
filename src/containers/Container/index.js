@@ -4,7 +4,7 @@ import {cEx} from '@geekagency/gen-classes'
 
 export default props => {
 
-
+  const {className, ...rest} = props
   const classes = cEx ([
     'container',
     className
