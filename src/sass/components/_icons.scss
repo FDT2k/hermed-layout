@@ -1,4 +1,5 @@
 .icon{
+    @extend .layout-flex;
     svg{
         width:32px;
         height:32px;

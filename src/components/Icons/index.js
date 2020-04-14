@@ -19,7 +19,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 
 
-const withIconsModifiers = compose(withBaseClass('icon'), withModifiers(x => `icon--${x}`, ['xs', 's', 'm', 'l', 'xl']))
+const withIconsModifiers = compose(
+    withBaseClass('icon'), 
+    withModifiers(x => `icon--${x}`, ['xs', 's', 'm', 'l', 'xl'])
+)
 
 
 

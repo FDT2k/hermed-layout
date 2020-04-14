@@ -112,6 +112,8 @@ export default props => {
       }
     }
   }, [])
+
+
   const classes = cEx([
     _ => dragAndDrop ? "drag-drop-zone" : '',
     "chat",
@@ -137,7 +139,6 @@ export default props => {
       <section ref={chatRef} className={classes} onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
         {props.children}
         <div className={classesOverlay}> <h2> lachez pour envoyer </h2> <Upload xl/></div>
-
       </section>
 
       <ChatFooter

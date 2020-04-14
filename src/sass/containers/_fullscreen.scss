@@ -11,4 +11,9 @@
   &--overflow-y{
     overflow-y:scroll;
   }
+/*  @include mq-width-and-upper(768px){
+    max-width:768px;
+    width: 768px;
+    margin:0 auto;
+  }*/
 }

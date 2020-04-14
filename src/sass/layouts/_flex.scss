@@ -15,6 +15,7 @@
         width: 100%;
     }
 
+   
     &--between{
         @include flex-just(space-between);
     }
@@ -35,7 +36,9 @@
         @include flex-align(stretch);
        
     }
-
+    &--align-start {
+        @include flex-align(flex-start);
+    }
     &--align-center{
         @include flex-align(center);
        

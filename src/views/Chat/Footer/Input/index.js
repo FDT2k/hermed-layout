@@ -5,7 +5,7 @@ import {spreadObjectBeginWith,forwardPropsRemovingHeader} from '@geekagency/comp
 import Input from 'components/Input'
 import LayoutFlex from 'layouts/Flex'
 
-import { MdArrowForward } from "react-icons/md";
+import { ArrowForward } from "components/Icons";
 import Button from 'components/Button';
 export default props => {
   const {className,handleChange,handleSubmit,value,...rest} = props
@@ -20,7 +20,7 @@ export default props => {
         <LayoutFlex alignStretch>
           <Input name="message" placeholder="message" autoComplete="off" onChange={handleChange} value={value}/>
           <Button fit  text navbar className="button--send  flex align-center just-center">
-            <MdArrowForward/>
+            <ArrowForward />
           </Button>
         </LayoutFlex>
       </form>

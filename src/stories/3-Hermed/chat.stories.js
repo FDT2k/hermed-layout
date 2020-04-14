@@ -41,7 +41,7 @@ export const DoctorChat = () => (
 export const PatientChat = () => (
   <div className="theme-blue-light">
   <FullScreen>
-    <Chat remoteName="Dr Karsegard" handlePhoto={x=>alert('taken pic')} handleFile={x=>alert(x)} remoteBadge="green" remoteStatus="connecté" handleSubmit={x=>alert(x)} handleSound={x=>alert(x)}>
+    <Chat remoteName="Dr Karsegard" handlePhoto={x=>alert('taken pic')} handleFile={x=>alert(x)} remoteBadge="red" remoteStatus="connecté" handleSubmit={x=>alert(x)} handleSound={x=>alert(x)}>
       <ChatBubble welcome message="Lorem hello"/>
       <ChatBubble left message="Lorem hello"  date="20:39"/>
       <ChatBubble right message="Lorem hello"  date="20:39"/>
@@ -50,3 +50,14 @@ export const PatientChat = () => (
 </div>
 );
 
+export const PatientChatDisconnected = () => (
+  <div className="theme-blue-light">
+  <FullScreen>
+    <Chat remoteName="Dr Karsegard" handlePhoto={x=>alert('taken pic')} handleFile={x=>alert(x)} remoteBadge="oups" remoteStatus="connecté" handleSubmit={x=>alert(x)} handleSound={x=>alert(x)}>
+      <ChatBubble welcome message="Lorem hello"/>
+      <ChatBubble left message="Lorem hello"  date="20:39"/>
+      <ChatBubble right message="Lorem hello"  date="20:39"/>
+    </Chat>
+    </FullScreen>
+</div>
+);

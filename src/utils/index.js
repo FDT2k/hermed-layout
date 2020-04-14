@@ -25,6 +25,9 @@ export const bemO = main=>{
     
 }
 
+export const divElement = ({children,...rest}) => <div {...rest}>{children}</div>
+export const sectionElement = ({children,...rest}) => <section {...rest}>{children}</section>
+
 export const modifiersToCeX = (keyEnhancer,list,modifiers)=> {
     return list.reduce((acc,item)=>{
         acc[keyEnhancer(item)]= _=> modifiers[item]=== true;

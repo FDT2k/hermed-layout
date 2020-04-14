@@ -15,6 +15,7 @@ export default props => {
     alignCenter, 
     alignStretch,
     alignTop,
+    alignStart,
 
     justBetween, 
     justAround, 
@@ -35,6 +36,7 @@ export default props => {
       [modifier('column')]: _=> column,
       [modifier('align-stretch')]: _=> alignStretch,
       [modifier('align-center')]: _=> alignCenter,
+      [modifier('align-start')]: _=> alignStart,
       [modifier('align-top')]: _=> alignTop,
       [modifier('centered')]: _=> centered,
       [modifier('cover')]: _=> cover,

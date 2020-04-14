@@ -19,7 +19,7 @@ const UserStatusContainer = compose(
 const UserBadge = withBaseClass(element('badge'))(Badge)
 
 const UserNameAndStatus = compose(
-  applyModifiers({ 'column': true }),
+  applyModifiers({ 'column': true,'alignStart':true }),
   withBaseClass(element('name'))
 )(LayoutFlex)
 
