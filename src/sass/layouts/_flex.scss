@@ -3,7 +3,6 @@
     @include flex();
     @include flex-direction(row);
     @include flex-align(center);
-    width: 100%;
 
     &--column{
       @include flex-direction(column);
@@ -39,6 +38,11 @@
 
     &--align-center{
         @include flex-align(center);
+       
+    }
+
+    &--align-top{
+        @include flex-align(flex-start);
        
     }
 

@@ -1,3 +1,5 @@
-.layout-footer {
-  padding: 10px 25px 0px;
+.footer{
+  @extend .layout-navbar;
+  @extend .layout-navbar--footer;
+  @extend .scheme-navbar;
 }

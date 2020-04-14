@@ -1,8 +1,5 @@
 import React from 'react';
-import { action, notes } from '@storybook/addon-actions';
 import Button from 'components/Button'
-import Header from 'components/Header'
-import Toolbar from 'components/Header/Toolbar'
 
 import 'sass/style.scss';
 import { FiArrowRightCircle } from "react-icons/fi";

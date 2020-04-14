@@ -75,7 +75,7 @@ export const BaseSchemeAndToolbarLayout = () => (
 
 
 
-export const HeadlineWithSchemeAndToolbarLayout = () => (
+export const HeadlineWithSchemeAndHeaderLayout = () => (
   <div className={makeThemeSelect()}>
 
     <LayoutFlex justBetween alignCenter className="scheme-navbar layout-navbar layout-navbar--header" >
@@ -97,7 +97,7 @@ export const HeadlineWithSchemeAndToolbarLayout = () => (
 export const FooterWithSchemeAndToolbarLayout = () => (
   <div className={makeThemeSelect()}>
 
-    <LayoutFlex justBetween alignCenter className="scheme-navbar layout-navbar layout-navbar--toolbar" >
+    <LayoutFlex justBetween alignCenter className="scheme-navbar layout-navbar layout-navbar--footer" >
      
         <Button fit navbar className="icon--s"><MdChat /><h2>chat</h2></Button>
         <Button fit navbar className="icon--s"><MdChat /><h2>chat</h2></Button>

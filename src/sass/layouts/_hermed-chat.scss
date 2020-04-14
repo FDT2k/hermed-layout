@@ -1,5 +1,5 @@
 /*must use MobileVHAdapter*/
-.hermed-chat {
+/*.hermed-chat {
     display: grid;
     grid-template-rows: 76px auto 138px;
     grid-template-areas:
@@ -7,9 +7,9 @@
         "chat"
         "tools";
 }
-
+*/
 /*Chat content, bubbles etc*/
-.hermed-chat > .chat {
+/*.hermed-chat > .chat {
     grid-area: chat;
     padding: 10px 25px;
     align-content: center;
@@ -25,7 +25,9 @@
         color: themed("primaryBasic");
         background-color: themed("primaryColorLight");
     }
-}
+}*/
+
+/*
 .hermed-chat > .tools {
     padding: 10px 25px;
     grid-area: tools;
@@ -70,3 +72,4 @@
         }
     }
 }
+*/

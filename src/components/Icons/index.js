@@ -1,11 +1,13 @@
 import React from 'react'
-import {  withModifiers, cEx } from 'utils'
+import { compose } from '@geekagency/composite-js'
+import { withModifiers, withBaseClass, cEx } from 'utils'
 import { TiWarning } from 'react-icons/ti'
 import { MdCall, MdCallEnd } from 'react-icons/md'
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { MdCameraAlt } from "react-icons/md";
 import { MdAttachFile } from "react-icons/md";
 import { MdKeyboardVoice } from "react-icons/md";
+import { MdCloudUpload } from "react-icons/md";
 import { MdVideocam } from "react-icons/md";
 import { MdPersonAdd } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
@@ -17,7 +19,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 
 
-const withIconsModifiers = withModifiers(x => `icon--${x}`, ['xs', 's', 'm', 'l', 'xl'])
+const withIconsModifiers = compose(withBaseClass('icon'), withModifiers(x => `icon--${x}`, ['xs', 's', 'm', 'l', 'xl']))
 
 
 
@@ -37,6 +39,7 @@ const Trash = withIconsModifiers(FaRegTrashAlt)
 const PowerOff = withIconsModifiers(FaPowerOff)
 const Kebab = withIconsModifiers(GoKebabVertical)
 const Gear = withIconsModifiers(GoGear)
+const Upload = withIconsModifiers(MdCloudUpload)
 
 
 export {
@@ -56,5 +59,6 @@ export {
     PowerOff,
     Kebab,
     Gear,
-    Hamburger
+    Hamburger,
+    Upload
 }

@@ -1,14 +1,17 @@
 .layout-navbar {
     @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-
+    p{/*ex: contact status*/
+        @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+    }
     min-height: 63px;
-
+    width:100%;
     &--footer {
         min-height: 79px;
         padding: 5px 25px 0px;
     }
 
     &--header {
+        padding: 0px 25px;
         .button {
            
             &--icon {

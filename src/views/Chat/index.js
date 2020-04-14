@@ -2,10 +2,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { cEx } from '@geekagency/gen-classes'
 
-import ChatHeader from 'components/Header/Chat'
-import ChatFooter from 'components/ChatFooter'
+import ChatHeader from 'views/Chat/Header'
+import ChatFooter from 'views/Chat/Footer'
 // autoScroll
-import { MdCloudUpload } from 'react-icons/md'
+import { Upload } from 'components/Icons'
 import { useVoiceRecorder } from "use-voice-recorder";
 
 export default props => {
@@ -121,7 +121,6 @@ export default props => {
   ])
   const classesOverlay = cEx([
     "drop_overlay",
-
     _ => dragging ? 'drop' : ''
   ])
   return (
@@ -133,9 +132,12 @@ export default props => {
         badge={remoteBadge}
         {...headerProps}
       />
+
+
       <section ref={chatRef} className={classes} onTouchStart={holdScroll} onTouchEnd={releaseScroll} onMouseDown={holdScroll} onMouseUp={releaseScroll}>
-        <div className={classesOverlay}> <h2> lachez pour envoyer </h2> <MdCloudUpload /></div>
         {props.children}
+        <div className={classesOverlay}> <h2> lachez pour envoyer </h2> <Upload xl/></div>
+
       </section>
 
       <ChatFooter

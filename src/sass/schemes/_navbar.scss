@@ -20,4 +20,11 @@
       }
     }
   }
+
+  p { /*contact-status*/
+    @include themify($themes) {
+      @include themed_font('secondaryFont','light-italic');
+      color:themed('grayLight');
+    }
+  }
 }
