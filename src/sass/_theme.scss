@@ -14,11 +14,13 @@ $whiteAlpha-55: alphaness($white, 0.55);
 
 /* Project's colors */
 $Pelorous: rgba(67,169,175, 1);
+$PelorousLDarker: lighting(hsla(183, 44, 47, 1), 36%);
 $ClearDay: rgba(229,255,248, 1);
 $Zumthor: rgba(233,243,255, 1);
 
 $Carnation: $HERMED_Theme-5-rgba;
-$Rajah: rgba(250,186,100, 1);
+$CarnationLDarker: lighting($HERMED_Theme_2-4-hsla, 36%);
+$Rajah: $More-Colors-4-rgba;
 $Champagne: $HERMED_Theme-3-rgba;
 
 $Charade: $HERMED_Theme-4-rgba;
@@ -44,6 +46,7 @@ $themes: (
     secondaryBasicAlpha: $whiteAlpha-55,
 
     primaryColor: $Pelorous,
+    primaryColorLDarker: $PelorousLDarker,
     primaryColorLight: $Zumthor,
     primaryColorDark: $ClearDay,
 
@@ -84,6 +87,7 @@ $themes: (
     secondaryBasicAlpha: $whiteAlpha-55,
 
     primaryColor: $Carnation,
+    primaryColorLDarker: $CarnationLDarker,
     primaryColorLight: $Champagne,
     primaryColorDark: $Rajah,
 
