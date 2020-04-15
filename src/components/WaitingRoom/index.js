@@ -4,10 +4,9 @@ import {spreadObjectBeginWith} from '@geekagency/composite-js/ReactUtils'
 import {key} from '@geekagency/composite-js/ObjectUtils'
 import {reduce,enlist} from '@geekagency/composite-js'
 
-import { GiHamburgerMenu } from "react-icons/gi";
+import { Hamburger } from "components/Icons";
 import Header from 'components/Header'
-import Content from 'components/Header/Content'
-import Title from 'components/Header/Title'
+import LayoutFlex from 'layouts/Flex'
 import Button from 'components/Button'
 
 import DefaultToolbar from 'components/WaitingRoom/Toolbar';
@@ -29,16 +28,20 @@ export default props => {
   return (
     <div className={classes} {...remaining}>
       <Header>
-        <Content>
-            <Button toolbar onClick={handleBack}><GiHamburgerMenu/></Button>
-            <Title>{title}</Title>
-        </Content>
+        <LayoutFlex>
+            <Button navbar onClick={handleBack}><Hamburger/></Button>
+            <h2>{title}</h2>
+        </LayoutFlex>
         { ( (Toolbar && <Toolbar {...toolbarProps} />) || (defaultToolbar&& <DefaultToolbar {...toolbarProps}/>) )
         }
       </Header>
 
       <section className="content">
         {props.children}
+        {React.Children.toArray(props.children).length ===0 && <div>
+            Aucun contact
+            <Button>Inviter un contact</Button>
+          </div>}
       </section>
     </div>
   )

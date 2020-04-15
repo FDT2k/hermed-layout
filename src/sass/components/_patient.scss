@@ -4,9 +4,7 @@
   width: 100%;
   padding-left: 25px;
   padding-right: 25px;
-  height: 75px;
   min-height: 75px;
-  max-height: 75px;
   cursor:pointer;
 
   @include themify($themes) {

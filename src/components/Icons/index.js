@@ -1,6 +1,9 @@
 import React from 'react'
 import { compose } from '@geekagency/composite-js'
-import { withModifiers, withBaseClass, cEx } from 'utils'
+import { bem, withModifiers, wrapComponent, divElement, withBaseClass, cEx } from 'utils'
+
+import LayoutFlex  from 'layouts/Flex'
+
 import { TiWarning } from 'react-icons/ti'
 import { MdCall, MdCallEnd } from 'react-icons/md'
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
@@ -16,12 +19,16 @@ import { FaPowerOff } from "react-icons/fa";
 import { GoKebabVertical } from 'react-icons/go'
 import { GoGear } from "react-icons/go";
 import { GiHamburgerMenu } from "react-icons/gi";
+import {CLASSES,SIZE_PROPS} from 'definition';
 
 
+
+const [__base_class,element,modifier] = bem (CLASSES.ICON)
 
 const withIconsModifiers = compose(
-    withBaseClass('icon'), 
-    withModifiers(x => `icon--${x}`, ['xs', 's', 'm', 'l', 'xl'])
+    withBaseClass(__base_class),
+    withModifiers(x => modifier(x), SIZE_PROPS),
+    wrapComponent(LayoutFlex)
 )
 
 
@@ -46,7 +53,6 @@ const Upload = withIconsModifiers(MdCloudUpload)
 
 
 export {
-
     Warning,
     Call,
     CallEnd,
