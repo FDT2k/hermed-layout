@@ -1,12 +1,11 @@
 .badge-dot {
+  @extend .scheme-badge;
   height: 16px;
   width: 16px;
   min-height: 16px;
   min-width: 16px;
   border-radius: 50%;
-  display: block;
   font-size: 10px;
-  line-height: 16px;
   /*
     par defaut la couleur est disabled*/
   @include themify($themes) {
@@ -16,38 +15,50 @@
     background-color: themed("disabled");
   }
 
-  &.red {
+  &--red {
     @include themify($themes) {
       background-color: themed("statusRed");
     }
   }
 
-  &.orange {
+  &--orange {
     @include themify($themes) {
       background-color: themed("statusYellow");
     }
   }
 
-  &.green {
+  &--green {
     @include themify($themes) {
       background-color: themed("statusGreen");
     }
   }
 
-  &.unkown {
+  &--unkown {
     @include themify($themes) {
       background-color: themed("grayDarker");
     }
   }
 
-  &.medium {
+  &--m {
     font-size: 14px;
-    line-height: 23px;
     min-height: 24px;
     min-width: 24px;
     width: 24px;
     height: 24px;
   }
-
-  text-align: center;
+  &--l {
+    font-size: 20px;
+    min-height: 36px;
+    min-width: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  &--xl {
+    font-size: 30px;
+    min-height: 48px;
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+  }
+  
 }

@@ -1,29 +1,23 @@
 import React, { useState } from 'react'
-import { cEx } from '@geekagency/gen-classes'
+import { divElement, compose, applyModifiers, withModifiers,withTransformedProps, withBaseClass, cEx,bem } from 'utils';
+
+import LayoutFlex from 'layouts/Flex'
+import {CLASSES,SIZE_PROPS,STATE_PROPS} from 'definition';
+
+const [BASE_CLASS, element, modifier] = bem(CLASSES.BADGE)
 
 
-export default props => {
+const withBadgeModifiers = compose(
+    withModifiers(x => modifier(x), STATE_PROPS),
+    withModifiers(x => modifier(x), SIZE_PROPS)
+)
 
-    const { className, medium, status, ...rest } = props
+const enhance = compose(
+    withBaseClass(BASE_CLASS),
+    // transform status props to modifier
+    withTransformedProps(x => modifier(x), ['status']),
+    withBadgeModifiers,
+    applyModifiers({'centered':true})
+)
 
-    const { red, orange, green, ...veryRest } = rest;
-
-    const classes = cEx([
-        'badge-dot',
-        { 'medium': _ => medium === true },
-        _ => {
-            if (red)
-                return 'red';
-            if (orange)
-                return 'orange'
-            if (green)
-                return 'green'
-        },
-        _ => status,
-        className,
-        
-    ])
-    return (
-        <span className={classes} {...veryRest}>{props.children}</span>
-    )
-}
+export default enhance(LayoutFlex)
