@@ -62,7 +62,7 @@ table {
   font-weight: 300;
   font-style: normal; }
 
-.theme-blue-light .headline__contact-status, .theme-pink-light .headline__contact-status, .theme-default .headline__contact-status {
+.theme-blue-light .scheme-navbar p, .theme-blue-light .chat-footer p, .theme-blue-light .headline p, .theme-blue-light .video-call .video-call__toolbar p, .video-call .theme-blue-light .video-call__toolbar p, .theme-pink-light .scheme-navbar p, .theme-pink-light .chat-footer p, .theme-pink-light .headline p, .theme-pink-light .video-call .video-call__toolbar p, .video-call .theme-pink-light .video-call__toolbar p, .theme-default .scheme-navbar p, .theme-default .chat-footer p, .theme-default .headline p, .theme-default .video-call .video-call__toolbar p, .video-call .theme-default .video-call__toolbar p {
   font-weight: 300;
   font-style: italic; }
 
@@ -70,11 +70,11 @@ table {
   font-weight: 400;
   font-style: normal; }
 
-.theme-blue-light h1, .theme-pink-light h1, .theme-default h1, .theme-blue-light h4, .theme-pink-light h4, .theme-default h4, .theme-blue-light .hermed-chat > .tools, .theme-pink-light .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-blue-light .scheme-navbar--toolbar h2, .theme-blue-light .chat-footer__toolbar h2, .theme-blue-light .video-call .video-call__toolbar h2, .video-call .theme-blue-light .video-call__toolbar h2, .theme-pink-light .scheme-navbar--toolbar h2, .theme-pink-light .chat-footer__toolbar h2, .theme-pink-light .video-call .video-call__toolbar h2, .video-call .theme-pink-light .video-call__toolbar h2, .theme-default .scheme-navbar--toolbar h2, .theme-default .chat-footer__toolbar h2, .theme-default .video-call .video-call__toolbar h2, .video-call .theme-default .video-call__toolbar h2, .theme-blue-light .button, .theme-pink-light .button, .theme-default .button, .theme-blue-light .send-message-state h4, .theme-pink-light .send-message-state h4, .theme-default .send-message-state h4, .theme-blue-light .floating-label-wrap.invalid .error-message, .theme-pink-light .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-blue-light .patient-item .name, .theme-pink-light .patient-item .name, .theme-default .patient-item .name, .theme-blue-light .active-call, .theme-pink-light .active-call, .theme-default .active-call, .theme-blue-light .list-item, .theme-pink-light .list-item, .theme-default .list-item {
+.theme-blue-light h1, .theme-pink-light h1, .theme-default h1, .theme-blue-light h4, .theme-pink-light h4, .theme-default h4, .theme-blue-light .hermed-chat > .tools, .theme-pink-light .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-blue-light .scheme-navbar h2, .theme-blue-light .chat-footer h2, .theme-blue-light .headline h2, .theme-blue-light .video-call .video-call__toolbar h2, .video-call .theme-blue-light .video-call__toolbar h2, .theme-pink-light .scheme-navbar h2, .theme-pink-light .chat-footer h2, .theme-pink-light .headline h2, .theme-pink-light .video-call .video-call__toolbar h2, .video-call .theme-pink-light .video-call__toolbar h2, .theme-default .scheme-navbar h2, .theme-default .chat-footer h2, .theme-default .headline h2, .theme-default .video-call .video-call__toolbar h2, .video-call .theme-default .video-call__toolbar h2, .theme-blue-light .button, .theme-pink-light .button, .theme-default .button, .theme-blue-light .send-message-state h4, .theme-pink-light .send-message-state h4, .theme-default .send-message-state h4, .theme-blue-light .floating-label-wrap.invalid .error-message, .theme-pink-light .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-blue-light .patient-item .name, .theme-pink-light .patient-item .name, .theme-default .patient-item .name, .theme-blue-light .active-call, .theme-pink-light .active-call, .theme-default .active-call, .theme-blue-light .list-item, .theme-pink-light .list-item, .theme-default .list-item {
   font-weight: 600;
   font-style: normal; }
 
-.theme-blue-light h3, .theme-pink-light h3, .theme-default h3, .theme-blue-light .hermed-chat > .tools .toolbar button, .theme-pink-light .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-blue-light .scheme-navbar, .theme-blue-light .chat-footer, .theme-blue-light .video-call .video-call__toolbar, .video-call .theme-blue-light .video-call__toolbar, .theme-pink-light .scheme-navbar, .theme-pink-light .chat-footer, .theme-pink-light .video-call .video-call__toolbar, .video-call .theme-pink-light .video-call__toolbar, .theme-default .scheme-navbar, .theme-default .chat-footer, .theme-default .video-call .video-call__toolbar, .video-call .theme-default .video-call__toolbar, .theme-blue-light .scheme-card__content h2, .theme-blue-light .card h2, .theme-pink-light .scheme-card__content h2, .theme-pink-light .card h2, .theme-default .scheme-card__content h2, .theme-default .card h2, .theme-blue-light .chat-bubble.welcome, .theme-pink-light .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-blue-light .headline, .theme-pink-light .headline, .theme-default .headline, .theme-blue-light .loading *, .theme-pink-light .loading *, .theme-default .loading *, .theme-blue-light .layout-footer, .theme-pink-light .layout-footer, .theme-default .layout-footer {
+.theme-blue-light h3, .theme-pink-light h3, .theme-default h3, .theme-blue-light .hermed-chat > .tools .toolbar button, .theme-pink-light .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-blue-light .scheme-navbar, .theme-blue-light .chat-footer, .theme-blue-light .headline, .theme-blue-light .video-call .video-call__toolbar, .video-call .theme-blue-light .video-call__toolbar, .theme-pink-light .scheme-navbar, .theme-pink-light .chat-footer, .theme-pink-light .headline, .theme-pink-light .video-call .video-call__toolbar, .video-call .theme-pink-light .video-call__toolbar, .theme-default .scheme-navbar, .theme-default .chat-footer, .theme-default .headline, .theme-default .video-call .video-call__toolbar, .video-call .theme-default .video-call__toolbar, .theme-blue-light .scheme-card__content h2, .theme-blue-light .card h2, .theme-pink-light .scheme-card__content h2, .theme-pink-light .card h2, .theme-default .scheme-card__content h2, .theme-default .card h2, .theme-blue-light .chat-bubble.welcome, .theme-pink-light .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-blue-light .loading *, .theme-pink-light .loading *, .theme-default .loading * {
   font-weight: 700;
   font-style: normal; }
 
@@ -117,7 +117,7 @@ table {
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse; }
 
-.flex-column, .headline button.icon, .layout-footer button.icon {
+.flex-column, .button--icon {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -217,7 +217,7 @@ table {
   -moz-align-items: flex-end;
   align-items: flex-end; }
 
-.align-center, .headline button.icon, .layout-footer button.icon {
+.align-center, .button--icon {
   -ms-align-items: center;
   -webkit-align-items: center;
   -moz-align-items: center;
@@ -710,7 +710,7 @@ footer {
   font-family: soleil, sans-serif;
   font-family: gibbs, sans-serif;
 */
-.theme-blue-light html, .theme-blue-light body, .theme-pink-light html, .theme-pink-light body, .theme-default html, .theme-default body, .theme-blue-light section, .theme-blue-light footer, .theme-pink-light section, .theme-pink-light footer, .theme-default section, .theme-default footer, .theme-blue-light h1, .theme-pink-light h1, .theme-default h1, .theme-blue-light h2, .theme-pink-light h2, .theme-default h2, .theme-blue-light h3, .theme-pink-light h3, .theme-default h3, .theme-blue-light h4, .theme-pink-light h4, .theme-default h4, .theme-blue-light label, .theme-blue-light input, .theme-pink-light label, .theme-pink-light input, .theme-default label, .theme-default input, .theme-blue-light a, .theme-pink-light a, .theme-default a, .theme-blue-light .hermed-chat > .chat, .theme-pink-light .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-blue-light .hermed-chat > .tools, .theme-pink-light .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-blue-light .hermed-chat > .tools .toolbar button, .theme-pink-light .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-blue-light .scheme-navbar, .theme-blue-light .chat-footer, .theme-blue-light .video-call .video-call__toolbar, .video-call .theme-blue-light .video-call__toolbar, .theme-pink-light .scheme-navbar, .theme-pink-light .chat-footer, .theme-pink-light .video-call .video-call__toolbar, .video-call .theme-pink-light .video-call__toolbar, .theme-default .scheme-navbar, .theme-default .chat-footer, .theme-default .video-call .video-call__toolbar, .video-call .theme-default .video-call__toolbar, .theme-blue-light .scheme-navbar--toolbar h2, .theme-blue-light .chat-footer__toolbar h2, .theme-blue-light .video-call .video-call__toolbar h2, .video-call .theme-blue-light .video-call__toolbar h2, .theme-pink-light .scheme-navbar--toolbar h2, .theme-pink-light .chat-footer__toolbar h2, .theme-pink-light .video-call .video-call__toolbar h2, .video-call .theme-pink-light .video-call__toolbar h2, .theme-default .scheme-navbar--toolbar h2, .theme-default .chat-footer__toolbar h2, .theme-default .video-call .video-call__toolbar h2, .video-call .theme-default .video-call__toolbar h2, .theme-blue-light .scheme-card__content, .theme-blue-light .card, .theme-pink-light .scheme-card__content, .theme-pink-light .card, .theme-default .scheme-card__content, .theme-default .card, .theme-blue-light .scheme-card__content h2, .theme-blue-light .card h2, .theme-pink-light .scheme-card__content h2, .theme-pink-light .card h2, .theme-default .scheme-card__content h2, .theme-default .card h2, .theme-blue-light .button, .theme-pink-light .button, .theme-default .button, .theme-blue-light .chat-bubble.welcome, .theme-pink-light .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-blue-light .chat-bubble.right, .theme-blue-light .chat-bubble.left, .theme-pink-light .chat-bubble.right, .theme-pink-light .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-blue-light .chat-bubble__date, .theme-pink-light .chat-bubble__date, .theme-default .chat-bubble__date, .theme-blue-light .send-message-state h4, .theme-pink-light .send-message-state h4, .theme-default .send-message-state h4, .theme-blue-light .floating-label-wrap, .theme-pink-light .floating-label-wrap, .theme-default .floating-label-wrap, .theme-blue-light .floating-label-wrap.invalid .error-message, .theme-pink-light .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-blue-light .floating-label-field, .theme-pink-light .floating-label-field, .theme-default .floating-label-field, .theme-blue-light .basic-form .label, .theme-pink-light .basic-form .label, .theme-default .basic-form .label, .theme-blue-light .headline, .theme-pink-light .headline, .theme-default .headline, .theme-blue-light .headline__contact-status, .theme-pink-light .headline__contact-status, .theme-default .headline__contact-status, .theme-blue-light .single-input input, .theme-pink-light .single-input input, .theme-default .single-input input, .theme-blue-light .single-input input:focus, .theme-pink-light .single-input input:focus, .theme-default .single-input input:focus, .theme-blue-light .single-input input::placeholder, .theme-pink-light .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-blue-light .single-input__label, .theme-pink-light .single-input__label, .theme-default .single-input__label, .theme-blue-light .single-input__input, .theme-pink-light .single-input__input, .theme-default .single-input__input, .theme-blue-light .single-input__input:focus, .theme-pink-light .single-input__input:focus, .theme-default .single-input__input:focus, .theme-blue-light .single-input__input::placeholder, .theme-pink-light .single-input__input::placeholder, .theme-default .single-input__input::placeholder, .theme-blue-light .patient-item, .theme-pink-light .patient-item, .theme-default .patient-item, .theme-blue-light .patient-item .name, .theme-pink-light .patient-item .name, .theme-default .patient-item .name, .theme-blue-light .single-select label, .theme-pink-light .single-select label, .theme-default .single-select label, .theme-blue-light .single-select select, .theme-pink-light .single-select select, .theme-default .single-select select, .theme-blue-light .single-select select:focus, .theme-pink-light .single-select select:focus, .theme-default .single-select select:focus, .theme-blue-light .single-select select::placeholder, .theme-pink-light .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-blue-light .waiting-room, .theme-pink-light .waiting-room, .theme-default .waiting-room, .theme-blue-light .loading *, .theme-pink-light .loading *, .theme-default .loading *, .theme-blue-light .answer_call, .theme-pink-light .answer_call, .theme-default .answer_call, .theme-blue-light .active-call, .theme-pink-light .active-call, .theme-default .active-call, .theme-blue-light .list-item, .theme-pink-light .list-item, .theme-default .list-item, .theme-blue-light .layout-footer, .theme-pink-light .layout-footer, .theme-default .layout-footer {
+.theme-blue-light html, .theme-blue-light body, .theme-pink-light html, .theme-pink-light body, .theme-default html, .theme-default body, .theme-blue-light section, .theme-blue-light footer, .theme-pink-light section, .theme-pink-light footer, .theme-default section, .theme-default footer, .theme-blue-light h1, .theme-pink-light h1, .theme-default h1, .theme-blue-light h2, .theme-pink-light h2, .theme-default h2, .theme-blue-light h3, .theme-pink-light h3, .theme-default h3, .theme-blue-light h4, .theme-pink-light h4, .theme-default h4, .theme-blue-light label, .theme-blue-light input, .theme-pink-light label, .theme-pink-light input, .theme-default label, .theme-default input, .theme-blue-light a, .theme-pink-light a, .theme-default a, .theme-blue-light .hermed-chat > .chat, .theme-pink-light .hermed-chat > .chat, .theme-default .hermed-chat > .chat, .theme-blue-light .hermed-chat > .tools, .theme-pink-light .hermed-chat > .tools, .theme-default .hermed-chat > .tools, .theme-blue-light .hermed-chat > .tools .toolbar button, .theme-pink-light .hermed-chat > .tools .toolbar button, .theme-default .hermed-chat > .tools .toolbar button, .theme-blue-light .scheme-navbar, .theme-blue-light .chat-footer, .theme-blue-light .headline, .theme-blue-light .video-call .video-call__toolbar, .video-call .theme-blue-light .video-call__toolbar, .theme-pink-light .scheme-navbar, .theme-pink-light .chat-footer, .theme-pink-light .headline, .theme-pink-light .video-call .video-call__toolbar, .video-call .theme-pink-light .video-call__toolbar, .theme-default .scheme-navbar, .theme-default .chat-footer, .theme-default .headline, .theme-default .video-call .video-call__toolbar, .video-call .theme-default .video-call__toolbar, .theme-blue-light .scheme-navbar h2, .theme-blue-light .chat-footer h2, .theme-blue-light .headline h2, .theme-blue-light .video-call .video-call__toolbar h2, .video-call .theme-blue-light .video-call__toolbar h2, .theme-pink-light .scheme-navbar h2, .theme-pink-light .chat-footer h2, .theme-pink-light .headline h2, .theme-pink-light .video-call .video-call__toolbar h2, .video-call .theme-pink-light .video-call__toolbar h2, .theme-default .scheme-navbar h2, .theme-default .chat-footer h2, .theme-default .headline h2, .theme-default .video-call .video-call__toolbar h2, .video-call .theme-default .video-call__toolbar h2, .theme-blue-light .scheme-navbar p, .theme-blue-light .chat-footer p, .theme-blue-light .headline p, .theme-blue-light .video-call .video-call__toolbar p, .video-call .theme-blue-light .video-call__toolbar p, .theme-pink-light .scheme-navbar p, .theme-pink-light .chat-footer p, .theme-pink-light .headline p, .theme-pink-light .video-call .video-call__toolbar p, .video-call .theme-pink-light .video-call__toolbar p, .theme-default .scheme-navbar p, .theme-default .chat-footer p, .theme-default .headline p, .theme-default .video-call .video-call__toolbar p, .video-call .theme-default .video-call__toolbar p, .theme-blue-light .scheme-card__content, .theme-blue-light .card, .theme-pink-light .scheme-card__content, .theme-pink-light .card, .theme-default .scheme-card__content, .theme-default .card, .theme-blue-light .scheme-card__content h2, .theme-blue-light .card h2, .theme-pink-light .scheme-card__content h2, .theme-pink-light .card h2, .theme-default .scheme-card__content h2, .theme-default .card h2, .theme-blue-light .button, .theme-pink-light .button, .theme-default .button, .theme-blue-light .chat-bubble.welcome, .theme-pink-light .chat-bubble.welcome, .theme-default .chat-bubble.welcome, .theme-blue-light .chat-bubble.right, .theme-blue-light .chat-bubble.left, .theme-pink-light .chat-bubble.right, .theme-pink-light .chat-bubble.left, .theme-default .chat-bubble.right, .theme-default .chat-bubble.left, .theme-blue-light .chat-bubble__date, .theme-pink-light .chat-bubble__date, .theme-default .chat-bubble__date, .theme-blue-light .send-message-state h4, .theme-pink-light .send-message-state h4, .theme-default .send-message-state h4, .theme-blue-light .floating-label-wrap, .theme-pink-light .floating-label-wrap, .theme-default .floating-label-wrap, .theme-blue-light .floating-label-wrap.invalid .error-message, .theme-pink-light .floating-label-wrap.invalid .error-message, .theme-default .floating-label-wrap.invalid .error-message, .theme-blue-light .floating-label-field, .theme-pink-light .floating-label-field, .theme-default .floating-label-field, .theme-blue-light .basic-form .label, .theme-pink-light .basic-form .label, .theme-default .basic-form .label, .theme-blue-light .single-input input, .theme-pink-light .single-input input, .theme-default .single-input input, .theme-blue-light .single-input input:focus, .theme-pink-light .single-input input:focus, .theme-default .single-input input:focus, .theme-blue-light .single-input input::placeholder, .theme-pink-light .single-input input::placeholder, .theme-default .single-input input::placeholder, .theme-blue-light .single-input__label, .theme-pink-light .single-input__label, .theme-default .single-input__label, .theme-blue-light .single-input__input, .theme-pink-light .single-input__input, .theme-default .single-input__input, .theme-blue-light .single-input__input:focus, .theme-pink-light .single-input__input:focus, .theme-default .single-input__input:focus, .theme-blue-light .single-input__input::placeholder, .theme-pink-light .single-input__input::placeholder, .theme-default .single-input__input::placeholder, .theme-blue-light .patient-item, .theme-pink-light .patient-item, .theme-default .patient-item, .theme-blue-light .patient-item .name, .theme-pink-light .patient-item .name, .theme-default .patient-item .name, .theme-blue-light .single-select label, .theme-pink-light .single-select label, .theme-default .single-select label, .theme-blue-light .single-select select, .theme-pink-light .single-select select, .theme-default .single-select select, .theme-blue-light .single-select select:focus, .theme-pink-light .single-select select:focus, .theme-default .single-select select:focus, .theme-blue-light .single-select select::placeholder, .theme-pink-light .single-select select::placeholder, .theme-default .single-select select::placeholder, .theme-blue-light .waiting-room, .theme-pink-light .waiting-room, .theme-default .waiting-room, .theme-blue-light .loading *, .theme-pink-light .loading *, .theme-default .loading *, .theme-blue-light .answer_call, .theme-pink-light .answer_call, .theme-default .answer_call, .theme-blue-light .active-call, .theme-pink-light .active-call, .theme-default .active-call, .theme-blue-light .list-item, .theme-pink-light .list-item, .theme-default .list-item {
   font-family: soleil, sans-serif; }
 
 /* FONTS */
@@ -806,8 +806,7 @@ button {
   -ms-align-items: center;
   -webkit-align-items: center;
   -moz-align-items: center;
-  align-items: center;
-  width: 100%; }
+  align-items: center; }
   .layout-flex--column {
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
@@ -870,6 +869,12 @@ button {
     -webkit-align-items: center;
     -moz-align-items: center;
     align-items: center; }
+  .layout-flex--align-top {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    align-items: flex-start; }
   .layout-flex--cover {
     width: 100%;
     height: 100%; }
@@ -1013,39 +1018,74 @@ button {
   text-align: center;
   padding: 16px; }
 
-/* schemes*/
-.scheme-navbar, .chat-footer, .video-call .video-call__toolbar {
-  padding-top: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
-  font-size: 12px; }
+.layout-navbar, .headline, .video-call .video-call__toolbar {
+  font-size: 12px;
+  min-height: 63px;
+  width: 100%; }
   @media (min-width: 320px) {
-    .scheme-navbar, .chat-footer, .video-call .video-call__toolbar {
+    .layout-navbar, .headline, .video-call .video-call__toolbar {
       font-size: calc(12px + 4 * (100vw - 320px) / 1046); } }
   @media (min-width: 1366px) {
-    .scheme-navbar, .chat-footer, .video-call .video-call__toolbar {
+    .layout-navbar, .headline, .video-call .video-call__toolbar {
       font-size: 16px; } }
-  .theme-blue-light .scheme-navbar, .theme-blue-light .chat-footer, .theme-blue-light .video-call .video-call__toolbar, .video-call .theme-blue-light .video-call__toolbar {
-    color: white;
-    background-color: #43a9af; }
-  .theme-pink-light .scheme-navbar, .theme-pink-light .chat-footer, .theme-pink-light .video-call .video-call__toolbar, .video-call .theme-pink-light .video-call__toolbar {
-    color: white;
-    background-color: #f25e5e; }
-  .theme-default .scheme-navbar, .theme-default .chat-footer, .theme-default .video-call .video-call__toolbar, .video-call .theme-default .video-call__toolbar {
-    color: white;
-    background-color: #f25e5e; }
-  .theme-blue-light .scheme-navbar--toolbar h2, .theme-blue-light .chat-footer__toolbar h2, .theme-blue-light .video-call .video-call__toolbar h2, .video-call .theme-blue-light .video-call__toolbar h2 {
-    color: white; }
-  .theme-pink-light .scheme-navbar--toolbar h2, .theme-pink-light .chat-footer__toolbar h2, .theme-pink-light .video-call .video-call__toolbar h2, .video-call .theme-pink-light .video-call__toolbar h2 {
-    color: white; }
-  .theme-default .scheme-navbar--toolbar h2, .theme-default .chat-footer__toolbar h2, .theme-default .video-call .video-call__toolbar h2, .video-call .theme-default .video-call__toolbar h2 {
-    color: white; }
-  .theme-blue-light .scheme-navbar--toolbar .button:focus, .theme-blue-light .chat-footer__toolbar .button:focus, .theme-blue-light .video-call .video-call__toolbar .button:focus, .video-call .theme-blue-light .video-call__toolbar .button:focus, .theme-blue-light .scheme-navbar--toolbar .button:active, .theme-blue-light .chat-footer__toolbar .button:active, .theme-blue-light .video-call .video-call__toolbar .button:active, .video-call .theme-blue-light .video-call__toolbar .button:active {
-    color: white; }
-  .theme-pink-light .scheme-navbar--toolbar .button:focus, .theme-pink-light .chat-footer__toolbar .button:focus, .theme-pink-light .video-call .video-call__toolbar .button:focus, .video-call .theme-pink-light .video-call__toolbar .button:focus, .theme-pink-light .scheme-navbar--toolbar .button:active, .theme-pink-light .chat-footer__toolbar .button:active, .theme-pink-light .video-call .video-call__toolbar .button:active, .video-call .theme-pink-light .video-call__toolbar .button:active {
-    color: white; }
-  .theme-default .scheme-navbar--toolbar .button:focus, .theme-default .chat-footer__toolbar .button:focus, .theme-default .video-call .video-call__toolbar .button:focus, .video-call .theme-default .video-call__toolbar .button:focus, .theme-default .scheme-navbar--toolbar .button:active, .theme-default .chat-footer__toolbar .button:active, .theme-default .video-call .video-call__toolbar .button:active, .video-call .theme-default .video-call__toolbar .button:active {
-    color: white; }
+  .layout-navbar p, .headline p, .video-call .video-call__toolbar p {
+    /*ex: contact status*/
+    font-size: 12px; }
+    @media (min-width: 320px) {
+      .layout-navbar p, .headline p, .video-call .video-call__toolbar p {
+        font-size: calc(12px + 2 * (100vw - 320px) / 1046); } }
+    @media (min-width: 1366px) {
+      .layout-navbar p, .headline p, .video-call .video-call__toolbar p {
+        font-size: 14px; } }
+  .layout-navbar--footer, .chat-footer, .video-call .video-call__toolbar {
+    min-height: 79px;
+    padding: 5px 25px 0px; }
+  .layout-navbar--header, .headline {
+    padding: 0px 25px; }
+    .layout-navbar--header .button--icon, .headline .button--icon {
+      margin-right: 10px; }
+    .layout-navbar--header .button--icon:last-child, .headline .button--icon:last-child {
+      margin: inherit; }
+
+/* schemes*/
+.theme-blue-light .scheme-navbar, .theme-blue-light .chat-footer, .theme-blue-light .headline, .theme-blue-light .video-call .video-call__toolbar, .video-call .theme-blue-light .video-call__toolbar {
+  color: white;
+  background-color: #43a9af; }
+
+.theme-pink-light .scheme-navbar, .theme-pink-light .chat-footer, .theme-pink-light .headline, .theme-pink-light .video-call .video-call__toolbar, .video-call .theme-pink-light .video-call__toolbar {
+  color: white;
+  background-color: #f25e5e; }
+
+.theme-default .scheme-navbar, .theme-default .chat-footer, .theme-default .headline, .theme-default .video-call .video-call__toolbar, .video-call .theme-default .video-call__toolbar {
+  color: white;
+  background-color: #f25e5e; }
+
+.theme-blue-light .scheme-navbar h2, .theme-blue-light .chat-footer h2, .theme-blue-light .headline h2, .theme-blue-light .video-call .video-call__toolbar h2, .video-call .theme-blue-light .video-call__toolbar h2 {
+  color: white; }
+
+.theme-pink-light .scheme-navbar h2, .theme-pink-light .chat-footer h2, .theme-pink-light .headline h2, .theme-pink-light .video-call .video-call__toolbar h2, .video-call .theme-pink-light .video-call__toolbar h2 {
+  color: white; }
+
+.theme-default .scheme-navbar h2, .theme-default .chat-footer h2, .theme-default .headline h2, .theme-default .video-call .video-call__toolbar h2, .video-call .theme-default .video-call__toolbar h2 {
+  color: white; }
+
+.theme-blue-light .scheme-navbar .button.text, .theme-blue-light .chat-footer .button.text, .theme-blue-light .headline .button.text, .theme-blue-light .video-call .video-call__toolbar .button.text, .video-call .theme-blue-light .video-call__toolbar .button.text {
+  color: white; }
+
+.theme-pink-light .scheme-navbar .button.text, .theme-pink-light .chat-footer .button.text, .theme-pink-light .headline .button.text, .theme-pink-light .video-call .video-call__toolbar .button.text, .video-call .theme-pink-light .video-call__toolbar .button.text {
+  color: white; }
+
+.theme-default .scheme-navbar .button.text, .theme-default .chat-footer .button.text, .theme-default .headline .button.text, .theme-default .video-call .video-call__toolbar .button.text, .video-call .theme-default .video-call__toolbar .button.text {
+  color: white; }
+
+.scheme-navbar p, .chat-footer p, .headline p, .video-call .video-call__toolbar p {
+  /*contact-status*/ }
+  .theme-blue-light .scheme-navbar p, .theme-blue-light .chat-footer p, .theme-blue-light .headline p, .theme-blue-light .video-call .video-call__toolbar p, .video-call .theme-blue-light .video-call__toolbar p {
+    color: #d9d9d9; }
+  .theme-pink-light .scheme-navbar p, .theme-pink-light .chat-footer p, .theme-pink-light .headline p, .theme-pink-light .video-call .video-call__toolbar p, .video-call .theme-pink-light .video-call__toolbar p {
+    color: #d9d9d9; }
+  .theme-default .scheme-navbar p, .theme-default .chat-footer p, .theme-default .headline p, .theme-default .video-call .video-call__toolbar p, .video-call .theme-default .video-call__toolbar p {
+    color: #d9d9d9; }
 
 /* Card scheme */
 .scheme-card__background, .card-container {
@@ -1163,27 +1203,17 @@ button {
       color: #f25e5e; }
     .theme-default .button.text {
       color: #f25e5e; }
-  .button.toolbar {
+  .button.navbar {
     background-color: transparent;
     border: none; }
-    .theme-blue-light .button.toolbar {
+    .theme-blue-light .button.navbar {
       color: white; }
-    .theme-pink-light .button.toolbar {
+    .theme-pink-light .button.navbar {
       color: white; }
-    .theme-default .button.toolbar {
+    .theme-default .button.navbar {
       color: white; }
-  .button.icon {
-    margin-right: 10px; }
-  .button.icon--32 svg {
-    width: 32px;
-    height: 32px; }
-    @media screen and (max-width: 425px) {
-      .button.icon--32 svg {
-        width: 24px;
-        height: 24px; } }
-  .button.icon--48 svg {
-    width: 48px;
-    height: 48px; }
+  .button--icon {
+    display: flex; }
   .button.clear {
     background-color: transparent;
     border-color: transparent; }
@@ -1224,44 +1254,51 @@ button {
 .button, .button:active {
   outline: none; }
 
-.chat-footer .chat-footer__message-input {
-  margin: 0px auto; }
-
-.chat-footer .chat-footer__toolbar > *:last-child {
-  margin-right: 0px; }
-
-.chat-footer .chat-footer__message-input {
-  position: relative;
-  width: 100%; }
-  .chat-footer .chat-footer__message-input .single-input input {
-    border-radius: 4px 0px 0px 4px;
-    border-right: none; }
-  .chat-footer .chat-footer__message-input .button--send {
-    border-radius: 0px 4px 4px 0px;
-    margin: 6px 0px;
-    padding-top: 0px;
-    padding-bottom: 0px; }
-    .theme-blue-light .chat-footer .chat-footer__message-input .button--send {
-      color: white;
-      background-color: white;
-      border: solid 1px #d9d9d9;
-      border-left: none; }
-    .theme-pink-light .chat-footer .chat-footer__message-input .button--send {
-      color: white;
-      background-color: white;
-      border: solid 1px #d9d9d9;
-      border-left: none; }
-    .theme-default .chat-footer .chat-footer__message-input .button--send {
-      color: white;
-      background-color: white;
-      border: solid 1px #d9d9d9;
-      border-left: none; }
-  .theme-blue-light .chat-footer .chat-footer__message-input svg {
-    color: #43a9af; }
-  .theme-pink-light .chat-footer .chat-footer__message-input svg {
-    color: #f25e5e; }
-  .theme-default .chat-footer .chat-footer__message-input svg {
-    color: #f25e5e; }
+.chat-footer {
+  min-height: 126px;
+  /*
+  .chat-footer__message-input {
+    margin: 0px auto;
+  }
+*/
+  /*
+  .chat-footer__toolbar > *:last-child {
+    margin-right: 0px;
+  }
+*/ }
+  .chat-footer .chat-footer__message-input {
+    position: relative;
+    width: 100%;
+    /*special case for send button*/ }
+    .chat-footer .chat-footer__message-input .single-input input {
+      border-radius: 4px 0px 0px 4px;
+      border-right: none; }
+    .chat-footer .chat-footer__message-input .button--send {
+      border-radius: 0px 4px 4px 0px;
+      margin: 6px 0px;
+      padding-top: 0px;
+      padding-bottom: 0px; }
+      .theme-blue-light .chat-footer .chat-footer__message-input .button--send {
+        color: white;
+        background-color: white;
+        border: solid 1px #d9d9d9;
+        border-left: none; }
+      .theme-pink-light .chat-footer .chat-footer__message-input .button--send {
+        color: white;
+        background-color: white;
+        border: solid 1px #d9d9d9;
+        border-left: none; }
+      .theme-default .chat-footer .chat-footer__message-input .button--send {
+        color: white;
+        background-color: white;
+        border: solid 1px #d9d9d9;
+        border-left: none; }
+    .theme-blue-light .chat-footer .chat-footer__message-input svg {
+      color: #43a9af; }
+    .theme-pink-light .chat-footer .chat-footer__message-input svg {
+      color: #f25e5e; }
+    .theme-default .chat-footer .chat-footer__message-input svg {
+      color: #f25e5e; }
 
 /*must use MobileVHAdapter*/
 .hermed-chat {
@@ -1569,62 +1606,6 @@ textarea.floating-label-field {
     @media (min-width: 1366px) {
       .basic-form .label {
         font-size: 14px; } }
-
-.headline {
-  min-height: 63px;
-  font-size: 12px; }
-  @media (min-width: 320px) {
-    .headline {
-      font-size: calc(12px + 4 * (100vw - 320px) / 1046); } }
-  @media (min-width: 1366px) {
-    .headline {
-      font-size: 16px; } }
-  .theme-blue-light .headline {
-    color: white;
-    background-color: #43a9af; }
-  .theme-pink-light .headline {
-    color: white;
-    background-color: #f25e5e; }
-  .theme-default .headline {
-    color: white;
-    background-color: #f25e5e; }
-  .theme-blue-light .headline button.text {
-    color: white; }
-  .theme-pink-light .headline button.text {
-    color: white; }
-  .theme-default .headline button.text {
-    color: white; }
-  .headline button.icon {
-    display: flex;
-    margin-right: 10px; }
-  .headline button.icon--32 svg {
-    width: 32px;
-    height: 32px; }
-    @media screen and (max-width: 425px) {
-      .headline button.icon--32 svg {
-        width: 24px;
-        height: 24px; } }
-  .headline .badge-dot {
-    margin-right: 8px; }
-    .theme-blue-light .headline .badge-dot {
-      background-color: #c9c9c9; }
-    .theme-pink-light .headline .badge-dot {
-      background-color: #c9c9c9; }
-  .headline__contact-status {
-    margin-left: calc(16px + 8px);
-    font-size: 12px; }
-    @media (min-width: 320px) {
-      .headline__contact-status {
-        font-size: calc(12px + 2 * (100vw - 320px) / 1046); } }
-    @media (min-width: 1366px) {
-      .headline__contact-status {
-        font-size: 14px; } }
-    .theme-blue-light .headline__contact-status {
-      color: #d9d9d9; }
-    .theme-pink-light .headline__contact-status {
-      color: #d9d9d9; }
-    .theme-default .headline__contact-status {
-      color: #d9d9d9; }
 
 .single-input {
   width: 100%;
@@ -2541,52 +2522,35 @@ textarea.floating-label-field {
     height: 100px; }
 
 .layout-footer {
-  padding-top: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
-  font-size: 12px; }
-  @media (min-width: 320px) {
-    .layout-footer {
-      font-size: calc(12px + 4 * (100vw - 320px) / 1046); } }
-  @media (min-width: 1366px) {
-    .layout-footer {
-      font-size: 16px; } }
-  .theme-blue-light .layout-footer {
-    color: white;
-    background-color: #43a9af; }
-  .theme-pink-light .layout-footer {
-    color: white;
-    background-color: #f25e5e; }
-  .theme-default .layout-footer {
-    color: white;
-    background-color: #f25e5e; }
-  .theme-blue-light .layout-footer button.text {
-    color: white; }
-  .theme-pink-light .layout-footer button.text {
-    color: white; }
-  .theme-default .layout-footer button.text {
-    color: white; }
-  .theme-blue-light .layout-footer button.text h2 {
-    color: white; }
-  .theme-pink-light .layout-footer button.text h2 {
-    color: white; }
-  .theme-default .layout-footer button.text h2 {
-    color: white; }
-  .layout-footer button.icon {
-    display: flex; }
+  padding: 10px 25px 0px; }
 
-.icon {
+.icon svg {
+  width: 32px;
+  height: 32px; }
+
+.icon--xs svg {
   width: 24px;
   height: 24px; }
-  .icon--small {
-    width: 32px;
-    height: 32px; }
-  .icon--med {
-    width: 48px;
-    height: 48px; }
-  .icon--huge {
-    width: 98px;
-    height: 98px; }
+
+.icon--s svg {
+  width: 32px;
+  height: 32px; }
+  @media screen and (max-width: 425px) {
+    .icon--s svg {
+      width: 24px;
+      height: 24px; } }
+
+.icon--m svg {
+  width: 48px;
+  height: 48px; }
+
+.icon--l svg {
+  width: 64px;
+  height: 64px; }
+
+.icon--xl svg {
+  width: 98px;
+  height: 98px; }
 
 /* new components */
 .video-call {
@@ -2600,8 +2564,6 @@ textarea.floating-label-field {
     bottom: 0px; }
   .video-call .video.video--preview {
     border: 2px solid white; }
-  .video-call .video-call__toolbar {
-    /*dont forget the !optional*/ }
 
 .card {
   min-width: 200px;

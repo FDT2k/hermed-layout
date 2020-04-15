@@ -1,34 +1,5 @@
 @import 'adobe';
 
-
-$OuterSpace: $GKA-Theme-1-rgba;
-$Elm: $GKA-Theme-2-rgba;
-$Bermuda: $GKA-Theme-3-rgba;
-$DeepSeaGreen: $UI-Color-4-rgba;
-$SandyBrown: $GKA-Theme-4-rgba;
-$Coral: #ff7954;
-$Oasis: $UI-Color-1-rgba;
-$OasisLight: lighting($Oasis, 97%);
-$SeaBuckthorn: $GKA-Theme-5-rgba;
-
-$Paradiso: $HERMED_Theme-1-rgba;
-$ParadisoLight: lighting($Paradiso, 90%);
-$ParadisoAlpha: alphaness($Paradiso, 0.5);
-$GrannyApple: $HERMED_Theme-2-rgba;
-$Champagne: $HERMED_Theme-3-rgba;
-$Charade: $HERMED_Theme-4-rgba;
-$Carnation: $HERMED_Theme-5-rgba;
-$Reef: $More-Colors-1-rgba;
-$PastelGreen: $More-Colors-2-rgba;
-$Mustard: $More-Colors-3-rgba;
-
-$Pelorous: #43A9AF;
-$Zumthor: #E9F3FF;
-
-$info: $UI-Color-3-rgba;
-$success: $UI-Color-5-rgba;
-$error: $UI-Color-2-rgba;
-
 /* GRAY
 //rgba(40, 48, 51, 0.51),*/
 $white: gray(100);
@@ -36,130 +7,150 @@ $gray-85: gray(85);
 $gray-79: gray(79);
 $gray-72: gray(72);
 $gray-52: gray(52);
-$gray-38: gray(38);
 
 $whiteAlpha-55: alphaness($white, 0.55);
 
+
+/* Project's colors */
+$Pelorous: rgba(67,169,175, 1);
+$ClearDay: rgba(229,255,248, 1);
+$Zumthor: rgba(233,243,255, 1);
+
+$Carnation: $HERMED_Theme-5-rgba;
+$Rajah: rgba(250,186,100, 1);
+$Champagne: $HERMED_Theme-3-rgba;
+
+$Charade: $HERMED_Theme-4-rgba;
+
+$PastelGreen: $More-Colors-2-rgba;
+$Reef: $More-Colors-1-rgba;
+$Mustard: $UI-Color-1-rgba;
+
+/* UI Color */
+$blue: $UI-Color-3-rgba;
+$green: $More-Colors-2-rgba;
+$red: $Carnation;
+$yellow: $Mustard;
+
+
 $themes: (
+  blue-light: (
+    primaryFont:'soleil',
+    secondaryFont: 'soleil',
 
-  chat: (
-    titleFont:'soleil',
-    mainFont: 'soleil',
-    textColor: $Charade,
-    textColorSecondary: $white,
+    primaryBasic: $Charade,
+    secondaryBasic: $white,
+    secondaryBasicAlpha: $whiteAlpha-55,
 
-    backgroundColor: $Champagne,
-    backgroundColorSecondary: $Paradiso,
-    backgroundColorTertiary: $white,
+    primaryColor: $Pelorous,
+    primaryColorLight: $Zumthor,
+    primaryColorDark: $ClearDay,
 
-    shadow: $gray-79,
-    fieldsText: $gray-52,
-    inputBorder: $gray-85,
-    helperText: $gray-72,
-    shadowColor: #00000029,
-    info: $Carnation,
-    error: $error,
-    success: $success,
-    warning: $SeaBuckthorn,
-    link: $Carnation,
-    disabled: $gray-52,
+    secondaryColor: $Carnation,
+    secondaryColorLight: $Champagne,
+    secondaryColorDark: $Rajah,
 
-    // Buttons
-    buttonTextTransform: uppercase,
-    buttonTextColor: $white,
-    buttonTextColorSecondary: $Paradiso,
-    buttonTextHoverColor: $Charade,
+    thirdColor:$PastelGreen,
+    thirdColorLight:$Reef,
+    thirdColorDark:$red,
 
-    buttonColor: $Paradiso,
-    buttonBorder: 1px solid $Paradiso,
-    buttonHoverColor: $GrannyApple,
+    statusBlue:$blue,
+    statusRed:$red,
+    statusGreen:$green,
+    statusYellow:$yellow,
 
-    //headline
-    smallTextColor: $gray-85,
-    StatusColorDefault: $gray-85,
-    StatusColorDisconnect: $Carnation,
-    statusColorWaiting: $Mustard,
-    statusColorOnline: $PastelGreen,
+    light: $white,
 
-    //Chat
-    ChatBubbleBackgroundDefault: $whiteAlpha-55,
-    ChatBubbleBackgroundPrimary: $Reef,
-    ChatBubbleBackgroundSecondary: $white,
+    grayLightest:$red,
+    grayLight: $gray-85,
+    grayLighter:$red,
+    gray: $gray-79,
+    grayDark:$gray-72,
+    grayDarker:$gray-52,
+    grayDarkest:$red,
 
+    dark: $Charade,
+
+    disabled:$gray-79 // keywords like grey or red doesnt work
   ),
-  landing: (
-    titleFont:'soleil',
-    mainFont: 'soleil',
-    textColor: $Charade,
-    textColorSecondary: $Carnation,
 
-    backgroundColorSecondary: $white,
-    backgroundColor: $white,
+  pink-light: (
+    primaryFont:'soleil',
+    secondaryFont: 'soleil',
 
-    shadow: $gray-79,
-    fieldsText: $gray-52,
-    inputBorder: $gray-85,
-    helperText: $gray-72,
-    info: $Carnation,
-    error: $error,
-    success: $success,
-    link: $Carnation,
+    primaryBasic: $Charade,
+    secondaryBasic: $white,
+    secondaryBasicAlpha: $whiteAlpha-55,
 
-    // Buttons
-    buttonTextTransform: uppercase,
-    buttonTextColor: $white,
-    buttonTextColorSecondary: $Carnation,
-    buttonTextHoverColor: $Charade,
+    primaryColor: $Carnation,
+    primaryColorLight: $Champagne,
+    primaryColorDark: $Rajah,
 
-    buttonColor: $Carnation,
-    buttonBorder: 1px solid $Carnation,
-    buttonHoverColor: $Oasis,
+    secondaryColor: $Pelorous,
+    secondaryColorLight: $Zumthor,
+    secondaryColorDark: $ClearDay,
 
-    //headline
-    smallTextColor: $gray-85,
+    thirdColor:$PastelGreen,
+    thirdColorLight:$Reef,
+    thirdColorDark:$red,
 
-    //Chat
-    ChatBubbleBackgroundDefault: $whiteAlpha-55,
-    ChatBubbleBackgroundPrimary: $Reef,
-    ChatBubbleBackgroundSecondary: $white,
+    statusBlue:$blue,
+    statusRed:$red,
+    statusGreen:$green,
+    statusYellow:$yellow,
+
+    light: $white,
+
+    grayLightest:$red,
+    grayLight: $gray-85,
+    grayLighter:$red,
+    gray: $gray-79,
+    grayDark:$gray-72,
+    grayDarker:$gray-52,
+    grayDarkest:$red,
+
+    dark: $Charade,
+
+    disabled:$gray-79
 
   ),
 
   default: (
-    titleFont:'soleil',
-    mainFont: 'soleil',
-    textColor: $Charade,
-    textColorSecondary: $Carnation,
+    primaryFont:'soleil',
+    secondaryFont: 'soleil',
 
-    backgroundColorSecondary: $white,
-    backgroundColor: $white,
+    primaryBasic: $Charade,
+    secondaryBasic: $white,
+    secondaryBasicAlpha: $whiteAlpha-55,
 
-    shadow: $gray-79,
-    fieldsText: $gray-52,
-    inputBorder: $gray-85,
-    helperText: $gray-72,
-    info: $Carnation,
-    error: $error,
-    success: $success,
-    link: $Carnation,
+    primaryColor: $Carnation,
+    primaryColorLight: $Champagne,
+    primaryColorDark: $Rajah,
 
-    // Buttons
-    buttonTextTransform: uppercase,
-    buttonTextColor: $white,
-    buttonTextColorSecondary: $Carnation,
-    buttonTextHoverColor: $Charade,
+    secondaryColor: $Pelorous,
+    secondaryColorLight: $Zumthor,
+    secondaryColorDark: $ClearDay,
 
-    buttonColor: $Carnation,
-    buttonBorder: 1px solid $Carnation,
-    buttonHoverColor: $Oasis,
+    thirdColor:$PastelGreen,
+    thirdColorLight:$Reef,
+    thirdColorDark:$red,
 
-    //headline
-    smallTextColor: $gray-85,
+    blue:$blue,
+    red:$red,
+    green:$green,
+    yellow:$yellow,
 
-    //Chat
-    ChatBubbleBackgroundDefault: $whiteAlpha-55,
-    ChatBubbleBackgroundPrimary: $Reef,
-    ChatBubbleBackgroundSecondary: $white,
+    light: $white,
+
+    grayLightest:$red,
+    grayLight: $gray-85,
+    grayLighter:$red,
+    gray: $gray-79,
+    grayDark:$gray-72,
+    grayDarker:$gray-52,
+    grayDarkest:$red,
+
+    dark: $Charade,
   ),
 
 );

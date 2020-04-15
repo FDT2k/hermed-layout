@@ -3,7 +3,6 @@
     @include flex();
     @include flex-direction(row);
     @include flex-align(center);
-    width: 100%;
 
     &--column{
       @include flex-direction(column);
@@ -16,6 +15,7 @@
         width: 100%;
     }
 
+   
     &--between{
         @include flex-just(space-between);
     }
@@ -36,9 +36,16 @@
         @include flex-align(stretch);
        
     }
-
+    &--align-start {
+        @include flex-align(flex-start);
+    }
     &--align-center{
         @include flex-align(center);
+       
+    }
+
+    &--align-top{
+        @include flex-align(flex-start);
        
     }
 

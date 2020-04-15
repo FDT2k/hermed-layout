@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
 
+import {compose,applyModifiers,withBaseClass} from 'utils'; 
 
 import LayoutFlex from 'layouts/Flex'
 
@@ -8,29 +9,18 @@ import Video from 'components/Video'
 import Draggable from 'react-draggable'
 import LayoutGrid from 'layouts/Grid'
 import { MdCall, MdCallEnd } from 'react-icons/md'
-import { FaMicrophone } from 'react-icons/fa'
-import { MdChat, MdVideocam, MdVideocamOff } from 'react-icons/md'
 import Button from 'components/Button'
 import DefaultToolbar from 'views/VideoCall/DefaultVideoToolbar'
 
 
-export const [__base_class, element,modifier] = bem('video-call');
-
-
-
-export default ({ className, Toolbar, handleAnswer, handleDiscard, incoming, ...rest }) => {
-
-    const classes = cEx([
-        __base_class,
-        className
-    ])
+const VideoCall =  ({ className, Toolbar, handleAnswer, handleDiscard, incoming, ...rest }) => {
 
     const [mainVideoProps, notSuitableForVp] = filterPropStartingWith('video', rest);
     const [feedbackVideoProps, notSuitableForFb] = filterPropStartingWith('feedback', notSuitableForVp);
     const [toolbarProps, notSuitableForToolbar] = filterPropStartingWith('toolbar', notSuitableForFb);
 
     return (
-        <div className={classes}  {...notSuitableForToolbar}>
+        <div className={className}  {...notSuitableForToolbar}>
 
             <LayoutGrid className="layout-video-call">
 
@@ -74,3 +64,12 @@ export default ({ className, Toolbar, handleAnswer, handleDiscard, incoming, ...
         </div>
     )
 }
+
+
+export const [__base_class, element,modifier] = bem('video-call');
+
+const enhance = withBaseClass(__base_class)
+
+export default enhance(VideoCall)
+
+

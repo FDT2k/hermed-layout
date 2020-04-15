@@ -1,0 +1,6 @@
+.headline {
+  @extend .layout-navbar;
+  @extend .layout-navbar--header;
+  @extend .scheme-navbar;
+
+}

@@ -11,7 +11,9 @@
     &__controls{
         position:absolute;
         padding:10px;
-        bottom:0px; 
+        bottom:30px; 
+        width: 100%;
+        
     }
 
     & .video.video--preview{
@@ -20,8 +22,7 @@
     }
 
     &  &__toolbar{ 
-        @extend .layout-navbar;
-        @extend .scheme-navbar;
+        @extend .footer;
     //    @extend .scheme-navbar--toolbar ;
     }
 }

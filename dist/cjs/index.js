@@ -7,7 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = require('react');
 var React__default = _interopDefault(React);
 var genClasses = require('@geekagency/gen-classes');
-require('@geekagency/composite-js');
+var compositeJs = require('@geekagency/composite-js');
 var md = require('react-icons/md');
 var fa = require('react-icons/fa');
 var InputMask = _interopDefault(require('react-input-mask'));
@@ -850,7 +850,7 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys); //export const objectReduce = reduce({});
+  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator  forever
   //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
@@ -880,10 +880,30 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   var keepMatching = function keepMatching(match) {
     return reduce({}, matchReducer(match));
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
 
-  var spreadFilterByKey = function spreadFilterByKey(match) {
-    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist, ensure_object_copy);
+
+  var makeSpreadFilterByKey = function makeSpreadFilterByKey(transformMatching) {
+    return function (transformNotMatching) {
+      return function (match) {
+        return compose(diverge(transformMatching(match), transformNotMatching(compose(not, match))), enlist, ensure_object_copy);
+      };
+    };
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
+
+
+  var spreadFilterByKey = makeSpreadFilterByKey(keepMatching)(keepMatching);
 
   var regex = function regex(str) {
     return new RegExp(str);
@@ -896,6 +916,13 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   var contains = compose(test, regex, concat(''));
   var endWith = compose(test, regex, append('$'));
   var equals = compose(test, regex, append('$'), concat('^'));
+
+  var presentIn = function presentIn(array) {
+    return function (str) {
+      return array.indexOf(str) > -1;
+    };
+  };
+
   var spreadObject = spreadFilterByKey;
 
   var spreadObjectBeginWith = function spreadObjectBeginWith(str, obj) {
@@ -910,10 +937,11 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
     return spreadFilterByKey(endWith(str))(obj);
   };
 
-  var transformReplace = function transformReplace(re, repl) {
-    return replace(re, repl);
+  var spreadObjectPresentIn = function spreadObjectPresentIn(array, obj) {
+    return spreadFilterByKey(presentIn(array))(obj);
   };
 
+  var transformReplace = replace;
   var transformLowSnake = lcfirst;
 
   var replaceKeyReducer = function replaceKeyReducer(transform) {
@@ -949,12 +977,14 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   exports.equals = equals;
   exports.forwardPropsRemovingHeader = forwardPropsRemovingHeader;
   exports.forwardPropsTransformer = forwardPropsTransformer;
+  exports.presentIn = presentIn;
   exports.regex = regex;
   exports.replaceKeyReducer = replaceKeyReducer;
   exports.spreadObject = spreadObject;
   exports.spreadObjectBeginWith = spreadObjectBeginWith;
   exports.spreadObjectContaining = spreadObjectContaining;
   exports.spreadObjectEndingWith = spreadObjectEndingWith;
+  exports.spreadObjectPresentIn = spreadObjectPresentIn;
   exports.transformKeys = transformKeys;
   exports.transformLowSnake = transformLowSnake;
   exports.transformProps = transformProps;
@@ -968,17 +998,19 @@ var ReactUtils_3 = ReactUtils.endWith;
 var ReactUtils_4 = ReactUtils.equals;
 var ReactUtils_5 = ReactUtils.forwardPropsRemovingHeader;
 var ReactUtils_6 = ReactUtils.forwardPropsTransformer;
-var ReactUtils_7 = ReactUtils.regex;
-var ReactUtils_8 = ReactUtils.replaceKeyReducer;
-var ReactUtils_9 = ReactUtils.spreadObject;
-var ReactUtils_10 = ReactUtils.spreadObjectBeginWith;
-var ReactUtils_11 = ReactUtils.spreadObjectContaining;
-var ReactUtils_12 = ReactUtils.spreadObjectEndingWith;
-var ReactUtils_13 = ReactUtils.transformKeys;
-var ReactUtils_14 = ReactUtils.transformLowSnake;
-var ReactUtils_15 = ReactUtils.transformProps;
-var ReactUtils_16 = ReactUtils.transformReplace;
-var ReactUtils_17 = ReactUtils.updateProp;
+var ReactUtils_7 = ReactUtils.presentIn;
+var ReactUtils_8 = ReactUtils.regex;
+var ReactUtils_9 = ReactUtils.replaceKeyReducer;
+var ReactUtils_10 = ReactUtils.spreadObject;
+var ReactUtils_11 = ReactUtils.spreadObjectBeginWith;
+var ReactUtils_12 = ReactUtils.spreadObjectContaining;
+var ReactUtils_13 = ReactUtils.spreadObjectEndingWith;
+var ReactUtils_14 = ReactUtils.spreadObjectPresentIn;
+var ReactUtils_15 = ReactUtils.transformKeys;
+var ReactUtils_16 = ReactUtils.transformLowSnake;
+var ReactUtils_17 = ReactUtils.transformProps;
+var ReactUtils_18 = ReactUtils.transformReplace;
+var ReactUtils_19 = ReactUtils.updateProp;
 
 var ObjectUtils = createCommonjsModule(function (module, exports) {
 
@@ -1617,7 +1649,7 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys); //export const objectReduce = reduce({});
+  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator  forever
   //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
@@ -1649,18 +1681,38 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   };
 
   var filterByKey = function filterByKey(match) {
-    return compose(keepMatching(match), enlist, ensure_object_copy);
+    return compose(keepMatching(match), trace('x'), enlist, ensure_object_copy);
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
 
-  var spreadFilterByKey = function spreadFilterByKey(match) {
-    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist, ensure_object_copy);
+
+  var makeSpreadFilterByKey = function makeSpreadFilterByKey(transformMatching) {
+    return function (transformNotMatching) {
+      return function (match) {
+        return compose(diverge(transformMatching(match), transformNotMatching(compose(not, match))), enlist, ensure_object_copy);
+      };
+    };
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
 
+
+  var spreadFilterByKey = makeSpreadFilterByKey(keepMatching)(keepMatching);
   exports.filterByKey = filterByKey;
   exports.isPropStrictlyEqual = isPropStrictlyEqual;
   exports.isPropStrictlyNotEqual = isPropStrictlyNotEqual;
   exports.keepMatching = keepMatching;
   exports.key = key;
+  exports.makeSpreadFilterByKey = makeSpreadFilterByKey;
   exports.matchReducer = matchReducer;
   exports.propMatch = propMatch;
   exports.spreadFilterByKey = spreadFilterByKey;
@@ -1671,9 +1723,10 @@ var ObjectUtils_2 = ObjectUtils.isPropStrictlyEqual;
 var ObjectUtils_3 = ObjectUtils.isPropStrictlyNotEqual;
 var ObjectUtils_4 = ObjectUtils.keepMatching;
 var ObjectUtils_5 = ObjectUtils.key;
-var ObjectUtils_6 = ObjectUtils.matchReducer;
-var ObjectUtils_7 = ObjectUtils.propMatch;
-var ObjectUtils_8 = ObjectUtils.spreadFilterByKey;
+var ObjectUtils_6 = ObjectUtils.makeSpreadFilterByKey;
+var ObjectUtils_7 = ObjectUtils.matchReducer;
+var ObjectUtils_8 = ObjectUtils.propMatch;
+var ObjectUtils_9 = ObjectUtils.spreadFilterByKey;
 
 var DefaultContext = {
   color: undefined,
@@ -1756,13 +1809,115 @@ function IconBase(props) {
 // THIS FILE IS AUTO GENERATED
 var GiHamburgerMenu=function(props){return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 512 512"},"child":[{"tag":"path","attr":{"d":"M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"}}]})(props);};GiHamburgerMenu.displayName="GiHamburgerMenu";
 
-var Header = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
-  return /*#__PURE__*/React__default.createElement("header", {
+var bem = function bem(main) {
+  return [main, function (block) {
+    return "".concat(main, "__").concat(block);
+  }, function (modifier) {
+    return "".concat(main, "--").concat(modifier);
+  }];
+};
+var modifiersToCeX = function modifiersToCeX(keyEnhancer, list, modifiers) {
+  return list.reduce(function (acc, item) {
+    acc[keyEnhancer(item)] = function (_) {
+      return modifiers[item] === true;
+    };
+
+    return acc;
+  }, {});
+};
+var withBaseClass = function withBaseClass(BaseClass) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]);
+
+      var classes = genClasses.cEx([BaseClass, className]);
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+        className: classes
+      }));
+    };
+  };
+};
+var withModifiers = function withModifiers(namer, modifiers) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]); //ensure to preserve classNames
+
+
+      var _spreadObjectPresentI = ReactUtils_14(modifiers, rest),
+          _spreadObjectPresentI2 = _slicedToArray(_spreadObjectPresentI, 2),
+          presentModifiers = _spreadObjectPresentI2[0],
+          _props = _spreadObjectPresentI2[1];
+
+      var classes = genClasses.cEx([className, modifiersToCeX(namer, modifiers, presentModifiers)]);
+      return /*#__PURE__*/React__default.createElement("div", _extends({
+        className: classes
+      }, _props), /*#__PURE__*/React__default.createElement(Component, null));
+    };
+  };
+};
+var applyModifiers = function applyModifiers(modifiers) {
+  return function (Component) {
+    return function (props) {
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, modifiers, props));
+    };
+  };
+};
+
+var _bem = bem('layout-flex'),
+    _bem2 = _slicedToArray(_bem, 3),
+    __base_class = _bem2[0],
+    element = _bem2[1],
+    modifier = _bem2[2];
+var LayoutFlex = (function (props) {
+  var _ref;
+
+  var className = props.className,
+      cover = props.cover,
+      centered = props.centered,
+      alignCenter = props.alignCenter,
+      alignStretch = props.alignStretch,
+      alignTop = props.alignTop,
+      justBetween = props.justBetween,
+      justAround = props.justAround,
+      justEvenly = props.justEvenly,
+      justCenter = props.justCenter,
+      column = props.column,
+      rest = _objectWithoutProperties(props, ["className", "cover", "centered", "alignCenter", "alignStretch", "alignTop", "justBetween", "justAround", "justEvenly", "justCenter", "column"]);
+
+  var classes = genClasses.cEx([__base_class, (_ref = {}, _defineProperty(_ref, modifier('between'), function (_) {
+    return justBetween;
+  }), _defineProperty(_ref, modifier('evenly'), function (_) {
+    return justEvenly;
+  }), _defineProperty(_ref, modifier('center'), function (_) {
+    return justCenter;
+  }), _defineProperty(_ref, modifier('around'), function (_) {
+    return justAround;
+  }), _defineProperty(_ref, modifier('column'), function (_) {
+    return column;
+  }), _defineProperty(_ref, modifier('align-stretch'), function (_) {
+    return alignStretch;
+  }), _defineProperty(_ref, modifier('align-center'), function (_) {
+    return alignCenter;
+  }), _defineProperty(_ref, modifier('align-top'), function (_) {
+    return alignTop;
+  }), _defineProperty(_ref, modifier('centered'), function (_) {
+    return centered;
+  }), _defineProperty(_ref, modifier('cover'), function (_) {
+    return cover;
+  }), _ref), className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
     className: classes
-  }, props.children);
+  }, rest), props.children));
 });
+
+var Headline = withBaseClass('headline');
+var Layout = applyModifiers({
+  'justBetween': true
+});
+var enhance = compositeJs.compose(Layout, Headline);
+var Header = enhance(LayoutFlex);
 
 var Content = (function (props) {
   var className = props.className;
@@ -1787,14 +1942,14 @@ var Button = (function (props) {
       _round = props.round,
       _text = props.text,
       _outlined = props.outlined,
-      _toolbar = props.toolbar,
+      _navbar = props.navbar,
       _success = props.success,
       _failure = props.failure,
       _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "clear", "round", "text", "outlined", "toolbar", "success", "failure", "fit"]);
+      rest = _objectWithoutProperties(props, ["className", "contained", "clear", "round", "text", "outlined", "navbar", "success", "failure", "fit"]);
 
   var classes = genClasses.cEx(["button", className, function (_) {
-    return !_contained && !_text && !_clear && !_round && !_outlined && !_toolbar ? "contained" : "";
+    return !_contained && !_text && !_clear && !_round && !_outlined && !_navbar ? "contained" : "";
   }, {
     'contained': function contained(_) {
       return _contained === true;
@@ -1802,8 +1957,8 @@ var Button = (function (props) {
     'text': function text(_) {
       return _text === true;
     },
-    'toolbar': function toolbar(_) {
-      return _toolbar === true;
+    'navbar': function navbar(_) {
+      return _navbar === true;
     },
     'outlined': function outlined(_) {
       return _outlined === true;
@@ -1824,7 +1979,7 @@ var Button = (function (props) {
       return _clear === true;
     }
   }, function (_) {
-    return _toolbar === true ? 'icon icon--32' : '';
+    return _navbar === true ? 'button--icon' : '';
   }]);
   return /*#__PURE__*/React__default.createElement("button", _extends({
     className: classes
@@ -1903,7 +2058,7 @@ var index$1 = (function (props) {
 
   var classes = genClasses.cEx(["waiting-room", className]);
 
-  var _spreadObjectBeginWit = ReactUtils_10('toolbar', rest),
+  var _spreadObjectBeginWit = ReactUtils_11('toolbar', rest),
       _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
       toolbarProps = _spreadObjectBeginWit2[0],
       remaining = _spreadObjectBeginWit2[1];
@@ -2005,14 +2160,6 @@ var Form = (function (props) {
   }, rest), props.children);
 });
 
-var bem = function bem(main) {
-  return [main, function (block) {
-    return "".concat(main, "__").concat(block);
-  }, function (modifier) {
-    return "".concat(main, "--").concat(modifier);
-  }];
-};
-
 var parent = bem('single-input');
 
 var _parent = _slicedToArray(parent, 3),
@@ -2022,10 +2169,10 @@ var _parent = _slicedToArray(parent, 3),
 
 var bem$1 = bem(e('label'));
 
-var _bem = _slicedToArray(bem$1, 3),
-    __base_class = _bem[0],
-    element = _bem[1],
-    modifier = _bem[2];
+var _bem$1 = _slicedToArray(bem$1, 3),
+    __base_class$1 = _bem$1[0],
+    element$1 = _bem$1[1],
+    modifier$1 = _bem$1[2];
 
 var Label = (function (props) {
   var label = props.label,
@@ -2034,9 +2181,9 @@ var Label = (function (props) {
       error = props.error,
       rest = _objectWithoutProperties(props, ["label", "id", "className", "error"]);
 
-  var classes = genClasses.cEx([__base_class, // "flex-column",
+  var classes = genClasses.cEx([__base_class$1, // "flex-column",
   className, function (_) {
-    return error ? modifier('error') : '';
+    return error ? modifier$1('error') : '';
   }]);
   return /*#__PURE__*/React__default.createElement("label", _extends({
     htmlFor: id,
@@ -2044,13 +2191,13 @@ var Label = (function (props) {
   }, rest), label);
 });
 
-var _bem$1 = bem('single-input'),
-    _bem2 = _slicedToArray(_bem$1, 3),
-    __base_class$1 = _bem2[0],
-    element$1 = _bem2[1],
-    modifier$1 = _bem2[2];
+var _bem$2 = bem('single-input'),
+    _bem2$1 = _slicedToArray(_bem$2, 3),
+    __base_class$2 = _bem2$1[0],
+    element$2 = _bem2$1[1],
+    modifier$2 = _bem2$1[2];
 
-var _bem3 = bem(element$1('input')),
+var _bem3 = bem(element$2('input')),
     _bem4 = _slicedToArray(_bem3, 3),
     __input_class = _bem4[0],
     inpElement = _bem4[1],
@@ -2064,12 +2211,12 @@ var Input = (function (props) {
       error = props.error,
       rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "error"]);
 
-  var _filterPropStartingWi = ReactUtils_10('label', rest),
+  var _filterPropStartingWi = ReactUtils_11('label', rest),
       _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
       labelClassName = _filterPropStartingWi2[0].labelClassName,
       notLabelProps = _filterPropStartingWi2[1];
 
-  var _filterPropStartingWi3 = ReactUtils_10('input', notLabelProps),
+  var _filterPropStartingWi3 = ReactUtils_11('input', notLabelProps),
       _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
       inputClassName = _filterPropStartingWi4[0].inputClassName,
       notInputProps = _filterPropStartingWi4[1]; // default type to text 
@@ -2077,9 +2224,9 @@ var Input = (function (props) {
 
   var _type = type || 'text';
 
-  var classes = genClasses.cEx([__base_class$1, // "flex-column",
+  var classes = genClasses.cEx([__base_class$2, // "flex-column",
   className, function (_) {
-    return error ? modifier$1('error') : '';
+    return error ? modifier$2('error') : '';
   }]);
   var inputClasses = genClasses.cEx([__input_class, inputClassName, function (_) {
     return error ? inpModifier('error') : '';
@@ -2221,43 +2368,104 @@ var OrganiserConfigurationForm = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "Se connecter"));
 });
 
+// THIS FILE IS AUTO GENERATED
+var TiWarning = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "version": "1.2",
+      "baseProfile": "tiny",
+      "viewBox": "0 0 24 24"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "d": "M21.171 15.398l-5.912-9.854c-.776-1.293-1.963-2.033-3.259-2.033s-2.483.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83.636 1.126 1.878 1.772 3.406 1.772h12c1.528 0 2.77-.646 3.406-1.771.637-1.125.551-2.521-.235-3.831zm-9.171 2.151c-.854 0-1.55-.695-1.55-1.549 0-.855.695-1.551 1.55-1.551s1.55.696 1.55 1.551c0 .854-.696 1.549-1.55 1.549zm1.633-7.424c-.011.031-1.401 3.468-1.401 3.468-.038.094-.13.156-.231.156s-.193-.062-.231-.156l-1.391-3.438c-.09-.233-.129-.443-.129-.655 0-.965.785-1.75 1.75-1.75s1.75.785 1.75 1.75c0 .212-.039.422-.117.625z"
+      }
+    }]
+  })(props);
+};
+TiWarning.displayName = "TiWarning";
+
+var withIconsModifiers = compositeJs.compose(withBaseClass('icon'), withModifiers(function (x) {
+  return "icon--".concat(x);
+}, ['xs', 's', 'm', 'l', 'xl']));
+var Hamburger = withIconsModifiers(GiHamburgerMenu);
+var Warning = withIconsModifiers(TiWarning);
+var Call = withIconsModifiers(md.MdCall);
+var CallEnd = withIconsModifiers(md.MdCallEnd);
+var ArrowForward = withIconsModifiers(md.MdArrowForward);
+var ArrowBack = withIconsModifiers(md.MdArrowBack);
+var Camera = withIconsModifiers(md.MdCameraAlt);
+var AttachFile = withIconsModifiers(md.MdAttachFile);
+var Voice = withIconsModifiers(md.MdKeyboardVoice);
+var Videocam = withIconsModifiers(md.MdVideocam);
+var PersonAdd = withIconsModifiers(md.MdPersonAdd);
+var LocalPhone = withIconsModifiers(md.MdLocalPhone);
+var Trash = withIconsModifiers(fa.FaRegTrashAlt);
+var PowerOff = withIconsModifiers(fa.FaPowerOff);
+var Kebab = withIconsModifiers(GoKebabVertical);
+var Gear = withIconsModifiers(GoGear);
+
+var index$4 = /*#__PURE__*/Object.freeze({
+__proto__: null,
+Warning: Warning,
+Call: Call,
+CallEnd: CallEnd,
+ArrowForward: ArrowForward,
+ArrowBack: ArrowBack,
+Camera: Camera,
+AttachFile: AttachFile,
+Voice: Voice,
+Videocam: Videocam,
+PersonAdd: PersonAdd,
+LocalPhone: LocalPhone,
+Trash: Trash,
+PowerOff: PowerOff,
+Kebab: Kebab,
+Gear: Gear,
+Hamburger: Hamburger
+});
+
 var BackButton = (function (props) {
   var className = props.className,
       handleBack = props.handleBack;
   var classes = genClasses.cEx([className]);
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
+    navbar: true,
     onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)));
+  }, /*#__PURE__*/React__default.createElement(ArrowBack, null)));
 });
 
-var ChatHeaderStatus = (function (props) {
+var UserStatus = function UserStatus(props) {
   var title = props.title,
       subtitle = props.subtitle,
-      badge = props.badge;
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-column just-around"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-row align-center"
-  }, badge && /*#__PURE__*/React__default.createElement(Badge, {
+      badge = props.badge,
+      rest = _objectWithoutProperties(props, ["title", "subtitle", "badge"]);
+
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    alignTop: true
+  }, rest), badge && /*#__PURE__*/React__default.createElement(Badge, {
     status: badge
-  }), /*#__PURE__*/React__default.createElement("h2", null, title)), subtitle && /*#__PURE__*/React__default.createElement("p", {
-    className: "headline__contact-status"
-  }, subtitle));
-});
+  }), /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    column: true
+  }, /*#__PURE__*/React__default.createElement("h2", null, title), subtitle && /*#__PURE__*/React__default.createElement("p", null, subtitle)));
+};
+
+var ChatHeaderStatus = withBaseClass('user-status')(UserStatus);
 
 var ChatHeaderToolbar = (function (props) {
   var handleCall = props.handleCall,
       handleVideoCall = props.handleVideoCall;
   return /*#__PURE__*/React__default.createElement(Toolbar, null, /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleVideoCall,
-    disabled: typeof handleVideoCall !== 'function',
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(md.MdVideocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    disabled: typeof handleVideoCall !== 'function'
+  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleCall,
-    disabled: typeof handleCall !== 'function',
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
+    disabled: typeof handleCall !== 'function'
+  }, /*#__PURE__*/React__default.createElement(LocalPhone, null)));
 });
 
 var ChatHeader = (function (props) {
@@ -2278,7 +2486,7 @@ var ChatHeader = (function (props) {
       const isDoctor= doctor===true || (!doctor && !patient);
   */
 
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className
+  var classes = genClasses.cEx(["headline", className
   /*  {
       "headline--patient":  _=> isDoctor !== true,
       "headline--doctor":   _=> isDoctor === true,
@@ -2293,7 +2501,7 @@ var ChatHeader = (function (props) {
   })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
 });
 
-var index$4 = (function (props) {
+var index$5 = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -2318,7 +2526,7 @@ var index$4 = (function (props) {
   }));
 });
 
-var index$5 = (function (props) {
+var index$6 = (function (props) {
   var incoming = props.incoming,
       handleAnswer = props.handleAnswer,
       handleDiscard = props.handleDiscard,
@@ -2369,7 +2577,7 @@ var Video = (function (props) {
   }, rest));
 });
 
-var index$6 = (function (props) {
+var index$7 = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2379,7 +2587,7 @@ var index$6 = (function (props) {
   }, rest), props.children);
 });
 
-var index$7 = (function (props) {
+var index$8 = (function (props) {
   var HiddenComponent = props.HiddenComponent,
       VisibleComponent = props.VisibleComponent;
 
@@ -2412,7 +2620,7 @@ var index$7 = (function (props) {
   })));
 });
 
-var index$8 = (function (props) {
+var index$9 = (function (props) {
   var className = props.className,
       closed = props.closed,
       rest = _objectWithoutProperties(props, ["className", "closed"]);
@@ -2432,7 +2640,7 @@ var index$8 = (function (props) {
   }, rest), props.children);
 });
 
-var index$9 = (function (props) {
+var index$a = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2442,7 +2650,7 @@ var index$9 = (function (props) {
   }, props.children);
 });
 
-var index$a = (function (props) {
+var index$b = (function (props) {
   var className = props.className,
       Icon = props.Icon,
       label = props.label,
@@ -2461,48 +2669,6 @@ var index$a = (function (props) {
   }, props.children)), /*#__PURE__*/React__default.createElement("div", {
     className: "list-item__optional"
   }, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
-});
-
-var _bem$2 = bem('layout-flex'),
-    _bem2$1 = _slicedToArray(_bem$2, 3),
-    __base_class$2 = _bem2$1[0],
-    element$2 = _bem2$1[1],
-    modifier$2 = _bem2$1[2];
-var LayoutFlex = (function (props) {
-  var _ref;
-
-  var className = props.className,
-      cover = props.cover,
-      centered = props.centered,
-      alignCenter = props.alignCenter,
-      alignStretch = props.alignStretch,
-      justBetween = props.justBetween,
-      justAround = props.justAround,
-      justEvenly = props.justEvenly,
-      justCenter = props.justCenter,
-      column = props.column,
-      rest = _objectWithoutProperties(props, ["className", "cover", "centered", "alignCenter", "alignStretch", "justBetween", "justAround", "justEvenly", "justCenter", "column"]);
-
-  var classes = genClasses.cEx([__base_class$2, (_ref = {}, _defineProperty(_ref, modifier$2('between'), function (_) {
-    return justBetween;
-  }), _defineProperty(_ref, modifier$2('evenly'), function (_) {
-    return justEvenly;
-  }), _defineProperty(_ref, modifier$2('center'), function (_) {
-    return justCenter;
-  }), _defineProperty(_ref, modifier$2('column'), function (_) {
-    return column;
-  }), _defineProperty(_ref, modifier$2('align-stretch'), function (_) {
-    return alignStretch;
-  }), _defineProperty(_ref, modifier$2('align-center'), function (_) {
-    return alignCenter;
-  }), _defineProperty(_ref, modifier$2('centered'), function (_) {
-    return centered;
-  }), _defineProperty(_ref, modifier$2('cover'), function (_) {
-    return cover;
-  }), _ref), className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
-  }, rest), props.children));
 });
 
 var ChatInput = (function (props) {
@@ -2527,7 +2693,7 @@ var ChatInput = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, {
     fit: true,
     text: true,
-    toolbar: true,
+    navbar: true,
     className: "button--send  flex align-center just-center"
   }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
 });
@@ -3841,7 +4007,7 @@ var build = createCommonjsModule(function (module, exports) {
     }, function (V, e) {}]);
   });
 });
-var Camera = unwrapExports(build);
+var Camera$1 = unwrapExports(build);
 
 var DefaultToolbar$1 = (function (props) {
   var className = props.className,
@@ -3865,7 +4031,7 @@ var DefaultToolbar$1 = (function (props) {
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
     justBetween: true,
     className: classes
-  }, rest), capturePic && /*#__PURE__*/React__default.createElement(Camera, {
+  }, rest), capturePic && /*#__PURE__*/React__default.createElement(Camera$1, {
     onTakePhoto: function onTakePhoto(x) {
       handlePhoto && handlePhoto(x);
       setCapturePic(false);
@@ -3879,22 +4045,19 @@ var DefaultToolbar$1 = (function (props) {
       display: "none"
     }
   }), /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
-    icon: true,
+    navbar: true,
     onClick: function onClick(x) {
       return setCapturePic(true);
     }
-  }, /*#__PURE__*/React__default.createElement(md.MdCameraAlt, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
-    icon: true,
+  }, /*#__PURE__*/React__default.createElement(Camera, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: function onClick(_) {
       return fileUploader.current.click();
     }
-  }, /*#__PURE__*/React__default.createElement(md.MdAttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
-    icon: true,
+  }, /*#__PURE__*/React__default.createElement(AttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleAudio
-  }, /*#__PURE__*/React__default.createElement(md.MdKeyboardVoice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
+  }, /*#__PURE__*/React__default.createElement(Voice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
 });
 
 var ChatRecord = (function (props) {
@@ -3932,22 +4095,21 @@ var ChatFooter = (function (props) {
 
   var classes = genClasses.cEx(['chat-footer', className]);
 
-  var _spreadObjectBeginWit = ReactUtils_10(__toolbar_prefix, afterMainComponent),
+  var _spreadObjectBeginWit = ReactUtils_11(__toolbar_prefix, afterMainComponent),
       _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
       toolbarProps = _spreadObjectBeginWit2[0],
       notSuitableForToolbar = _spreadObjectBeginWit2[1];
 
-  var _spreadObjectBeginWit3 = ReactUtils_10(__input_prefix, notSuitableForToolbar),
+  var _spreadObjectBeginWit3 = ReactUtils_11(__input_prefix, notSuitableForToolbar),
       _spreadObjectBeginWit4 = _slicedToArray(_spreadObjectBeginWit3, 2),
       inputProps = _spreadObjectBeginWit4[0],
       notSuitableForInput = _spreadObjectBeginWit4[1];
 
-  var _spreadObjectBeginWit5 = ReactUtils_10(__record_prefix, notSuitableForInput),
+  var _spreadObjectBeginWit5 = ReactUtils_11(__record_prefix, notSuitableForInput),
       _spreadObjectBeginWit6 = _slicedToArray(_spreadObjectBeginWit5, 2),
       recordProps = _spreadObjectBeginWit6[0],
       rest = _spreadObjectBeginWit6[1];
 
-  console.log(recordProps, rest);
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
     column: true,
     className: classes
@@ -4064,7 +4226,7 @@ const useVoiceRecorder = cb => {
   };
 };
 
-var index$b = (function (props) {
+var index$c = (function (props) {
   var autoscroll = props.autoscroll,
       dragAndDrop = props.dragAndDrop,
       handleChange = props.handleChange,
@@ -4266,7 +4428,7 @@ var Landing = (function (props) {
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
-var index$c = (function (props) {
+var index$d = (function (props) {
   var handleClick = props.handleClick,
       identity = props.identity;
 
@@ -4299,7 +4461,7 @@ var index$c = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
 });
 
-var index$d = (function (props) {
+var index$e = (function (props) {
   var handleSubmit = props.handleSubmit;
   return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
     handleSubmit: handleSubmit
@@ -4329,8 +4491,6 @@ var _bem$3 = bem('video-call__toolbar'),
     modifier$3 = _bem2$2[2];
 
 var DefaultToolbar$2 = (function (props) {
-  console.log(props);
-
   var className = props.className,
       microEnabled = props.microEnabled,
       camEnabled = props.camEnabled,
@@ -4365,23 +4525,27 @@ var DefaultToolbar$2 = (function (props) {
 
   var classes = genClasses.cEx([__base_class$3, className]);
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
-    justBetween: true,
+    justEvenly: true,
     className: classes
   }, rest), /*#__PURE__*/React__default.createElement(Button, {
     fit: true,
-    toolbar: true,
+    navbar: true,
+    className: "icon--s",
     onClick: handleChat
   }, " ", /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Chat")), /*#__PURE__*/React__default.createElement(Button, {
     fit: true,
-    toolbar: true,
+    navbar: true,
+    className: "icon--s",
     onClick: _toggleMicro
   }, _microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophone, null), !_microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophoneSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Micro")), /*#__PURE__*/React__default.createElement(Button, {
     fit: true,
-    toolbar: true,
+    navbar: true,
+    className: "icon--s",
     onClick: _toggleCamera
   }, _cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideo, null), !_cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideoSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Camera")), /*#__PURE__*/React__default.createElement(Button, {
     fit: true,
-    toolbar: true,
+    navbar: true,
+    className: "icon--s",
     onClick: handleSwitch
   }, /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Switch")));
 });
@@ -4391,7 +4555,7 @@ var _bem$4 = bem('video-call'),
     __base_class$4 = _bem2$3[0],
     element$4 = _bem2$3[1],
     modifier$4 = _bem2$3[2];
-var index$e = (function (_ref) {
+var index$f = (function (_ref) {
   var className = _ref.className,
       Toolbar = _ref.Toolbar,
       handleAnswer = _ref.handleAnswer,
@@ -4401,17 +4565,17 @@ var index$e = (function (_ref) {
 
   var classes = genClasses.cEx([__base_class$4, className]);
 
-  var _filterPropStartingWi = ReactUtils_10('video', rest),
+  var _filterPropStartingWi = ReactUtils_11('video', rest),
       _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
       mainVideoProps = _filterPropStartingWi2[0],
       notSuitableForVp = _filterPropStartingWi2[1];
 
-  var _filterPropStartingWi3 = ReactUtils_10('feedback', notSuitableForVp),
+  var _filterPropStartingWi3 = ReactUtils_11('feedback', notSuitableForVp),
       _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
       feedbackVideoProps = _filterPropStartingWi4[0],
       notSuitableForFb = _filterPropStartingWi4[1];
 
-  var _filterPropStartingWi5 = ReactUtils_10('toolbar', notSuitableForFb),
+  var _filterPropStartingWi5 = ReactUtils_11('toolbar', notSuitableForFb),
       _filterPropStartingWi6 = _slicedToArray(_filterPropStartingWi5, 2),
       toolbarProps = _filterPropStartingWi6[0],
       notSuitableForToolbar = _filterPropStartingWi6[1];
@@ -4452,7 +4616,7 @@ var _bem$5 = bem('container-fullscreen'),
     element$5 = _bem2$4[1],
     modifier$5 = _bem2$4[2];
 
-var index$f = (function (props) {
+var index$g = (function (props) {
   var offset = props.offset,
       className = props.className,
       otherStyle = props.style,
@@ -4495,7 +4659,7 @@ var _bem$6 = bem('container-stack'),
     element$6 = _bem2$5[1],
     modifier$6 = _bem2$5[2];
 
-var index$g = (function (props) {
+var index$h = (function (props) {
   var className = props.className,
       baseKey = props.baseKey,
       baseIndex = props.baseIndex,
@@ -4524,7 +4688,7 @@ var _bem$7 = bem('container-modal'),
     __base_class$7 = _bem2$6[0],
     element$7 = _bem2$6[1],
     modifier$7 = _bem2$6[2];
-var index$h = (function (_ref) {
+var index$i = (function (_ref) {
   var _ref2;
 
   var children = _ref.children,
@@ -4624,7 +4788,7 @@ var index$h = (function (_ref) {
   }, rest), children);
 });
 
-var index$i = (function (props) {
+var index$j = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -4639,7 +4803,7 @@ var _bem$8 = bem('card'),
     __base_class$8 = _bem2$7[0],
     element$8 = _bem2$7[1],
     modifier$8 = _bem2$7[2];
-var index$j = (function (_ref) {
+var index$k = (function (_ref) {
   var className = _ref.className,
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["className", "children"]);
@@ -4657,7 +4821,7 @@ var _bem$9 = bem('card-container'),
     __base_class$9 = _bem2$8[0],
     element$9 = _bem2$8[1],
     modifier$9 = _bem2$8[2];
-var index$k = (function (_ref) {
+var index$l = (function (_ref) {
   var className = _ref.className,
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["className", "children"]);
@@ -4670,86 +4834,45 @@ var index$k = (function (_ref) {
   }, rest), children);
 });
 
-// THIS FILE IS AUTO GENERATED
-var TiWarning = function (props) {
-  return GenIcon({
-    "tag": "svg",
-    "attr": {
-      "version": "1.2",
-      "baseProfile": "tiny",
-      "viewBox": "0 0 24 24"
-    },
-    "child": [{
-      "tag": "path",
-      "attr": {
-        "d": "M21.171 15.398l-5.912-9.854c-.776-1.293-1.963-2.033-3.259-2.033s-2.483.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83.636 1.126 1.878 1.772 3.406 1.772h12c1.528 0 2.77-.646 3.406-1.771.637-1.125.551-2.521-.235-3.831zm-9.171 2.151c-.854 0-1.55-.695-1.55-1.549 0-.855.695-1.551 1.55-1.551s1.55.696 1.55 1.551c0 .854-.696 1.549-1.55 1.549zm1.633-7.424c-.011.031-1.401 3.468-1.401 3.468-.038.094-.13.156-.231.156s-.193-.062-.231-.156l-1.391-3.438c-.09-.233-.129-.443-.129-.655 0-.965.785-1.75 1.75-1.75s1.75.785 1.75 1.75c0 .212-.039.422-.117.625z"
-      }
-    }]
-  })(props);
-};
-TiWarning.displayName = "TiWarning";
-
-
-
-var index$l = /*#__PURE__*/Object.freeze({
-__proto__: null,
-Warning: TiWarning,
-Call: md.MdCall,
-CallEnd: md.MdCallEnd,
-ArrowForward: md.MdArrowForward,
-ArrowBack: md.MdArrowBack,
-Camera: md.MdCameraAlt,
-AttachFile: md.MdAttachFile,
-Voice: md.MdKeyboardVoice,
-Videocam: md.MdVideocam,
-PersonAdd: md.MdPersonAdd,
-LocalPhone: md.MdLocalPhone,
-Trash: fa.FaRegTrashAlt,
-PowerOff: fa.FaPowerOff,
-Kebab: GoKebabVertical,
-Gear: GoGear,
-Hamburger: GiHamburgerMenu
-});
-
-exports.ActiveCallBar = index$6;
+exports.ActiveCallBar = index$7;
 exports.Badge = Badge;
 exports.Button = Button;
-exports.Calling = index$5;
-exports.Card = index$j;
-exports.CardContainer = index$k;
-exports.Chat = index$b;
+exports.Calling = index$6;
+exports.Card = index$k;
+exports.CardContainer = index$l;
+exports.Chat = index$c;
 exports.ChatBubble = index;
 exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
-exports.Container = index$i;
-exports.CustomerLanding = index$c;
-exports.DebugPanel = index$7;
+exports.Container = index$j;
+exports.CustomerLanding = index$d;
+exports.DebugPanel = index$8;
 exports.Form = Form;
-exports.Fullscreen = index$f;
+exports.Fullscreen = index$g;
 exports.Header = Header;
 exports.HeaderBackButton = BackButton;
 exports.HeaderTitle = Title;
 exports.HeaderToolbar = Toolbar;
-exports.Icons = index$l;
+exports.Icons = index$4;
 exports.Input = Input;
 exports.InputCheckbox = InputCheckbox;
 exports.Landing = Landing;
 exports.LayoutFlex = LayoutFlex;
 exports.LayoutGrid = LayoutGrid;
-exports.Loading = index$4;
-exports.MobileVHAdapter = index$f;
-exports.Modal = index$h;
+exports.Loading = index$5;
+exports.MobileVHAdapter = index$g;
+exports.Modal = index$i;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
-exports.OrganiserLanding = index$d;
+exports.OrganiserLanding = index$e;
 exports.Patient = index$2;
 exports.Select = index$3;
-exports.Sidebar = index$8;
-exports.SidebarList = index$9;
-exports.SidebarListItem = index$a;
-exports.Stack = index$g;
+exports.Sidebar = index$9;
+exports.SidebarList = index$a;
+exports.SidebarListItem = index$b;
+exports.Stack = index$h;
 exports.Video = Video;
-exports.VideoCall = index$e;
+exports.VideoCall = index$f;
 exports.VideoPreview = Video;
 exports.WaitingRoom = index$1;
 //# sourceMappingURL=index.js.map

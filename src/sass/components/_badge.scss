@@ -1,54 +1,53 @@
 .badge-dot {
-    height: 16px;
-    width: 16px;
-    min-height: 16px;
-    min-width: 16px;
-    border-radius: 50%;
-    display: block;
-    font-size: 10px;
-    line-height: 16px;;
-    /*
+  height: 16px;
+  width: 16px;
+  min-height: 16px;
+  min-width: 16px;
+  border-radius: 50%;
+  display: block;
+  font-size: 10px;
+  line-height: 16px;
+  /*
     par defaut la couleur est disabled*/
+  @include themify($themes) {
+    background-color: themed("disabled");
+  }
+  @include themify($themes) {
+    background-color: themed("disabled");
+  }
+
+  &.red {
     @include themify($themes) {
-        background-color: themed('grayDarker');
+      background-color: themed("statusRed");
     }
+  }
+
+  &.orange {
     @include themify($themes) {
-      background-color: themed('grayDarker');
+      background-color: themed("statusYellow");
     }
+  }
 
-      &.red {
-        @include themify($themes) {
-          background-color: themed('statusRed');
-        }
-      }
-
-      &.orange {
-        @include themify($themes) {
-          background-color: themed('statusYellow');
-        }
-      }
-
-      &.green {
-        @include themify($themes) {
-          background-color: themed('statusGreen');
-        }
-      }
-
-      &.unkown{
-          @include themify($themes) {
-              background-color: themed('grayDarker');
-          }
-      }
-
-    &.medium{
-        font-size: 14px;
-        line-height: 23px;;
-        min-height: 24px;
-        min-width: 24px;
-        width: 24px;
-        height: 24px;
+  &.green {
+    @include themify($themes) {
+      background-color: themed("statusGreen");
     }
+  }
 
-    text-align:center;
+  &.unkown {
+    @include themify($themes) {
+      background-color: themed("grayDarker");
+    }
+  }
 
+  &.medium {
+    font-size: 14px;
+    line-height: 23px;
+    min-height: 24px;
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  text-align: center;
 }

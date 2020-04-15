@@ -16,7 +16,7 @@ let includePathOptions = {
 };
 export default [
   {
-    input: 'src/components/export',
+    input: 'src/export',
     output: {
       file: 'dist/cjs/index.js',
       format: 'cjs',

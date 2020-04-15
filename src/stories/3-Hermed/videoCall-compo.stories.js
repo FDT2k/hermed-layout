@@ -3,14 +3,7 @@ import 'sass/style.scss';
 
 
 import Fullscreen from 'containers/Fullscreen'
-import Modal from 'containers/Modal'
-import LayoutFlex from 'layouts/Flex'
 
-import Video from 'components/Video'
-import Draggable from 'react-draggable'
-import VideoCallLayout from 'layouts/VideoCall'
-import { MdCall, MdCallEnd } from 'react-icons/md'
-import Button from 'components/Button'
 
 
 import VideoCall from 'views/VideoCall';
