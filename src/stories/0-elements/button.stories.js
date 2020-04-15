@@ -15,18 +15,23 @@ export default {
 
 export const Normal = () => (
   <div className={makeThemeSelect()}>
-    <Button >Hello Button</Button>
-    <Button outlined>Hello Button</Button>
-    <Button text>Hello Button</Button>
+    <Button >Contained</Button>
+    <Button outlined>Outlined</Button>
+    <Button text>Text</Button>
+    
+    <Button disabled>Disabled</Button>
+    <Button outlined disabled>Disabled Outlined</Button>
+    <Button text disabled>Disabled Text</Button>
+
   </div>
 );
 
 
 export const Fit = () => (
   <div className={makeThemeSelect()}>
-    <Button fit>Hello Button</Button>
-    <Button outlined fit>Hello Button</Button>
-    <Button text fit>Hello Button</Button>
+    <Button fit>Fit</Button>
+    <Button outlined fit>Outlined fit</Button>
+    <Button text fit>Text Fit</Button>
   </div>
 
 );
@@ -43,5 +48,3 @@ export const ToolbarForHeader = () => (
   </div>
 
 );
-
-

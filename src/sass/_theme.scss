@@ -3,6 +3,7 @@
 /* GRAY
 //rgba(40, 48, 51, 0.51),*/
 $white: gray(100);
+$gray-92: gray(92);
 $gray-85: gray(85);
 $gray-79: gray(79);
 $gray-72: gray(72);
@@ -61,7 +62,7 @@ $themes: (
 
     light: $white,
 
-    grayLightest:$red,
+    grayLightest:$gray-92,
     grayLight: $gray-85,
     grayLighter:$red,
     gray: $gray-79,
@@ -101,7 +102,7 @@ $themes: (
 
     light: $white,
 
-    grayLightest:$red,
+    grayLightest:$gray-92,
     grayLight: $gray-85,
     grayLighter:$red,
     gray: $gray-79,

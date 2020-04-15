@@ -34,6 +34,8 @@
     }
   }
 
+
+
   &.success{
     @include themify($themes) {
       background-color: themed('statusGreen');
@@ -70,7 +72,6 @@
 		background-color: transparent;
 		@include themify($themes) {
 			color:themed('primaryColor');
-			/*box-shadow: 0px 1px 5px 0px themed('gray');*/
 		}
 	}
 
@@ -99,8 +100,8 @@
     @extend .align-center;
   }
 
- 
- 
+
+
 
   &.clear{
     background-color: transparent;
@@ -130,6 +131,30 @@
       color: themed('secondaryBasic');
       border: 1px solid themed('primaryColor');
       background-color:themed('primaryColor');
+    }
+  }
+
+  /* Disabled */
+  &.contained:disabled {
+    @include themify($themes) {
+      background-color: themed('grayLight');
+      color: themed('light');
+    }
+  }
+  &.outlined:disabled {
+    @include themify($themes) {
+      color: themed('grayLight');
+      background-color: inherit;
+    }
+  }
+  &.contained:disabled, &.outlined:disabled {
+    @include themify($themes) {
+      border: solid 1px themed('grayLight');
+    }
+  }
+  &.text:disabled {
+    @include themify($themes) {
+      color: themed('grayLight');
     }
   }
 }
