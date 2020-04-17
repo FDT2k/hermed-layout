@@ -32,6 +32,7 @@
 /* components */
 @import 'components/button';
 @import 'components/icons';
+@import 'components/badge';
 
 @import 'components/headline';
 @import 'components/footer';
@@ -45,7 +46,6 @@
 @import 'components/input-checkbox';
 @import 'components/input';
 @import 'components/landing';
-@import 'components/patient';
 @import 'components/select';
 @import 'components/theme-picker';
 @import 'components/waiting-room';
@@ -53,12 +53,12 @@
 @import 'components/answer_call';
 @import 'components/video-preview';
 @import 'components/active_call';
-@import 'components/badge';
 @import 'components/sidebar';
 @import 'components/list';
 @import 'components/list-item';
 @import 'components/contextualmenu';
 @import 'components/drag-drop-zone'; //not an actual component but used in chat
+@import 'components/patient';
 
 
 

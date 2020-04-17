@@ -11,9 +11,7 @@
   @include themify($themes) {
     background-color: themed("disabled");
   }
-  @include themify($themes) {
-    background-color: themed("disabled");
-  }
+  
 
   &--red {
     @include themify($themes) {
@@ -33,6 +31,13 @@
     }
   }
 
+
+  &--primary {
+    @include themify($themes) {
+      background-color: themed("primaryColor");
+    }
+  }
+
   &--unkown {
     @include themify($themes) {
       background-color: themed("grayDarker");
@@ -46,6 +51,7 @@
     width: 24px;
     height: 24px;
   }
+
   &--l {
     font-size: 20px;
     min-height: 36px;
@@ -53,6 +59,7 @@
     width: 36px;
     height: 36px;
   }
+
   &--xl {
     font-size: 30px;
     min-height: 48px;

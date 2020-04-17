@@ -41,7 +41,8 @@ const sampleUser2 = {
 
 const sampleUser3 = {
   name: "Fabien Di Tore",
-  email: "fabien@ditore.ch"
+  email: "fabien@ditore.ch",
+  birthdate: "24.02.1982"
 }
 export const AvecPatients = () =>
   <div className={makeThemeSelect()}>
@@ -66,6 +67,7 @@ export const AvecPatients = () =>
           status="whut"
           handleContextual={x => alert('menu')}
           handleClick={x_ => alert('hey')}
+          secondaryStatus="red"
           contact={sampleUser} />
         <Patient
           status="whut"

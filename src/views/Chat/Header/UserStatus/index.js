@@ -11,7 +11,7 @@ import { compose, applyModifiers, withBaseClass,bem } from 'utils';
 const [__base_class, element, modifier] = bem('user_status')
 
 const UserStatusContainer = compose(
-  applyModifiers({ 'alignTop': true }),
+  applyModifiers({ 'alignStart': true }),
   withBaseClass(__base_class)
 )(LayoutFlex)
 

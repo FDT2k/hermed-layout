@@ -6,60 +6,70 @@ import Button from 'components/Button'
 import { GoKebabVertical } from 'react-icons/go'
 import { compose, applyModifiers, withBaseClass, bem, divElement } from 'utils';
 
-const [BASE_CLASS, element, modifier] = bem('patient-item')
 
 
-const UserInfo = ({ name, phone, email }) => (<div className="coord">
+const UserInfo = ({ name, phone, email,birthdate }) => (<LayoutFlex  column alignStart>
   <div className="name">{name}</div>
   <div className="phone">{phone}</div>
   <div className="email">{email}</div>
-</div>)
-
-const Container  = compose(
-  withBaseClass(BASE_CLASS)
-)(divElement)
+  <div className="birthdate">{birthdate}</div>
+</LayoutFlex>)
 
 
-const LeftPart = ({status,contact}) => {
-  
-  return  <LayoutFlex>
-    <Badge status={status} />
-    <UserInfo {...contact} />
-  </LayoutFlex>
+
+const LeftPart = ({ status, contact,...rest }) => {
+  return (
+    <LayoutFlex {...rest}>
+      <Badge m status={status} />
+      <UserInfo {...contact} />
+    </LayoutFlex>
+  )
 }
 
 
-const RightPart = ({secondaryStatus,handleClick}) => {
-  return  <LayoutFlex>
-      <Badge status={secondaryStatus} />
+const RightPart = ({ status, handleClick, ...rest }) => {
+  return (
+    <LayoutFlex {...rest}>
+      {status && <Badge m status={status} />}
       <Button clear onClick={e => {
         handleClick(e)
         e.stopPropagation()
       }}><GoKebabVertical /></Button>
     </LayoutFlex>
+  )
 }
+
+
+const [BASE_CLASS, element, modifier] = bem('patient-item')
+
+const Container = compose(
+  withBaseClass(BASE_CLASS),
+  applyModifiers({justBetween:true,alignStretch:true})
+)(LayoutFlex)
+
+
+const ContactInfo = compose(
+  withBaseClass(element('contact')),
+
+)(LeftPart)
+
+const ContactMenu = compose(
+  withBaseClass(element('toolbar')),
+
+)(RightPart)
 
 const Contact = props => {
   const {
     status,
     contact,
     secondaryStatus,
-   
     handleClick,
-    className,
     handleContextual,
     ...rest } = props;
-
-  const classes = cEx([
-    "patient-item",
-    className
-  ])
-
-
   return (
     <Container onClick={handleClick} {...rest}>
-      <LeftPart contact={contact} status={status}/>
-      <RightPart status={secondaryStatus} handleClick={handleContextual}/>
+      <ContactInfo contact={contact} status={status} />
+      <ContactMenu status={secondaryStatus} handleClick={handleContextual} />
     </Container>
   )
 }
