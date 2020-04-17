@@ -1,24 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react';
+import { bem,compose, withModifiers, wrapComponent, divElement, withBaseClass, cEx } from 'utils'
 
+const [__base_class,element,modifier] = bem ('example-component')
 
-import {filterPropStartingWith,forwardProps,bem, cEx} from 'utils'
+const Component = compose(
+    withBaseClass(__base_class),
+    withModifiers(x => modifier(x), ['closed'])
+)(divElement)
 
-export const [__base_class,element,modifier] = bem('example-component');
-
-export default ({ className, children , cover,fit, /* other props,*/ ...rest }) => {
-
-  const classes = cEx([
-    __base_class,
-    {
-      [modifier('modifier-1')]: _ => cover,
-      [modifier('modifier-2')]: _ => fit,
-    },
-    className
-  ])
-
-  return (
-    <div className={classes}  {...rest}>
-      {children}
-    </div>
-  )
-}
+export default Component;

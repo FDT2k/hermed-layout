@@ -3,13 +3,13 @@ import { cEx } from '@geekagency/gen-classes'
 import Badge from 'components/Badge'
 import LayoutFlex from 'layouts/Flex'
 import Button from 'components/Button'
-import { GoKebabVertical } from 'react-icons/go'
+import { Kebab } from 'components/Icons'
 import { compose, applyModifiers, withBaseClass, bem, divElement } from 'utils';
 
 
 
 const UserInfo = ({ name, phone, email,birthdate }) => (<LayoutFlex  column alignStart>
-  <div className="name">{name}</div>
+  <h2>{name}</h2>
   <div className="phone">{phone}</div>
   <div className="email">{email}</div>
   <div className="birthdate">{birthdate}</div>
@@ -34,7 +34,7 @@ const RightPart = ({ status, handleClick, ...rest }) => {
       <Button clear onClick={e => {
         handleClick(e)
         e.stopPropagation()
-      }}><GoKebabVertical /></Button>
+      }}><Kebab s/></Button>
     </LayoutFlex>
   )
 }

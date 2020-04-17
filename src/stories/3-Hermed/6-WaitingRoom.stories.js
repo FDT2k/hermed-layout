@@ -8,9 +8,8 @@ import { makeThemeSelect } from 'stories/theme-knobs'
 import WaitingRoom from 'components/WaitingRoom'
 import WaitingRoomToolbar from 'components/WaitingRoom/Toolbar'
 import Patient from 'components/Patient'
-import Button from 'components/Button'
-import ThemePicker from 'components/ThemePicker'
-import MobileVHAdapter from 'components/MobileVHAdapter';
+import Sidebar from 'components/Sidebar'
+import Fullscreen from 'containers/Fullscreen';
 
 export default {
   title: "Hermed/WaitingRoom",
@@ -18,9 +17,9 @@ export default {
 };
 export const Attente = () =>
   <div className="theme-blue-light">
-    <MobileVHAdapter>
+    <Fullscreen>
       <WaitingRoom />
-    </MobileVHAdapter>
+    </Fullscreen>
 
   </div>
 
@@ -46,8 +45,12 @@ const sampleUser3 = {
 }
 export const AvecPatients = () =>
   <div className={makeThemeSelect()}>
-    <MobileVHAdapter>
-      <WaitingRoom handleBack={_ => alert('hey burger')} Toolbar={Bar}>
+    <Fullscreen>
+      <WaitingRoom 
+      handleBack={_ => alert('hey burger')} 
+      Toolbar={Bar}
+      title="Bonjour"
+      displayToolbar>
         <Patient
           status="green"
           handleContextual={x => alert('menu')}
@@ -76,22 +79,46 @@ export const AvecPatients = () =>
           contact={sampleUser3}
           />
       </WaitingRoom>
-    </MobileVHAdapter>
+    </Fullscreen>
   </div>
 
 export const DefaultToolbar = () =>
   <div className="theme-blue-light">
-    <MobileVHAdapter>
-      <WaitingRoom handleBack={_ => alert('hey burger')} defaultToolbar={true} toolbarHandleAdd={x => x}>
+    <Fullscreen>
+      <WaitingRoom
+       handleBack={_ => alert('hey burger')} 
+       displayToolbar
+       toolbarHandleAdd={x => x}>
         <Patient handleClick={x_ => alert('hey')} name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch" />
         <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch" />
         <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch" />
         <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch" />
         <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch" />
         <Patient name="Fabien Karsegard" phone="+4179 999 99 99" email="fabien@karsegard.ch" />
-        <Button>inviter</Button>
       </WaitingRoom>
-    </MobileVHAdapter>
+    </Fullscreen>
+  </div>
+
+
+
+export const WithSideBar = () =>
+  <div className="theme-blue-light">
+    <Sidebar>
+      blablou
+    </Sidebar>
+    <Fullscreen>
+      <WaitingRoom
+       handleBack={_ => alert('hey burger')} 
+       displayToolbar
+       toolbarHandleAdd={x => x}>
+        <Patient
+          status="whut"
+          handleContextual={x => alert('menu')}
+          handleClick={x_ => alert('hey')}
+          contact={sampleUser3}
+          />
+      </WaitingRoom>
+    </Fullscreen>
   </div>
 
 

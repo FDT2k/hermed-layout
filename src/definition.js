@@ -2,6 +2,7 @@ export const CLASSES = {
     BUTTON:'button',
     BADGE:'badge-dot',
     ICON:'icon',
+    SIDEBAR:'sidebar',
 }
 
 

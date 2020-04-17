@@ -1,19 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import 'sass/style.scss';
-import { FaMicrophone, FaMicrophoneSlash, FaVideoSlash, FaVideo } from 'react-icons/fa'
 import { MdChat } from 'react-icons/md'
 
 
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import { makeThemeSelect } from 'stories/theme-knobs'
 
-import FullScreen from 'containers/Fullscreen'
 import LayoutFlex from 'layouts/Flex'
 import Button from 'components/Button'
-import { TiWarning } from 'react-icons/ti'
-
-import Card from 'components/Card'
-import CardContainer from 'components/Card/Container'
 
 export default {
   title: "Hermed/General/Navbar",

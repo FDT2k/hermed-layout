@@ -2,19 +2,27 @@
   svg{
       width:32px;
       height:32px;
+      @include mq-width-and-lower(425px){
+            width: 24px;
+            height: 24px;
+        }
   }
 
   &--xs svg{
       width: 24px;
       height: 24px;
+      @include mq-width-and-lower(425px){
+        width: 12px;
+        height: 12px;
+    }
   }
   &--s svg{
       width:32px;
       height:32px;
       @include mq-width-and-lower(425px){
-          width: 24px;
-          height: 24px;
-      }
+        width: 24px;
+        height: 24px;
+    }
   }
 
 

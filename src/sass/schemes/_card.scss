@@ -1,7 +1,8 @@
 /* Card scheme */
 .scheme-card {
   &__background {
-    background-color:#e9f3ffC4
+    background-color:#e9f3ffC4;
+    backdrop-filter: blur(3px);
   }
 
   &__content {

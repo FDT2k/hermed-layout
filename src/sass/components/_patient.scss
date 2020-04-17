@@ -1,55 +1,16 @@
 /* Custom sections */
 .patient-item {
-  width: 100%;
   min-height: 75px;
-  height:100%;
   cursor:pointer;
 
-  @extend .layout-navbar--header;
+  @extend .layout-list__item;
+  @extend .scheme-list__item;
 
-  /*&__toolbar .badge-dot{
-    @include themify($themes) {
-      background-color: transparent;
-    }
-    @extend .badge-dot;
-  }*/
 
   &__contact >*{
     margin: 0 10px;
   }
 
-  &__contact .name{
-    font-weight:bold;
-  }
-/*
-  @include themify($themes) {
-    @include themed_font("secondaryFont", "regular");
-    color: themed("primaryBasic");
-    background-color: themed("secondaryBasic");
-    border-bottom: 1px solid #00000029;
-  }
-*/
-/*
-  & > .headline__content > * {
-    padding-left: 20px;
-  }*/
-/*
-  & .button {
-    height: 34px;
-  }
 
- */
-/*
-  .status.secondary {
-    background-color: transparent;
-  }
-*/
- /* .name {
-    @include themify($themes) {
-      @include themed_font("secondaryFont", "semi-bold");
-    }
-    font-size: 14px;
-  }
-
-  font-size: 14px;*/
+ 
 }

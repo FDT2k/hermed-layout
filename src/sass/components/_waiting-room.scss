@@ -1,36 +1,41 @@
-
 /* Custom sections */
 .waiting-room {
-  display:grid;
+  @extend .layout-grid;
+
   min-height: 100%;
-  height:100%;
-  max-height:100%;
-  grid-template-columns: 100vw;
+  height: 100%;
+  max-height: 100%;
+  grid-template-columns: 0px auto;
   grid-template-rows: 76px auto;
   grid-template-areas:
-    "header"
-    "content";
+    "header header"
+    "sidebar content";
+
 
   @include themify($themes) {
-    @include themed_font('secondaryFont','regular');
+    @include themed_font("secondaryFont", "regular");
     @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
-    color: themed('primaryBasic');
-    background-color: themed('backgroundColor');
-
+    color: themed("primaryBasic");
+    background-color: themed("backgroundColor");
   }
 
-  >.headline {
-    grid-area:header;
+  &__header {
+    grid-area: header;
   }
 
-  >.content {
-    grid-area:content;
+  &__content {
+    grid-area: content;
     @include flex();
     @include flex-direction(column);
     @include flex-align(center);
     overflow-y: scroll;
-    height:100%;
-  
+    height: 100%;
+
+    
+    & > .empty-list{
+      text-align:center;
+    }
+
   }
 
 }

@@ -5,6 +5,9 @@ import { curry, enlist,  compose } from '@geekagency/composite-js'
 import {key} from '@geekagency/composite-js/ObjectUtils'
 import { cEx } from '@geekagency/gen-classes'
 
+
+const e = React.createElement;
+
 const bem = main => {
     return (
         [
@@ -16,20 +19,24 @@ const bem = main => {
 }
 
 
-export const bemO = main => {
-    return {
-        block: main,
-        element: block => `${main}__${block}`,
-        modifier: modifier => `${main}--${modifier}`
 
-    }
 
+export const makeBem = current => {
+    return [
+        current,
+        block => makeBem(`${current}-${block}`),
+        element=> makeBem(`${current}__${element}`),
+        modifier => makeBem(`${current}--${modifier}`)
+    ]
 }
 
-export const wrapComponent = Wrap => Component=> props => <Wrap {...props}><Component/></Wrap>
+export const wrapComponent = Wrap => Component=> ({children,...rest}) => <Wrap {...rest}><Component>{children}</Component></Wrap>
 
 export const divElement = ({ children, ...rest }) => <div {...rest}>{children}</div>
 export const sectionElement = ({ children, ...rest }) => <section {...rest}>{children}</section>
+export const asideElement = ({ children, ...rest }) => <aside {...rest}>{children}</aside>
+
+export const baseElement = curry((_e,  {children,...rest}) => e(_e,rest,children) )
 
 export const modifiersToCeX = (keyEnhancer, list, modifiers) => {
     return list.reduce((acc, item) => {
@@ -102,12 +109,14 @@ export const applyModifiers = (modifiers,unless) => Component => props => {
     return <Component {..._m} {...props} />
 }
 
+
 export {
     spreadObjectBeginWith as filterPropStartingWith,
     spreadObjectPresentIn as filterPropPresentIn,
     forwardPropsRemovingHeader as forwardProps,
     bem,
-    cEx
+    cEx,
+    cEx as classNames,
 }
 
 

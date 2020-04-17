@@ -11,7 +11,6 @@
   @include themify($themes) {
     background-color: themed("disabled");
   }
-  
 
   &--red {
     @include themify($themes) {
@@ -31,7 +30,6 @@
     }
   }
 
-
   &--primary {
     @include themify($themes) {
       background-color: themed("primaryColor");
@@ -50,6 +48,12 @@
     min-width: 24px;
     width: 24px;
     height: 24px;
+    @include mq-width-and-lower(425px) {
+      width: 16px;
+      height: 16px;
+      min-height: 16px;
+      min-width: 16px;
+    }
   }
 
   &--l {
@@ -67,5 +71,4 @@
     width: 48px;
     height: 48px;
   }
-  
 }

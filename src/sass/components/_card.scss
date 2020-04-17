@@ -4,11 +4,12 @@
     @extend .scheme-card__content;
     min-width: 200px;
     min-height: 300px;
-
+    max-width: 80vw;
 
 }
-
+/*
 .card-container {
     @extend .scheme-card__background;
     padding:20px;
 }
+*/

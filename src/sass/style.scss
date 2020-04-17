@@ -18,15 +18,17 @@
 
 /*Layouts*/
 
-@import 'layouts/grid.scss';
-@import 'layouts/flex.scss';
-@import 'layouts/card.scss';
-@import 'layouts/navbar.scss';
+@import 'layouts/grid';
+@import 'layouts/list';
+@import 'layouts/flex';
+@import 'layouts/card';
+@import 'layouts/navbar';
 
 /* schemes*/
 @import 'schemes/navbar';
 @import 'schemes/card';
 @import 'schemes/badges';
+@import 'schemes/list';
 
 
 /* components */
@@ -55,10 +57,10 @@
 @import 'components/active_call';
 @import 'components/sidebar';
 @import 'components/list';
-@import 'components/list-item';
 @import 'components/contextualmenu';
 @import 'components/drag-drop-zone'; //not an actual component but used in chat
 @import 'components/patient';
+@import 'components/background-overlay';
 
 
 

@@ -12,6 +12,9 @@
 
     &--header {
         padding: 0px 25px;
+        @include mq-width-and-lower(425px){
+            padding: 0px 5px;
+        }
         .button {
            
             &--icon {

@@ -1,23 +1,45 @@
-import React,{useState} from 'react'
-import {cEx} from '@geekagency/gen-classes'
+import React, { useState } from 'react'
+import { cEx, compose, applyModifiers, withBaseClass, bem, divElement } from 'utils';
+import LayoutFlex from 'layouts/Flex'
 
 
-export default props => {
+const [__base_class, element, modifier] = bem('list-item')
 
-  const {className, Icon,label,Optional, ...rest} = props
+const CellContent = compose(
+  withBaseClass(element('content'))
+)(LayoutFlex);
 
-  const classes = cEx ([
-    'list-item',
+const CellOptionalContent = compose(
+  withBaseClass(element('optional-content'))
+)(LayoutFlex);
 
-    className,
-  ])
+const Cell = compose(
+  withBaseClass(__base_class),
+  applyModifiers({'justBetween':true})
+)(LayoutFlex);
+
+
+const Component = props => {
+
+  const { Icon, label, Optional, handleClick, ...rest } = props
+
+  const _handleClick=  e=>{
+    handleClick && handleClick(e);
+    e.stopEventPropagation();
+  }
+  
   return (
-      <div className={classes} {...rest}>
-        <div className="list-item-content">
-          <div className="list-item__icon">{Icon && <Icon/>}</div>
-          <div className="list-item__title">{props.children}</div>
-        </div>
-        <div className="list-item__optional">{Optional && <Optional/>}</div>
-      </div>
+    <Cell onClick={_handleClick}  {...rest}>
+      <CellContent>
+        {Icon && <Icon />}
+        {props.children}
+      </CellContent>
+      <CellOptionalContent>
+        {Optional && <Optional />}
+      </CellOptionalContent>
+    </Cell>
   )
 }
+
+
+export default Component

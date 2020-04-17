@@ -1,23 +1,34 @@
 .sidebar{
-  position: absolute;
-  max-width: 50vw;
-  left: 0px;
-  min-width: 270px;
   height: 100%;
+  max-height: 100%;
+  max-width: 50vw;
+  
+  min-width: 270px;
 
+  overflow-y: auto;
+  transition: left 500ms ease-in;
   @include themify($themes) {
     background: themed('secondaryBasic');
-    box-shadow:themed('gray');
+    box-shadow: 0px 3px 6px themed('disabled');
   }
 
-  opacity: 1;
-  max-height: 100%;
-  overflow-y: auto;
+  
 
+  &__modal{
+  transition: opacity 500ms ease-in;
+    
+    &--closed{
+      opacity:0;
+      pointer-events: none;
+    }
 
-  transition: left 800ms ease-in;
+    .sidebar {
+      position:absolute;
+      left: 0px;
 
-  &.sidebar--state-closed{
-    left:-100%;
+      &--closed{
+        left:-100%;
+      }
+    }
   }
 }

@@ -3,10 +3,11 @@ import { cEx, compose, applyModifiers, withBaseClass, bem, divElement } from 'ut
 import LayoutFlex from 'layouts/Flex'
 
 
-const [__base_class, element, modifier] = bem('list')
+const [__base_class,element,modifier] = bem('background-overlay');
 
 
 export default compose(
   withBaseClass(__base_class),
-  applyModifiers({column:true})
+  applyModifiers({cover:true})
 )(LayoutFlex)
+
