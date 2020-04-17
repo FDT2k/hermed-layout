@@ -1,36 +1,37 @@
 .icon{
-    svg{
-        width:32px;
-        height:32px;
-    }
+  svg{
+      width:32px;
+      height:32px;
+  }
 
-    &--xs svg{
-        width: 24px;
-        height: 24px;
-    }
-    &--s svg{
-        width:32px;
-        height:32px;
-        @include mq-width-and-lower(425px){
-            width: 24px;
-            height: 24px;
-        }
-    }
-
-
-    &--m svg{
-        width:48px;
-        height:48px;
-    }
-
-    &--l svg{
-        width:64px;
-        height:64px;
-    }
+  &--xs svg{
+      width: 24px;
+      height: 24px;
+  }
+  &--s svg{
+      width:32px;
+      height:32px;
+      @include mq-width-and-lower(425px){
+          width: 24px;
+          height: 24px;
+      }
+  }
 
 
-    &--xl svg{
-        width:98px;
-        height:98px;
-    }
+  &--m svg{
+      width:48px;
+      height:48px;
+  }
+
+  &--l svg{
+      width:64px;
+      height:64px;
+  }
+
+
+  &--xl svg{
+      width:98px;
+      height:98px;
+  }
+
 }

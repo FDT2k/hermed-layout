@@ -15,7 +15,7 @@ export default props => {
 
   const fileUploader = useRef();
 
-  
+
   const _handleFileSelect = e => {
     handleFile && handleFile(e)
   }
@@ -31,7 +31,7 @@ export default props => {
           <CamIcon/>
           <h2>photo</h2>
         </Button>
-        <Button navbar onClick={_=>fileUploader.current.click()}  >
+        <Button navbar disabled onClick={_=>fileUploader.current.click()}  >
           <AttachFile/>
           <h2>Fichier</h2>
         </Button>
