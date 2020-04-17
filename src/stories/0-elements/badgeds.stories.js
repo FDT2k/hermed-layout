@@ -51,6 +51,7 @@ export const ExampleWithContent= () => (
     <Badge green m>8</Badge>
     <Badge green l>9</Badge>
     <Badge green xl>10</Badge>
+    <Badge status="green" xl>65</Badge>
     </div>
 
 );

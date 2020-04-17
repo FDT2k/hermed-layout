@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { spreadObjectPresentIn, spreadObjectBeginWith, forwardPropsRemovingHeader } from '@geekagency/composite-js/ReactUtils'
-import { curry, enlist, key, compose } from '@geekagency/composite-js'
+import { curry, enlist,  compose } from '@geekagency/composite-js'
+import {key} from '@geekagency/composite-js/ObjectUtils'
 import { cEx } from '@geekagency/gen-classes'
 
 const bem = main => {
@@ -37,12 +38,6 @@ export const modifiersToCeX = (keyEnhancer, list, modifiers) => {
     }, {})
 }
 
-export const propsToCeX = (keyEnhancer, list, modifiers) => {
-    return list.reduce((acc, item) => {
-        acc.push( _=> keyEnhancer(modifiers[item]))
-        return acc
-    }, [])
-}
 
 
 export const withBaseClass = BaseClass => Component => props => {
@@ -67,22 +62,44 @@ export const withModifiers = (namer, modifiers) => Component => props => {
 
 
 
+export const propsToCeX = (keyEnhancer, list, modifiers) => {
+    return list.reduce((acc, item) => {
+        if(modifiers[item]){
+           acc.push( _=> keyEnhancer(modifiers[item]))
+        }
+        return acc
+    }, [])
+}
+
 export const withTransformedProps = (namer, modifiers) => Component => props => {
     const { className, ...rest } = props; //ensure to preserve classNames
     const [presentModifiers, _props] = spreadObjectPresentIn(modifiers, rest)
-    //console.error(presentModifiers,modifiers)
-    //console.log(propsToCeX(namer, modifiers, presentModifiers))
+   // console.error( enlist(presentModifiers),modifiers)
+   //console.log(propsToCeX(namer,modifiers, presentModifiers))
     const classes = cEx([
         className,
-        ...propsToCeX(namer, enlist(presentModifiers), presentModifiers)
+        ...propsToCeX(namer, modifiers, presentModifiers)
     ]);
 
     return <Component className={classes} {..._props}/>
 }
 
-export const applyModifiers = (modifiers) => Component => props => {
+// apply modifiers if not in unless
+export const applyModifiers = (modifiers,unless) => Component => props => {
 
-    return <Component {...modifiers} {...props} />
+    let _m = modifiers;
+/*
+    if(unless && unless.length>0){
+        const [presentModifiers, _props] = spreadObjectPresentIn(unless, props)
+
+        _m = enlist(modifiers).reduce((acc,item)=>{
+            console.log(presentModifiers)
+
+            return acc
+        },{})
+    }
+*/
+    return <Component {..._m} {...props} />
 }
 
 export {

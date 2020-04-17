@@ -28,6 +28,10 @@
     &--center{
         @include flex-just(center);
     }
+    &--start{
+        @include flex-just(flex-start);
+    }
+    
     &--centered{
         @include flex-align(center);
         @include flex-just(center);
@@ -36,16 +40,15 @@
         @include flex-align(stretch);
        
     }
+    &--stretch{
+        @include flex-just(stretch);
+       
+    }
     &--align-start {
         @include flex-align(flex-start);
     }
     &--align-center{
         @include flex-align(center);
-       
-    }
-
-    &--align-top{
-        @include flex-align(flex-start);
        
     }
 
