@@ -1,11 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { cEx } from '@geekagency/gen-classes'
 import Badge from 'components/Badge'
 import LayoutFlex from 'layouts/Flex'
 import Button from 'components/Button'
 import { Kebab } from 'components/Icons'
 import { compose, applyModifiers, withBaseClass, bem, divElement } from 'utils';
-
+import ContextMenu from 'components/ContextMenu'
 
 
 const UserInfo = ({ name, phone, email,birthdate }) => (<LayoutFlex  column alignStart>
@@ -27,12 +27,18 @@ const LeftPart = ({ status, contact,...rest }) => {
 }
 
 
-const RightPart = ({ status, handleClick, ...rest }) => {
+const RightPart = ({ status, menu ,handleClick, ...rest }) => {
+  const [menuVisible, setMenuVisible] = useState(false)
   return (
     <LayoutFlex {...rest}>
       {status && <Badge m status={status} />}
+      {menu && <ContextMenu options={menu} handleDiscard={_=>setMenuVisible(false)} visible={menuVisible}/>}
       <Button clear onClick={e => {
-        handleClick(e)
+        if(menu){
+          setMenuVisible(!menuVisible)
+        }else{
+          handleClick && handleClick(e)
+        }
         e.stopPropagation()
       }}><Kebab s/></Button>
     </LayoutFlex>
@@ -65,11 +71,16 @@ const Contact = props => {
     secondaryStatus,
     handleClick,
     handleContextual,
+    contextualMenu,
     ...rest } = props;
+
+  if(handleContextual && contextualMenu){
+    console.warn('handleContextual && contextualMenu are mutually exclusive. Menu is used in priority')
+  }
   return (
     <Container onClick={handleClick} {...rest}>
       <ContactInfo contact={contact} status={status} />
-      <ContactMenu status={secondaryStatus} handleClick={handleContextual} />
+      <ContactMenu menu={contextualMenu} status={secondaryStatus} handleClick={handleContextual} />
     </Container>
   )
 }
