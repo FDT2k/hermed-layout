@@ -1187,10 +1187,10 @@
   resolved "http://192.168.64.135:4873/@geekagency%2fcomposite-js/-/composite-js-0.7.3.tgz#60fb7d92e3c1147ca3ea3078747dbccac08b1576"
   integrity sha512-bJcFQJdeq9rDBlBXIXvJFLU2/IO5ucnxTMgPPNLvJCHOfw2/7UNoa+CQNO6uCOXAWfctWF1UYSJ3sMSupMwzPA==
 
-"@geekagency/composite-js@^1.1.0":
-  version "1.1.0"
-  resolved "http://192.168.64.135:4873/@geekagency%2fcomposite-js/-/composite-js-1.1.0.tgz#03d7a445c0e1be30f3aa108141305bcb13b7bb5f"
-  integrity sha512-MAA+lpFT7pHOOy2ZwUube1KmkQyPgQz5LwPJUcdzEgD+aopZXB8eHBe1SHzN254Js3qt0qujbdvLHwYKK3zEag==
+"@geekagency/composite-js@^1.1.1":
+  version "1.1.1"
+  resolved "http://192.168.64.135:4873/@geekagency%2fcomposite-js/-/composite-js-1.1.1.tgz#bacf26d84ba8d84fe74a34e00b7292ee76d48ff4"
+  integrity sha512-fAWYRfpfU6+kmc7sjHJM5XUY/8UyMClFrA4Tyq23W5y4k0Hof6ynN8XErYYJZmbw5w2alSuX5HweuWUHX/fDQA==
 
 "@geekagency/gen-classes@^1.3.0":
   version "1.3.0"

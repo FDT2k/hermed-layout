@@ -138,3 +138,39 @@ export const WithSideBar = () => {
 
   )
 }
+
+export const WithContextualMenu = () => {
+  const [sb, setSb] = useState(true)
+
+  
+  return (
+    <div className="theme-blue-light">
+
+      <Fullscreen>
+        <WaitingRoom
+          handleBack={_ => setSb(!sb)}
+          displayToolbar
+          toolbarHandleAdd={x => x}>
+          
+          <Patient
+            status="whut"
+            handleContextual={x => alert('menu')}
+            contextualMenu={[{id:'a',label:'Delete'}]}
+            handleClick={x_ => alert('hey')}
+            contact={sampleUser3}
+            
+          />
+           <Patient
+            status="whut"
+            handleContextual={x => alert(x)}
+            contextualMenu={[{id:'a',label:'Delete',Icon:Trash},{id:'b',label:'Edit'}]}
+            handleClick={x_ => alert('hey')}
+            contact={sampleUser3}
+            
+          />
+        </WaitingRoom>
+      </Fullscreen>
+    </div>
+
+  )
+}

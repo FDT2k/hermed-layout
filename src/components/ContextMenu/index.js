@@ -1,17 +1,21 @@
 import React, { useRef,useState, useEffect } from 'react'
 import { cEx } from '@geekagency/gen-classes'
+import { compose, applyModifiers, withBaseClass, bem, divElement } from 'utils';
+
+import {windowRect,constrainInRect} from '@geekagency/composite-js/Geometry';
 
 import ListItem from 'components/Sidebar/List/Item'
-export default props => {
+
+
+const ContextualMenu =  props => {
   const me = useRef();
   const [visibleState, setVisibleState] = useState(false)
   const { className, handleDiscard, callback, visible, options, ...rest } = props
 
-  const _options = options || [];
 
 
   const classes = cEx([
-    'contextual-menu',
+    
     _ => visibleState !== true ? 'contextual-menu--state-closed' : '',
     className,
   ])
@@ -21,17 +25,19 @@ export default props => {
     handleDiscard && handleDiscard()
     e.stopPropagation();
   }
+  
+  useEffect(() => {
+      setVisibleState(visible);
+  }, [visible])
 
   useEffect(() => {
-    if (visible) {
+    if (visibleState === true) {
       
-      setVisibleState(true);
       if(me.current){
-       let parentNode = me.current.parentNode;
-       let parentRect = {width:window.innerWidth,height:window.innerHeight}
-       let rect = me.current.getBoundingClientRect();
-       
-       console.log(parentRect,rect)
+        let cRect = windowRect(window);
+        let rect = constrainInRect( cRect,me.current.getBoundingClientRect())
+        me.current.style.top=`${rect.y}px`;
+        me.current.style.left=`${rect.x}px`;
       }
       window.addEventListener('click', closeme)
     } else {
@@ -41,14 +47,14 @@ export default props => {
     return () => {
       window.removeEventListener('click', closeme)
     }
-  }, [visible])
+  }, [visibleState])
 
   return (
     <div ref={me} className={classes} {...rest}>
 
       {
         options.map(
-          item => <ListItem Icon={item.Icon} onClick={e => {
+          item => <ListItem key={item.id} Icon={item.Icon} onClick={e => {
 
             if (item.callback) {
               item.callback(item.id)
@@ -65,3 +71,6 @@ export default props => {
     </div>
   )
 }
+
+
+export default withBaseClass('contextual-menu')(ContextualMenu)
