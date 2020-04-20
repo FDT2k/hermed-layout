@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import 'sass/style.scss';
 
 import Input from 'components/Input'
-import InputCheckbox from 'components/InputCheckbox'
-import InputChatMessage from 'components/InputChatMessage'
 import Select from 'components/Input/Select'
 import { withKnobs, text, boolean, number, optionsKnob as options } from "@storybook/addon-knobs";
 import { makeThemeSelect } from 'stories/theme-knobs'
@@ -18,6 +16,7 @@ export const SingleInput = () =>
   <div className={makeThemeSelect()}>
     <Input  />
     <Input error />
+    <Input label="Username" error="woops you made a typo" />
     <Input label="With Label" />
     <Input label="With Label and placeholder" placeholder="hey I'm placeholder" />
 
@@ -49,8 +48,8 @@ export const SingleSelect = () =>
 
 export const SingleCheckbox = () =>
   <div className={makeThemeSelect()}>
-    <InputCheckbox onChange={v=> alert('changed ')} label="SSL (should be unchecked)"  />
-    <InputCheckbox onChange={v=> alert('changed ')} label="SSL(should be checked)" checked />
-    <InputCheckbox onChange={v=> alert('changed ')} label="SSL (should be checked)" checked={true} />
+    <Input  error="woops" type="checkbox" onChange={v=> alert('changed ')} label="SSL (should be unchecked)"  />
+    <Input  type="checkbox" onChange={v=> alert('changed ')} label="SSL(should be checked)" checked />
+    <Input  type="checkbox" onChange={v=> alert('changed ')} label="SSL (should be checked)" checked={true} />
   </div>
 

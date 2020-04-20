@@ -22,12 +22,12 @@ const bem = main => {
 
 
 export const makeBem = current => {
-    return [
+    return {
         current,
-        block => makeBem(`${current}-${block}`),
-        element=> makeBem(`${current}__${element}`),
-        modifier => makeBem(`${current}--${modifier}`)
-    ]
+        block: block => makeBem(`${current}-${block}`),
+        element: element=> makeBem(`${current}__${element}`),
+        modifier:modifier => makeBem(`${current}--${modifier}`)
+    }
 }
 
 export const wrapComponent = Wrap => Component=> ({children,...rest}) => <Wrap {...rest}><Component>{children}</Component></Wrap>
@@ -40,7 +40,7 @@ export const baseElement = curry((_e,  {children,...rest}) => e(_e,rest,children
 
 export const modifiersToCeX = (keyEnhancer, list, modifiers) => {
     return list.reduce((acc, item) => {
-        acc[keyEnhancer(item)] = _ => modifiers[item] === true;
+        acc[keyEnhancer(item)] = _ => typeof modifiers[item] != 'undefined';
         return acc
     }, {})
 }
@@ -55,6 +55,18 @@ export const withBaseClass = BaseClass => Component => props => {
     ])
     return <Component {...rest} className={classes} />
 }
+
+
+export const withBem = bem => Component => props=>{
+    const { className, ...rest } = props;
+    const classes = cEx([
+        bem.current,
+        className
+    ])
+    return <Component {...rest} className={classes} />
+
+}
+
 
 
 export const withModifiers = (namer, modifiers) => Component => props => {

@@ -1,13 +1,22 @@
 .single-input {
+
   width: 100%;
   padding: 6px 0px;
 
+
   &__label {
     @include themify($themes) {
-      color: themed('primaryBasic');
-      @include themed_font('secondaryFont','regular');
+      color: themed("primaryBasic");
+      @include themed_font("secondaryFont", "regular");
     }
     @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+
+    /* &--error{
+      @include themify($themes) {
+        color:#ff0000;
+      }
+    }
+    */
   }
 
   &__input {
@@ -18,27 +27,45 @@
     border-radius: 4px;
 
     @include themify($themes) {
-      color: themed('primaryBasic');
-      border: solid 1px themed('grayLight');
-      @include themed_font('secondaryFont','regular');
+      color: themed("primaryBasic");
+      border: solid 1px themed("grayLight");
+      @include themed_font("secondaryFont", "regular");
     }
     @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
 
     &:focus {
       @include themify($themes) {
-        color: themed('primaryBasic');
-        border: solid 1px themed('primaryBasic');
-        @include themed_font('secondaryFont','regular');
+        color: themed("primaryBasic");
+        border: solid 1px themed("primaryBasic");
+        @include themed_font("secondaryFont", "regular");
       }
     }
 
     &::placeholder {
       @include themify($themes) {
-        color: themed('grayDark');
-        @include themed_font('secondaryFont','thin');
+        color: themed("grayDark");
+        @include themed_font("secondaryFont", "thin");
       }
     }
-
+    &--error {
+      @include themify($themes) {
+        border-color: red;
+      }
+    }
   }
 
+  &__error {
+    display:inline-block;
+    padding-left: 5px;
+    @include themify($themes) {
+      color: #ff0000;
+    }
+  }
+  
+
+
+  /*debugging*/
+ /* &--error{
+    border:2px dashed purple;
+  }*/
 }

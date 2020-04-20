@@ -1,11 +1,16 @@
-.single-input.--checkbox{
-  width: auto;
-  padding: 6px 0px;
+.single-input__input.input-checkbox{
+  @include themify($themes) {
+   border: 0px solid transparent;
+   width: auto;
+   padding: 6px 0px;
+  }
+}
 
+.input-checkbox {
+  
 
- 
   /* Customize the label (the container) */
-  .container {
+  & .container {
     display: block;
     position: relative;
     margin: 4px 0px;
@@ -20,7 +25,7 @@
   }
 
   /* Hide the browser's default checkbox */
-  .container input {
+  & .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -29,93 +34,88 @@
   }
 
   /* Create a custom checkbox */
-  .checkmark {
+  & .checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     @include themify($themes) {
-      background-color: themed('secondaryBasic');
+      background-color: themed("secondaryBasic");
     }
     border-radius: 4px;
     transition: all 500ms ease-in;
   }
 
   /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+  & .container:hover input ~ .checkmark {
     @include themify($themes) {
-      background-color: themed('disabled');
+      background-color: themed("disabled");
     }
   }
- /* On mouse-over, add a grey background color */
- .container input ~ .checkmark {
-  @include themify($themes) {
-    background-color :themed('disabled');
+  /* On mouse-over, add a grey background color */
+  & .container input ~ .checkmark {
+    @include themify($themes) {
+      background-color: themed("disabled");
+    }
   }
-}
 
   /* When the checkbox is checked */
-  .container input:checked ~ .checkmark {
+  & .container input:checked ~ .checkmark {
     @include themify($themes) {
-      background-color: themed('primaryColor');
+      background-color: themed("primaryColor");
     }
   }
 
-  .line{
+  .line {
     left: 18px;
     top: 8px;
-    content: ' ';
+    content: " ";
     height: 25px;
     width: 2px;
     @include themify($themes) {
-      border: solid themed('secondaryBasic');
+      border: solid themed("secondaryBasic");
       border-width: 0 5px 5px 0;
     }
   }
 
   /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
+  & .checkmark:after {
     position: absolute;
     display: block;
     @extend .line;
     transform: rotate(-45deg);
   }
 
-  .checkmark::before {
+  & .checkmark::before {
     position: absolute;
     @extend .line;
     transform: rotate(45deg);
   }
- 
 
   /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+  & .container input:checked ~ .checkmark:after {
     display: block;
   }
-  .container input:checked ~ .checkmark::before {
-    opacity:0;
+  & .container input:checked ~ .checkmark::before {
+    opacity: 0;
   }
-  
 
   /* Style the checkmark/indicator */
-  .container input:checked ~ .checkmark:after {
+  & .container input:checked ~ .checkmark:after {
     left: 14px;
     top: 6px;
     width: 13px;
     height: 23px;
     @include themify($themes) {
-      border: solid themed('secondaryBasic');
+      border: solid themed("secondaryBasic");
       border-width: 0 5px 5px 0;
     }
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-
   }
-
 
   /* Lien vers l'exemple :
   https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
-
 }
