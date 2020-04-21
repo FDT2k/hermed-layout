@@ -19,10 +19,10 @@ export const Checkbox =  props => {
   }
   return (
     <div className={className}>
-    <div className="container" onClick={handleClick}>
-      <input ref={cb} checked={check} type="checkbox"  {...rest} />
-      <span className="checkmark"></span>
-    </div>
+      <div className="container" onClick={handleClick}>
+        <input ref={cb} checked={check} type="checkbox"  {...rest} />
+        <span className="checkmark"></span>
+      </div>
     </div>
 
   )

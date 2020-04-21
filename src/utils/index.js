@@ -40,7 +40,7 @@ export const baseElement = curry((_e,  {children,...rest}) => e(_e,rest,children
 
 export const modifiersToCeX = (keyEnhancer, list, modifiers) => {
     return list.reduce((acc, item) => {
-        acc[keyEnhancer(item)] = _ => typeof modifiers[item] != 'undefined';
+        acc[keyEnhancer(item,modifiers[item])] = _ => typeof modifiers[item] != 'undefined';
         return acc
     }, {})
 }
@@ -121,6 +121,11 @@ export const applyModifiers = (modifiers,unless) => Component => props => {
     return <Component {..._m} {...props} />
 }
 
+const  makePropsFilter= (prefix)=> ([
+    spreadObjectBeginWith(prefix),
+    forwardPropsRemovingHeader(prefix)
+])
+
 
 export {
     spreadObjectBeginWith as filterPropStartingWith,
@@ -129,6 +134,7 @@ export {
     bem,
     cEx,
     cEx as classNames,
+    makePropsFilter
 }
 
 

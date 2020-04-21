@@ -3,6 +3,29 @@
   width: 100%;
   padding: 6px 0px;
 
+  &--checkbox-inline{
+     @include flex-direction(row-reverse);
+     @include flex-just(flex-end);
+     @include flex-align(center);
+    
+  }
+  
+  &--checkbox-inline &__label{
+    padding-left:5px;
+  }
+  &--checkbox-inline-reverse{
+    @include flex-direction(row);
+    @include flex-just(flex-start);
+    @include flex-align(center);
+    padding-left:5px;
+  }
+  
+  &--checkbox-inline-reverse  &__label{
+    padding-right:5px;
+  }
+  .layout-flex &, .form-group &{
+    padding-right:5px;
+  }
 
   &__label {
     @include themify($themes) {

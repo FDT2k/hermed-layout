@@ -4,6 +4,8 @@
    width: auto;
    padding: 6px 0px;
   }
+
+  height: auto;
 }
 
 .input-checkbox {
@@ -13,9 +15,9 @@
   & .container {
     display: block;
     position: relative;
-    margin: 4px 0px;
-    width: 40px;
-    height: 40px;
+    margin: 0px auto;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     font-size: 22px;
     -webkit-user-select: none;
@@ -68,8 +70,8 @@
   }
 
   .line {
-    left: 18px;
-    top: 8px;
+    left: 13px;
+    top: 3px;
     content: " ";
     height: 25px;
     width: 2px;
@@ -103,10 +105,10 @@
 
   /* Style the checkmark/indicator */
   & .container input:checked ~ .checkmark:after {
-    left: 14px;
-    top: 6px;
-    width: 13px;
-    height: 23px;
+    left: 9px;
+    top: 3px;
+    width: 12px;
+    height: 20px;
     @include themify($themes) {
       border: solid themed("secondaryBasic");
       border-width: 0 5px 5px 0;

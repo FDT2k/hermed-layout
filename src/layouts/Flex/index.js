@@ -20,8 +20,12 @@ export default props => {
     justEvenly, 
     justCenter,
     justStart,
+    justEnd,
 
     column, 
+    columnReverse, 
+    row,
+    rowReverse,
     ...rest
   } = props
 
@@ -34,7 +38,10 @@ export default props => {
       [modifier('stretch')]: _=> justStretch,
       [modifier('around')]: _=> justAround,
       [modifier('start')]: _=> justStart,
+      [modifier('end')]: _=> justEnd,
       [modifier('column')]: _=> column,
+      [modifier('column-reverse')]: _=> columnReverse,
+      [modifier('row-reverse')]: _=> rowReverse,
       [modifier('align-stretch')]: _=> alignStretch,
       [modifier('align-center')]: _=> alignCenter,
       [modifier('align-start')]: _=> alignStart,
