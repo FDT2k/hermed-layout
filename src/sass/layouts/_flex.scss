@@ -102,4 +102,8 @@
     &--wrap {
         @include flex-wrap-parent(wrap);
     }
+
+    &--content-start{
+        @include flex-align-content(flex-start);
+    }
 }

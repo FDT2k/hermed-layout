@@ -22,10 +22,16 @@ export default props => {
     justStart,
     justEnd,
 
+    contentStart,
+
     column, 
     columnReverse, 
     row,
     rowReverse,
+    
+    wrap,
+    nowrap,
+    wrapReverse,
     ...rest
   } = props
 
@@ -47,6 +53,10 @@ export default props => {
       [modifier('align-start')]: _=> alignStart,
       [modifier('centered')]: _=> centered,
       [modifier('cover')]: _=> cover,
+      [modifier('wrap')]: _=> wrap,
+      [modifier('nowrap')]: _=> nowrap,
+      [modifier('wrap-reverse')]: _=> wrapReverse,
+      [modifier('content-start')]: _=> contentStart,
 
     },
     className,

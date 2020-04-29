@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import { filterPropStartingWith, forwardProps, bem, cEx } from 'utils'
+import { filterPropStartingWith, forwardProps, bem, cEx, modifiersToCeX } from 'utils'
 
 const [__base_class, element,modifier]= bem('container-fullscreen')
 
 export default props => {
-  let { offset, className, style:otherStyle, ...rest } = props;
+  let { offset,overflowY, className, style:otherStyle, ...rest } = props;
   if (!offset) {
     offset = 0;
   }
@@ -28,7 +28,8 @@ export default props => {
 
   const classes = cEx([
     __base_class,
-    className
+    _=> overflowY ? modifier('overflow-y'): '',
+    className,
   ])
 
   return (
