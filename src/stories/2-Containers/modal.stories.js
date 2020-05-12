@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import Modal from 'containers/Modal'
 import Fullscreen from 'containers/Fullscreen'
 import Flex from 'layouts/Flex'
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 
 
 import { withKnobs, text, boolean, number, optionsKnob as options } from "@storybook/addon-knobs";

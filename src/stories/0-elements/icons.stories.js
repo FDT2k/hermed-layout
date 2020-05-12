@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import { makeThemeSelect } from 'stories/theme-knobs'

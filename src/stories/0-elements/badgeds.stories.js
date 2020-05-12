@@ -1,7 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react';
 import ThemePicker from 'components/ThemePicker'
 import Badge from 'components/Badge'
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
 

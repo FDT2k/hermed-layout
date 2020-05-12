@@ -25,7 +25,7 @@ const Component = props => {
 
   const _handleClick=  e=>{
     handleClick && handleClick(e);
-    e.stopEventPropagation();
+    e.stopPropagation();
   }
   
   return (

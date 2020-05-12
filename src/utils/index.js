@@ -40,7 +40,8 @@ export const baseElement = curry((_e,  {children,...rest}) => e(_e,rest,children
 
 export const modifiersToCeX = (keyEnhancer, list, modifiers) => {
     return list.reduce((acc, item) => {
-        acc[keyEnhancer(item,modifiers[item])] = _ => typeof modifiers[item] != 'undefined';
+        const _type = typeof modifiers[item]
+        acc[keyEnhancer(item,modifiers[item])] = _ => _type !== 'undefined' && modifiers[item]!==false ;
         return acc
     }, {})
 }
@@ -77,6 +78,32 @@ export const withModifiers = (namer, modifiers) => Component => props => {
         modifiersToCeX(namer, modifiers, presentModifiers)
     ]);
     return <Component className={classes} {..._props}/>
+}
+
+
+
+export const reduceVariables = (keyEnhancer,valEnhancer, list, variables) => {
+    return list.reduce((acc, item) => {
+        acc[keyEnhancer(item,variables[item])] = valEnhancer(variables[item]);
+        return acc
+    }, {})
+}
+
+
+
+export const withVariables = (keyEnhancer,valEnhancer, variables) => Component => props => {
+    const { style, ...rest } = props; //ensure to preserve styles
+    const _style = style || {}
+
+    const [presentVars, _props] = spreadObjectPresentIn(variables, rest)
+
+    const styles = {
+        ..._style,
+        ...reduceVariables(keyEnhancer,valEnhancer, variables, presentVars)
+    };
+
+    
+    return <Component style={styles} {..._props}/>
 }
 
 

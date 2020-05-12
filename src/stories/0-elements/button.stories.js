@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from 'components/Button'
 
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 import { FiArrowRightCircle } from "react-icons/fi";
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import { makeThemeSelect } from 'stories/theme-knobs'

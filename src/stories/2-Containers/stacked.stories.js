@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Fullscreen from 'containers/Fullscreen'
 import Stack from 'containers/Stack'
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 import { withKnobs, text, boolean, number, optionsKnob as options } from "@storybook/addon-knobs";
 
 import { makeThemeSelect } from 'stories/theme-knobs'

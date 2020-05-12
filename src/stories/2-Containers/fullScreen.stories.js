@@ -1,6 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react';
 import Fullscreen from 'containers/Fullscreen'
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 
 
 

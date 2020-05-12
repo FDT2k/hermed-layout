@@ -1,0 +1,17 @@
+.variable-background {
+    
+    background-image: var(--background_image);
+
+    &--cover {
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+    }
+
+    .layout-flex{
+        padding: 10px;
+        & > *{
+            padding:10px;
+        }
+    }
+}

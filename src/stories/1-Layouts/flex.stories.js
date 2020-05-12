@@ -2,7 +2,8 @@ import React,{useEffect,useState,useRef} from 'react';
 import ThemePicker from 'components/ThemePicker'
 import LayoutFlex from 'layouts/Flex'
 import Fullscreen from 'containers/Fullscreen'
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 const FakeContent = props => <div className={props.className} style={{display:'inline-block'}}> {props.children}</div>
 
 

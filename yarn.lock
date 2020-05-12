@@ -1187,10 +1187,10 @@
   resolved "http://192.168.64.135:4873/@geekagency%2fcomposite-js/-/composite-js-0.7.3.tgz#60fb7d92e3c1147ca3ea3078747dbccac08b1576"
   integrity sha512-bJcFQJdeq9rDBlBXIXvJFLU2/IO5ucnxTMgPPNLvJCHOfw2/7UNoa+CQNO6uCOXAWfctWF1UYSJ3sMSupMwzPA==
 
-"@geekagency/composite-js@^1.1.2":
-  version "1.1.2"
-  resolved "http://192.168.64.135:4873/@geekagency%2fcomposite-js/-/composite-js-1.1.2.tgz#f5ae16a39da8e164e6d3743df6fc7216fb881b60"
-  integrity sha512-cHcC7DwUY5hsQar4Z/zzB2LFzFt3EUOSBPUm5ME0il+tYPJzmfHh3VjYKPMNtEgyr2DMlGIovU5vrNAX4aCnYg==
+"@geekagency/composite-js@^2.0.14":
+  version "2.0.14"
+  resolved "http://192.168.64.135:4873/@geekagency%2fcomposite-js/-/composite-js-2.0.14.tgz#38c639410b4746b85f2b81e4562e066c2ffe197c"
+  integrity sha512-etSdDEQf89TFu0keuDymMXxPfKAWvx2FMU30YBGemkhP46HBUN4fFiGoto5t/BEgkNFh7g9H4mIcU47/F9CEjQ==
 
 "@geekagency/gen-classes@^1.3.0":
   version "1.3.0"
@@ -2262,11 +2262,6 @@
   version "4.1.2"
   resolved "http://192.168.64.135:4873/@types%2fnpmlog/-/npmlog-4.1.2.tgz#d070fe6a6b78755d1092a3dc492d34c3d8f871c4"
   integrity sha512-4QQmOF5KlwfxJ5IGXFIudkeLCdMABz03RcUXu+LCb24zmln8QW6aDjuGl4d4XPVLf2j+FnjelHTP7dvceAFbhA==
-
-"@types/pako@^1.0.1":
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/@types%2fpako/-/pako-1.0.1.tgz#33b237f3c9aff44d0f82fe63acffa4a365ef4a61"
-  integrity sha512-GdZbRSJ3Cv5fiwT6I0SQ3ckeN2PWNqxd26W9Z2fCK1tGrrasGy4puvNFtnddqH9UJFMQYXxEuuB7B8UK+LLwSg==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -3551,11 +3546,6 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-blob-util@^2.0.2:
-  version "2.0.2"
-  resolved "http://192.168.64.135:4873/blob-util/-/blob-util-2.0.2.tgz#3b4e3c281111bb7f11128518006cdc60b403a1eb"
-  integrity sha512-T7JQa+zsXXEa6/8ZhHcQEW1UFfVM49Ts65uBkFL6fz2QmrElqmbajIDJvuA0tEhRe5eIjpV9ZF+0RfZR9voJFQ==
-
 block-stream@*:
   version "0.0.9"
   resolved "http://192.168.64.135:4873/block-stream/-/block-stream-0.0.9.tgz#13ebfe778a03205cfe03751481ebb4b3300c126a"
@@ -3951,11 +3941,6 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30000989, can
   resolved "http://192.168.64.135:4873/caniuse-lite/-/caniuse-lite-1.0.30001035.tgz#2bb53b8aa4716b2ed08e088d4dc816a5fe089a1e"
   integrity sha512-C1ZxgkuA4/bUEdMbU5WrGY4+UhMFFiXrgNAfxiMIqWgFTWfv/xsZCS2xEHT2LMq7xAZfuAnu6mcqyDl0ZR6wLQ==
 
-canny-edge-detector@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/canny-edge-detector/-/canny-edge-detector-1.0.0.tgz#41f4cc3e09c0802a5269a05e7bff3dbf09169c97"
-  integrity sha512-SpewmkHDE1PbJ1/AVAcpvZKOufYpUXT0euMvhb5C4Q83Q9XEOmSXC+yR7jl3F4Ae1Ev6OtQKbFgdcPrOdHjzQg==
-
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "http://192.168.64.135:4873/capture-exit/-/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -4237,11 +4222,6 @@ color-convert@^2.0.1:
   integrity sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==
   dependencies:
     color-name "~1.1.4"
-
-color-functions@^3.0.1:
-  version "3.0.1"
-  resolved "http://192.168.64.135:4873/color-functions/-/color-functions-3.0.1.tgz#a207e2d4a0975dccc72fcd37cce12d2d4bf8b674"
-  integrity sha512-pPz+aopsINRkVk/MHZqT4mmvuUyTFwF4vhq6fLwOU8zSBU3kP5+vN/z4zZiefdOtB3+PaqBy7lAr9Yv4zbsBcQ==
 
 color-name@1.1.3:
   version "1.1.3"
@@ -5832,13 +5812,6 @@ extsprintf@^1.2.0:
   resolved "http://192.168.64.135:4873/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fast-bmp@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/fast-bmp/-/fast-bmp-1.0.0.tgz#7de95f42c290484090ae2c70ab25440673acca37"
-  integrity sha1-felfQsKQSECQrixwqyVEBnOsyjc=
-  dependencies:
-    iobuffer "^3.1.0"
-
 fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "http://192.168.64.135:4873/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
@@ -5861,14 +5834,6 @@ fast-glob@^2.0.2:
     merge2 "^1.2.3"
     micromatch "^3.1.10"
 
-fast-jpeg@^1.0.1:
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/fast-jpeg/-/fast-jpeg-1.0.1.tgz#bd545ec6cd82430ca5ded4bd30bbd061fafecf8b"
-  integrity sha1-vVRexs2CQwyl3tS9MLvQYfr+z4s=
-  dependencies:
-    iobuffer "^2.1.0"
-    tiff "^2.0.0"
-
 fast-json-stable-stringify@^2.0.0:
   version "2.1.0"
   resolved "http://192.168.64.135:4873/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
@@ -5878,20 +5843,6 @@ fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "http://192.168.64.135:4873/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-fast-list@^1.0.3:
-  version "1.0.3"
-  resolved "http://192.168.64.135:4873/fast-list/-/fast-list-1.0.3.tgz#f5d5754a7c1cbf682a15961ef9a063897571eaa1"
-  integrity sha1-9dV1Snwcv2gqFZYe+aBjiXVx6qE=
-
-fast-png@^5.0.2:
-  version "5.0.2"
-  resolved "http://192.168.64.135:4873/fast-png/-/fast-png-5.0.2.tgz#2e689005ef89cbe4ba0200ff43f7da171a83ab5d"
-  integrity sha512-75j60BAZP5R3eTHslW5o8apfuAtxRONfY3gGt3yQlsm46Xz+uRCjguBFFr5SMNGPJ7MjYFBsE1dlwPLnTA4t6w==
-  dependencies:
-    "@types/pako" "^1.0.1"
-    iobuffer "^5.0.2"
-    pako "^1.0.10"
 
 fault@^1.0.2:
   version "1.0.4"
@@ -5920,11 +5871,6 @@ fb-watchman@^2.0.0:
   integrity sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
   dependencies:
     bser "2.1.1"
-
-fft.js@^4.0.3:
-  version "4.0.3"
-  resolved "http://192.168.64.135:4873/fft.js/-/fft.js-4.0.3.tgz#b0084efa94188febdd1cffe68691f4c85a0fb8cb"
-  integrity sha1-sAhO+pQYj+vdHP/mhpH0yFoPuMs=
 
 figgy-pudding@^3.5.1:
   version "3.5.1"
@@ -5968,11 +5914,6 @@ file-system-cache@^1.0.5:
     bluebird "^3.3.5"
     fs-extra "^0.30.0"
     ramda "^0.21.0"
-
-file-type@^10.10.0:
-  version "10.11.0"
-  resolved "http://192.168.64.135:4873/file-type/-/file-type-10.11.0.tgz#2961d09e4675b9fb9a3ee6b69e9cd23f43fd1890"
-  integrity sha512-uzk64HRpUZyTGZtVuvrjP0FYxzQrBf4rojot6J65YMEbwBLB0CWm0CLojVpwpmFmxcE/lkvYICgfcGozbBq6rw==
 
 file-uri-to-path@1.0.0:
   version "1.0.0"
@@ -6598,11 +6539,6 @@ has-flag@^4.0.0:
   resolved "http://192.168.64.135:4873/has-flag/-/has-flag-4.0.0.tgz#944771fd9c81c81265c4d6941860da06bb59479b"
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
-has-own@^1.0.1:
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/has-own/-/has-own-1.0.1.tgz#7cc78a63e5ffde330fa8d0a6ddaca4a70c495579"
-  integrity sha512-RDKhzgQTQfMaLvIFhjahU+2gGnRBK6dYOd5Gd9BzkmnBneOCRYjRC003RIMrdAbH52+l+CnMS4bBCXGer8tEhg==
-
 has-symbols@^1.0.0, has-symbols@^1.0.1:
   version "1.0.1"
   resolved "http://192.168.64.135:4873/has-symbols/-/has-symbols-1.0.1.tgz#9f5214758a44196c406d9bd76cebf81ec2dd31e8"
@@ -6925,43 +6861,6 @@ ignore@^4.0.6:
   resolved "http://192.168.64.135:4873/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-image-js@^0.21.9:
-  version "0.21.9"
-  resolved "http://192.168.64.135:4873/image-js/-/image-js-0.21.9.tgz#eb79f68f0f9c446ba5236e58d4ea50730ccff7d8"
-  integrity sha512-OMcrbDtVVxWv0ZjmgcmjGMpesoCol7VjuVeTvAWqXm7vkSQWnTMAUXrEYdwzBVEZHzNAKsu2IcueLc0f7hValQ==
-  dependencies:
-    blob-util "^2.0.2"
-    canny-edge-detector "^1.0.0"
-    color-functions "^3.0.1"
-    fast-bmp "^1.0.0"
-    fast-jpeg "^1.0.1"
-    fast-list "^1.0.3"
-    fast-png "^5.0.2"
-    has-own "^1.0.1"
-    image-type "^4.1.0"
-    is-array-type "^1.0.0"
-    is-integer "^1.0.7"
-    jpeg-js "^0.3.7"
-    js-priority-queue "^0.1.5"
-    ml-convolution "^0.2.0"
-    ml-disjoint-set "^1.0.0"
-    ml-matrix "^5.2.1"
-    ml-matrix-convolution "0.4.3"
-    ml-regression "^4.4.2"
-    monotone-chain-convex-hull "^1.0.0"
-    new-array "^1.0.0"
-    num-sort "^1.0.0"
-    robust-point-in-polygon "^1.0.3"
-    tiff "^4.0.0"
-    web-worker-manager "^0.2.0"
-
-image-type@^4.1.0:
-  version "4.1.0"
-  resolved "http://192.168.64.135:4873/image-type/-/image-type-4.1.0.tgz#72a88d64ff5021371ed67b9a466442100be57cd1"
-  integrity sha512-CFJMJ8QK8lJvRlTCEgarL4ro6hfDQKif2HjSvYCdQZESaIPV4v9imrf7BQHK+sQeTeNeMpWciR9hyC/g8ybXEg==
-  dependencies:
-    file-type "^10.10.0"
-
 immer@1.10.0:
   version "1.10.0"
   resolved "http://192.168.64.135:4873/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
@@ -7174,23 +7073,6 @@ invert-kv@^2.0.0:
   resolved "http://192.168.64.135:4873/invert-kv/-/invert-kv-2.0.0.tgz#7393f5afa59ec9ff5f67a27620d11c226e3eec02"
   integrity sha512-wPVv/y/QQ/Uiirj/vh3oP+1Ww+AWehmi1g5fFWGPF6IpCBCDVrhgHRMvrLfdYcwDh3QJbGXDW4JAuzxElLSqKA==
 
-iobuffer@^2.1.0:
-  version "2.1.0"
-  resolved "http://192.168.64.135:4873/iobuffer/-/iobuffer-2.1.0.tgz#074882d24020a85db6a5042a0418ef9b6b2e616a"
-  integrity sha1-B0iC0kAgqF22pQQqBBjvm2suYWo=
-
-iobuffer@^3.1.0:
-  version "3.2.0"
-  resolved "http://192.168.64.135:4873/iobuffer/-/iobuffer-3.2.0.tgz#9234f4d2cb1042818704f07d1f5c833f41327e26"
-  integrity sha1-kjT00ssQQoGHBPB9H1yDP0EyfiY=
-  dependencies:
-    utf8 "^2.1.2"
-
-iobuffer@^5.0.2:
-  version "5.0.2"
-  resolved "http://192.168.64.135:4873/iobuffer/-/iobuffer-5.0.2.tgz#90f6ead2afd24cc9d2f2befbbb2a501552d70d4f"
-  integrity sha512-FwwzAUZkapfHq76amLGSaEigB2nRSZR+ADc+zRcIRm2MsofDJAiIEPGbw+is/lI+kW32fM5jezmJ8dVQnd1UbA==
-
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "http://192.168.64.135:4873/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
@@ -7243,20 +7125,10 @@ is-alphanumerical@^1.0.0:
     is-alphabetical "^1.0.0"
     is-decimal "^1.0.0"
 
-is-any-array@^0.0.3:
-  version "0.0.3"
-  resolved "http://192.168.64.135:4873/is-any-array/-/is-any-array-0.0.3.tgz#cbdd8c7189d47b53b050969245f4ef7e55550b9b"
-  integrity sha512-Lr5SRykZv6uuYMZURz7+YpigT1ziTBHOTgFJ1zK7gL+9Wbet5Ha1ws6S84Jo/lH4zep02b95sk6o4+MTk97mPQ==
-
 is-arguments@^1.0.4:
   version "1.0.4"
   resolved "http://192.168.64.135:4873/is-arguments/-/is-arguments-1.0.4.tgz#3faf966c7cba0ff437fb31f6250082fcf0448cf3"
   integrity sha512-xPh0Rmt8NE65sNzvyUmWgI1tz3mKq74lGA0mL8LYZcoIzKOzDh6HmrYm3d18k60nHerC8A9Km8kYu87zfSFnLA==
-
-is-array-type@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/is-array-type/-/is-array-type-1.0.0.tgz#0bd8a263430319c8fa32fa7af260140f4762b506"
-  integrity sha1-C9iiY0MDGcj6Mvp68mAUD0ditQY=
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -7450,13 +7322,6 @@ is-hexadecimal@^1.0.0:
   version "1.0.4"
   resolved "http://192.168.64.135:4873/is-hexadecimal/-/is-hexadecimal-1.0.4.tgz#cc35c97588da4bd49a8eedd6bc4082d44dcb23a7"
   integrity sha512-gyPJuv83bHMpocVYoqof5VDiZveEoGoFL8m3BXNb2VW8Xs+rz9kqO8LOQ5DH6EsuvilT1ApazU0pyl+ytbPtlw==
-
-is-integer@^1.0.6, is-integer@^1.0.7:
-  version "1.0.7"
-  resolved "http://192.168.64.135:4873/is-integer/-/is-integer-1.0.7.tgz#6bde81aacddf78b659b6629d629cadc51a886d5c"
-  integrity sha1-a96Bqs3feLZZtmKdYpytxRqIbVw=
-  dependencies:
-    is-finite "^1.0.0"
 
 is-map@^2.0.1:
   version "2.0.1"
@@ -8108,20 +7973,10 @@ jest@24.9.0:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
 
-jpeg-js@^0.3.7:
-  version "0.3.7"
-  resolved "http://192.168.64.135:4873/jpeg-js/-/jpeg-js-0.3.7.tgz#471a89d06011640592d314158608690172b1028d"
-  integrity sha512-9IXdWudL61npZjvLuVe/ktHiA41iE8qFyLB+4VDTblEsWBzeg8WQTlktdUK4CdncUqtUgUg0bbOmTE2bKBKaBQ==
-
 js-base64@^2.1.8:
   version "2.5.2"
   resolved "http://192.168.64.135:4873/js-base64/-/js-base64-2.5.2.tgz#313b6274dda718f714d00b3330bbae6e38e90209"
   integrity sha512-Vg8czh0Q7sFBSUMWWArX/miJeBWYBPpdU/3M/DKSaekLMqrqVPaedp+5mZhie/r0lgrcaYBfwXatEew6gwgiQQ==
-
-js-priority-queue@^0.1.5:
-  version "0.1.5"
-  resolved "http://192.168.64.135:4873/js-priority-queue/-/js-priority-queue-0.1.5.tgz#f71e9b2120c91e8a1ddab3b7d347dac01d81e837"
-  integrity sha1-9x6bISDJHood2rO300fawB2B6Dc=
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -9013,189 +8868,6 @@ mkdirp@0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-ml-array-max@^1.1.1, ml-array-max@^1.1.2:
-  version "1.1.2"
-  resolved "http://192.168.64.135:4873/ml-array-max/-/ml-array-max-1.1.2.tgz#ac14a4954ebdb9f401774cc1572fce439e12f94d"
-  integrity sha512-it2hYUSuYEwIRO6hjTWfe6gbGutF4Tuct7jxt3LiLE4wKFs6ku5FLNIRKtOL2jyH+Jdwt1ddbqKMX8inBM8RxA==
-  dependencies:
-    is-any-array "^0.0.3"
-
-ml-array-min@^1.1.2:
-  version "1.1.2"
-  resolved "http://192.168.64.135:4873/ml-array-min/-/ml-array-min-1.1.2.tgz#a084370fe78998a4131d566d066ee01bccce253a"
-  integrity sha512-92QzvsyK7TxGz618pno6bu0LXYcRKssbimP85qRllk2xX5Z4gnVxlOmrMjSerUut9zzbt1eQB4byXNCwT0vgwA==
-  dependencies:
-    is-any-array "^0.0.3"
-
-ml-array-rescale@^1.2.1:
-  version "1.3.1"
-  resolved "http://192.168.64.135:4873/ml-array-rescale/-/ml-array-rescale-1.3.1.tgz#7e55871af8741d212e2b47b8acd55571936c822b"
-  integrity sha512-PMj/f3MXBf5j2is8E4ugfNx6txi5y6qO4iVizfGjUVcpBl9RpXhznsoOz5iLtVtW1uDiWl+ToHaW4IGwoG+rmg==
-  dependencies:
-    is-any-array "^0.0.3"
-    ml-array-max "^1.1.2"
-    ml-array-min "^1.1.2"
-
-ml-convolution@^0.2.0:
-  version "0.2.0"
-  resolved "http://192.168.64.135:4873/ml-convolution/-/ml-convolution-0.2.0.tgz#374659a6f75c98324ef7d61766c1e6209caff594"
-  integrity sha1-N0ZZpvdcmDJO99YXZsHmIJyv9ZQ=
-  dependencies:
-    fft.js "^4.0.3"
-    next-power-of-two "^1.0.0"
-
-ml-disjoint-set@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/ml-disjoint-set/-/ml-disjoint-set-1.0.0.tgz#6cd8e583eef5a02585348b98d0df21fd83ef6082"
-  integrity sha1-bNjlg+71oCWFNIuY0N8h/YPvYII=
-
-ml-distance-euclidean@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/ml-distance-euclidean/-/ml-distance-euclidean-1.0.0.tgz#08447c2233641a2b2a9b4c29e5f792d28f1d5b95"
-  integrity sha1-CER8IjNkGisqm0wp5feS0o8dW5U=
-
-ml-distance-euclidean@^2.0.0:
-  version "2.0.0"
-  resolved "http://192.168.64.135:4873/ml-distance-euclidean/-/ml-distance-euclidean-2.0.0.tgz#3a668d236649d1b8fec96380b9435c6f42c9a817"
-  integrity sha512-yC9/2o8QF0A3m/0IXqCTXCzz2pNEzvmcE/9HFKOZGnTjatvBbsn4lWYJkxENkA4Ug2fnYl7PXQxnPi21sgMy/Q==
-
-ml-fft@1.3.5:
-  version "1.3.5"
-  resolved "http://192.168.64.135:4873/ml-fft/-/ml-fft-1.3.5.tgz#effc1f3c5d0b803a0b39738feb3dacd27c145010"
-  integrity sha1-7/wfPF0LgDoLOXOP6z2s0nwUUBA=
-
-ml-kernel-gaussian@^2.0.1:
-  version "2.0.2"
-  resolved "http://192.168.64.135:4873/ml-kernel-gaussian/-/ml-kernel-gaussian-2.0.2.tgz#2d1a1130d3205e551e7d1dbe642b8f150076e6c0"
-  integrity sha512-5MBrH2g9MBO53I6mcyXvMhyOLsmO2w21+26A1ZV/vYoxqpsov2PWkT8bhdFCEe0kgDupmAb6u81iOID/rhnarA==
-  dependencies:
-    ml-distance-euclidean "^2.0.0"
-
-ml-kernel-polynomial@^2.0.0:
-  version "2.0.1"
-  resolved "http://192.168.64.135:4873/ml-kernel-polynomial/-/ml-kernel-polynomial-2.0.1.tgz#ae99e26892f5763185e2334bad862adc5733c599"
-  integrity sha512-aGDNRPHDiKeJmBxB0L9wTxKNLfp5JytbdRIo5K+FTcmFjkWDe3YZPo6R6wBB5mxaJ5eqTRawzeV4RoIWHbakyQ==
-
-ml-kernel-sigmoid@^1.0.0:
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/ml-kernel-sigmoid/-/ml-kernel-sigmoid-1.0.1.tgz#3eb4419a97d68d299dd6faffa8dca0fb91dd3300"
-  integrity sha512-mSbYOSbNQ7GsUAGrHuUHNsLgM3bZGpXkotw/FBdKZD9YMXfVOgQb1LvvvVeSlOR/ZdmX23qqaV0RnKSYWBF8og==
-
-ml-kernel@^2.0.0:
-  version "2.3.4"
-  resolved "http://192.168.64.135:4873/ml-kernel/-/ml-kernel-2.3.4.tgz#7f6cdd5a3a9b1b6ee3c34bfd15c181664a0661dd"
-  integrity sha512-XH841rI/FANQD1JbhJuSy2XpXmstDjTRoYqJTQRq3V+sZmphvOKIJx1bWTr2vCxduDcWV/M77AYPZRivqt5QTA==
-  dependencies:
-    ml-distance-euclidean "^1.0.0"
-    ml-kernel-gaussian "^2.0.1"
-    ml-kernel-polynomial "^2.0.0"
-    ml-kernel-sigmoid "^1.0.0"
-    ml-matrix "^5.0.0"
-
-ml-matrix-convolution@0.4.3:
-  version "0.4.3"
-  resolved "http://192.168.64.135:4873/ml-matrix-convolution/-/ml-matrix-convolution-0.4.3.tgz#cbc75346b8996caf24a9b431bbad47f9ad2a4c11"
-  integrity sha1-y8dTRriZbK8kqbQxu61H+a0qTBE=
-  dependencies:
-    ml-fft "1.3.5"
-    ml-stat "^1.2.0"
-
-ml-matrix@^5.0.0, ml-matrix@^5.0.1, ml-matrix@^5.2.1:
-  version "5.3.0"
-  resolved "http://192.168.64.135:4873/ml-matrix/-/ml-matrix-5.3.0.tgz#2154902a3380f6a0874ab9a2539a09e873e8db92"
-  integrity sha512-DuvdXYwfGRpM+7MVdvi/zSjiazn+8QPrACT3Xi0pQpYx5SXZ1WuFYwUDXTSmV9+hrCxRhrC4hrzesNcfjpvOsw==
-  dependencies:
-    ml-array-max "^1.1.1"
-    ml-array-rescale "^1.2.1"
-
-ml-regression-base@^1.0.0, ml-regression-base@^1.1.1, ml-regression-base@^1.2.0:
-  version "1.2.1"
-  resolved "http://192.168.64.135:4873/ml-regression-base/-/ml-regression-base-1.2.1.tgz#ce4de3ddb635af2536e8f5bfaa1910ae1f5552ec"
-  integrity sha512-G1gKXkGqT5fvv1oirmF1PjdRAS4qmAH+eTBCL8flAiJ2SI6Lxnh5U18pVJuujKjhOykCvF0Oi47FpWD5CPsLxw==
-
-ml-regression-exponential@^1.0.0:
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/ml-regression-exponential/-/ml-regression-exponential-1.0.1.tgz#f5eedba31a3e0bcfbbb92c26c590f9d02970e7d0"
-  integrity sha1-9e7boxo+C8+7uSwmxZD50Clw59A=
-  dependencies:
-    ml-regression-base "^1.1.1"
-    ml-regression-simple-linear "^1.0.1"
-
-ml-regression-multivariate-linear@^1.0.0:
-  version "1.2.0"
-  resolved "http://192.168.64.135:4873/ml-regression-multivariate-linear/-/ml-regression-multivariate-linear-1.2.0.tgz#cfb33ffacd7e153d33b7481ef9f5d094d954689e"
-  integrity sha512-PUEjcEf05xQbJN9wnMUDFyUXJDZu+Kj6hdw2zzu0S2A9iK9k9AoM30YEUgvD01D12xeanMplWN+xcxgzWPb2/Q==
-  dependencies:
-    ml-matrix "^5.0.1"
-    ml-regression-base "^1.2.0"
-
-ml-regression-polynomial@^1.0.0:
-  version "1.0.3"
-  resolved "http://192.168.64.135:4873/ml-regression-polynomial/-/ml-regression-polynomial-1.0.3.tgz#bd77838c8b673ddcc6ad6e53959a9a97789b80c5"
-  integrity sha512-GXfzXG+PRzpVfVmJiHRc8ggme2ISJlzkaN79Fxl8fI9aQSMoL7qNc3vlp9YwTmzPARhOoFY11JYLuvZCvMIfcg==
-  dependencies:
-    ml-matrix "^5.0.0"
-    ml-regression-base "^1.1.1"
-
-ml-regression-power@^1.0.0:
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/ml-regression-power/-/ml-regression-power-1.0.1.tgz#5b877934e921b51c1203d2760ee5abe82e6a454b"
-  integrity sha512-xClgCv89kmzfdwVdTrda/3QNPgCWAcH21dNT1sD8TW9Lk8jMkh5vcMrufoG4WpbaYEslHh03LeTB70u8T7Cu4Q==
-  dependencies:
-    ml-regression-base "^1.2.0"
-    ml-regression-simple-linear "^1.0.2"
-
-ml-regression-robust-polynomial@^1.0.0:
-  version "1.0.1"
-  resolved "http://192.168.64.135:4873/ml-regression-robust-polynomial/-/ml-regression-robust-polynomial-1.0.1.tgz#870793f61bde021d002e439ebb4064428ed9d888"
-  integrity sha512-Vgl8ZMdH18pWuX82AWrVjamNVKcm9kAAqbUdjNLjlTqqQFFzEO/f6P/VJdb2jIkRtYwv64w6HNB1BGpow+sElA==
-  dependencies:
-    ml-matrix "^5.0.0"
-    ml-regression-base "^1.2.0"
-
-ml-regression-simple-linear@^1.0.0, ml-regression-simple-linear@^1.0.1, ml-regression-simple-linear@^1.0.2:
-  version "1.0.2"
-  resolved "http://192.168.64.135:4873/ml-regression-simple-linear/-/ml-regression-simple-linear-1.0.2.tgz#d99fe95be9178c3bf045cc58490b1e62851336af"
-  integrity sha1-2Z/pW+kXjDvwRcxYSQseYoUTNq8=
-  dependencies:
-    ml-regression-base "^1.0.0"
-
-ml-regression-theil-sen@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/ml-regression-theil-sen/-/ml-regression-theil-sen-1.0.0.tgz#fb33c67ca88cd182c9eee999cecccd7aad5c2bc8"
-  integrity sha512-h0+IAUqCyR6zEK0pQEoSK/AYYqpRqZVd0HqQ8uFJLXKN/X9vNcYjoImL3JxaB71M7DfUuKI+okeE6b2zVHTJSw==
-  dependencies:
-    ml-regression-base "^1.2.0"
-    ml-stat "^1.3.3"
-
-ml-regression@^4.4.2:
-  version "4.4.2"
-  resolved "http://192.168.64.135:4873/ml-regression/-/ml-regression-4.4.2.tgz#d19b376bcc990968cda0d9c3e59f04fd12b91a5f"
-  integrity sha512-pdADkuG0juGAl68QGjqEpr+OiB9AWEJn1/FjD+qVaWJ06FXACpZZkg0XhHXB5pRsSwygA2cEIZHKJ4Ct2dPmMw==
-  dependencies:
-    is-integer "^1.0.6"
-    ml-kernel "^2.0.0"
-    ml-matrix "^5.0.0"
-    ml-regression-base "^1.2.0"
-    ml-regression-exponential "^1.0.0"
-    ml-regression-multivariate-linear "^1.0.0"
-    ml-regression-polynomial "^1.0.0"
-    ml-regression-power "^1.0.0"
-    ml-regression-robust-polynomial "^1.0.0"
-    ml-regression-simple-linear "^1.0.0"
-    ml-regression-theil-sen "^1.0.0"
-    ml-stat "^1.3.3"
-
-ml-stat@^1.2.0, ml-stat@^1.3.3:
-  version "1.3.3"
-  resolved "http://192.168.64.135:4873/ml-stat/-/ml-stat-1.3.3.tgz#8a5493b0f67382fbf705c260e070436655a7dcfa"
-  integrity sha1-ilSTsPZzgvv3BcJg4HBDZlWn3Po=
-
-monotone-chain-convex-hull@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/monotone-chain-convex-hull/-/monotone-chain-convex-hull-1.0.0.tgz#e5e3a39f305d6bc6fe71062fc7072bc56c3a55e0"
-  integrity sha1-5eOjnzBda8b+cQYvxwcrxWw6VeA=
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "http://192.168.64.135:4873/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -9282,16 +8954,6 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   version "2.6.1"
   resolved "http://192.168.64.135:4873/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
-
-new-array@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/new-array/-/new-array-1.0.0.tgz#5dbc639d961eac7f1a9fbc1a7146ec12f2924fbf"
-  integrity sha1-XbxjnZYerH8an7wacUbsEvKST78=
-
-next-power-of-two@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/next-power-of-two/-/next-power-of-two-1.0.0.tgz#cbc1f2f62b586fc501bd3ab2fb9962ac4e4e9359"
-  integrity sha1-y8Hy9itYb8UBvTqy+5lirE5Ok1k=
 
 next-tick@~1.0.0:
   version "1.0.0"
@@ -9498,13 +9160,6 @@ nth-check@^1.0.2, nth-check@~1.0.1:
   integrity sha512-WeBOdju8SnzPN5vTUJYxYUxLeXpCaVP5i5e0LF8fg7WORF2Wd7wFX/pk0tYZk7s8T+J7VLy0Da6J1+wCT0AtHg==
   dependencies:
     boolbase "~1.0.0"
-
-num-sort@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/num-sort/-/num-sort-1.0.0.tgz#cabec1fd5f4da4aca995af90b7a0f379944e1dbd"
-  integrity sha1-yr7B/V9NpKypla+Qt6DzeZROHb0=
-  dependencies:
-    number-is-nan "^1.0.0"
 
 num2fraction@^1.2.2:
   version "1.2.2"
@@ -9844,7 +9499,7 @@ p-try@^2.0.0:
   resolved "http://192.168.64.135:4873/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-pako@^1.0.10, pako@~1.0.5:
+pako@~1.0.5:
   version "1.0.11"
   resolved "http://192.168.64.135:4873/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
@@ -12003,41 +11658,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-robust-orientation@^1.0.2:
-  version "1.1.3"
-  resolved "http://192.168.64.135:4873/robust-orientation/-/robust-orientation-1.1.3.tgz#daff5b00d3be4e60722f0e9c0156ef967f1c2049"
-  integrity sha1-2v9bANO+TmByLw6cAVbvln8cIEk=
-  dependencies:
-    robust-scale "^1.0.2"
-    robust-subtract "^1.0.0"
-    robust-sum "^1.0.0"
-    two-product "^1.0.2"
-
-robust-point-in-polygon@^1.0.3:
-  version "1.0.3"
-  resolved "http://192.168.64.135:4873/robust-point-in-polygon/-/robust-point-in-polygon-1.0.3.tgz#ea68f025a44dfe6aede80f0863788705cf547ec4"
-  integrity sha1-6mjwJaRN/mrt6A8IY3iHBc9UfsQ=
-  dependencies:
-    robust-orientation "^1.0.2"
-
-robust-scale@^1.0.2:
-  version "1.0.2"
-  resolved "http://192.168.64.135:4873/robust-scale/-/robust-scale-1.0.2.tgz#775132ed09542d028e58b2cc79c06290bcf78c32"
-  integrity sha1-d1Ey7QlULQKOWLLMecBikLz3jDI=
-  dependencies:
-    two-product "^1.0.2"
-    two-sum "^1.0.0"
-
-robust-subtract@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/robust-subtract/-/robust-subtract-1.0.0.tgz#e0b164e1ed8ba4e3a5dda45a12038348dbed3e9a"
-  integrity sha1-4LFk4e2LpOOl3aRaEgODSNvtPpo=
-
-robust-sum@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/robust-sum/-/robust-sum-1.0.0.tgz#16646e525292b4d25d82757a286955e0bbfa53d9"
-  integrity sha1-FmRuUlKStNJdgnV6KGlV4Lv6U9k=
-
 rollup-plugin-babel@^4.4.0:
   version "4.4.0"
   resolved "http://192.168.64.135:4873/rollup-plugin-babel/-/rollup-plugin-babel-4.4.0.tgz#d15bd259466a9d1accbdb2fe2fff17c52d030acb"
@@ -13211,20 +12831,6 @@ thunky@^1.0.2:
   resolved "http://192.168.64.135:4873/thunky/-/thunky-1.1.0.tgz#5abaf714a9405db0504732bbccd2cedd9ef9537d"
   integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
 
-tiff@^2.0.0:
-  version "2.1.0"
-  resolved "http://192.168.64.135:4873/tiff/-/tiff-2.1.0.tgz#b3f41c519bd66835267f14cb31a04acb1f7860ca"
-  integrity sha1-s/QcUZvWaDUmfxTLMaBKyx94YMo=
-  dependencies:
-    iobuffer "^2.1.0"
-
-tiff@^4.0.0:
-  version "4.0.0"
-  resolved "http://192.168.64.135:4873/tiff/-/tiff-4.0.0.tgz#f6054a1935e3110a09f5984bc5483982bffc3b4a"
-  integrity sha512-nB2XVkvuq05M5hV8HhfEqHS+IEMsei4XQXxJEHDL3vFoxV3oWoNe8X8qvZc//KcSKmXq7AwLV9R1eUAmzlLVKQ==
-  dependencies:
-    iobuffer "^5.0.2"
-
 timers-browserify@^2.0.4:
   version "2.0.11"
   resolved "http://192.168.64.135:4873/timers-browserify/-/timers-browserify-2.0.11.tgz#800b1f3eee272e5bc53ee465a04d0e804c31211f"
@@ -13386,16 +12992,6 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "http://192.168.64.135:4873/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
-
-two-product@^1.0.2:
-  version "1.0.2"
-  resolved "http://192.168.64.135:4873/two-product/-/two-product-1.0.2.tgz#67d95d4b257a921e2cb4bd7af9511f9088522eaa"
-  integrity sha1-Z9ldSyV6kh4stL16+VEfkIhSLqo=
-
-two-sum@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.64.135:4873/two-sum/-/two-sum-1.0.0.tgz#31d3f32239e4f731eca9df9155e2b297f008ab64"
-  integrity sha1-MdPzIjnk9zHsqd+RVeKyl/AIq2Q=
 
 type-check@~0.3.2:
   version "0.3.2"
@@ -13595,11 +13191,6 @@ use@^3.1.0:
   resolved "http://192.168.64.135:4873/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
-utf8@^2.1.2:
-  version "2.1.2"
-  resolved "http://192.168.64.135:4873/utf8/-/utf8-2.1.2.tgz#1fa0d9270e9be850d9b05027f63519bf46457d96"
-  integrity sha1-H6DZJw6b6FDZsFAn9jUZv0ZFfZY=
-
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "http://192.168.64.135:4873/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -13739,11 +13330,6 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   integrity sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==
   dependencies:
     minimalistic-assert "^1.0.0"
-
-web-worker-manager@^0.2.0:
-  version "0.2.0"
-  resolved "http://192.168.64.135:4873/web-worker-manager/-/web-worker-manager-0.2.0.tgz#e1bce423c640b76c409731f9de950bb1b9266521"
-  integrity sha1-4bzkI8ZAt2xAlzH53pULsbkmZSE=
 
 webidl-conversions@^4.0.2:
   version "4.0.2"

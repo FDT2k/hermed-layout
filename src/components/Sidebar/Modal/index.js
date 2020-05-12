@@ -16,7 +16,6 @@ const ClosableModal = compose(
 )(Modal)
 
 export default ({ children, handleClick, closed, ...rest }) => {
-
     return (
         <ClosableModal relative cover closed={closed}>
             <BackgroundOverlay onClick={handleClick}>

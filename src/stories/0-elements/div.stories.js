@@ -1,5 +1,6 @@
 import React,{useEffect,useState,useRef} from 'react';
-import 'sass/style.scss';
+import 'sass/projects/hermod/style.scss';
+
 import ThemePicker from 'components/ThemePicker'
 import ChatBubble from 'components/ChatBubble'
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";

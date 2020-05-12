@@ -43,7 +43,7 @@ export const SidebarAsModal = () => {
   const [visible, setVisible] = useState(true)
   return (<div  className={makeThemeSelect()}>
     <Fullscreen>
-      <SidebarModal closed={!visible} handleClick={_=> setVisible(false)}>
+      <SidebarModal closed={!visible} handleClick={_=> setVisible(!visible)}>
           <List>
             <ListItem handleClick={_=> alert('wiiii')} Icon={Videocam}> <h2>Coucou</h2> </ListItem>
             <ListItem Icon={Videocam}> <h2>Coucou</h2> </ListItem>
