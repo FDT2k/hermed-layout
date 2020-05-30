@@ -1,18 +1,11 @@
-import React,{useState} from 'react'
-import {cEx} from '@geekagency/gen-classes'
+import React from 'react';
+import { bem,compose, withModifiers, wrapComponent, divElement, withBaseClass, cEx } from 'utils'
 
+const [__base_class,element,modifier] = bem ('example-component')
 
-export default props => {
+const Component = compose(
+    withBaseClass(__base_class),
+    withModifiers(x => modifier(x), ['closed'])
+)(divElement)
 
-  const {className, ...rest} = props
-
-  const classes = cEx ([
-    'my-super-class',
-    className,
-  ])
-  return (
-      <>
-        <div className={classes} {...rest}> Example component</div>
-      </>
-  )
-}
+export default Component;

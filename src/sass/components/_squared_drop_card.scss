@@ -1,0 +1,48 @@
+.squared-drop-card{
+    @include themify($themes) {
+        background-color: themed("secondaryBasic");
+        color: themed("primaryBasic");
+    }
+    box-shadow: 0px 1px 5px #0000005C;
+
+    &--top_right {
+        border-radius: 20px 0px 20px 20px;
+    }
+    &--top_left {
+        border-radius: 0px 20px 20px 20px;
+    }
+    &--top {
+        border-radius: 0px 0px 20px 20px;
+    }
+    &--bottom {
+        border-radius: 20px 20px 0px 0px;
+    }
+
+    &--bottom_right {
+        border-radius: 20px 20px 0px 20px;
+    }
+
+
+    &--bottom_left {
+        border-radius: 20px 20px 20px 0px;
+    }
+    &--right{
+        border-radius: 0px 20px 20px 0px;
+
+    }
+
+    &--left{
+        border-radius: 20px 0px 0px 20px;
+
+    }
+
+    &--opposite{
+        border-radius: 0px 20px 0px 20px;
+
+    }
+
+    &--opposite_reverse {
+        border-radius: 20px 0px 20px 0px;
+
+    }
+}

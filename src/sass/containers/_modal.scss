@@ -1,0 +1,15 @@
+.container-modal{
+  position: absolute;
+  @include genmodifiers();
+
+  &--fit{
+
+  }
+
+  &--bottom{
+    bottom:0px;
+  }
+
+  &--centered{
+  }
+}

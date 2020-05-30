@@ -7,6 +7,7 @@
 }
 
 .button {
+
   max-width: 500px;
   cursor: pointer;
   text-transform: uppercase;
@@ -16,7 +17,7 @@
 
   &.round{
     border-radius: 50%;
-    padding: 1em 1.3em;
+    padding: 1em 1.25em;
     margin: 0px;
     @include themify($themes) {
       border:0px solid themed('primaryColor');
@@ -32,6 +33,8 @@
       }
     }
   }
+
+
 
   &.success{
     @include themify($themes) {
@@ -69,7 +72,6 @@
 		background-color: transparent;
 		@include themify($themes) {
 			color:themed('primaryColor');
-			/*box-shadow: 0px 1px 5px 0px themed('gray');*/
 		}
 	}
 
@@ -82,7 +84,7 @@
 	}
 
 
-  &.toolbar {
+  &.navbar {
     background-color: transparent;
     border: none;
 
@@ -91,32 +93,22 @@
     }
   }
 
-  &.icon {
-    margin-right: 10px;
-  }
-
-  &.icon--32 {
-    svg {
-      width: 32px;
-      height: 32px;
-      @include mq-width-and-lower(425px){
-        width: 24px;
-        height: 24px;
-      }
+  &--icon {
+    display: flex;
+    @extend .flex-column;
+    @extend .align-center;
+    .icon {
+      border-radius: 30px;
+      padding: 4px;
     }
   }
-  &.icon--48 {
-    svg {
-      width: 48px;
-      height: 48px;
-    }
-  }
-
 
   &.clear{
     background-color: transparent;
     border-color: transparent;
   }
+
+  /* :hover */
 	&:hover, &:focus {
 		@include themify($themes) {
 			color: themed('primaryBasic');
@@ -130,6 +122,20 @@
     }
   }
 
+  &--icon:hover:not(.button--send) {
+    transform: scale(1.1);
+    transition: transform 0.1s;
+    @include themify($themes) {
+      color:themed('primaryColor');
+    }
+    .icon {
+      @include themify($themes) {
+  			background-color: themed('secondaryBasic');
+  		}
+    }
+  }
+
+  /* :active */
   &:active{
     @include themify($themes) {
 			color: themed('primaryColor');
@@ -141,6 +147,61 @@
       color: themed('secondaryBasic');
       border: 1px solid themed('primaryColor');
       background-color:themed('primaryColor');
+    }
+  }
+
+  &--icon:active:not(.button--send) {
+    transform: scale(0.9);
+    transition: transform 0.1s;
+    @include themify($themes) {
+      color:themed('secondaryBasic');
+    }
+    h2 {
+      @include themify($themes) {
+        color:themed('primaryColorLDarker');
+      }
+    }
+    .icon {
+      @include themify($themes) {
+        background-color: themed('primaryColorLDarker');
+      }
+    }
+  }
+
+  /* Disabled */
+  &.contained:disabled {
+    @include themify($themes) {
+      background-color: themed('grayLight');
+      color: themed('light');
+    }
+  }
+  &.outlined:disabled {
+    @include themify($themes) {
+      color: themed('grayLight');
+      background-color: inherit;
+    }
+  }
+  &.contained:disabled, &.outlined:disabled {
+    @include themify($themes) {
+      border: solid 1px themed('grayLight');
+    }
+  }
+  &.text:disabled {
+    @include themify($themes) {
+      color: themed('grayLight');
+    }
+  }
+  &--icon:disabled:not(.button--send) {
+    @include themify($themes) {
+      color:themed('grayLight');
+    }
+    h2 {
+      @include themify($themes) {
+        color:themed('grayLight');
+      }
+    }
+    .icon {
+        background-color:inherit;
     }
   }
 }

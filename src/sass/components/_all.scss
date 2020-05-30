@@ -1,0 +1,45 @@
+
+@import 'button';
+@import 'icons';
+@import 'badge';
+
+@import 'headline';
+@import 'footer';
+
+@import 'chat';
+@import 'galery';
+@import 'chatbubble';
+@import 'debug-panel';
+@import 'form-input-floating';
+@import 'form';
+@import 'input-chat-message';
+@import 'input-checkbox';
+@import 'input';
+@import 'landing';
+@import 'select';
+@import 'theme-picker';
+@import 'waiting-room';
+@import 'loading';
+@import 'answer_call';
+@import 'video-preview';
+@import 'active_call';
+@import 'sidebar';
+@import 'list';
+@import 'contextualmenu';
+@import 'drag-drop-zone'; //not an actual component but used in chat
+@import 'patient';
+@import 'background-overlay';
+@import 'var_background';
+@import 'squared_drop_card';
+@import 'tiled-section';
+
+
+/* new components */
+@import 'video_call';
+
+@import 'card';
+
+/* removed */
+//@import 'vh-container';
+//@import 'layouts/hermed-chat.scss';
+//@import 'layouts/video-call.scss';

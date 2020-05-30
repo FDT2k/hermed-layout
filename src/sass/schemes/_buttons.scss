@@ -1,0 +1,10 @@
+.scheme-button{
+
+  *:disabled {
+    @include themify($themes) {
+      background-color: themed('grayLight');
+      border: solid 1px themed('grayLight');
+    }
+  }
+
+}

@@ -1,18 +1,12 @@
 import React,{useState} from 'react'
-import {cEx} from '@geekagency/gen-classes'
+import { cEx, compose, applyModifiers, withBaseClass, bem, divElement } from 'utils';
+import LayoutFlex from 'layouts/Flex'
 
 
-export default props => {
+const [__base_class, element, modifier] = bem('list')
 
-  const {className, ...rest} = props
 
-  const classes = cEx ([
-    'list',
-    className,
-  ])
-  return (
-      <div className={classes}>
-        {props.children}
-      </div>
-  )
-}
+export default compose(
+  withBaseClass(__base_class),
+  applyModifiers({column:true})
+)(LayoutFlex)

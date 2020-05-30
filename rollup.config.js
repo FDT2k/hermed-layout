@@ -16,7 +16,7 @@ let includePathOptions = {
 };
 export default [
   {
-    input: 'src/components/export',
+    input: 'src/export',
     output: {
       file: 'dist/cjs/index.js',
       format: 'cjs',
@@ -39,7 +39,31 @@ export default [
       scss(),
       includePaths(includePathOptions)
     ],
-  }/*,{
+  }/*, {
+    input: 'src/components/Icons/index',
+    output: {
+      file: 'dist/cjs/icons.js',
+      format: 'cjs',
+      indent: false,
+      sourcemap: true,
+      exports: 'named',
+    },
+    external: ['is-dom', 'prop-types',
+    'react','@geekagency/composite-js','@geekagency/gen-classes',
+    'formik','react-input-mask','react-loading','react-draggable'], 
+    plugins: [
+      nodeResolve({
+        mainFields: ['module', 'jsnext:main', 'main'],
+      }),
+      commonjs({
+        include: 'node_modules/**',
+      }),
+      babel({ runtimeHelpers: true }),
+      scss(),
+      includePaths(includePathOptions)
+    ],
+  },*/
+  /*,{
     input:'src/sass/style.scss',
     output: {
       file: 'dist/cjs/style'

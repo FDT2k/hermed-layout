@@ -1,28 +1,11 @@
 import React,{useState,useEffect} from 'react'
-import {cEx} from '@geekagency/gen-classes'
+import { bem,compose,baseElement, withModifiers, wrapComponent,asideElement, divElement, withBaseClass, cEx } from 'utils'
 
+const [__base_class,element,modifier] = bem('sidebar')
 
-export default props => {
+const Component = compose(
+  withBaseClass(__base_class),
+  withModifiers(x=>modifier(x),['closed'])
+)(baseElement('aside'))
 
-  const {className, closed, ...rest} = props
-
-/*  const [visible,setVisible] = useState(closed || true)
-
-  useEffect(()=>{
-    setVisible(closed || true)
-  },[closed])
-*/
-  const classes = cEx ([
-    'sidebar',
-    _=> closed===true ? 'sidebar--state-closed' : '',
-    className,
-  ])
-  return (
-      <aside className={classes}>
-      {props.children}
-
-      </aside>
-  )
-
-
-}
+export default Component;

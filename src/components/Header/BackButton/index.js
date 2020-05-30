@@ -1,7 +1,7 @@
 import React from 'react'
 import {cEx} from '@geekagency/gen-classes'
 import Button from 'components/Button'
-import { MdArrowBack } from "react-icons/md";
+import { ArrowBack } from "components/Icons";
 
 export default props => {
 
@@ -12,7 +12,7 @@ export default props => {
   ])
   return (
       <>
-        {handleBack && <Button toolbar onClick={handleBack}><MdArrowBack/></Button>}
+        {handleBack && <Button navbar onClick={handleBack}><ArrowBack/></Button>}
       </>
   )
 }

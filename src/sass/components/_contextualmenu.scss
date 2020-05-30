@@ -1,19 +1,29 @@
 .contextual-menu{
-  position: absolute;
-  
+  position: fixed;
+  display:block;
 
-  &.contextual-menu--state-closed .contextual-menu__background{
-    display:none;
-  }
 
+  min-width: 150px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
 
   overflow-y: hidden;
-  transition: width 800ms ease-in;
-  &.contextual-menu--state-closed{
-    height:0px;
-    width:0px;
+  transition: opacity 800ms ease-in;
+  &--state-closed{
+    opacity:0;
+    display:none;
+  }
+
+  & .list-item__content .icon{
+    @extend .icon--xxs;
+  }
+
+  & .list-item{
+    padding:0px 5px;
+  }
+
+  & .list-item__content > * {
+    padding:3px;
   }
 }

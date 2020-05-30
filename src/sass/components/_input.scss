@@ -1,16 +1,48 @@
 .single-input {
+
   width: 100%;
   padding: 6px 0px;
 
-  label {
-    @include themify($themes) {
-      color: themed('primaryBasic');
-      @include themed_font('secondaryFont','regular');
-    }
-    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+  &--checkbox-inline{
+     @include flex-direction(row-reverse);
+     @include flex-just(flex-end);
+     @include flex-align(center);
+    
+  }
+  
+  &--checkbox-inline &__label{
+    padding-left:5px;
+  }
+  &--checkbox-inline-reverse{
+    @include flex-direction(row);
+    @include flex-just(flex-start);
+    @include flex-align(center);
+    padding-left:5px;
+  }
+  
+  &--checkbox-inline-reverse  &__label{
+    padding-right:5px;
+  }
+  .layout-flex &, .form-group &{
+    padding-right:5px;
   }
 
-  input {
+  &__label {
+    @include themify($themes) {
+      color: themed("primaryBasic");
+      @include themed_font("secondaryFont", "regular");
+    }
+    @include fluid-type(font-size, 320px, 1366px, 12px, 14px);
+
+    /* &--error{
+      @include themify($themes) {
+        color:#ff0000;
+      }
+    }
+    */
+  }
+
+  &__input {
     height: 48px;
     //max-width: 500px;
     width: 100%;
@@ -18,27 +50,45 @@
     border-radius: 4px;
 
     @include themify($themes) {
-      color: themed('primaryBasic');
-      border: solid 1px themed('grayLight');
-      @include themed_font('secondaryFont','regular');
+      color: themed("primaryBasic");
+      border: solid 1px themed("grayLight");
+      @include themed_font("secondaryFont", "regular");
     }
     @include fluid-type(font-size, 320px, 1366px, 14px, 16px);
 
     &:focus {
       @include themify($themes) {
-        color: themed('primaryBasic');
-        border: solid 1px themed('primaryBasic');
-        @include themed_font('secondaryFont','regular');
+        color: themed("primaryBasic");
+        border: solid 1px themed("primaryBasic");
+        @include themed_font("secondaryFont", "regular");
       }
     }
 
     &::placeholder {
       @include themify($themes) {
-        color: themed('grayDark');
-        @include themed_font('secondaryFont','thin');
+        color: themed("grayDark");
+        @include themed_font("secondaryFont", "thin");
       }
     }
-
+    &--error {
+      @include themify($themes) {
+        border-color: red;
+      }
+    }
   }
 
+  &__error {
+    display:inline-block;
+    padding-left: 5px;
+    @include themify($themes) {
+      color: #ff0000;
+    }
+  }
+  
+
+
+  /*debugging*/
+ /* &--error{
+    border:2px dashed purple;
+  }*/
 }

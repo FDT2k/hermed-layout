@@ -1,0 +1,35 @@
+/* Card scheme */
+.scheme-card {
+  &__background {
+    background-color:#e9f3ffC4;
+    backdrop-filter: blur(3px);
+  }
+
+  &__content {
+    
+    @include fluid-type(font-size, 320px, 1366px, 12px, 16px);
+
+    box-shadow: 0px 10px 20px #2699FB1A;
+
+    @include themify($themes) {
+      background-color: themed("secondaryBasic");
+      color: themed('primaryBasic');
+      @include themed_font("secondaryFont", "regular");
+    }
+
+    h2{
+      @include themify($themes) {
+        color: themed("primaryColor");
+        @include themed_font("secondaryFont", "bold");
+      }
+    }
+
+
+
+    svg{
+      @include themify($themes) {
+         fill:  themed("primaryColor");
+      }
+    }
+  }
+}
