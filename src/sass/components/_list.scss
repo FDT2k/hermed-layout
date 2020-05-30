@@ -1,8 +1,21 @@
 .list{
-
- width: 100%;
- @include flex();
- @include flex-direction(column);
- @include flex-align(center);
- 
+    @include genmodifiers();
+    
 }
+
+
+.list-item{
+    @extend .layout-list__item;
+    @extend .scheme-list__item;
+  
+  
+    &:hover{
+      @include themify($themes) {
+        background-color: themed('grayLight');
+      }
+      transition: background-color 0.2s ease-out;
+    }
+  
+  
+  }
+  

@@ -3,15 +3,15 @@ import {cEx} from '@geekagency/gen-classes'
 
 
 export default props => {
-  const {className,contained,clear,round,text,outlined,toolbar,success,failure,fit, ...rest} = props
+  const {className,contained,clear,round,text,outlined,navbar,success,failure,fit, ...rest} = props
   const classes = cEx([
     "button",
     className,
-    _=> (!contained&&!text && !clear&& !round && !outlined  && !toolbar) ? "contained": "",
+    _=> (!contained&&!text && !clear&& !round && !outlined  && !navbar) ? "contained": "",
     {
       'contained':_=>contained === true,
       'text':_=>text === true ,
-      'toolbar': _=> toolbar===true,
+      'navbar': _=> navbar===true,
       'outlined':_=>outlined === true,
       'fit':_=>fit === true,
       'round': _=> round ===true,
@@ -19,7 +19,7 @@ export default props => {
       'failure': _=> failure ===true,
       'clear': _=> clear ===true
     },
-    _=> (toolbar === true ) ? 'icon icon--32': '',
+    _=> (navbar === true ) ? 'button--icon': '',
 
 
   ])

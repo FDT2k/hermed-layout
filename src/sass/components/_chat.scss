@@ -1,101 +1,103 @@
 
-/*must use MobileVHAdapter*/
+/*must use Fullscreen Container*/
 .hermed-chat{
-    display:grid;
-    min-height: 100%;
-    height:100%;
-    max-height:100%;
-    grid-template-columns: 100vw;
-    grid-template-rows: 76px auto 138px;
+
+    @extend .layout-grid;
+    grid-template-rows: 76px auto 126px;
     grid-template-areas:
       "header"
       "chat"
-      "tools"
-
-}
-
-/*.hermed-chat > header {
-  grid-area: header;
-  background-color:#388279;
-  color: white;
-  @include themify($themes) {
-    @include themed_font('secondaryFont','regular');
-
-    color: themed('secondaryBasic');
-		background-color: themed('backgroundColorSecondary');
-	}
-  text-align:center;
-
-  .average-time{
-    @include themify($themes) {
-      @include themed_font('primaryFont','semi-bold');
-    }
-    font-size: 40px;
-  }
-}*/
+      "tools";
 
 
-/*Chat content, bubbles etc*/
-.hermed-chat > .chat {
-  grid-area: chat;
-  padding: 10px 25px;
-  align-content: center;
-  align-items: center;
-  overflow-y: scroll;
-  height:100%;
-
-  & >*:first-child{
-    margin-top: auto;
-  }
-  @include themify($themes) {
-    @include themed_font('secondaryFont','regular');
-    color: themed('primaryBasic');
-    background-color: themed('primaryColorLight');
-  }
-
-}
-.hermed-chat > .tools {
-  padding: 10px 25px;
-  grid-area: tools;
-  height:100%;
-  @include themify($themes) {
-    @include themed_font('primaryFont','semi-bold');
-    color: themed('secondaryBasic');
-    background-color: themed('primaryColor');
-  }
-  .toolbar {
+  & .react-html5-camera-photo {
+    background-color:black;
+    position:absolute;
+    top:0px;
+    left:0px;
     width:100%;
-    padding-top:10px;
-    padding-bottom:15px;
-    @include flex;
-    @include flex-direction(row);
-    @include flex-just(space-between);
+    height:100%;
+    max-height:100%;
+    z-index:1000;
+    max-height:100%;
+    @include flex();
+    @include flex-just(space-around)
+  }
 
-    button{
+  & .user_status{
+    &__badge{
+      margin-top: 2px;
+    }
+    &__name{
+      padding: 0px 10px;
+    }
+  }
+
+  /*Chat content, bubbles etc*/
+  & > .chat {
+    grid-area: chat;
+    padding: 10px 25px;
+    align-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    height:100%;
+
+    /*auto push down,  just-end is buggy with overflow-y*/
+    & >*:first-child{
+      margin-top: auto;
+    }
+    @include themify($themes) {
+      @include themed_font('secondaryFont','regular');
+      color: themed('primaryBasic');
+      background-color: themed('primaryColorLight');
+    }
+
+  }
+
+}
+
+
+
+.chat-footer {
+  min-height:126px;
+  
+  @extend .footer;
+  
+  
+  &__toolbar{
+    width:100%;
+  }
+
+
+
+  &__message-input {
+    position: relative;
+    width:100%;
+
+    .single-input input {
+      border-radius: 4px 0px 0px 4px;
+      border-right: none;
+    }
+    .button--send {
+      border-radius: 0px 4px 4px 0px;
+      margin: 6px 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+
       @include themify($themes) {
-        @include themed_font('primaryFont','bold');
-        color: themed('secondaryBasic');
-        background-color: themed('primaryColor');
-        border-color: themed('primaryColor');
-        border: 1px solid themed('primaryColor');
+        color: themed("secondaryBasic");
+        background-color: themed("secondaryBasic");
+        border: solid 1px themed("grayLight");
+        border-left: none;
       }
     }
-  }
-  .text-input{
 
-    height: 40px;
-    width: 100%;
-    form{
-      height:100%;
-      margin:0px;
-      padding:0px;
-    }
-
-    input {
-      border: 1px solid #1B263030;
-      border-radius: 4px;
-      height:100%;
-      width:100%;
+   
+    /*special case for send button*/
+    svg {
+      @include themify($themes) {
+        color: themed("primaryColor");
+      }
     }
   }
 }

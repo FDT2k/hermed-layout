@@ -1,0 +1,17 @@
+
+
+.galery{
+    height:100%;
+    overflow-y: hidden;
+
+    &__thumb{
+        height:100%;
+        width:100%;
+        object-fit: cover;
+        padding-top:10px;
+
+     //   border:1px solid blue;
+    }
+
+  
+}

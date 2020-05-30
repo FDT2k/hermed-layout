@@ -1,0 +1,26 @@
+.scheme-list {
+
+    &__item {
+
+        @include themify($themes) {
+            @include themed_font("secondaryFont", "regular");
+        }
+        
+        @include themify($themes) {
+            border-bottom: 1px solid themed('disabled');
+        }
+
+        .icon svg {
+            @include themify($themes) {
+                fill: themed('primaryBasic')
+            }
+        }
+
+        &:hover{
+            @include themify($themes) {
+            background-color: themed('grayLight');
+            }
+            transition: background-color 0.2s ease-out;
+        }
+    }
+}

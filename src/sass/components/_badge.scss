@@ -1,54 +1,74 @@
 .badge-dot {
-    height: 16px;
-    width: 16px;
-    min-height: 16px;
-    min-width: 16px;
-    border-radius: 50%;
-    display: block;
-    font-size: 10px;
-    line-height: 16px;;
-    /*
+  @extend .scheme-badge;
+  height: 16px;
+  width: 16px;
+  min-height: 16px;
+  min-width: 16px;
+  border-radius: 50%;
+  font-size: 10px;
+  /*
     par defaut la couleur est disabled*/
+  @include themify($themes) {
+    background-color: themed("disabled");
+  }
+
+  &--red {
     @include themify($themes) {
-        background-color: themed('grayDarker');
+      background-color: themed("statusRed");
     }
+  }
+
+  &--orange {
     @include themify($themes) {
-      background-color: themed('grayDarker');
+      background-color: themed("statusYellow");
     }
+  }
 
-      &.red {
-        @include themify($themes) {
-          background-color: themed('statusRed');
-        }
-      }
-
-      &.orange {
-        @include themify($themes) {
-          background-color: themed('statusYellow');
-        }
-      }
-
-      &.green {
-        @include themify($themes) {
-          background-color: themed('statusGreen');
-        }
-      }
-
-      &.unkown{
-          @include themify($themes) {
-              background-color: themed('grayDarker');
-          }
-      }
-
-    &.medium{
-        font-size: 14px;
-        line-height: 23px;;
-        min-height: 24px;
-        min-width: 24px;
-        width: 24px;
-        height: 24px;
+  &--green {
+    @include themify($themes) {
+      background-color: themed("statusGreen");
     }
+  }
 
-    text-align:center;
+  &--primary {
+    @include themify($themes) {
+      background-color: themed("primaryColor");
+    }
+  }
 
+  &--unkown {
+    @include themify($themes) {
+      background-color: themed("grayDarker");
+    }
+  }
+
+  &--m {
+    font-size: 14px;
+    min-height: 24px;
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    @include mq-width-and-lower(425px) {
+      width: 16px;
+      height: 16px;
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+
+  &--l {
+    font-size: 20px;
+    min-height: 36px;
+    min-width: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  &--xl {
+    font-size: 30px;
+    min-height: 48px;
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+  }
 }

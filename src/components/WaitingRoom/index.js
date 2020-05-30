@@ -1,45 +1,80 @@
-import React from 'react'
-import {cEx} from '@geekagency/gen-classes'
-import {spreadObjectBeginWith} from '@geekagency/composite-js/ReactUtils'
-import {key} from '@geekagency/composite-js/ObjectUtils'
-import {reduce,enlist} from '@geekagency/composite-js'
+import React,{useState} from 'react'
+import { cEx } from '@geekagency/gen-classes'
+import { compose, filterPropStartingWith, wrapComponent, applyModifiers, withBaseClass, bem, sectionElement, divElement } from 'utils';
 
-import { GiHamburgerMenu } from "react-icons/gi";
-import Header from 'components/Header'
-import Content from 'components/Header/Content'
-import Title from 'components/Header/Title'
+import { Hamburger } from "components/Icons";
+import BaseHeader from 'components/Header'
+import LayoutFlex from 'layouts/Flex'
 import Button from 'components/Button'
 
 import DefaultToolbar from 'components/WaitingRoom/Toolbar';
 
 
-export default props => {
 
-  const { title, className,handleBack,Toolbar, defaultToolbar, ...rest} = props
+const Content = (props) => {
+  const { children, handleClick, ...rest } = props;
+  return (
+    <section {...rest}>
+      {children}
+      {React.Children.toArray(children).length === 0 && <div className="empty-list">
+        Aucun contact
+        <Button onClick={handleClick}>Inviter un contact</Button>
+      </div>}
+    </section>
+  )
+}
 
-  const classes = cEx ([
-    "waiting-room",
-    className,
-  ])
+const Header = props => {
+  const {className,handleBack,title,Toolbar,displayToolbar,...rest} = props;
+  return (
+  <BaseHeader className={className}>
+    <LayoutFlex>
+      {handleBack &&<Button navbar onClick={handleBack}><Hamburger /></Button>}
+      <h2>{title}</h2>
+    </LayoutFlex>
+    {((Toolbar && displayToolbar &&  <Toolbar {...rest} />) || (displayToolbar && <DefaultToolbar {...rest} />))
+    }
+  </BaseHeader>)
 
-  const [toolbarProps,remaining] =  spreadObjectBeginWith('toolbar',rest)
+}
 
 
+const View = props => {
+
+  const { title, handleBack, Toolbar, handleNewGuest, displayToolbar, ...rest } = props
+
+  const [toolbarProps, remaining] = filterPropStartingWith('toolbar', rest)
 
   return (
-    <div className={classes} {...remaining}>
-      <Header>
-        <Content>
-            <Button toolbar onClick={handleBack}><GiHamburgerMenu/></Button>
-            <Title>{title}</Title>
-        </Content>
-        { ( (Toolbar && <Toolbar {...toolbarProps} />) || (defaultToolbar&& <DefaultToolbar {...toolbarProps}/>) )
-        }
-      </Header>
-
-      <section className="content">
+    <div  {...remaining}>
+      <WaitingRoomHeader 
+        {...toolbarProps} 
+        title={title} 
+        handleBack={handleBack}
+        Toolbar={Toolbar}
+        displayToolbar={displayToolbar}  
+      />
+      <WaitingRoomContent handleClick={handleNewGuest}>
         {props.children}
-      </section>
+      </WaitingRoomContent>
     </div>
   )
 }
+
+const [__base_class, element, modifier] = bem('waiting-room')
+const __content_class = element('content');
+const __header_class = element('header');
+
+const WaitingRoomContent = compose(
+  withBaseClass(__content_class),
+)(Content)
+
+const WaitingRoomHeader = compose(
+  withBaseClass(__header_class),
+)(Header)
+
+const WaitingRoom = compose(
+  withBaseClass(__base_class)
+)(View)
+
+export default WaitingRoom;

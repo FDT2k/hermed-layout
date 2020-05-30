@@ -1,0 +1,28 @@
+.video-call{
+   
+
+    height:100%;
+    background-color: black;
+
+    & .layout-video-call{
+        grid-template-rows: auto 79px;
+    }
+
+    &__controls{
+        position:absolute;
+        padding:10px;
+        bottom:30px; 
+        width: 100%;
+        
+    }
+
+    & .video.video--preview{
+      border: 2px solid white;
+
+    }
+
+    &  &__toolbar{ 
+        @extend .footer;
+    //    @extend .scheme-navbar--toolbar ;
+    }
+}

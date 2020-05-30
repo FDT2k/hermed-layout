@@ -1,9 +1,19 @@
 .container-fullscreen{
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
+  width:100%;
   overflow:hidden;
-  &--debug{
-    background:red;
-
+  
+  &--overflow{
+    overflow:auto;
   }
+
+  &--overflow-y{
+    overflow-y:scroll;
+  }
+/*  @include mq-width-and-upper(768px){
+    max-width:768px;
+    width: 768px;
+    margin:0 auto;
+  }*/
 }

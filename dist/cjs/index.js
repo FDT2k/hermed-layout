@@ -7,12 +7,13 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = require('react');
 var React__default = _interopDefault(React);
 var genClasses = require('@geekagency/gen-classes');
-require('@geekagency/composite-js');
+var compositeJs = require('@geekagency/composite-js');
 var md = require('react-icons/md');
 var fa = require('react-icons/fa');
 var InputMask = _interopDefault(require('react-input-mask'));
 var formik = require('formik');
 var ReactLoading = _interopDefault(require('react-loading'));
+var Draggable = _interopDefault(require('react-draggable'));
 
 var index = (function (props) {
   var message = props.message,
@@ -37,6 +38,21 @@ var index = (function (props) {
   }, date || '-'));
 });
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 function _extends() {
   _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -53,6 +69,40 @@ function _extends() {
   };
 
   return _extends.apply(this, arguments);
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
 }
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -146,6 +196,8 @@ function _arrayLikeToArray(arr, len) {
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function unwrapExports (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -798,7 +850,7 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys); //export const objectReduce = reduce({});
+  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator  forever
   //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
@@ -828,10 +880,30 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   var keepMatching = function keepMatching(match) {
     return reduce({}, matchReducer(match));
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
 
-  var spreadFilterByKey = function spreadFilterByKey(match) {
-    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist, ensure_object_copy);
+
+  var makeSpreadFilterByKey = function makeSpreadFilterByKey(transformMatching) {
+    return function (transformNotMatching) {
+      return function (match) {
+        return compose(diverge(transformMatching(match), transformNotMatching(compose(not, match))), enlist, ensure_object_copy);
+      };
+    };
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
+
+
+  var spreadFilterByKey = makeSpreadFilterByKey(keepMatching)(keepMatching);
 
   var regex = function regex(str) {
     return new RegExp(str);
@@ -844,6 +916,13 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   var contains = compose(test, regex, concat(''));
   var endWith = compose(test, regex, append('$'));
   var equals = compose(test, regex, append('$'), concat('^'));
+
+  var presentIn = function presentIn(array) {
+    return function (str) {
+      return array.indexOf(str) > -1;
+    };
+  };
+
   var spreadObject = spreadFilterByKey;
 
   var spreadObjectBeginWith = function spreadObjectBeginWith(str, obj) {
@@ -858,10 +937,11 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
     return spreadFilterByKey(endWith(str))(obj);
   };
 
-  var transformReplace = function transformReplace(re, repl) {
-    return replace(re, repl);
+  var spreadObjectPresentIn = function spreadObjectPresentIn(array, obj) {
+    return spreadFilterByKey(presentIn(array))(obj);
   };
 
+  var transformReplace = replace;
   var transformLowSnake = lcfirst;
 
   var replaceKeyReducer = function replaceKeyReducer(transform) {
@@ -897,12 +977,14 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   exports.equals = equals;
   exports.forwardPropsRemovingHeader = forwardPropsRemovingHeader;
   exports.forwardPropsTransformer = forwardPropsTransformer;
+  exports.presentIn = presentIn;
   exports.regex = regex;
   exports.replaceKeyReducer = replaceKeyReducer;
   exports.spreadObject = spreadObject;
   exports.spreadObjectBeginWith = spreadObjectBeginWith;
   exports.spreadObjectContaining = spreadObjectContaining;
   exports.spreadObjectEndingWith = spreadObjectEndingWith;
+  exports.spreadObjectPresentIn = spreadObjectPresentIn;
   exports.transformKeys = transformKeys;
   exports.transformLowSnake = transformLowSnake;
   exports.transformProps = transformProps;
@@ -916,17 +998,19 @@ var ReactUtils_3 = ReactUtils.endWith;
 var ReactUtils_4 = ReactUtils.equals;
 var ReactUtils_5 = ReactUtils.forwardPropsRemovingHeader;
 var ReactUtils_6 = ReactUtils.forwardPropsTransformer;
-var ReactUtils_7 = ReactUtils.regex;
-var ReactUtils_8 = ReactUtils.replaceKeyReducer;
-var ReactUtils_9 = ReactUtils.spreadObject;
-var ReactUtils_10 = ReactUtils.spreadObjectBeginWith;
-var ReactUtils_11 = ReactUtils.spreadObjectContaining;
-var ReactUtils_12 = ReactUtils.spreadObjectEndingWith;
-var ReactUtils_13 = ReactUtils.transformKeys;
-var ReactUtils_14 = ReactUtils.transformLowSnake;
-var ReactUtils_15 = ReactUtils.transformProps;
-var ReactUtils_16 = ReactUtils.transformReplace;
-var ReactUtils_17 = ReactUtils.updateProp;
+var ReactUtils_7 = ReactUtils.presentIn;
+var ReactUtils_8 = ReactUtils.regex;
+var ReactUtils_9 = ReactUtils.replaceKeyReducer;
+var ReactUtils_10 = ReactUtils.spreadObject;
+var ReactUtils_11 = ReactUtils.spreadObjectBeginWith;
+var ReactUtils_12 = ReactUtils.spreadObjectContaining;
+var ReactUtils_13 = ReactUtils.spreadObjectEndingWith;
+var ReactUtils_14 = ReactUtils.spreadObjectPresentIn;
+var ReactUtils_15 = ReactUtils.transformKeys;
+var ReactUtils_16 = ReactUtils.transformLowSnake;
+var ReactUtils_17 = ReactUtils.transformProps;
+var ReactUtils_18 = ReactUtils.transformReplace;
+var ReactUtils_19 = ReactUtils.updateProp;
 
 var ObjectUtils = createCommonjsModule(function (module, exports) {
 
@@ -1565,7 +1649,7 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys); //export const objectReduce = reduce({});
+  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator  forever
   //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
@@ -1597,18 +1681,38 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   };
 
   var filterByKey = function filterByKey(match) {
-    return compose(keepMatching(match), enlist, ensure_object_copy);
+    return compose(keepMatching(match), trace('x'), enlist, ensure_object_copy);
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
 
-  var spreadFilterByKey = function spreadFilterByKey(match) {
-    return compose(diverge(keepMatching(match), keepMatching(compose(not, match))), enlist, ensure_object_copy);
+
+  var makeSpreadFilterByKey = function makeSpreadFilterByKey(transformMatching) {
+    return function (transformNotMatching) {
+      return function (match) {
+        return compose(diverge(transformMatching(match), transformNotMatching(compose(not, match))), enlist, ensure_object_copy);
+      };
+    };
   };
+  /*
+    perform a match function on every item of an object and returns an array like this: 
+    [matching, notmatching]
+  
+    //MatchFunction => Object => List
+  */
 
+
+  var spreadFilterByKey = makeSpreadFilterByKey(keepMatching)(keepMatching);
   exports.filterByKey = filterByKey;
   exports.isPropStrictlyEqual = isPropStrictlyEqual;
   exports.isPropStrictlyNotEqual = isPropStrictlyNotEqual;
   exports.keepMatching = keepMatching;
   exports.key = key;
+  exports.makeSpreadFilterByKey = makeSpreadFilterByKey;
   exports.matchReducer = matchReducer;
   exports.propMatch = propMatch;
   exports.spreadFilterByKey = spreadFilterByKey;
@@ -1619,9 +1723,10 @@ var ObjectUtils_2 = ObjectUtils.isPropStrictlyEqual;
 var ObjectUtils_3 = ObjectUtils.isPropStrictlyNotEqual;
 var ObjectUtils_4 = ObjectUtils.keepMatching;
 var ObjectUtils_5 = ObjectUtils.key;
-var ObjectUtils_6 = ObjectUtils.matchReducer;
-var ObjectUtils_7 = ObjectUtils.propMatch;
-var ObjectUtils_8 = ObjectUtils.spreadFilterByKey;
+var ObjectUtils_6 = ObjectUtils.makeSpreadFilterByKey;
+var ObjectUtils_7 = ObjectUtils.matchReducer;
+var ObjectUtils_8 = ObjectUtils.propMatch;
+var ObjectUtils_9 = ObjectUtils.spreadFilterByKey;
 
 var DefaultContext = {
   color: undefined,
@@ -1704,13 +1809,115 @@ function IconBase(props) {
 // THIS FILE IS AUTO GENERATED
 var GiHamburgerMenu=function(props){return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 512 512"},"child":[{"tag":"path","attr":{"d":"M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"}}]})(props);};GiHamburgerMenu.displayName="GiHamburgerMenu";
 
-var Header = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className]);
-  return /*#__PURE__*/React__default.createElement("header", {
+var bem = function bem(main) {
+  return [main, function (block) {
+    return "".concat(main, "__").concat(block);
+  }, function (modifier) {
+    return "".concat(main, "--").concat(modifier);
+  }];
+};
+var modifiersToCeX = function modifiersToCeX(keyEnhancer, list, modifiers) {
+  return list.reduce(function (acc, item) {
+    acc[keyEnhancer(item)] = function (_) {
+      return modifiers[item] === true;
+    };
+
+    return acc;
+  }, {});
+};
+var withBaseClass = function withBaseClass(BaseClass) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]);
+
+      var classes = genClasses.cEx([BaseClass, className]);
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+        className: classes
+      }));
+    };
+  };
+};
+var withModifiers = function withModifiers(namer, modifiers) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]); //ensure to preserve classNames
+
+
+      var _spreadObjectPresentI = ReactUtils_14(modifiers, rest),
+          _spreadObjectPresentI2 = _slicedToArray(_spreadObjectPresentI, 2),
+          presentModifiers = _spreadObjectPresentI2[0],
+          _props = _spreadObjectPresentI2[1];
+
+      var classes = genClasses.cEx([className, modifiersToCeX(namer, modifiers, presentModifiers)]);
+      return /*#__PURE__*/React__default.createElement("div", _extends({
+        className: classes
+      }, _props), /*#__PURE__*/React__default.createElement(Component, null));
+    };
+  };
+};
+var applyModifiers = function applyModifiers(modifiers) {
+  return function (Component) {
+    return function (props) {
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, modifiers, props));
+    };
+  };
+};
+
+var _bem = bem('layout-flex'),
+    _bem2 = _slicedToArray(_bem, 3),
+    __base_class = _bem2[0],
+    element = _bem2[1],
+    modifier = _bem2[2];
+var LayoutFlex = (function (props) {
+  var _ref;
+
+  var className = props.className,
+      cover = props.cover,
+      centered = props.centered,
+      alignCenter = props.alignCenter,
+      alignStretch = props.alignStretch,
+      alignTop = props.alignTop,
+      justBetween = props.justBetween,
+      justAround = props.justAround,
+      justEvenly = props.justEvenly,
+      justCenter = props.justCenter,
+      column = props.column,
+      rest = _objectWithoutProperties(props, ["className", "cover", "centered", "alignCenter", "alignStretch", "alignTop", "justBetween", "justAround", "justEvenly", "justCenter", "column"]);
+
+  var classes = genClasses.cEx([__base_class, (_ref = {}, _defineProperty(_ref, modifier('between'), function (_) {
+    return justBetween;
+  }), _defineProperty(_ref, modifier('evenly'), function (_) {
+    return justEvenly;
+  }), _defineProperty(_ref, modifier('center'), function (_) {
+    return justCenter;
+  }), _defineProperty(_ref, modifier('around'), function (_) {
+    return justAround;
+  }), _defineProperty(_ref, modifier('column'), function (_) {
+    return column;
+  }), _defineProperty(_ref, modifier('align-stretch'), function (_) {
+    return alignStretch;
+  }), _defineProperty(_ref, modifier('align-center'), function (_) {
+    return alignCenter;
+  }), _defineProperty(_ref, modifier('align-top'), function (_) {
+    return alignTop;
+  }), _defineProperty(_ref, modifier('centered'), function (_) {
+    return centered;
+  }), _defineProperty(_ref, modifier('cover'), function (_) {
+    return cover;
+  }), _ref), className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
     className: classes
-  }, props.children);
+  }, rest), props.children));
 });
+
+var Headline = withBaseClass('headline');
+var Layout = applyModifiers({
+  'justBetween': true
+});
+var enhance = compositeJs.compose(Layout, Headline);
+var Header = enhance(LayoutFlex);
 
 var Content = (function (props) {
   var className = props.className;
@@ -1735,14 +1942,14 @@ var Button = (function (props) {
       _round = props.round,
       _text = props.text,
       _outlined = props.outlined,
-      _toolbar = props.toolbar,
+      _navbar = props.navbar,
       _success = props.success,
       _failure = props.failure,
       _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "clear", "round", "text", "outlined", "toolbar", "success", "failure", "fit"]);
+      rest = _objectWithoutProperties(props, ["className", "contained", "clear", "round", "text", "outlined", "navbar", "success", "failure", "fit"]);
 
   var classes = genClasses.cEx(["button", className, function (_) {
-    return !_contained && !_text && !_clear && !_round && !_outlined && !_toolbar ? "contained" : "";
+    return !_contained && !_text && !_clear && !_round && !_outlined && !_navbar ? "contained" : "";
   }, {
     'contained': function contained(_) {
       return _contained === true;
@@ -1750,8 +1957,8 @@ var Button = (function (props) {
     'text': function text(_) {
       return _text === true;
     },
-    'toolbar': function toolbar(_) {
-      return _toolbar === true;
+    'navbar': function navbar(_) {
+      return _navbar === true;
     },
     'outlined': function outlined(_) {
       return _outlined === true;
@@ -1772,7 +1979,7 @@ var Button = (function (props) {
       return _clear === true;
     }
   }, function (_) {
-    return _toolbar === true ? 'icon icon--32' : '';
+    return _navbar === true ? 'button--icon' : '';
   }]);
   return /*#__PURE__*/React__default.createElement("button", _extends({
     className: classes
@@ -1851,7 +2058,7 @@ var index$1 = (function (props) {
 
   var classes = genClasses.cEx(["waiting-room", className]);
 
-  var _spreadObjectBeginWit = ReactUtils_10('toolbar', rest),
+  var _spreadObjectBeginWit = ReactUtils_11('toolbar', rest),
       _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
       toolbarProps = _spreadObjectBeginWit2[0],
       remaining = _spreadObjectBeginWit2[1];
@@ -1953,18 +2160,118 @@ var Form = (function (props) {
   }, rest), props.children);
 });
 
+var parent = bem('single-input');
+
+var _parent = _slicedToArray(parent, 3),
+    b = _parent[0],
+    e = _parent[1],
+    m = _parent[2];
+
+var bem$1 = bem(e('label'));
+
+var _bem$1 = _slicedToArray(bem$1, 3),
+    __base_class$1 = _bem$1[0],
+    element$1 = _bem$1[1],
+    modifier$1 = _bem$1[2];
+
+var Label = (function (props) {
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      error = props.error,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "error"]);
+
+  var classes = genClasses.cEx([__base_class$1, // "flex-column",
+  className, function (_) {
+    return error ? modifier$1('error') : '';
+  }]);
+  return /*#__PURE__*/React__default.createElement("label", _extends({
+    htmlFor: id,
+    className: classes
+  }, rest), label);
+});
+
+var _bem$2 = bem('single-input'),
+    _bem2$1 = _slicedToArray(_bem$2, 3),
+    __base_class$2 = _bem2$1[0],
+    element$2 = _bem2$1[1],
+    modifier$2 = _bem2$1[2];
+
+var _bem3 = bem(element$2('input')),
+    _bem4 = _slicedToArray(_bem3, 3),
+    __input_class = _bem4[0],
+    inpElement = _bem4[1],
+    inpModifier = _bem4[2];
+
 var Input = (function (props) {
   var label = props.label,
       id = props.id,
       className = props.className,
+      type = props.type,
+      error = props.error,
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "error"]);
+
+  var _filterPropStartingWi = ReactUtils_11('label', rest),
+      _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
+      labelClassName = _filterPropStartingWi2[0].labelClassName,
+      notLabelProps = _filterPropStartingWi2[1];
+
+  var _filterPropStartingWi3 = ReactUtils_11('input', notLabelProps),
+      _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
+      inputClassName = _filterPropStartingWi4[0].inputClassName,
+      notInputProps = _filterPropStartingWi4[1]; // default type to text 
+
+
+  var _type = type || 'text';
+
+  var classes = genClasses.cEx([__base_class$2, // "flex-column",
+  className, function (_) {
+    return error ? modifier$2('error') : '';
+  }]);
+  var inputClasses = genClasses.cEx([__input_class, inputClassName, function (_) {
+    return error ? inpModifier('error') : '';
+  }]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React__default.createElement(Label, {
+    htmlFor: id,
+    className: labelClassName,
+    error: error,
+    label: label
+  }), type !== "checkbox" && /*#__PURE__*/React__default.createElement(InputMask, _extends({
+    className: inputClasses,
+    id: id,
+    type: _type,
+    autoComplete: "off"
+  }, rest)), type === "checkbox" && /*#__PURE__*/React__default.createElement("input", _extends({
+    className: inputClasses,
+    id: id,
+    type: _type,
+    autoComplete: "off"
+  }, rest)));
+});
+
+var InputCheckbox = (function (props) {
+  var _extends2;
+
+  var label = props.label,
+      id = props.id,
+      className = props.className,
+      checked = props.checked,
       labelClassName = props.labelClassName,
       inputClassName = props.inputClassName,
+      onClick = props.onClick,
       type = props.type,
-      caretPos = props.caretPos,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "labelClassName", "inputClassName", "type", "caretPos"]);
+      rest = _objectWithoutProperties(props, ["label", "id", "className", "checked", "labelClassName", "inputClassName", "onClick", "type"]);
 
-  var ref = React.useRef();
-  var classes = genClasses.cEx(["single-input flex-column", className]);
+  var cb = React.useRef();
+
+  var _useState = React.useState(checked),
+      _useState2 = _slicedToArray(_useState, 2),
+      check = _useState2[0],
+      setChecked = _useState2[1];
+
+  var classes = genClasses.cEx(["single-input --checkbox flex-column", className]);
   var labelClasses = genClasses.cEx([labelClassName]);
   var inputClasses = genClasses.cEx(["input", inputClassName]);
   return /*#__PURE__*/React__default.createElement("div", {
@@ -1972,13 +2279,19 @@ var Input = (function (props) {
   }, /*#__PURE__*/React__default.createElement("label", {
     htmlFor: id,
     className: labelClasses
-  }, label), /*#__PURE__*/React__default.createElement(InputMask, _extends({
-    ref: ref,
-    className: inputClasses,
-    id: id,
-    type: "text",
-    autoComplete: "off"
-  }, rest)));
+  }, label), /*#__PURE__*/React__default.createElement("div", {
+    className: "container",
+    onClick: function onClick(_) {
+      cb.current.click();
+      setChecked(cb.current.checked);
+    }
+  }, /*#__PURE__*/React__default.createElement("input", _extends((_extends2 = {
+    checked: "checked",
+    ref: cb,
+    className: inputClasses
+  }, _defineProperty(_extends2, "checked", check), _defineProperty(_extends2, "id", id), _defineProperty(_extends2, "type", "checkbox"), _extends2), rest)), /*#__PURE__*/React__default.createElement("span", {
+    className: "checkmark"
+  })));
 });
 
 var index$3 = (function (props) {
@@ -1989,45 +2302,11 @@ var index$3 = (function (props) {
 
   return /*#__PURE__*/React__default.createElement("div", {
     className: "single-select"
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id
-  }, label), /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "single-select__select"
   }, /*#__PURE__*/React__default.createElement("select", _extends({
     id: id
   }, rest), props.children)));
-});
-
-var InputCheckbox = (function (props) {
-  var label = props.label,
-      id = props.id,
-      className = props.className,
-      labelClassName = props.labelClassName,
-      inputClassName = props.inputClassName,
-      type = props.type,
-      caretPos = props.caretPos,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "labelClassName", "inputClassName", "type", "caretPos"]);
-
-  var ref = React.useRef();
-  var classes = genClasses.cEx(["single-input --checkbox flex-column", className]);
-  var labelClasses = genClasses.cEx([labelClassName]);
-  var inputClasses = genClasses.cEx(["input", inputClassName]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id,
-    className: labelClasses
-  }, label), /*#__PURE__*/React__default.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/React__default.createElement(InputMask, _extends({
-    checked: "checked",
-    ref: ref,
-    className: inputClasses,
-    id: id,
-    type: "checkbox"
-  }, rest)), /*#__PURE__*/React__default.createElement("span", {
-    className: "checkmark"
-  })));
 });
 
 var OrganiserConfigurationForm = (function (props) {
@@ -2089,43 +2368,104 @@ var OrganiserConfigurationForm = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "Se connecter"));
 });
 
+// THIS FILE IS AUTO GENERATED
+var TiWarning = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "version": "1.2",
+      "baseProfile": "tiny",
+      "viewBox": "0 0 24 24"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "d": "M21.171 15.398l-5.912-9.854c-.776-1.293-1.963-2.033-3.259-2.033s-2.483.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83.636 1.126 1.878 1.772 3.406 1.772h12c1.528 0 2.77-.646 3.406-1.771.637-1.125.551-2.521-.235-3.831zm-9.171 2.151c-.854 0-1.55-.695-1.55-1.549 0-.855.695-1.551 1.55-1.551s1.55.696 1.55 1.551c0 .854-.696 1.549-1.55 1.549zm1.633-7.424c-.011.031-1.401 3.468-1.401 3.468-.038.094-.13.156-.231.156s-.193-.062-.231-.156l-1.391-3.438c-.09-.233-.129-.443-.129-.655 0-.965.785-1.75 1.75-1.75s1.75.785 1.75 1.75c0 .212-.039.422-.117.625z"
+      }
+    }]
+  })(props);
+};
+TiWarning.displayName = "TiWarning";
+
+var withIconsModifiers = compositeJs.compose(withBaseClass('icon'), withModifiers(function (x) {
+  return "icon--".concat(x);
+}, ['xs', 's', 'm', 'l', 'xl']));
+var Hamburger = withIconsModifiers(GiHamburgerMenu);
+var Warning = withIconsModifiers(TiWarning);
+var Call = withIconsModifiers(md.MdCall);
+var CallEnd = withIconsModifiers(md.MdCallEnd);
+var ArrowForward = withIconsModifiers(md.MdArrowForward);
+var ArrowBack = withIconsModifiers(md.MdArrowBack);
+var Camera = withIconsModifiers(md.MdCameraAlt);
+var AttachFile = withIconsModifiers(md.MdAttachFile);
+var Voice = withIconsModifiers(md.MdKeyboardVoice);
+var Videocam = withIconsModifiers(md.MdVideocam);
+var PersonAdd = withIconsModifiers(md.MdPersonAdd);
+var LocalPhone = withIconsModifiers(md.MdLocalPhone);
+var Trash = withIconsModifiers(fa.FaRegTrashAlt);
+var PowerOff = withIconsModifiers(fa.FaPowerOff);
+var Kebab = withIconsModifiers(GoKebabVertical);
+var Gear = withIconsModifiers(GoGear);
+
+var index$4 = /*#__PURE__*/Object.freeze({
+__proto__: null,
+Warning: Warning,
+Call: Call,
+CallEnd: CallEnd,
+ArrowForward: ArrowForward,
+ArrowBack: ArrowBack,
+Camera: Camera,
+AttachFile: AttachFile,
+Voice: Voice,
+Videocam: Videocam,
+PersonAdd: PersonAdd,
+LocalPhone: LocalPhone,
+Trash: Trash,
+PowerOff: PowerOff,
+Kebab: Kebab,
+Gear: Gear,
+Hamburger: Hamburger
+});
+
 var BackButton = (function (props) {
   var className = props.className,
       handleBack = props.handleBack;
   var classes = genClasses.cEx([className]);
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
+    navbar: true,
     onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowBack, null)));
+  }, /*#__PURE__*/React__default.createElement(ArrowBack, null)));
 });
 
-var ChatHeaderStatus = (function (props) {
+var UserStatus = function UserStatus(props) {
   var title = props.title,
       subtitle = props.subtitle,
-      badge = props.badge;
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-column just-around"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-row align-center"
-  }, badge && /*#__PURE__*/React__default.createElement(Badge, {
+      badge = props.badge,
+      rest = _objectWithoutProperties(props, ["title", "subtitle", "badge"]);
+
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    alignTop: true
+  }, rest), badge && /*#__PURE__*/React__default.createElement(Badge, {
     status: badge
-  }), /*#__PURE__*/React__default.createElement("h2", null, title)), subtitle && /*#__PURE__*/React__default.createElement("p", {
-    className: "headline__contact-status"
-  }, subtitle));
-});
+  }), /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    column: true
+  }, /*#__PURE__*/React__default.createElement("h2", null, title), subtitle && /*#__PURE__*/React__default.createElement("p", null, subtitle)));
+};
+
+var ChatHeaderStatus = withBaseClass('user-status')(UserStatus);
 
 var ChatHeaderToolbar = (function (props) {
   var handleCall = props.handleCall,
       handleVideoCall = props.handleVideoCall;
   return /*#__PURE__*/React__default.createElement(Toolbar, null, /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleVideoCall,
-    disabled: typeof handleVideoCall !== 'function',
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(md.MdVideocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    disabled: typeof handleVideoCall !== 'function'
+  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleCall,
-    disabled: typeof handleCall !== 'function',
-    toolbar: true
-  }, /*#__PURE__*/React__default.createElement(md.MdLocalPhone, null)));
+    disabled: typeof handleCall !== 'function'
+  }, /*#__PURE__*/React__default.createElement(LocalPhone, null)));
 });
 
 var ChatHeader = (function (props) {
@@ -2146,7 +2486,7 @@ var ChatHeader = (function (props) {
       const isDoctor= doctor===true || (!doctor && !patient);
   */
 
-  var classes = genClasses.cEx(["headline", "flex-row", "just-between", "align-center", className
+  var classes = genClasses.cEx(["headline", className
   /*  {
       "headline--patient":  _=> isDoctor !== true,
       "headline--doctor":   _=> isDoctor === true,
@@ -2161,7 +2501,7 @@ var ChatHeader = (function (props) {
   })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
 });
 
-var index$4 = (function (props) {
+var index$5 = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -2186,7 +2526,7 @@ var index$4 = (function (props) {
   }));
 });
 
-var index$5 = (function (props) {
+var index$6 = (function (props) {
   var incoming = props.incoming,
       handleAnswer = props.handleAnswer,
       handleDiscard = props.handleDiscard,
@@ -2213,17 +2553,17 @@ var index$5 = (function (props) {
   }, " ", /*#__PURE__*/React__default.createElement(md.MdCallEnd, null), " ")));
 });
 
-var index$6 = (function (props) {
+var Video = (function (props) {
   var myRef = React.useRef();
 
   var srcObject = props.srcObject,
       className = props.className,
-      _preview = props.preview,
+      preview = props.preview,
       rest = _objectWithoutProperties(props, ["srcObject", "className", "preview"]);
 
   var classes = genClasses.cEx(['video', className, {
-    'preview': function preview(_) {
-      return _preview;
+    'video--preview': function videoPreview(_) {
+      return preview;
     }
   }]);
   React.useEffect(function () {
@@ -2238,39 +2578,6 @@ var index$6 = (function (props) {
 });
 
 var index$7 = (function (props) {
-  var offset = props.offset;
-
-  if (!offset) {
-    offset = 0;
-  }
-
-  var _useState = React.useState(),
-      _useState2 = _slicedToArray(_useState, 2),
-      vh = _useState2[0],
-      setVh = _useState2[1];
-
-  var adapt = function adapt() {
-    setVh((window.innerHeight - offset) * 0.01);
-  };
-
-  React.useEffect(function () {
-    adapt();
-  }, []);
-  React.useEffect(function () {
-    window.addEventListener('resize', adapt);
-    return function () {
-      window.removeEventListener('resize', adapt);
-    };
-  }, []);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "vh-container",
-    style: {
-      '--vh': "".concat(vh, "px")
-    }
-  }, props.children);
-});
-
-var index$8 = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2280,7 +2587,7 @@ var index$8 = (function (props) {
   }, rest), props.children);
 });
 
-var index$9 = (function (props) {
+var index$8 = (function (props) {
   var HiddenComponent = props.HiddenComponent,
       VisibleComponent = props.VisibleComponent;
 
@@ -2313,7 +2620,7 @@ var index$9 = (function (props) {
   })));
 });
 
-var index$a = (function (props) {
+var index$9 = (function (props) {
   var className = props.className,
       closed = props.closed,
       rest = _objectWithoutProperties(props, ["className", "closed"]);
@@ -2328,12 +2635,12 @@ var index$a = (function (props) {
   var classes = genClasses.cEx(['sidebar', function (_) {
     return closed === true ? 'sidebar--state-closed' : '';
   }, className]);
-  return /*#__PURE__*/React__default.createElement("aside", {
+  return /*#__PURE__*/React__default.createElement("aside", _extends({
     className: classes
-  }, props.children);
+  }, rest), props.children);
 });
 
-var index$b = (function (props) {
+var index$a = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2343,7 +2650,7 @@ var index$b = (function (props) {
   }, props.children);
 });
 
-var index$c = (function (props) {
+var index$b = (function (props) {
   var className = props.className,
       Icon = props.Icon,
       label = props.label,
@@ -2364,28 +2671,6 @@ var index$c = (function (props) {
   }, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
 });
 
-var DefaultToolbar$1 = (function (props) {
-  var className = props.className,
-      handlePhoto = props.handlePhoto,
-      handleFile = props.handleFile,
-      handleAudio = props.handleAudio,
-      rest = _objectWithoutProperties(props, ["className", "handlePhoto", "handleFile", "handleAudio"]);
-
-  var classes = genClasses.cEx(["chat-footer__tools", "flex-row", "just-between", className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
-  }, rest), /*#__PURE__*/React__default.createElement("button", {
-    onClick: handlePhoto,
-    className: "button text icon icon--32"
-  }, /*#__PURE__*/React__default.createElement(md.MdCameraAlt, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement("button", {
-    onClick: handleFile,
-    className: "button text icon icon--32"
-  }, /*#__PURE__*/React__default.createElement(md.MdAttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement("button", {
-    onClick: handleAudio,
-    className: "button text icon icon--32"
-  }, /*#__PURE__*/React__default.createElement(md.MdKeyboardVoice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
-});
-
 var ChatInput = (function (props) {
   var className = props.className,
       handleChange = props.handleChange,
@@ -2393,49 +2678,1562 @@ var ChatInput = (function (props) {
       value = props.value,
       rest = _objectWithoutProperties(props, ["className", "handleChange", "handleSubmit", "value"]);
 
-  var classes = genClasses.cEx(['chat-footer__message-input', 'flex-row', 'align-stretch', className]);
+  var classes = genClasses.cEx(['chat-footer__message-input', className]);
   return /*#__PURE__*/React__default.createElement("form", {
     className: classes,
     onSubmit: handleSubmit
+  }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    alignStretch: true
   }, /*#__PURE__*/React__default.createElement(Input, {
     name: "message",
     placeholder: "message",
     autoComplete: "off",
     onChange: handleChange,
     value: value
-  }), /*#__PURE__*/React__default.createElement("button", {
-    className: "button button--send text icon--32 flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null)));
+  }), /*#__PURE__*/React__default.createElement(Button, {
+    fit: true,
+    text: true,
+    navbar: true,
+    className: "button--send  flex align-center just-center"
+  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
 });
 
-var __toolbar_header = 'toolbar';
-var __input_header = 'input';
+var build = createCommonjsModule(function (module, exports) {
+  !function (V, e) {
+    module.exports = e(React__default);
+  }(commonjsGlobal, function (V) {
+    return function (V) {
+      function e(n) {
+        if (t[n]) return t[n].exports;
+        var r = t[n] = {
+          i: n,
+          l: !1,
+          exports: {}
+        };
+        return V[n].call(r.exports, r, r.exports, e), r.l = !0, r.exports;
+      }
+
+      var t = {};
+      return e.m = V, e.c = t, e.d = function (V, t, n) {
+        e.o(V, t) || Object.defineProperty(V, t, {
+          configurable: !1,
+          enumerable: !0,
+          get: n
+        });
+      }, e.n = function (V) {
+        var t = V && V.__esModule ? function () {
+          return V.default;
+        } : function () {
+          return V;
+        };
+        return e.d(t, "a", t), t;
+      }, e.o = function (V, e) {
+        return Object.prototype.hasOwnProperty.call(V, e);
+      }, e.p = "", e(e.s = 3);
+    }([function (e, t) {
+      e.exports = V;
+    }, function (V, e, t) {
+      V.exports = t(7)();
+    }, function (V, e, t) {
+      !function (e, t) {
+        V.exports = t();
+      }(0, function () {
+        return function (V) {
+          function e(n) {
+            if (t[n]) return t[n].exports;
+            var r = t[n] = {
+              i: n,
+              l: !1,
+              exports: {}
+            };
+            return V[n].call(r.exports, r, r.exports, e), r.l = !0, r.exports;
+          }
+
+          var t = {};
+          return e.m = V, e.c = t, e.d = function (V, t, n) {
+            e.o(V, t) || Object.defineProperty(V, t, {
+              configurable: !1,
+              enumerable: !0,
+              get: n
+            });
+          }, e.n = function (V) {
+            var t = V && V.__esModule ? function () {
+              return V.default;
+            } : function () {
+              return V;
+            };
+            return e.d(t, "a", t), t;
+          }, e.o = function (V, e) {
+            return Object.prototype.hasOwnProperty.call(V, e);
+          }, e.p = "", e(e.s = 1);
+        }([function (V, e, t) {
+
+          function n(V, e, t) {
+            return e in V ? Object.defineProperty(V, e, {
+              value: t,
+              enumerable: !0,
+              configurable: !0,
+              writable: !0
+            }) : V[e] = t, V;
+          }
+
+          t.d(e, "e", function () {
+            return o;
+          }), t.d(e, "a", function () {
+            return i;
+          }), t.d(e, "f", function () {
+            return a;
+          }), t.d(e, "c", function () {
+            return A;
+          }), t.d(e, "b", function () {
+            return c;
+          }), t.d(e, "d", function () {
+            return u;
+          });
+          var r,
+              o = ["user", "environment"],
+              i = {
+            USER: "user",
+            ENVIRONMENT: "environment"
+          },
+              a = ["jpg", "png"],
+              A = {
+            PNG: "png",
+            JPG: "jpg"
+          },
+              c = (r = {}, n(r, "jpg", "image/jpeg"), n(r, "png", "image/png"), r),
+              u = {
+            audio: !1,
+            video: !0
+          };
+        }, function (V, e, t) {
+          V.exports = t(2);
+        }, function (V, e, t) {
+
+          function n(V, e) {
+            if (!(V instanceof e)) throw new TypeError("Cannot call a class as a function");
+          }
+
+          Object.defineProperty(e, "__esModule", {
+            value: !0
+          }), t.d(e, "FACING_MODES", function () {
+            return c;
+          }), t.d(e, "IMAGE_TYPES", function () {
+            return u;
+          });
+
+          var r = t(3),
+              o = t(5),
+              i = function () {
+            function V(V, e) {
+              for (var t = 0; t < e.length; t++) {
+                var n = e[t];
+                n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(V, n.key, n);
+              }
+            }
+
+            return function (e, t, n) {
+              return t && V(e.prototype, t), n && V(e, n), e;
+            };
+          }(),
+              a = r.a.IMAGE_TYPES.PNG,
+              A = function () {
+            function V(e) {
+              n(this, V), this.videoElement = e, this.stream = null, this.numberOfMaxResolutionTry = 1, this.settings = null, this.windowURL = r.a.getWindowURL(), this.mediaDevices = r.a.getNavigatorMediaDevices();
+            }
+
+            return i(V, [{
+              key: "_getStreamDevice",
+              value: function (V, e) {
+                var t = this;
+                return new Promise(function (n, o) {
+                  var i = r.a.getIdealConstraints(V, e);
+                  t.mediaDevices.getUserMedia(i).then(function (V) {
+                    t._gotStream(V), n(V);
+                  }).catch(function (V) {
+                    o(V);
+                  });
+                });
+              }
+            }, {
+              key: "_getStreamDeviceMaxResolution",
+              value: function (V) {
+                var e = this,
+                    t = r.a.getMaxResolutionConstraints(V, this.numberOfMaxResolutionTry);
+
+                if (null == t) {
+                  var n = {};
+                  return this._getStreamDevice(V, n);
+                }
+
+                return new Promise(function (n, r) {
+                  e.mediaDevices.getUserMedia(t).then(function (V) {
+                    e._gotStream(V), n(V);
+                  }).catch(function (t) {
+                    setTimeout(function () {
+                      e.numberOfMaxResolutionTry += 1, e._getStreamDeviceMaxResolution(V).catch(function () {
+                        r(t);
+                      });
+                    }, 20);
+                  });
+                });
+              }
+            }, {
+              key: "_setVideoSrc",
+              value: function (V) {
+                if ("srcObject" in this.videoElement) this.videoElement.srcObject = V;else {
+                  var e = this.windowURL.createObjectURL(V);
+                  this.videoElement.src = e;
+                }
+              }
+            }, {
+              key: "_setSettings",
+              value: function (V) {
+                this.settings = null;
+                var e = V && V.getTracks ? V.getTracks() : [];
+                e.length > 0 && e[0].getSettings && (this.settings = e[0].getSettings());
+              }
+            }, {
+              key: "_gotStream",
+              value: function (V) {
+                this.stream = V, this._setSettings(V), this._setVideoSrc(V);
+              }
+            }, {
+              key: "getCameraSettings",
+              value: function () {
+                return this.settings;
+              }
+            }, {
+              key: "startCamera",
+              value: function (V, e) {
+                var t = this;
+                return this.stopCamera().then(function () {}).catch(function () {}).then(function () {
+                  return t._getStreamDevice(V, e);
+                });
+              }
+            }, {
+              key: "startCameraMaxResolution",
+              value: function () {
+                var V = this,
+                    e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                return this.stopCamera().then(function () {}).catch(function () {}).then(function () {
+                  return V._getStreamDeviceMaxResolution(e);
+                });
+              }
+            }, {
+              key: "getDataUri",
+              value: function (V) {
+                var e = {
+                  sizeFactor: void 0 === V.sizeFactor ? o.c : V.sizeFactor,
+                  imageType: void 0 === V.imageType ? a : V.imageType,
+                  imageCompression: void 0 === V.imageCompression ? o.a : V.imageCompression,
+                  isImageMirror: void 0 === V.isImageMirror ? o.b : V.isImageMirror
+                };
+                return r.a.getDataUri(this.videoElement, e);
+              }
+            }, {
+              key: "stopCamera",
+              value: function () {
+                var V = this;
+                return new Promise(function (e, t) {
+                  V.stream && (V.stream.getTracks().forEach(function (V) {
+                    V.stop();
+                  }), V.videoElement.src = "", V.stream = null, V._setSettings(null), e()), t(Error("no stream to stop!"));
+                });
+              }
+            }]), V;
+          }(),
+              c = r.a.FACING_MODES,
+              u = r.a.IMAGE_TYPES;
+
+          e.default = A;
+        }, function (V, e, t) {
+
+          function n(V, e) {
+            if (!(V instanceof e)) throw new TypeError("Cannot call a class as a function");
+          }
+
+          var r = t(4),
+              o = t(0),
+              i = function () {
+            function V(V, e) {
+              for (var t = 0; t < e.length; t++) {
+                var n = e[t];
+                n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(V, n.key, n);
+              }
+            }
+
+            return function (e, t, n) {
+              return t && V(e.prototype, t), n && V(e, n), e;
+            };
+          }(),
+              a = function () {
+            function V() {
+              n(this, V);
+            }
+
+            return i(V, null, [{
+              key: "getDataUri",
+              value: function (V, e) {
+                var t = e.sizeFactor,
+                    n = e.imageType,
+                    o = e.imageCompression,
+                    i = e.isImageMirror,
+                    a = V.videoWidth,
+                    A = V.videoHeight,
+                    c = Object(r.b)(a, A, t),
+                    u = c.imageWidth,
+                    s = c.imageHeight,
+                    l = document.createElement("canvas");
+                l.width = u, l.height = s;
+                var f = l.getContext("2d");
+                return i && f.setTransform(-1, 0, 0, 1, l.width, 0), f.drawImage(V, 0, 0, u, s), Object(r.a)(l, n, o);
+              }
+            }, {
+              key: "getWindowURL",
+              value: function () {
+                return window.URL || window.webkitURL || window.mozURL || window.msURL;
+              }
+            }, {
+              key: "getNavigatorMediaDevices",
+              value: function () {
+                var V = null,
+                    e = !(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia),
+                    t = !(!navigator.mozGetUserMedia && !navigator.webkitGetUserMedia);
+                if (e) V = navigator.mediaDevices;else if (t) {
+                  var n = navigator.mozGetUserMedia || navigator.webkitGetUserMedia,
+                      r = {
+                    getUserMedia: function (V) {
+                      return new Promise(function (e, t) {
+                        n.call(navigator, V, e, t);
+                      });
+                    }
+                  };
+                  V = Object.assign(n, r);
+                }
+                return V;
+              }
+            }, {
+              key: "isSupportedFacingMode",
+              value: function () {
+                return V.getNavigatorMediaDevices().getSupportedConstraints().facingMode;
+              }
+            }, {
+              key: "getIdealConstraints",
+              value: function (V, e) {
+                var t = {
+                  audio: !1,
+                  video: {}
+                };
+                if (Object(r.c)(V, e)) return o.d;
+                var n = navigator.mediaDevices.getSupportedConstraints();
+                return n.width && n.height && n.facingMode ? (V && o.e.includes(V) && (t.video.facingMode = V), e && e.width && (t.video.width = e.width), e && e.height && (t.video.height = e.height), t) : (console.error("Constraint width height or facingMode not supported!"), o.d);
+              }
+            }, {
+              key: "getMaxResolutionConstraints",
+              value: function () {
+                var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
+                    t = arguments[1],
+                    n = V.getIdealConstraints(e),
+                    r = n.video.facingMode,
+                    o = [{
+                  width: {
+                    min: 640
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 800
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 900
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 1024
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 1080
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 1280
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 1920
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 2560
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }, {
+                  width: {
+                    min: 3840
+                  },
+                  ideal: {
+                    facingMode: r
+                  }
+                }];
+                if (t >= o.length) return null;
+                var i = o.slice(0, -t);
+                return n.video.advanced = i, n;
+              }
+            }, {
+              key: "FACING_MODES",
+              get: function () {
+                return o.a;
+              }
+            }, {
+              key: "IMAGE_TYPES",
+              get: function () {
+                return o.c;
+              }
+            }]), V;
+          }();
+
+          e.a = a;
+        }, function (V, e, t) {
+
+          function n(V, e) {
+            if (!(e >= 0 && e <= 1)) throw new Error(e + " is invalid imageCompression, choose between: [0, 1]");
+            if (!c.f.includes(V)) throw new Error(V + " is invalid imageType, choose between: " + c.f.join(", "));
+            return !0;
+          }
+
+          function r(V, e) {
+            var t = {};
+
+            try {
+              n(V, e), t.imageType = V, t.imageCompression = e;
+            } catch (V) {
+              console.error(V), console.error("default value of " + c.c.PNG + " is used"), t.imageType = c.c.PNG, t.imageCompression = null;
+            }
+
+            return t;
+          }
+
+          function o(V, e, t) {
+            var n = V * parseFloat(t);
+            return {
+              imageWidth: n,
+              imageHeight: e / (V / n)
+            };
+          }
+
+          function i(V, e, t) {
+            return r(e, t).imageType === c.c.JPG ? t ? V.toDataURL(c.b[c.c.JPG], t) : V.toDataURL(c.b[c.c.JPG]) : V.toDataURL(c.b[e]);
+          }
+
+          function a(V) {
+            if ("object" === ("undefined" === typeof V ? "undefined" : u(V))) for (var e in V) if (V.hasOwnProperty(e)) return !1;
+            return !0;
+          }
+
+          function A(V, e) {
+            return !(V || e && !a(e));
+          }
+
+          e.b = o, e.a = i, e.c = A;
+          var c = t(0),
+              u = "function" === typeof Symbol && "symbol" === typeof Symbol.iterator ? function (V) {
+            return typeof V;
+          } : function (V) {
+            return V && "function" === typeof Symbol && V.constructor === Symbol && V !== Symbol.prototype ? "symbol" : typeof V;
+          };
+        }, function (V, e, t) {
+
+          t.d(e, "c", function () {
+            return n;
+          }), t.d(e, "a", function () {
+            return r;
+          }), t.d(e, "b", function () {
+            return o;
+          });
+          var n = 1,
+              r = null,
+              o = !1;
+        }]);
+      });
+    }, function (V, e, t) {
+      V.exports = t(4);
+    }, function (V, e, t) {
+
+      Object.defineProperty(e, "__esModule", {
+        value: !0
+      });
+      var n = t(5);
+      t.d(e, "Camera", function () {
+        return n.c;
+      }), t.d(e, "FACING_MODES", function () {
+        return n.a;
+      }), t.d(e, "IMAGE_TYPES", function () {
+        return n.b;
+      }), e.default = n.c;
+    }, function (V, e, t) {
+
+      var n = t(6);
+      t.d(e, "a", function () {
+        return n.a;
+      }), t.d(e, "b", function () {
+        return n.b;
+      }), e.c = n.c;
+    }, function (V, e, t) {
+
+      function n(V) {
+        function e() {
+          p && clearTimeout(p);
+        }
+
+        function t() {
+          var t = {
+            sizeFactor: V.sizeFactor,
+            imageType: V.imageType,
+            imageCompression: V.imageCompression,
+            isImageMirror: V.isImageMirror
+          },
+              n = j(t);
+          V.isSilentMode || Object(f.c)(), "function" === typeof V.onTakePhoto && V.onTakePhoto(n), A(n), v(!1), e(), p = setTimeout(function () {
+            v(!0), "function" === typeof V.onTakePhotoAnimationDone && V.onTakePhotoAnimationDone(n);
+          }, 900);
+        }
+
+        var n = Object(r.useState)(""),
+            i = g(n, 2),
+            a = i[0],
+            A = i[1],
+            h = Object(r.useState)(!0),
+            d = g(h, 2),
+            m = d[0],
+            v = d[1],
+            y = Object(r.useState)(""),
+            k = g(y, 2),
+            b = k[0],
+            E = k[1],
+            w = Object(r.useRef)(null),
+            C = Object(c.a)(w, V.idealFacingMode, V.idealResolution, V.isMaxResolution),
+            U = g(C, 4),
+            S = U[0],
+            x = U[1],
+            I = U[2],
+            j = U[3];
+        Object(r.useEffect)(function () {
+          S ? "function" === typeof V.onCameraStart && V.onCameraStart(S) : "function" === typeof V.onCameraStop && V.onCameraStop();
+        }, [S]), Object(r.useEffect)(function () {
+          x && (E(x.name + " " + x.message), "function" === typeof V.onCameraError && V.onCameraError(x));
+        }, [x]), Object(r.useEffect)(function () {
+          I && Object(f.d)(I.message);
+        }, [I]);
+        var T = Object(f.b)(m, V.isImageMirror),
+            R = Object(f.a)(!m),
+            L = V.isFullscreen ? "react-html5-camera-photo-fullscreen" : "";
+        return o.a.createElement("div", {
+          className: "react-html5-camera-photo " + L
+        }, o.a.createElement(l.a, {
+          cssClass: "display-error",
+          isDisplayError: V.isDisplayStartCameraError,
+          errorMsg: b
+        }), o.a.createElement(s.a, {
+          isShowWhiteFlash: !m
+        }), o.a.createElement("img", {
+          style: R,
+          alt: "camera",
+          src: a
+        }), o.a.createElement("video", {
+          style: T,
+          ref: w,
+          autoPlay: !0,
+          muted: "muted",
+          playsInline: !0
+        }), o.a.createElement(u.a, {
+          isClicked: !m,
+          onClick: t
+        }));
+      }
+
+      var r = t(0),
+          o = t.n(r),
+          i = t(1),
+          a = t.n(i),
+          A = t(2),
+          c = (t.n(A), t(9)),
+          u = t(13),
+          s = t(15),
+          l = t(17),
+          f = t(19),
+          h = t(21);
+      t.n(h);
+      t.o(A, "FACING_MODES") && t.d(e, "a", function () {
+        return A.FACING_MODES;
+      }), t.o(A, "IMAGE_TYPES") && t.d(e, "b", function () {
+        return A.IMAGE_TYPES;
+      });
+
+      var g = function () {
+        function V(V, e) {
+          var t = [],
+              n = !0,
+              r = !1,
+              o = void 0;
+
+          try {
+            for (var i, a = V[Symbol.iterator](); !(n = (i = a.next()).done) && (t.push(i.value), !e || t.length !== e); n = !0);
+          } catch (V) {
+            r = !0, o = V;
+          } finally {
+            try {
+              !n && a.return && a.return();
+            } finally {
+              if (r) throw o;
+            }
+          }
+
+          return t;
+        }
+
+        return function (e, t) {
+          if (Array.isArray(e)) return e;
+          if (Symbol.iterator in Object(e)) return V(e, t);
+          throw new TypeError("Invalid attempt to destructure non-iterable instance");
+        };
+      }(),
+          p = null;
+
+      e.c = n, n.propTypes = {
+        onTakePhoto: a.a.func,
+        onTakePhotoAnimationDone: a.a.func,
+        onCameraError: a.a.func,
+        idealFacingMode: a.a.string,
+        idealResolution: a.a.object,
+        imageType: a.a.string,
+        isImageMirror: a.a.bool,
+        isSilentMode: a.a.bool,
+        isDisplayStartCameraError: a.a.bool,
+        imageCompression: a.a.number,
+        isMaxResolution: a.a.bool,
+        isFullscreen: a.a.bool,
+        sizeFactor: a.a.number,
+        onCameraStart: a.a.func,
+        onCameraStop: a.a.func
+      }, n.defaultProps = {
+        isImageMirror: !0,
+        isDisplayStartCameraError: !0
+      };
+    }, function (V, e, t) {
+
+      function n() {}
+
+      function r() {}
+
+      var o = t(8);
+      r.resetWarningCache = n, V.exports = function () {
+        function V(V, e, t, n, r, i) {
+          if (i !== o) {
+            var a = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");
+            throw a.name = "Invariant Violation", a;
+          }
+        }
+
+        function e() {
+          return V;
+        }
+
+        V.isRequired = V;
+        var t = {
+          array: V,
+          bool: V,
+          func: V,
+          number: V,
+          object: V,
+          string: V,
+          symbol: V,
+          any: V,
+          arrayOf: e,
+          element: V,
+          elementType: V,
+          instanceOf: e,
+          node: V,
+          objectOf: e,
+          oneOf: e,
+          oneOfType: e,
+          shape: e,
+          exact: e,
+          checkPropTypes: r,
+          resetWarningCache: n
+        };
+        return t.PropTypes = t, t;
+      };
+    }, function (V, e, t) {
+
+      V.exports = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
+    }, function (V, e, t) {
+
+      function n(V) {
+        return function () {
+          var e = V.apply(this, arguments);
+          return new Promise(function (V, t) {
+            function n(r, o) {
+              try {
+                var i = e[r](o),
+                    a = i.value;
+              } catch (V) {
+                return void t(V);
+              }
+
+              if (!i.done) return Promise.resolve(a).then(function (V) {
+                n("next", V);
+              }, function (V) {
+                n("throw", V);
+              });
+              V(a);
+            }
+
+            return n("next");
+          });
+        };
+      }
+
+      function r(V, e, t, r) {
+        function o(V) {
+          return s.getDataUri(V);
+        }
+
+        var A = Object(a.useState)(null),
+            f = u(A, 2),
+            h = f[0],
+            g = f[1],
+            p = Object(a.useState)(null),
+            d = u(p, 2),
+            m = d[0],
+            v = d[1],
+            y = Object(a.useState)(null),
+            k = u(y, 2),
+            b = k[0],
+            E = k[1];
+        return Object(a.useEffect)(function () {
+          V && V.current && (s = new c.a(V.current));
+        }, [V]), Object(a.useEffect)(function () {
+          var o = function () {
+            var V = n(i.a.mark(function V() {
+              var n;
+              return i.a.wrap(function (V) {
+                for (;;) switch (V.prev = V.next) {
+                  case 0:
+                    if (l = !0, V.prev = 1, n = null, !r) {
+                      V.next = 9;
+                      break;
+                    }
+
+                    return V.next = 6, s.startCameraMaxResolution(e);
+
+                  case 6:
+                    n = V.sent, V.next = 12;
+                    break;
+
+                  case 9:
+                    return V.next = 11, s.startCamera(e, t);
+
+                  case 11:
+                    n = V.sent;
+
+                  case 12:
+                    g(n), v(null), V.next = 19;
+                    break;
+
+                  case 16:
+                    V.prev = 16, V.t0 = V.catch(1), v(V.t0);
+
+                  case 19:
+                  case "end":
+                    return V.stop();
+                }
+              }, V, this, [[1, 16]]);
+            }));
+            return function () {
+              return V.apply(this, arguments);
+            };
+          }();
+
+          if (h) return function () {
+            function e() {
+              return t.apply(this, arguments);
+            }
+
+            var t = n(i.a.mark(function e() {
+              return i.a.wrap(function (e) {
+                for (;;) switch (e.prev = e.next) {
+                  case 0:
+                    if (e.prev = 0, !l) {
+                      e.next = 5;
+                      break;
+                    }
+
+                    return l = !1, e.next = 5, s.stopCamera();
+
+                  case 5:
+                    V && V.current && (g(null), E(null)), e.next = 11;
+                    break;
+
+                  case 8:
+                    e.prev = 8, e.t0 = e.catch(0), E(e.t0);
+
+                  case 11:
+                  case "end":
+                    return e.stop();
+                }
+              }, e, this, [[0, 8]]);
+            }));
+            return e;
+          }();
+          o();
+        }, [V, h, e, t, r]), [h, m, b, o];
+      }
+
+      e.a = r;
+
+      var o = t(10),
+          i = t.n(o),
+          a = t(0),
+          A = (t.n(a), t(2)),
+          c = t.n(A),
+          u = function () {
+        function V(V, e) {
+          var t = [],
+              n = !0,
+              r = !1,
+              o = void 0;
+
+          try {
+            for (var i, a = V[Symbol.iterator](); !(n = (i = a.next()).done) && (t.push(i.value), !e || t.length !== e); n = !0);
+          } catch (V) {
+            r = !0, o = V;
+          } finally {
+            try {
+              !n && a.return && a.return();
+            } finally {
+              if (r) throw o;
+            }
+          }
+
+          return t;
+        }
+
+        return function (e, t) {
+          if (Array.isArray(e)) return e;
+          if (Symbol.iterator in Object(e)) return V(e, t);
+          throw new TypeError("Invalid attempt to destructure non-iterable instance");
+        };
+      }(),
+          s = null,
+          l = !1;
+    }, function (V, e, t) {
+      V.exports = t(11);
+    }, function (V, e, t) {
+      var n = function () {
+        return this;
+      }() || Function("return this")(),
+          r = n.regeneratorRuntime && Object.getOwnPropertyNames(n).indexOf("regeneratorRuntime") >= 0,
+          o = r && n.regeneratorRuntime;
+
+      if (n.regeneratorRuntime = void 0, V.exports = t(12), r) n.regeneratorRuntime = o;else try {
+        delete n.regeneratorRuntime;
+      } catch (V) {
+        n.regeneratorRuntime = void 0;
+      }
+    }, function (V, e) {
+      !function (e) {
+
+        function t(V, e, t, n) {
+          var o = e && e.prototype instanceof r ? e : r,
+              i = Object.create(o.prototype),
+              a = new f(n || []);
+          return i._invoke = c(V, t, a), i;
+        }
+
+        function n(V, e, t) {
+          try {
+            return {
+              type: "normal",
+              arg: V.call(e, t)
+            };
+          } catch (V) {
+            return {
+              type: "throw",
+              arg: V
+            };
+          }
+        }
+
+        function r() {}
+
+        function o() {}
+
+        function i() {}
+
+        function a(V) {
+          ["next", "throw", "return"].forEach(function (e) {
+            V[e] = function (V) {
+              return this._invoke(e, V);
+            };
+          });
+        }
+
+        function A(V) {
+          function e(t, r, o, i) {
+            var a = n(V[t], V, r);
+
+            if ("throw" !== a.type) {
+              var A = a.arg,
+                  c = A.value;
+              return c && "object" === typeof c && m.call(c, "__await") ? Promise.resolve(c.__await).then(function (V) {
+                e("next", V, o, i);
+              }, function (V) {
+                e("throw", V, o, i);
+              }) : Promise.resolve(c).then(function (V) {
+                A.value = V, o(A);
+              }, i);
+            }
+
+            i(a.arg);
+          }
+
+          function t(V, t) {
+            function n() {
+              return new Promise(function (n, r) {
+                e(V, t, n, r);
+              });
+            }
+
+            return r = r ? r.then(n, n) : n();
+          }
+
+          var r;
+          this._invoke = t;
+        }
+
+        function c(V, e, t) {
+          var r = C;
+          return function (o, i) {
+            if (r === S) throw new Error("Generator is already running");
+
+            if (r === x) {
+              if ("throw" === o) throw i;
+              return g();
+            }
+
+            for (t.method = o, t.arg = i;;) {
+              var a = t.delegate;
+
+              if (a) {
+                var A = u(a, t);
+
+                if (A) {
+                  if (A === I) continue;
+                  return A;
+                }
+              }
+
+              if ("next" === t.method) t.sent = t._sent = t.arg;else if ("throw" === t.method) {
+                if (r === C) throw r = x, t.arg;
+                t.dispatchException(t.arg);
+              } else "return" === t.method && t.abrupt("return", t.arg);
+              r = S;
+              var c = n(V, e, t);
+
+              if ("normal" === c.type) {
+                if (r = t.done ? x : U, c.arg === I) continue;
+                return {
+                  value: c.arg,
+                  done: t.done
+                };
+              }
+
+              "throw" === c.type && (r = x, t.method = "throw", t.arg = c.arg);
+            }
+          };
+        }
+
+        function u(V, e) {
+          var t = V.iterator[e.method];
+
+          if (t === p) {
+            if (e.delegate = null, "throw" === e.method) {
+              if (V.iterator.return && (e.method = "return", e.arg = p, u(V, e), "throw" === e.method)) return I;
+              e.method = "throw", e.arg = new TypeError("The iterator does not provide a 'throw' method");
+            }
+
+            return I;
+          }
+
+          var r = n(t, V.iterator, e.arg);
+          if ("throw" === r.type) return e.method = "throw", e.arg = r.arg, e.delegate = null, I;
+          var o = r.arg;
+          return o ? o.done ? (e[V.resultName] = o.value, e.next = V.nextLoc, "return" !== e.method && (e.method = "next", e.arg = p), e.delegate = null, I) : o : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, I);
+        }
+
+        function s(V) {
+          var e = {
+            tryLoc: V[0]
+          };
+          1 in V && (e.catchLoc = V[1]), 2 in V && (e.finallyLoc = V[2], e.afterLoc = V[3]), this.tryEntries.push(e);
+        }
+
+        function l(V) {
+          var e = V.completion || {};
+          e.type = "normal", delete e.arg, V.completion = e;
+        }
+
+        function f(V) {
+          this.tryEntries = [{
+            tryLoc: "root"
+          }], V.forEach(s, this), this.reset(!0);
+        }
+
+        function h(V) {
+          if (V) {
+            var e = V[y];
+            if (e) return e.call(V);
+            if ("function" === typeof V.next) return V;
+
+            if (!isNaN(V.length)) {
+              var t = -1,
+                  n = function e() {
+                for (; ++t < V.length;) if (m.call(V, t)) return e.value = V[t], e.done = !1, e;
+
+                return e.value = p, e.done = !0, e;
+              };
+
+              return n.next = n;
+            }
+          }
+
+          return {
+            next: g
+          };
+        }
+
+        function g() {
+          return {
+            value: p,
+            done: !0
+          };
+        }
+
+        var p,
+            d = Object.prototype,
+            m = d.hasOwnProperty,
+            v = "function" === typeof Symbol ? Symbol : {},
+            y = v.iterator || "@@iterator",
+            k = v.asyncIterator || "@@asyncIterator",
+            b = v.toStringTag || "@@toStringTag",
+            E = "object" === typeof V,
+            w = e.regeneratorRuntime;
+        if (w) return void (E && (V.exports = w));
+        w = e.regeneratorRuntime = E ? V.exports : {}, w.wrap = t;
+        var C = "suspendedStart",
+            U = "suspendedYield",
+            S = "executing",
+            x = "completed",
+            I = {},
+            j = {};
+
+        j[y] = function () {
+          return this;
+        };
+
+        var T = Object.getPrototypeOf,
+            R = T && T(T(h([])));
+        R && R !== d && m.call(R, y) && (j = R);
+        var L = i.prototype = r.prototype = Object.create(j);
+        o.prototype = L.constructor = i, i.constructor = o, i[b] = o.displayName = "GeneratorFunction", w.isGeneratorFunction = function (V) {
+          var e = "function" === typeof V && V.constructor;
+          return !!e && (e === o || "GeneratorFunction" === (e.displayName || e.name));
+        }, w.mark = function (V) {
+          return Object.setPrototypeOf ? Object.setPrototypeOf(V, i) : (V.__proto__ = i, b in V || (V[b] = "GeneratorFunction")), V.prototype = Object.create(L), V;
+        }, w.awrap = function (V) {
+          return {
+            __await: V
+          };
+        }, a(A.prototype), A.prototype[k] = function () {
+          return this;
+        }, w.AsyncIterator = A, w.async = function (V, e, n, r) {
+          var o = new A(t(V, e, n, r));
+          return w.isGeneratorFunction(e) ? o : o.next().then(function (V) {
+            return V.done ? V.value : o.next();
+          });
+        }, a(L), L[b] = "Generator", L[y] = function () {
+          return this;
+        }, L.toString = function () {
+          return "[object Generator]";
+        }, w.keys = function (V) {
+          var e = [];
+
+          for (var t in V) e.push(t);
+
+          return e.reverse(), function t() {
+            for (; e.length;) {
+              var n = e.pop();
+              if (n in V) return t.value = n, t.done = !1, t;
+            }
+
+            return t.done = !0, t;
+          };
+        }, w.values = h, f.prototype = {
+          constructor: f,
+          reset: function (V) {
+            if (this.prev = 0, this.next = 0, this.sent = this._sent = p, this.done = !1, this.delegate = null, this.method = "next", this.arg = p, this.tryEntries.forEach(l), !V) for (var e in this) "t" === e.charAt(0) && m.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = p);
+          },
+          stop: function () {
+            this.done = !0;
+            var V = this.tryEntries[0],
+                e = V.completion;
+            if ("throw" === e.type) throw e.arg;
+            return this.rval;
+          },
+          dispatchException: function (V) {
+            function e(e, n) {
+              return o.type = "throw", o.arg = V, t.next = e, n && (t.method = "next", t.arg = p), !!n;
+            }
+
+            if (this.done) throw V;
+
+            for (var t = this, n = this.tryEntries.length - 1; n >= 0; --n) {
+              var r = this.tryEntries[n],
+                  o = r.completion;
+              if ("root" === r.tryLoc) return e("end");
+
+              if (r.tryLoc <= this.prev) {
+                var i = m.call(r, "catchLoc"),
+                    a = m.call(r, "finallyLoc");
+
+                if (i && a) {
+                  if (this.prev < r.catchLoc) return e(r.catchLoc, !0);
+                  if (this.prev < r.finallyLoc) return e(r.finallyLoc);
+                } else if (i) {
+                  if (this.prev < r.catchLoc) return e(r.catchLoc, !0);
+                } else {
+                  if (!a) throw new Error("try statement without catch or finally");
+                  if (this.prev < r.finallyLoc) return e(r.finallyLoc);
+                }
+              }
+            }
+          },
+          abrupt: function (V, e) {
+            for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+              var n = this.tryEntries[t];
+
+              if (n.tryLoc <= this.prev && m.call(n, "finallyLoc") && this.prev < n.finallyLoc) {
+                var r = n;
+                break;
+              }
+            }
+
+            r && ("break" === V || "continue" === V) && r.tryLoc <= e && e <= r.finallyLoc && (r = null);
+            var o = r ? r.completion : {};
+            return o.type = V, o.arg = e, r ? (this.method = "next", this.next = r.finallyLoc, I) : this.complete(o);
+          },
+          complete: function (V, e) {
+            if ("throw" === V.type) throw V.arg;
+            return "break" === V.type || "continue" === V.type ? this.next = V.arg : "return" === V.type ? (this.rval = this.arg = V.arg, this.method = "return", this.next = "end") : "normal" === V.type && e && (this.next = e), I;
+          },
+          finish: function (V) {
+            for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+              var t = this.tryEntries[e];
+              if (t.finallyLoc === V) return this.complete(t.completion, t.afterLoc), l(t), I;
+            }
+          },
+          catch: function (V) {
+            for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+              var t = this.tryEntries[e];
+
+              if (t.tryLoc === V) {
+                var n = t.completion;
+
+                if ("throw" === n.type) {
+                  var r = n.arg;
+                  l(t);
+                }
+
+                return r;
+              }
+            }
+
+            throw new Error("illegal catch attempt");
+          },
+          delegateYield: function (V, e, t) {
+            return this.delegate = {
+              iterator: h(V),
+              resultName: e,
+              nextLoc: t
+            }, "next" === this.method && (this.arg = p), I;
+          }
+        };
+      }(function () {
+        return this;
+      }() || Function("return this")());
+    }, function (V, e, t) {
+
+      var n = t(0),
+          r = t.n(n),
+          o = t(1),
+          i = t.n(o),
+          a = t(14),
+          A = (t.n(a), function (V) {
+        var e = V.onClick,
+            t = V.isClicked,
+            n = t ? "is-clicked" : "";
+        return r.a.createElement("div", {
+          id: "container-circles"
+        }, r.a.createElement("div", {
+          id: "outer-circle",
+          onClick: function (V) {
+            t || e();
+          }
+        }, r.a.createElement("div", {
+          id: "inner-circle",
+          className: n
+        })));
+      });
+      A.propTypes = {
+        onClick: i.a.func.isRequired,
+        isClicked: i.a.bool.isRequired
+      }, e.a = A;
+    }, function (V, e) {}, function (V, e, t) {
+
+      var n = t(0),
+          r = t.n(n),
+          o = t(1),
+          i = t.n(o),
+          a = t(16),
+          A = (t.n(a), function (V) {
+        var e = V.isShowWhiteFlash,
+            t = e ? "do-transition" : "",
+            n = t + " normal";
+        return r.a.createElement("div", {
+          id: "white-flash",
+          className: n
+        });
+      });
+      A.propTypes = {
+        isShowWhiteFlash: i.a.bool.isRequired
+      }, e.a = A;
+    }, function (V, e) {}, function (V, e, t) {
+
+      function n(V, e) {
+        return V && e && e.length > 0;
+      }
+
+      var r = t(0),
+          o = t.n(r),
+          i = t(1),
+          a = t.n(i),
+          A = t(18),
+          c = (t.n(A), function (V) {
+        var e = V.isDisplayError,
+            t = V.errorMsg,
+            r = V.cssClass;
+        return n(e, t) ? (console.log("cssClass", r), o.a.createElement("div", {
+          className: r,
+          id: "display-error"
+        }, o.a.createElement("h1", null, "Camera error: ", t))) : null;
+      });
+      c.propTypes = {
+        isDisplayError: a.a.bool,
+        errorMsg: a.a.string,
+        cssClass: a.a.string
+      }, e.a = c;
+    }, function (V, e) {}, function (V, e, t) {
+
+      function n(V) {
+        return V ? {
+          display: "inline-block"
+        } : {
+          display: "none"
+        };
+      }
+
+      function r(V) {
+        return V ? {
+          transform: "rotateY(180deg)"
+        } : {
+          transform: "none"
+        };
+      }
+
+      function o(V, e) {
+        return Object.assign({}, r(e), n(V));
+      }
+
+      function i() {
+        new Audio("data:audio/mp3;base64," + c.a.base64).play();
+      }
+
+      function a(V) {
+        console.info("react-html5-camera-photo info:", V);
+      }
+
+      e.a = n, e.b = o, e.c = i, e.d = a;
+      var A = t(20),
+          c = t.n(A);
+    }, function (V, e) {
+      V.exports = {
+        base64: "SUQzBAAAAAAASVRQRTEAAAAcAAADU291bmRKYXkuY29tIFNvdW5kIEVmZmVjdHMAVFNTRQAAAA8AAANMYXZmNTcuNzIuMTAxAAAAAAAAAAAAAAD/+1QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABJbmZvAAAADwAAAB0AACxAAA0NDRUVFR4eHh4nJycvLy8vODg4QUFBQUlJSVJSUlJbW1tjY2NsbGxsdXV1fX19fYaGho+Pj4+Xl5egoKCgqampsbGxurq6usPDw8vLy8vU1NTd3d3d5eXl7u7u7vf39////wAAAABMYXZjNTcuOTMAAAAAAAAAAAAAAAAkAkAAAAAAAAAsQC+b5ZH/+5RkAA/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAAR4RBEitS0FLUmhcO1TSK1JoJrUtC4dpmkUlLQTQUtC4dpqkUkVoJoJpxcO01KKSK1JoJoRcO01i0kUlLGJkCdw7Skpaho4aHGJkCZkO0pIrDBxw0OGHoEzD3aUkVhg4wMHDD0E4tjjUkUgw8YPDhloJxbSaSRSGhxg8YpaCcW00kRSRWpNBOxZ/1VVFlv/9LLLqu//VVVUW//WWWWXd/6VVVVd/+qsssGH/ZZZVVUDt+1VVlli1dIxZZVUDI0RhaqqyzX9GLLLKq/+QtVVGgCAACMZAAY0NkBDHeIlc0SIVc0Kpu8Sudc0SucfQq+iRCd4hOlc0SubvEJ3NHiE76FErnCr13iE74d4hO8Q0SuaJUSuaJXKvEJ330Su8Q0KuaFUJ3iVzcWaJQ7wWYBHSMAgAD4xjjeYxjZ35znnO/zkJOfqQhKnO6B88jTnnOd0IRjhwUZTnO85///znkD/+5Rkrg7gAABpAAAACAAADSAAAAEQ2Y50IITAARuAEEgQjXnhDgIHCKc53IHxdyEbnOehCEkJ+pCelSMp4gHBRQ4HG5CSE8hJCN/U7oIBwONJAAAAABzNHNlZ0RgQYz9Z7iGTHEB/80BaFYCuiQxoNtAsgAYQaVXEGCOw1eAQwscAnqCA4wbgC2AfcLWgsjQU2SxNkDIOQcAICYDsC/QfJunpFwYwiBPhc4QIMLhqQFyQQMafSYToaBt4ucd4uQQUAgwyMNQQuQItic+ghuLAQdlkELTqJsxICMaQ4UERZT0KbbSURTRUOZYcwcwY5MiwoENUDJjGFslwwOn609SlqYXIK0HgXO8XPcbKThcIPIuUVoQiSyXYhB9OtX////+MF0v////zWIAICAEKgAB/mXJmPHgWEBgPOgZOlaYsIFBP+AQ4QLHrqkMPcPAKKBZ7ZFyAhl8AcIGyALmsoLqwDiCwCxhv4aX8i47Q9MOXKIXAEgKFDAxNenFnkHFkEQb/+5RE9QADBV+6LQRgAltMZtWglABa0gEKuaiAC3vAoeM1MAAWYQILzHIICTw5nW7RcBUEpjnkHEoDmA3lH0Xw/cQVFJCxdNqCh2E2Xy+dJs3JsiossdgrUcoTkRIc5t++OWO8ToPJNi5D0XIXSYEJxaidDVAy5PlocIZPW62fVpyLigBQBAHrIuVrJOFrg5pLCcSAkokPocwjSNHPHN0//////////+QhCj7qaGYVYmpqaAAAGq7AwgBlh8VBaQtGWez8jOC40Cs8QWdoEoqxgWS1OGgVhKDhH+mSYIkesyxKFQLAOJPHUkiRlkHQGoXY9YwWxnKGEht1WcAxxbxjowl8ZZOpjMoTFYLhMp1UWNzTcRKlEThVyzRJ9C5JpucTzZNnKasIvafZ4+7b8Nv83+Mazrf1JvUKBJrxNz2pLmfWWKB/Cz8x/7RM5/1Ce/+L76+P5VVv//Of/6N7Pce0F4fxJEPU6bWE3FR6oN5kpCbjkeTdixgeMWuvWJWbPnn/+5RkagAFn1nIzmXgAoEqWPDHsABTQW8/uPeACTkOaPcYsABbsyzEjbu+fchSvlqOGJ9HCWDt1LSxKyl8Ukl5ZzCMTzuj69ziub5eq/GI1/jU05e/Vyef+sLP2UOTjPezyH/2pWN3Kd+UX7tbbLmTSNimTrrEzKqWI82ZXEVz/f+APYQWsTYAFgsDYkDgbEotLbToGU/zJZiBhooccZojHRxKjGTDmIYgELVTQ6I2QqDhXYc7gxAUg/WKLpvmqB/Aa3CjVqNWDqJq6FkPVCvUdaazrdNQLVgv4+X93OD48uq7h+33naGTRWem5b5x8/PzbP34OY+8UeZuq839/vV6xL5/9b/XgaviJ9X39eff////zE3/////R5XdMx9Zlv5kMT+fb+7lKgBsvQwB1JIZFR4wVnWT2FlJ/9ydOZTEtzzjSMAwIrF0HW4nk9iLot6Z7fXzZ9ce865weBD+l9AJVqCZJWiEQsTcMVtf+2qtxuAtqJsBk0mAUCkVg8GmyjH/+5RkCQADSzRfbjFgBDyCa4/GlACMzGFh/PMACSAXa/+SUACjoDx0SmqACERx/bjtG4yJBsfEURAKyS7HTNFQ7ithQtedceTij5ucmkWN8luex6UdfP/y85Ma9PZExfX7fX5N6mDZIDUU5B4GFjoqoho+gmvcXDwfOFEQBAJAImIAIgAEBgoCAACgBWBb6r87R1ptBJTt9CIxPHoSUlxjgK9m/SEj3c159dg8LocfP5dBMH0/+r8bNvCqREJgBAo3AsBPzmJsdpUPjpXS9g9FMzKZrbNwgKTOuEDqnHmTRomLkbR2pd3RDi2Tznwzv//7otGijIoTEh2G3Q46FAgGDpWjmXd5f7f/7jYhgVdpAWecCrcCQt2IrHuQFiFFHxnaDIwAAJAFyyJGMwQlgONtlkI6kliXEWGr3/aI4kBnKOqNM539ilaUrLMZH/lUzP+ubGjlo8qZtgiBDTywUCohJd1f/r7rKml6giMBAAJEqYxixGCLCoy4k/LilUWoA4T/+5RkDIIDKhvW+ekyIkcDiu8kYoQMtHVX56UMiSmMKrj0jJnnxKuJignB5BdoZW+9uSWOWnCfrsssUm7dsQBie/NwY8W5Mcwd2coQYLGa4lTralcVA1UmoIyYTV/+2yAhmrb2/n/usGNZ7WlQTff6IlqcUUhEAJEqA8DKDVVREeIr8esjOrIUkuirufCdazjA811RD9N4LbvbaQCrw4dHvhMDz5A2w6KgoASjBS/Z+oFXtQIWF1JaIlkIxIAVMLauzmL6Rl2Q88yap03k8jXbwTjyBATEib0nyZFm3bJLlisBM01260qLqxtjRyN3m+oeF0gaslaUUUQ+FPb3T5AmE9qgnWRkokRC7/ODQPHdJPvq//9E2/SxEVK8v8htbsiCAAAgWWvTAjwQFpoiNLhYgE54RXwYLM+nGalvD2YxIJBjCwcqYng0c1/O3ts1SX8vgE9ZFUddfs8VPyCUwUA1wwzDBe2/+arbfpkEAAkBTABB0BwGgTAGdBCwAkBHJh7/+5RkDAADMxjUaYxJwkuiap8xIygM4G9Tp5kQmQkTrXzAmmOsHqFdAdFFCiEr5yxbLwZtWEEdVovOs23MAvAStVLKV8IXKgKrT8ncmLedi7bB/cA3VbAaKlqOq5/HaA4InbPz5nmuucADoe6xcBNt7tSPMuqIZAAAJBShDfodhw8JW8ZZJHhUwH3Fw7/DalLuM1CoAAQXCh4QvMhMrHIu0JKhUHpigUiESAQcKQCBYuIlFAIIUGgiPNQr+3/qOciRRBARJTh8shKgNIuRVKUxSdti8UYsSmgfCmU53r4EGDk9h+UaQORLKigsxpCqsGqz2zQThjt29fjfjzCmksKQOfPf4ErnOwvcZIT9DQVP/9TFYZiYuyTT96/zSiWVZKgcauvX/Fd2hVVUNhuyQBJGdRxhU4uKqjyBE8rLjlmFbTMFLMEjhIDHv6NmRNmf/x/F/5cxOiRvEoLByWYmOhp3cSRgUq/7/qoYV0MBAAAAIAdHYSUB4FLQkP5cCxrCATz/+5RkDAADcxrQ+e8ackTCep8wwjpL4TlL56RsgQ2T6HjEiTjmdytbVp+p2hSvFX/J3siqX5Wp2r5mJhZB/SmifjK/QQ4ShGCxzKeZDGcp/kktH8kDWWOSZDARPRv7gK6He3vFplnf/ISQ4UblSirr/7W5uvEVbi7d/41VMOCGZhBRugHYuN2QEgAmo6plMR15BTDpS6GyW+h+zjhlE8LMf//ITt//LrTQsNbb/J9Zyp169ismbG93VWFmoE0ymLyzqiiAgAXG5uD/P1BnCX472hAoSyXQ5JvjJEp2tNIkZx/G6bBA1KGgQYzpIzGm5IWHFI3Mrnvebeakn//f8j/pWaH1rsSqWc2dp0jnbn3/7JmdV7+rm4jPHhXFE1r0tJiYoAAAAigB0SlA5VjmyuiQgE4EkySaHa9QarZQzE+i/c44HSRySJ4CDjRhoytL7p/+PEeSed2CYQgcEgTaIoDtrrpKeaNEABAKbd2LYYyuPAvgvmUzBhOEiQkCUASwM4n/+5RkDwACrRjR+eZCQEOC2f4x5jYL0TlD56RriN8N7HyXiJ54Gw8X6M1cW+MDfWrsKucJQ0gMq/komUNiAq4FSIwOpfEowi0zG6KleQCSwEHCweBskbbnvsRfcri9EggAAUkBeGC1nNGwSq4XGArmaGnlPGbIccshyzql3zEm2iXAZItfIUAwLCoVDYKxffIQWDp2wsVDAJDsKevOnvQcxkqRgBAKSS4GO+X2ZRCBlqF/QtpvneXKjA4qgriVakmnNLSUvMmiVGtept5SCQ5tDuocjzRsk/bPpezir/nVJu2kc4xlwvbaEtJd6zQ6R3eZfPv/ZJ9m7oiBSzn3SsPUuzAigOuJgJs0MnJOxdG1Hos5k5GjucbkewcqlX//d9egcowOwg72yIVFgeHHACCQIp/9PT01NnhGAQAAAknKA6Tbgw7HGWOAnUc4qlQxWxVTQozhF1NqtN4r5ZNzwrSNPp7VsAAhMNBEATOaL/+InKoczbIhOQm8yucxCbkEwBj/+5RkJQACy03O+eEWUj8Cqd0kI2JK7FM957BJCP8LZrDEjRj7MQQulP8iNv1ZQ4OWjvqHfxoAAAVtoBJyKgSboha50SOlHFNhEvo0yk1IDQILHJd8pzLwyCCFsP8b6IUbJYLXxxLBnDxp1STleWZlv/9Kz3aKJGABkluAYT6bKlJ0SsMEFQhDZNG46mJhXjMyWnaEijV2W3UQQjhJ2y0PbgCxKEv/f+ooiGu9UlKa1tKv4sNhxYveU5D+e9J/2/3u9i4YA5osaQqZV7oIAAVOEC1I9By09EwqKkMtLA2RufTbvi1rZ3AWUsGCwYCCGdpMJPBVQLQqxvFCAWEaRqjziYSr/tU5CgK2lSZ5l0MQIByXbAOUTklQFwOgfB8rh4B4jOlhhg7ZuucQTkGoy6+ZAqKKQ6gWMbPkZmZ9al/+kwJlkVSkI3uaVC2PdDdkO2QyMxaaVttL+yKt1NKxBTFCCAVrowyW2stA1KFv0hbLb65ETygHpTFEK1a04Ng4gIb/+5RkOwAC0k7O+YMUUj6BiiwFgg3KmJ8zphhtQRKNZGBmJRA3zVydPlFXGVS////puxqodg5reZNm7/MndWf/JPWm/zFfXM98bBIBmkEAqijiJIAzdzxAOh6LS9CEgB3NmijZQuE95VFuWutlsK2FVMstBJuVY76LLWembjBBYkSAGFCwCSE1Ppa8UNIPf/rQVegNg4JAcJFg6bBbQAIAMCuSFKdNYIqoIFhkZHZCSAvBs6hSPpInc9z4qA4OHAHPHf+l0aFJ/6EAAV2ArBonPBCu1MQoShTe7XNf9XsZ9qpd+AAP+gZLrd1p3akdlU8FYXUqpYXEkAAVGvN3ewT7cvODAwWv/t31+k+EtuUdesnV7G0KUzixLoR06olmbZdiqiqzv7N7ttT6aftruhpizihYWJqUcutcZKiaIBXJKbYkBix6RiszxMK5sJ3Ztcpka/ndJlS85HzhllK4TzomBkODyvw6MKWqB1yAbBMTKNvY95k+RrRGFkLBABAgI4n/+5RkT4QSok5JyeYT4kUDee0Z40mKUJ8YyLypwOeOZChhDhBy6cO3WizCTU0ThVTKhLA6LJCj9VhvNbUxMr572iZ6pVQhrx7L5n3lEWWQSMJMsqkMdU/2ogTDpQ1LUgDmIw0+xSPp8q74NAETGx7fpCHkBgwgHtJJbfdIBQ2Ei9iiS4Fg8HgwECBAIpSoj4KVspVh+KNAkISWq9gdCp655vAt6qxRINC8/20T9M/zI5/3sr5eevDsXTYoZDpVDe4LaAc3X7C+k/mRXV/V5vK5X/MCgvHUGw6tbfym3UZ9VRnJVEgkcSR3dZmtOt37p7dv6f/T6V/5QuVKCHLFJbd+mxP/FHcjQI+/uXECJ7zhGKxohM9ZXlY1KlYdgNDNEOUMYLMaFMiPhVqvdmtZbF0KohuyOtfX+j/+n/xVc7/7fut6xwOQ9a6vx5ougb49A6BJJiQoymSK5RLTnwaC0KFVw9GzUl1d/2ZWq5kZlbpVkQ4EZ1WpHor+uT365V/7vT//+5Rkao9yt1FEAeY+EEBoWIAk4pQJATkOBZhRAQuSIZBzCXDoq+3/8Y3/2M/FBCAObWqHRAAtBiifAQCA1BRpVb52s2S5LI2Dq/8pdzkc9Eo10eK9QbhdwiNCt85vHP1ouZJ3FHtp77tE/0fZHon7N6oJwACADvQx9SohjjDiuogvjxhWFb55pURta2RhcxRyGZ73J0P0VvoiQ4ZlVaNv1djz1ZmtRGX9aKt2/33+1vszag1xXTcAbOWQBd6nCJkAAAwE50ngeCHKFx4NgkajxyDQGDg8gbAB82lgNsldzF0/I1VXDWjZv6losVd/pjqv+mkYxQAgLAqKmFTMqgPTSAlvGL6vsVEwoP4QoNGxYoxifXxK5OK3E9Raod2Xk6CZV263XWvqrscMz9Fa3b0ATfVXh3tQen8E8aMctpDNFg+tKkvaxhtKRI5UCFQOo+ei5Y3ApV5GBuyyL3V5hL1tIrGwRIlHhIqrvQBtZxSWLjrVaqwMSGQ1hqCNaJDGiFH/+5RkhwBSYU3DQUYS4DThKHsAIgQHeGkNgIhqgQQJ4NQAjCJAlFF/+Pt02b8lSSXzdgtLH4ihpv64/LHJp/ekvx66X+Hd5lMVFew/KbF2/CeuO7/xf903H92Cr0eRG0lKHlls5APGEG0b1MrTN/Pxtf92++3b1/ZC7yOuo1L/fUJr99PmOau1+DczWWohH8L0eh/nWTbo8/OvyZ/ccZuEf/+Rn/l/L/M//+ZEqKpH+ZFToqJ+iqi+i/yoi+ip9yhgYMh27OZUWpgoIEd1ITFaxUllRQWcDAaskNCYwCgJAlEQaBsJgsBQSlREGgbCYLBUBAUSiINB2dKnUZK3kSJ1948Y9LNCn/I9c763Wf1AVct8rUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5REtg5yOQ+/ACAYIkLiWBAEIy5G6UjKQIBcAPWAH5ARjShVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVACCU025+ZGfywyOy3//ksyP+XMmstIyNWCggQNHI1ls////WWRyMmVgYME6GTLJZ///2WWxyNWWSoZGrWyzL/9WVqCBOhkyhgYMI6GrBQUqFpoVFP9bDILCzOLiv/rFRYk//qF+LCrDKm/4o2sVFtbP6hdmLCsyoXUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5Rkjg/ygl8ruCAaQiiABWAAAAAAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU="
+      };
+    }, function (V, e) {}]);
+  });
+});
+var Camera$1 = unwrapExports(build);
+
+var DefaultToolbar$1 = (function (props) {
+  var className = props.className,
+      handlePhoto = props.handlePhoto,
+      handleFile = props.handleFile,
+      handleAudio = props.handleAudio,
+      rest = _objectWithoutProperties(props, ["className", "handlePhoto", "handleFile", "handleAudio"]);
+
+  var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      capturePic = _useState2[0],
+      setCapturePic = _useState2[1];
+
+  var fileUploader = React.useRef();
+
+  var _handleFileSelect = function _handleFileSelect(e) {
+    handleFile && handleFile(e);
+  };
+
+  var classes = genClasses.cEx(["chat-footer__toolbar", className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    justBetween: true,
+    className: classes
+  }, rest), capturePic && /*#__PURE__*/React__default.createElement(Camera$1, {
+    onTakePhoto: function onTakePhoto(x) {
+      handlePhoto && handlePhoto(x);
+      setCapturePic(false);
+    }
+  }), /*#__PURE__*/React__default.createElement("input", {
+    type: "file",
+    id: "file",
+    ref: fileUploader,
+    onChange: _handleFileSelect,
+    style: {
+      display: "none"
+    }
+  }), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
+    onClick: function onClick(x) {
+      return setCapturePic(true);
+    }
+  }, /*#__PURE__*/React__default.createElement(Camera, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
+    onClick: function onClick(_) {
+      return fileUploader.current.click();
+    }
+  }, /*#__PURE__*/React__default.createElement(AttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
+    onClick: handleAudio
+  }, /*#__PURE__*/React__default.createElement(Voice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
+});
+
+var ChatRecord = (function (props) {
+  var className = props.className,
+      recording = props.recording,
+      handleDelete = props.handleDelete,
+      handleSend = props.handleSend,
+      record = props.record,
+      rest = _objectWithoutProperties(props, ["className", "recording", "handleDelete", "handleSend", "record"]);
+
+  var classes = genClasses.cEx(['chat-footer__message-input', 'flex-row', 'align-stretch', className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, recording && /*#__PURE__*/React__default.createElement("div", null, "Enregistrement"), !recording && record && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("audio", {
+    src: record,
+    controls: true,
+    preload: 'metadata'
+  }), /*#__PURE__*/React__default.createElement("button", {
+    onClick: handleDelete,
+    className: "button button--send text icon--32 flex align-center just-center"
+  }, /*#__PURE__*/React__default.createElement(fa.FaRegTrashAlt, null)), /*#__PURE__*/React__default.createElement("button", {
+    onClick: handleSend,
+    className: "button button--send text icon--32 flex align-center just-center"
+  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
+});
+
+var __toolbar_prefix = 'toolbar';
+var __input_prefix = 'input';
+var __record_prefix = 'record';
 var ChatFooter = (function (props) {
   var className = props.className,
-      afterMainComponent = _objectWithoutProperties(props, ["className"]);
+      recording = props.recording,
+      record = props.record,
+      afterMainComponent = _objectWithoutProperties(props, ["className", "recording", "record"]);
 
   var classes = genClasses.cEx(['chat-footer', className]);
 
-  var _spreadObjectBeginWit = ReactUtils_10(__toolbar_header, afterMainComponent),
+  var _spreadObjectBeginWit = ReactUtils_11(__toolbar_prefix, afterMainComponent),
       _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
       toolbarProps = _spreadObjectBeginWit2[0],
       notSuitableForToolbar = _spreadObjectBeginWit2[1];
 
-  var _spreadObjectBeginWit3 = ReactUtils_10(__input_header, notSuitableForToolbar),
+  var _spreadObjectBeginWit3 = ReactUtils_11(__input_prefix, notSuitableForToolbar),
       _spreadObjectBeginWit4 = _slicedToArray(_spreadObjectBeginWit3, 2),
       inputProps = _spreadObjectBeginWit4[0],
-      rest = _spreadObjectBeginWit4[1];
+      notSuitableForInput = _spreadObjectBeginWit4[1];
 
-  return /*#__PURE__*/React__default.createElement("footer", _extends({
+  var _spreadObjectBeginWit5 = ReactUtils_11(__record_prefix, notSuitableForInput),
+      _spreadObjectBeginWit6 = _slicedToArray(_spreadObjectBeginWit5, 2),
+      recordProps = _spreadObjectBeginWit6[0],
+      rest = _spreadObjectBeginWit6[1];
+
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    column: true,
     className: classes
-  }, rest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_header, toolbarProps)), /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_header, inputProps)));
+  }, rest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_prefix, toolbarProps)), !recording && !record && /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_prefix, inputProps)), (recording || record) && /*#__PURE__*/React__default.createElement(ChatRecord, _extends({
+    recording: recording,
+    record: record
+  }, ReactUtils_5(__record_prefix, recordProps))));
 });
 
-var index$d = (function (props) {
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+const initState = {
+  isRecording: false,
+  recorder: null,
+  data: null
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'start':
+      return Object.assign(Object.assign({}, state), {
+        isRecording: true
+      });
+
+    case 'stop':
+      return Object.assign(Object.assign({}, state), {
+        isRecording: false
+      });
+
+    case 'startRecording':
+      return Object.assign(Object.assign({}, state), {
+        isRecording: true,
+        recorder: action.payload.recorder
+      });
+
+    default:
+      return state;
+  }
+};
+
+const useVoiceRecorder = cb => {
+  const [state, dispatch] = React.useReducer(reducer, initState);
+
+  const finishRecording = ({
+    data
+  }) => {
+    cb(data);
+  };
+
+  const start = () => __awaiter(void 0, void 0, void 0, function* () {
+    dispatch({
+      type: 'start'
+    });
+    const stream = yield navigator.mediaDevices.getUserMedia({
+      audio: true
+    });
+    const recorder = new MediaRecorder(stream);
+    dispatch({
+      type: 'startRecording',
+      payload: {
+        recorder
+      }
+    });
+    recorder.start();
+    recorder.addEventListener('dataavailable', finishRecording);
+  });
+
+  const stop = () => {
+    const recorder = state.recorder;
+    dispatch({
+      type: 'stop'
+    });
+
+    if (recorder) {
+      recorder.stop();
+      recorder.removeEventListener('dataavailable', finishRecording);
+    }
+  };
+
+  return {
+    start,
+    stop,
+    recorder: state.recorder,
+    isRecording: state.isRecording
+  };
+};
+
+var index$c = (function (props) {
   var autoscroll = props.autoscroll,
       dragAndDrop = props.dragAndDrop,
       handleChange = props.handleChange,
-      handleSubmit = props.handleSubmit;
+      handleSubmit = props.handleSubmit,
+      handlePhoto = props.handlePhoto,
+      handleFile = props.handleFile,
+      handleSound = props.handleSound;
   var remoteBadge = props.remoteBadge,
       remoteName = props.remoteName,
       remoteStatus = props.remoteStatus;
@@ -2459,6 +4257,18 @@ var index$d = (function (props) {
       _useState4 = _slicedToArray(_useState3, 2),
       inputValue = _useState4[0],
       setInputValue = _useState4[1];
+
+  var _useState5 = React.useState(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      record = _useState6[0],
+      setRecord = _useState6[1];
+
+  var _useVoiceRecorder = useVoiceRecorder(function (data) {
+    setRecord(window.URL.createObjectURL(data));
+  }),
+      isRecording = _useVoiceRecorder.isRecording,
+      stopRecording = _useVoiceRecorder.stop,
+      startRecording = _useVoiceRecorder.start;
 
   var _handleChange = function _handleChange(e) {
     setInputValue(e.target.value);
@@ -2485,10 +4295,18 @@ var index$d = (function (props) {
     if (chatRef.current && autoscroll && shouldAutoscroll) chatRef.current.scrollTop = chatRef.current.scrollHeight; //  chatRef.current.addEventListener('scroll',()=>console.log('scroll'))
   });
 
-  var _useState5 = React.useState(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      dragging = _useState6[0],
-      setDragging = _useState6[1];
+  var handleAudio = function handleAudio() {
+    if (!isRecording) {
+      startRecording();
+    } else {
+      stopRecording();
+    }
+  };
+
+  var _useState7 = React.useState(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      dragging = _useState8[0],
+      setDragging = _useState8[1];
 
   var handleDrag = function handleDrag(e) {
     console.log('handleDrag', e);
@@ -2566,7 +4384,19 @@ var index$d = (function (props) {
   }, /*#__PURE__*/React__default.createElement("div", {
     className: classesOverlay
   }, " ", /*#__PURE__*/React__default.createElement("h2", null, " lachez pour envoyer "), " ", /*#__PURE__*/React__default.createElement(md.MdCloudUpload, null)), props.children), /*#__PURE__*/React__default.createElement(ChatFooter, {
+    recording: isRecording,
+    record: record,
+    toolbarHandleAudio: handleAudio,
     inputHandleSubmit: _handleSubmit,
+    toolbarHandlePhoto: handlePhoto,
+    toolbarHandleFile: handleFile,
+    recordHandleDelete: function recordHandleDelete(x) {
+      return setRecord(null);
+    },
+    recordHandleSend: function recordHandleSend(_) {
+      handleSound(record);
+      setRecord(null);
+    },
     inputHandleChange: _handleChange,
     inputValue: inputValue
   }));
@@ -2598,7 +4428,7 @@ var Landing = (function (props) {
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
-var index$e = (function (props) {
+var index$d = (function (props) {
   var handleClick = props.handleClick,
       identity = props.identity;
 
@@ -2631,41 +4461,418 @@ var index$e = (function (props) {
   }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
 });
 
-var index$f = (function (props) {
+var index$e = (function (props) {
   var handleSubmit = props.handleSubmit;
   return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
     handleSubmit: handleSubmit
   }));
 });
 
-exports.ActiveCallBar = index$8;
+var LayoutGrid = (function (props) {
+  var className = props.className,
+      layout3 = props.layout3,
+      layout2 = props.layout2,
+      rest = _objectWithoutProperties(props, ["className", "layout3", "layout2"]);
+
+  var classes = genClasses.cEx(['layout-grid', className, function (_) {
+    return layout3 ? 'layout-grid--3r' : '';
+  }, function (_) {
+    return layout2 ? 'layout-grid--2r' : '';
+  }]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), props.children));
+});
+
+var _bem$3 = bem('video-call__toolbar'),
+    _bem2$2 = _slicedToArray(_bem$3, 3),
+    __base_class$3 = _bem2$2[0],
+    element$3 = _bem2$2[1],
+    modifier$3 = _bem2$2[2];
+
+var DefaultToolbar$2 = (function (props) {
+  var className = props.className,
+      microEnabled = props.microEnabled,
+      camEnabled = props.camEnabled,
+      handleChat = props.handleChat,
+      handleMicro = props.handleMicro,
+      handleCamera = props.handleCamera,
+      handleSwitch = props.handleSwitch,
+      rest = _objectWithoutProperties(props, ["className", "microEnabled", "camEnabled", "handleChat", "handleMicro", "handleCamera", "handleSwitch"]);
+
+  var _useState = React.useState(microEnabled === true || false),
+      _useState2 = _slicedToArray(_useState, 2),
+      _microEnabled = _useState2[0],
+      setMicroEnabled = _useState2[1];
+
+  var _useState3 = React.useState(camEnabled === true || false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      _cameraEnabled = _useState4[0],
+      setCameraEnabled = _useState4[1]; //const [preferredCam,setPreferredCam]     = useState(camDevice === true || false);
+
+
+  var _toggleMicro = function _toggleMicro() {
+    var newState = !_microEnabled;
+    setMicroEnabled(newState);
+    handleMicro && handleMicro(newState);
+  };
+
+  var _toggleCamera = function _toggleCamera() {
+    var newState = !_cameraEnabled;
+    setCameraEnabled(newState);
+    handleCamera && handleCamera(newState);
+  };
+
+  var classes = genClasses.cEx([__base_class$3, className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    justEvenly: true,
+    className: classes
+  }, rest), /*#__PURE__*/React__default.createElement(Button, {
+    fit: true,
+    navbar: true,
+    className: "icon--s",
+    onClick: handleChat
+  }, " ", /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Chat")), /*#__PURE__*/React__default.createElement(Button, {
+    fit: true,
+    navbar: true,
+    className: "icon--s",
+    onClick: _toggleMicro
+  }, _microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophone, null), !_microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophoneSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Micro")), /*#__PURE__*/React__default.createElement(Button, {
+    fit: true,
+    navbar: true,
+    className: "icon--s",
+    onClick: _toggleCamera
+  }, _cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideo, null), !_cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideoSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Camera")), /*#__PURE__*/React__default.createElement(Button, {
+    fit: true,
+    navbar: true,
+    className: "icon--s",
+    onClick: handleSwitch
+  }, /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Switch")));
+});
+
+var _bem$4 = bem('video-call'),
+    _bem2$3 = _slicedToArray(_bem$4, 3),
+    __base_class$4 = _bem2$3[0],
+    element$4 = _bem2$3[1],
+    modifier$4 = _bem2$3[2];
+var index$f = (function (_ref) {
+  var className = _ref.className,
+      Toolbar = _ref.Toolbar,
+      handleAnswer = _ref.handleAnswer,
+      handleDiscard = _ref.handleDiscard,
+      incoming = _ref.incoming,
+      rest = _objectWithoutProperties(_ref, ["className", "Toolbar", "handleAnswer", "handleDiscard", "incoming"]);
+
+  var classes = genClasses.cEx([__base_class$4, className]);
+
+  var _filterPropStartingWi = ReactUtils_11('video', rest),
+      _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
+      mainVideoProps = _filterPropStartingWi2[0],
+      notSuitableForVp = _filterPropStartingWi2[1];
+
+  var _filterPropStartingWi3 = ReactUtils_11('feedback', notSuitableForVp),
+      _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
+      feedbackVideoProps = _filterPropStartingWi4[0],
+      notSuitableForFb = _filterPropStartingWi4[1];
+
+  var _filterPropStartingWi5 = ReactUtils_11('toolbar', notSuitableForFb),
+      _filterPropStartingWi6 = _slicedToArray(_filterPropStartingWi5, 2),
+      toolbarProps = _filterPropStartingWi6[0],
+      notSuitableForToolbar = _filterPropStartingWi6[1];
+
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, notSuitableForToolbar), /*#__PURE__*/React__default.createElement(LayoutGrid, {
+    className: "layout-video-call"
+  }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    className: "position-relative"
+  }, /*#__PURE__*/React__default.createElement(Video, _extends({
+    autoPlay: true,
+    loop: true
+  }, ReactUtils_5('video', mainVideoProps))), /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    justEvenly: true,
+    className: "".concat(__base_class$4, "__controls")
+  }, incoming && /*#__PURE__*/React__default.createElement(Button, {
+    round: true,
+    success: true,
+    onClick: handleAnswer
+  }, /*#__PURE__*/React__default.createElement(md.MdCall, null)), /*#__PURE__*/React__default.createElement(Button, {
+    round: true,
+    failure: true,
+    onClick: handleDiscard
+  }, /*#__PURE__*/React__default.createElement(md.MdCallEnd, null)))), !Toolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar$2, ReactUtils_5('toolbar', toolbarProps))), /*#__PURE__*/React__default.createElement(Draggable, {
+    bounds: '.' + __base_class$4
+  }, /*#__PURE__*/React__default.createElement(Video, _extends({
+    preview: true,
+    autoPlay: true,
+    loop: true,
+    muted: true
+  }, ReactUtils_5('feedback', feedbackVideoProps)))));
+});
+
+var _bem$5 = bem('container-fullscreen'),
+    _bem2$4 = _slicedToArray(_bem$5, 3),
+    __base_class$5 = _bem2$4[0],
+    element$5 = _bem2$4[1],
+    modifier$5 = _bem2$4[2];
+
+var index$g = (function (props) {
+  var offset = props.offset,
+      className = props.className,
+      otherStyle = props.style,
+      rest = _objectWithoutProperties(props, ["offset", "className", "style"]);
+
+  if (!offset) {
+    offset = 0;
+  }
+
+  var _useState = React.useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      vh = _useState2[0],
+      setVh = _useState2[1];
+
+  var adapt = function adapt() {
+    setVh((window.innerHeight - offset) * 0.01);
+  };
+
+  React.useEffect(function () {
+    adapt();
+  }, []);
+  React.useEffect(function () {
+    window.addEventListener('resize', adapt);
+    return function () {
+      window.removeEventListener('resize', adapt);
+    };
+  }, []);
+  var classes = genClasses.cEx([__base_class$5, className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes,
+    style: _objectSpread2({
+      '--vh': "".concat(vh, "px")
+    }, otherStyle)
+  }, rest), props.children);
+});
+
+var _bem$6 = bem('container-stack'),
+    _bem2$5 = _slicedToArray(_bem$6, 3),
+    __base_class$6 = _bem2$5[0],
+    element$6 = _bem2$5[1],
+    modifier$6 = _bem2$5[2];
+
+var index$h = (function (props) {
+  var className = props.className,
+      baseKey = props.baseKey,
+      baseIndex = props.baseIndex,
+      rest = _objectWithoutProperties(props, ["className", "baseKey", "baseIndex"]);
+
+  var classes = genClasses.cEx([__base_class$6, className]);
+
+  var _baseIndex = baseIndex || 1000;
+
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, React__default.Children.toArray(props.children).map(function (children, idx) {
+    return React__default.cloneElement(children, {
+      className: genClasses.cEx([children.props.className, element$6('stacked')]),
+      key: "".concat(baseKey).concat(idx),
+      style: _objectSpread2({}, children.props.style, {
+        position: 'absolute',
+        zIndex: _baseIndex + idx
+      })
+    });
+  }));
+});
+
+var _bem$7 = bem('container-modal'),
+    _bem2$6 = _slicedToArray(_bem$7, 3),
+    __base_class$7 = _bem2$6[0],
+    element$7 = _bem2$6[1],
+    modifier$7 = _bem2$6[2];
+var index$i = (function (_ref) {
+  var _ref2;
+
+  var children = _ref.children,
+      debug = _ref.debug,
+      className = _ref.className,
+      cover = _ref.cover,
+      bottom = _ref.bottom,
+      relative = _ref.relative,
+      centered = _ref.centered,
+      fit = _ref.fit,
+      vcenter = _ref.vcenter,
+      hcenter = _ref.hcenter,
+      rest = _objectWithoutProperties(_ref, ["children", "debug", "className", "cover", "bottom", "relative", "centered", "fit", "vcenter", "hcenter"]);
+
+  var modalRef = React.useRef();
+
+  var adapt = function adapt() {
+    if (modalRef.current) {
+      var parentNode = modalRef.current.parentNode;
+      var modalRect = {
+        x: 0,
+        y: 0,
+        height: 0,
+        width: 0
+      };
+      var currentModalRect = modalRef.current.getBoundingClientRect();
+      var parentRect = modalRef.current.parentNode.getBoundingClientRect();
+      var windowRect = {
+        x: 0,
+        y: 0,
+        height: window.innerHeight,
+        width: window.innerWidth,
+        top: 0,
+        left: 0
+      };
+      if (debug) console.table({
+        parentRect: parentRect,
+        windowRect: windowRect
+      });
+      var refRect = relative ? parentRect : windowRect;
+
+      if (relative) {
+        parentNode.style.position = 'relative';
+      }
+
+      if (centered) {
+        modalRect.y = refRect.height / 2 - currentModalRect.height / 2;
+        modalRect.x = refRect.width / 2 - currentModalRect.width / 2;
+      }
+
+      if (vcenter) {
+        modalRect.y = refRect.height / 2 - currentModalRect.height / 2;
+      }
+
+      if (hcenter) {
+        modalRect.x = refRect.width / 2 - currentModalRect.width / 2;
+      }
+
+      if (debug) console.table({
+        refRect: refRect,
+        modalRect: modalRect
+      });
+
+      if (modalRect.y < 0) {
+        modalRect.y = 0;
+      }
+
+      if (!bottom) {
+        modalRef.current.style.top = "".concat(modalRect.y, "px");
+      }
+
+      modalRef.current.style.left = "".concat(modalRect.x, "px");
+    }
+  };
+
+  React.useEffect(function () {
+    adapt();
+  }, []);
+  React.useEffect(function () {
+    document.addEventListener('load', adapt);
+    window.addEventListener('resize', adapt);
+    return function () {
+      window.removeEventListener('resize', adapt);
+      document.removeEventListener('load', adapt);
+    };
+  }, []);
+  var classes = genClasses.cEx([__base_class$7, (_ref2 = {}, _defineProperty(_ref2, modifier$7('cover'), function (_) {
+    return cover;
+  }), _defineProperty(_ref2, modifier$7('centered'), function (_) {
+    return centered;
+  }), _defineProperty(_ref2, modifier$7('bottom'), function (_) {
+    return bottom;
+  }), _ref2), className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes,
+    ref: modalRef
+  }, rest), children);
+});
+
+var index$j = (function (props) {
+  var className = props.className,
+      rest = _objectWithoutProperties(props, ["className"]);
+
+  var classes = genClasses.cEx(['container', className]);
+  return /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), props.children);
+});
+
+var _bem$8 = bem('card'),
+    _bem2$7 = _slicedToArray(_bem$8, 3),
+    __base_class$8 = _bem2$7[0],
+    element$8 = _bem2$7[1],
+    modifier$8 = _bem2$7[2];
+var index$k = (function (_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      rest = _objectWithoutProperties(_ref, ["className", "children"]);
+
+  var classes = genClasses.cEx([__base_class$8, className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    justBetween: true,
+    column: true,
+    className: classes
+  }, rest), children);
+});
+
+var _bem$9 = bem('card-container'),
+    _bem2$8 = _slicedToArray(_bem$9, 3),
+    __base_class$9 = _bem2$8[0],
+    element$9 = _bem2$8[1],
+    modifier$9 = _bem2$8[2];
+var index$l = (function (_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      rest = _objectWithoutProperties(_ref, ["className", "children"]);
+
+  var classes = genClasses.cEx([__base_class$9, className]);
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+    cover: true,
+    centered: true,
+    className: classes
+  }, rest), children);
+});
+
+exports.ActiveCallBar = index$7;
 exports.Badge = Badge;
 exports.Button = Button;
-exports.Calling = index$5;
-exports.Chat = index$d;
+exports.Calling = index$6;
+exports.Card = index$k;
+exports.CardContainer = index$l;
+exports.Chat = index$c;
 exports.ChatBubble = index;
 exports.ChatHeader = ChatHeader;
 exports.ChatHeaderStatus = ChatHeaderStatus;
 exports.ChatHeaderToolbar = ChatHeaderToolbar;
-exports.CustomerLanding = index$e;
-exports.DebugPanel = index$9;
+exports.Container = index$j;
+exports.CustomerLanding = index$d;
+exports.DebugPanel = index$8;
 exports.Form = Form;
+exports.Fullscreen = index$g;
 exports.Header = Header;
 exports.HeaderBackButton = BackButton;
 exports.HeaderTitle = Title;
 exports.HeaderToolbar = Toolbar;
+exports.Icons = index$4;
 exports.Input = Input;
+exports.InputCheckbox = InputCheckbox;
 exports.Landing = Landing;
-exports.Loading = index$4;
-exports.MobileVHAdapter = index$7;
+exports.LayoutFlex = LayoutFlex;
+exports.LayoutGrid = LayoutGrid;
+exports.Loading = index$5;
+exports.MobileVHAdapter = index$g;
+exports.Modal = index$i;
 exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
-exports.OrganiserLanding = index$f;
+exports.OrganiserLanding = index$e;
 exports.Patient = index$2;
 exports.Select = index$3;
-exports.Sidebar = index$a;
-exports.SidebarList = index$b;
-exports.SidebarListItem = index$c;
-exports.Video = index$6;
-exports.VideoPreview = index$6;
+exports.Sidebar = index$9;
+exports.SidebarList = index$a;
+exports.SidebarListItem = index$b;
+exports.Stack = index$h;
+exports.Video = Video;
+exports.VideoCall = index$f;
+exports.VideoPreview = Video;
 exports.WaitingRoom = index$1;
 //# sourceMappingURL=index.js.map

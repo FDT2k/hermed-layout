@@ -17,7 +17,7 @@ export default props => {
       'video',
       className,
       {
-        'preview': _=> preview
+        'video--preview': _=> preview
       }
     ]
   )
@@ -29,7 +29,6 @@ export default props => {
     }
 
   },[srcObject])
-
 
 
   return (
