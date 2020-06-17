@@ -1,6 +1,6 @@
 {
   "name": "hermed-layout",
-  "version": "0.9.17",
+  "version": "0.9.18",
   "private": false,
   "main": "dist/cjs/index.js",
   "dependencies": {
@@ -58,13 +58,14 @@
     "@testing-library/user-event": "^7.1.2",
     "css-loader": "^3.4.2",
     "install-peers-cli": "^2.2.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "react-scripts": "3.4.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-includepaths": "^0.2.3",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-scss": "^2.1.0",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-scss": "^2.5.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3"
   }
