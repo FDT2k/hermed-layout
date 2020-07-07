@@ -10,9 +10,10 @@ var genClasses = require('@geekagency/gen-classes');
 var compositeJs = require('@geekagency/composite-js');
 var md = require('react-icons/md');
 var fa = require('react-icons/fa');
+var gi = require('react-icons/gi');
 var InputMask = _interopDefault(require('react-input-mask'));
-var formik = require('formik');
 var ReactLoading = _interopDefault(require('react-loading'));
+var Camera$1 = _interopDefault(require('react-html5-camera-photo'));
 var Draggable = _interopDefault(require('react-draggable'));
 
 var index = (function (props) {
@@ -37,6 +38,22 @@ var index = (function (props) {
     className: "chat-bubble__date"
   }, date || '-'));
 });
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -145,8 +162,20 @@ function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
@@ -181,7 +210,7 @@ function _unsupportedIterableToArray(o, minLen) {
   if (typeof o === "string") return _arrayLikeToArray(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(n);
+  if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
 
@@ -193,11 +222,13 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function unwrapExports (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -526,7 +557,12 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
 
   var match = curry(function (re, str) {
     return str.match(re);
-  }); // concat :: String -> String
+  });
+
+  var regex = function regex(str) {
+    return new RegExp(str);
+  }; // concat :: String -> String
+
 
   var concat = curry(function (a, b) {
     return a.concat(b);
@@ -636,6 +672,19 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
     return !x;
   };
 
+  var _OR_ = curry(function (a, b, x) {
+    return a(x) || b(x);
+  });
+
+  var _AND_ = curry(function (a, b, x) {
+    return a(x) && b(x);
+  });
+
+  var _NOT_ = curry(function (a, x) {
+    return !a(x);
+  }); //export const isStrictlyEqual = curry((value,item)=> value===item)
+
+
   var isStrictlyEqual = curry(function (value, item) {
     return value === item;
   });
@@ -656,7 +705,15 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   var is_type_function = is_type('function');
   var is_type_number = is_type('number');
   var is_undefined = is_type('undefined');
-  var is_type_bool = is_type('boolean'); //fucky number test in js can suck on this shit ..!..
+
+  var isNull = function isNull(x) {
+    return x === null;
+  };
+
+  var is_type_bool = is_type('boolean');
+
+  var isNil = _OR_(isNull, is_undefined); //fucky number test in js can suck on this shit ..!..
+
 
   var defaultTo = function defaultTo(val) {
     return compose(maybe(val, identity), Maybe.of);
@@ -720,12 +777,7 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
     }
   
   */
-
-  var spec = curry(function (obj, arg) {
-    return pipe(keys, map(function (x) {
-      return as_prop(x, obj[x](arg));
-    }), mergeAll)(obj);
-  }); //Object -> List
+  //Object -> List
 
   var enlist = curry(function (obj) {
     return pipe(keys, map(function (x) {
@@ -758,7 +810,10 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
 
   var filterNotEqual = compose(filter, isStrictlyNotEqual); // value => List => List
 
-  var filterEqual = compose(filter, isStrictlyEqual); // reduce an array of subObjects to a merged object of all subObjects
+  var filterEqual = compose(filter, isStrictlyEqual);
+  var indexOf = curry(function (v, a) {
+    return a.indexOf(v);
+  }); // reduce an array of subObjects to a merged object of all subObjects
 
   var reduceToObject = reduce({}, merge);
   /*Recursively call a Curried FN  with each array item of args
@@ -847,10 +902,93 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   });
   var safe_stack = curry(function (array, item) {
     return [item].concat(_toConsumableArray(array));
+  });
+  /*
+    if(cond is met, return right else return left)
+  */
+
+  var either = curry(function (cond, left, right, val) {
+    return cond(val) ? right(val) : left(val);
+  });
+  var eitherUndefined = either(is_undefined);
+
+  var _throw = function _throw(x) {
+    return function (val) {
+      throw new Error(x);
+    };
+  }; //interrupt everything
+
+
+  var eitherThrow = curry(function (cond, error) {
+    return either(cond, _throw(error), identity);
+  });
+  var tryCatcher = curry(function (catcher, tryer, arg) {
+    try {
+      return tryer(arg);
+    } catch (err) {
+      return catcher(arg, err);
+    }
+  });
+
+  var mergeAll = function mergeAll(list) {
+    return reduce({}, assign2, list);
+  };
+
+  var delete_list_item = curry(function (state, action) {
+    return filter(function (item) {
+      return item.id != action.payload;
+    }, state);
+  });
+  var add_list_item = curry(function (state, action) {
+    return [].concat(_toConsumableArray(state), [action.payload]);
+  });
+  var item_prop_is_equal = curry(function (prop, value, item) {
+    return item[prop] == value;
+  });
+  var add_to_list = curry(function (state, action) {
+    return [].concat(_toConsumableArray(state), [action.payload]);
+  }); // del_from_list :: List -> Object-> List
+
+  var del_from_list_by_prop_id = curry(function (state, action) {
+    return filter(function (item) {
+      return item.id != action.payload;
+    }, state);
+  }); // update_object :: Object->Object->Object
+
+  var update_list_by_prop_id = curry(function (list, itemIdValue, updateFn) {
+    return update_list(list, item_prop_is_equal('id', itemIdValue), updateFn);
+  }); // update_list :: List -> Fn -> Fn -> List
+
+  var update_list = curry(function (list, itemPredicate, updateFn) {
+    return list.map(function (item) {
+      return either(itemPredicate, identity, updateFn, item);
+    });
+  });
+  var propIsEqual = curry(function (prop, value, item) {
+    return item[prop] === value;
+  });
+  var propIsNotEqual = curry(function (prop, value, item) {
+    return item[prop] !== value;
+  });
+  var delByProp = curry(function (prop, list, val) {
+    return filter(propIsNotEqual(prop, val), list);
+  });
+  var delByPropId = delByProp('id');
+  var add = curry(function (list, item) {
+    return [].concat(_toConsumableArray(list), [item]);
+  });
+  var getByProp = curry(function (prop, list, val) {
+    return filter(propIsEqual(prop, val), list);
+  });
+  var update = curry(function (cond, val, list, fn) {
+    return map(either(cond(val), identity, fn))(list);
+  });
+  var updateIfPropEqual = curry(function (prop, val, list, fn) {
+    return update(propIsEqual(prop), val, list, fn);
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator  forever
+  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator .... forever !!
   //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
@@ -863,6 +1001,16 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
 
   var propMatch = curry(function (re, key) {
     return compose(test(re), prop(key));
+  });
+
+  var makeHasKey = function makeHasKey(k) {
+    return compose(function (x) {
+      return x !== -1;
+    }, indexOf(k), keys);
+  };
+
+  var hasKey = curry(function (k, o) {
+    return makeHasKey(k)(o);
   }); // Object -> Object -> Object 
 
   var matchReducer = function matchReducer(match) {
@@ -904,11 +1052,11 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
 
 
   var spreadFilterByKey = makeSpreadFilterByKey(keepMatching)(keepMatching);
-
-  var regex = function regex(str) {
-    return new RegExp(str);
-  };
-
+  var spec = curry(function (obj, arg) {
+    return pipe(keys, map(function (x) {
+      return as_prop(x, obj[x](arg));
+    }), mergeAll)(obj);
+  });
   var updateProp = curry(function (prop, obj, value) {
     return updateObject(obj, _defineProperty({}, prop, value));
   });
@@ -924,23 +1072,18 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   };
 
   var spreadObject = spreadFilterByKey;
-
-  var spreadObjectBeginWith = function spreadObjectBeginWith(str, obj) {
+  var spreadObjectBeginWith = curry(function (str, obj) {
     return spreadFilterByKey(beginWith(str))(obj);
-  };
-
-  var spreadObjectContaining = function spreadObjectContaining(str, obj) {
+  });
+  var spreadObjectContaining = curry(function (str, obj) {
     return spreadFilterByKey(contains(str))(obj);
-  };
-
-  var spreadObjectEndingWith = function spreadObjectEndingWith(str, obj) {
+  });
+  var spreadObjectEndingWith = curry(function (str, obj) {
     return spreadFilterByKey(endWith(str))(obj);
-  };
-
-  var spreadObjectPresentIn = function spreadObjectPresentIn(array, obj) {
+  });
+  var spreadObjectPresentIn = curry(function (array, obj) {
     return spreadFilterByKey(presentIn(array))(obj);
-  };
-
+  });
   var transformReplace = replace;
   var transformLowSnake = lcfirst;
 
@@ -967,10 +1110,9 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   }; // String -> Object ->Object
 
 
-  var forwardPropsRemovingHeader = function forwardPropsRemovingHeader(header, obj) {
+  var forwardPropsRemovingHeader = curry(function (header, obj) {
     return transformKeys(forwardPropsTransformer(header))(obj);
-  };
-
+  });
   exports.beginWith = beginWith;
   exports.contains = contains;
   exports.endWith = endWith;
@@ -978,7 +1120,6 @@ var ReactUtils = createCommonjsModule(function (module, exports) {
   exports.forwardPropsRemovingHeader = forwardPropsRemovingHeader;
   exports.forwardPropsTransformer = forwardPropsTransformer;
   exports.presentIn = presentIn;
-  exports.regex = regex;
   exports.replaceKeyReducer = replaceKeyReducer;
   exports.spreadObject = spreadObject;
   exports.spreadObjectBeginWith = spreadObjectBeginWith;
@@ -999,18 +1140,17 @@ var ReactUtils_4 = ReactUtils.equals;
 var ReactUtils_5 = ReactUtils.forwardPropsRemovingHeader;
 var ReactUtils_6 = ReactUtils.forwardPropsTransformer;
 var ReactUtils_7 = ReactUtils.presentIn;
-var ReactUtils_8 = ReactUtils.regex;
-var ReactUtils_9 = ReactUtils.replaceKeyReducer;
-var ReactUtils_10 = ReactUtils.spreadObject;
-var ReactUtils_11 = ReactUtils.spreadObjectBeginWith;
-var ReactUtils_12 = ReactUtils.spreadObjectContaining;
-var ReactUtils_13 = ReactUtils.spreadObjectEndingWith;
-var ReactUtils_14 = ReactUtils.spreadObjectPresentIn;
-var ReactUtils_15 = ReactUtils.transformKeys;
-var ReactUtils_16 = ReactUtils.transformLowSnake;
-var ReactUtils_17 = ReactUtils.transformProps;
-var ReactUtils_18 = ReactUtils.transformReplace;
-var ReactUtils_19 = ReactUtils.updateProp;
+var ReactUtils_8 = ReactUtils.replaceKeyReducer;
+var ReactUtils_9 = ReactUtils.spreadObject;
+var ReactUtils_10 = ReactUtils.spreadObjectBeginWith;
+var ReactUtils_11 = ReactUtils.spreadObjectContaining;
+var ReactUtils_12 = ReactUtils.spreadObjectEndingWith;
+var ReactUtils_13 = ReactUtils.spreadObjectPresentIn;
+var ReactUtils_14 = ReactUtils.transformKeys;
+var ReactUtils_15 = ReactUtils.transformLowSnake;
+var ReactUtils_16 = ReactUtils.transformProps;
+var ReactUtils_17 = ReactUtils.transformReplace;
+var ReactUtils_18 = ReactUtils.updateProp;
 
 var ObjectUtils = createCommonjsModule(function (module, exports) {
 
@@ -1225,8 +1365,7 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
 
   var match = curry(function (re, str) {
     return str.match(re);
-  }); // concat :: String -> String
-
+  });
   var concat = curry(function (a, b) {
     return a.concat(b);
   }); // append :: String -> String
@@ -1435,6 +1574,19 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
     return !x;
   };
 
+  var _OR_ = curry(function (a, b, x) {
+    return a(x) || b(x);
+  });
+
+  var _AND_ = curry(function (a, b, x) {
+    return a(x) && b(x);
+  });
+
+  var _NOT_ = curry(function (a, x) {
+    return !a(x);
+  }); //export const isStrictlyEqual = curry((value,item)=> value===item)
+
+
   var isStrictlyEqual = curry(function (value, item) {
     return value === item;
   });
@@ -1455,7 +1607,15 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   var is_type_function = is_type('function');
   var is_type_number = is_type('number');
   var is_undefined = is_type('undefined');
-  var is_type_bool = is_type('boolean'); //fucky number test in js can suck on this shit ..!..
+
+  var isNull = function isNull(x) {
+    return x === null;
+  };
+
+  var is_type_bool = is_type('boolean');
+
+  var isNil = _OR_(isNull, is_undefined); //fucky number test in js can suck on this shit ..!..
+
 
   var defaultTo = function defaultTo(val) {
     return compose(maybe(val, identity), Maybe.of);
@@ -1519,12 +1679,7 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
     }
   
   */
-
-  var spec = curry(function (obj, arg) {
-    return pipe(keys, map(function (x) {
-      return as_prop(x, obj[x](arg));
-    }), mergeAll)(obj);
-  }); //Object -> List
+  //Object -> List
 
   var enlist = curry(function (obj) {
     return pipe(keys, map(function (x) {
@@ -1557,7 +1712,10 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
 
   var filterNotEqual = compose(filter, isStrictlyNotEqual); // value => List => List
 
-  var filterEqual = compose(filter, isStrictlyEqual); // reduce an array of subObjects to a merged object of all subObjects
+  var filterEqual = compose(filter, isStrictlyEqual);
+  var indexOf = curry(function (v, a) {
+    return a.indexOf(v);
+  }); // reduce an array of subObjects to a merged object of all subObjects
 
   var reduceToObject = reduce({}, merge);
   /*Recursively call a Curried FN  with each array item of args
@@ -1646,10 +1804,93 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
   });
   var safe_stack = curry(function (array, item) {
     return [item].concat(_toConsumableArray(array));
+  });
+  /*
+    if(cond is met, return right else return left)
+  */
+
+  var either = curry(function (cond, left, right, val) {
+    return cond(val) ? right(val) : left(val);
+  });
+  var eitherUndefined = either(is_undefined);
+
+  var _throw = function _throw(x) {
+    return function (val) {
+      throw new Error(x);
+    };
+  }; //interrupt everything
+
+
+  var eitherThrow = curry(function (cond, error) {
+    return either(cond, _throw(error), identity);
+  });
+  var tryCatcher = curry(function (catcher, tryer, arg) {
+    try {
+      return tryer(arg);
+    } catch (err) {
+      return catcher(arg, err);
+    }
+  });
+
+  var mergeAll = function mergeAll(list) {
+    return reduce({}, assign2, list);
+  };
+
+  var delete_list_item = curry(function (state, action) {
+    return filter(function (item) {
+      return item.id != action.payload;
+    }, state);
+  });
+  var add_list_item = curry(function (state, action) {
+    return [].concat(_toConsumableArray(state), [action.payload]);
+  });
+  var item_prop_is_equal = curry(function (prop, value, item) {
+    return item[prop] == value;
+  });
+  var add_to_list = curry(function (state, action) {
+    return [].concat(_toConsumableArray(state), [action.payload]);
+  }); // del_from_list :: List -> Object-> List
+
+  var del_from_list_by_prop_id = curry(function (state, action) {
+    return filter(function (item) {
+      return item.id != action.payload;
+    }, state);
+  }); // update_object :: Object->Object->Object
+
+  var update_list_by_prop_id = curry(function (list, itemIdValue, updateFn) {
+    return update_list(list, item_prop_is_equal('id', itemIdValue), updateFn);
+  }); // update_list :: List -> Fn -> Fn -> List
+
+  var update_list = curry(function (list, itemPredicate, updateFn) {
+    return list.map(function (item) {
+      return either(itemPredicate, identity, updateFn, item);
+    });
+  });
+  var propIsEqual = curry(function (prop, value, item) {
+    return item[prop] === value;
+  });
+  var propIsNotEqual = curry(function (prop, value, item) {
+    return item[prop] !== value;
+  });
+  var delByProp = curry(function (prop, list, val) {
+    return filter(propIsNotEqual(prop, val), list);
+  });
+  var delByPropId = delByProp('id');
+  var add = curry(function (list, item) {
+    return [].concat(_toConsumableArray(list), [item]);
+  });
+  var getByProp = curry(function (prop, list, val) {
+    return filter(propIsEqual(prop, val), list);
+  });
+  var update = curry(function (cond, val, list, fn) {
+    return map(either(cond(val), identity, fn))(list);
+  });
+  var updateIfPropEqual = curry(function (prop, val, list, fn) {
+    return update(propIsEqual(prop), val, list, fn);
   }); // {a:b} -> a
   // {a:b, c:d} -> a
 
-  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator  forever
+  var key = compose(head, keys); //export const objectReduce = reduce({});  //<--- never do this unless you want to keep the accumulator .... forever !!
   //  String -> a -> Object -> Bool
 
   var isPropStrictlyEqual = curry(function (_prop, value, item) {
@@ -1662,6 +1903,16 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
 
   var propMatch = curry(function (re, key) {
     return compose(test(re), prop(key));
+  });
+
+  var makeHasKey = function makeHasKey(k) {
+    return compose(function (x) {
+      return x !== -1;
+    }, indexOf(k), keys);
+  };
+
+  var hasKey = curry(function (k, o) {
+    return makeHasKey(k)(o);
   }); // Object -> Object -> Object 
 
   var matchReducer = function matchReducer(match) {
@@ -1707,26 +1958,272 @@ var ObjectUtils = createCommonjsModule(function (module, exports) {
 
 
   var spreadFilterByKey = makeSpreadFilterByKey(keepMatching)(keepMatching);
+  var spec = curry(function (obj, arg) {
+    return pipe(keys, map(function (x) {
+      return as_prop(x, obj[x](arg));
+    }), mergeAll)(obj);
+  });
   exports.filterByKey = filterByKey;
+  exports.hasKey = hasKey;
   exports.isPropStrictlyEqual = isPropStrictlyEqual;
   exports.isPropStrictlyNotEqual = isPropStrictlyNotEqual;
   exports.keepMatching = keepMatching;
   exports.key = key;
+  exports.makeHasKey = makeHasKey;
   exports.makeSpreadFilterByKey = makeSpreadFilterByKey;
   exports.matchReducer = matchReducer;
   exports.propMatch = propMatch;
+  exports.spec = spec;
   exports.spreadFilterByKey = spreadFilterByKey;
 });
 unwrapExports(ObjectUtils);
 var ObjectUtils_1 = ObjectUtils.filterByKey;
-var ObjectUtils_2 = ObjectUtils.isPropStrictlyEqual;
-var ObjectUtils_3 = ObjectUtils.isPropStrictlyNotEqual;
-var ObjectUtils_4 = ObjectUtils.keepMatching;
-var ObjectUtils_5 = ObjectUtils.key;
-var ObjectUtils_6 = ObjectUtils.makeSpreadFilterByKey;
-var ObjectUtils_7 = ObjectUtils.matchReducer;
-var ObjectUtils_8 = ObjectUtils.propMatch;
-var ObjectUtils_9 = ObjectUtils.spreadFilterByKey;
+var ObjectUtils_2 = ObjectUtils.hasKey;
+var ObjectUtils_3 = ObjectUtils.isPropStrictlyEqual;
+var ObjectUtils_4 = ObjectUtils.isPropStrictlyNotEqual;
+var ObjectUtils_5 = ObjectUtils.keepMatching;
+var ObjectUtils_6 = ObjectUtils.key;
+var ObjectUtils_7 = ObjectUtils.makeHasKey;
+var ObjectUtils_8 = ObjectUtils.makeSpreadFilterByKey;
+var ObjectUtils_9 = ObjectUtils.matchReducer;
+var ObjectUtils_10 = ObjectUtils.propMatch;
+var ObjectUtils_11 = ObjectUtils.spec;
+var ObjectUtils_12 = ObjectUtils.spreadFilterByKey;
+
+var e = React__default.createElement;
+
+var bem = function bem(main) {
+  return [main, function (block) {
+    return "".concat(main, "__").concat(block);
+  }, function (modifier) {
+    return "".concat(main, "--").concat(modifier);
+  }];
+};
+
+var makeBem = function makeBem(current) {
+  return {
+    current: current,
+    block: function block(_block) {
+      return makeBem("".concat(current, "-").concat(_block));
+    },
+    element: function element(_element) {
+      return makeBem("".concat(current, "__").concat(_element));
+    },
+    modifier: function modifier(_modifier) {
+      return makeBem("".concat(current, "--").concat(_modifier));
+    }
+  };
+};
+var wrapComponent = function wrapComponent(Wrap) {
+  return function (Component) {
+    return function (_ref) {
+      var children = _ref.children,
+          rest = _objectWithoutProperties(_ref, ["children"]);
+
+      return /*#__PURE__*/React__default.createElement(Wrap, rest, /*#__PURE__*/React__default.createElement(Component, null, children));
+    };
+  };
+};
+var divElement = function divElement(_ref2) {
+  var children = _ref2.children,
+      rest = _objectWithoutProperties(_ref2, ["children"]);
+
+  return /*#__PURE__*/React__default.createElement("div", rest, children);
+};
+var baseElement = compositeJs.curry(function (_e, _ref5) {
+  var children = _ref5.children,
+      rest = _objectWithoutProperties(_ref5, ["children"]);
+
+  return e(_e, rest, children);
+});
+var modifiersToCeX = function modifiersToCeX(keyEnhancer, list, modifiers) {
+  return list.reduce(function (acc, item) {
+    var _type = _typeof(modifiers[item]);
+
+    acc[keyEnhancer(item, modifiers[item])] = function (_) {
+      return _type !== 'undefined' && modifiers[item] !== false;
+    };
+
+    return acc;
+  }, {});
+};
+var withBaseClass = function withBaseClass(BaseClass) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]);
+
+      var classes = genClasses.cEx([BaseClass, className]);
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+        className: classes
+      }));
+    };
+  };
+};
+var withBem = function withBem(bem) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]);
+
+      var classes = genClasses.cEx([bem.current, className]);
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+        className: classes
+      }));
+    };
+  };
+};
+var withModifiers = function withModifiers(namer, modifiers) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]); //ensure to preserve classNames
+
+
+      var _spreadObjectPresentI = ReactUtils_13(modifiers, rest),
+          _spreadObjectPresentI2 = _slicedToArray(_spreadObjectPresentI, 2),
+          presentModifiers = _spreadObjectPresentI2[0],
+          _props = _spreadObjectPresentI2[1];
+
+      var classes = genClasses.cEx([className, modifiersToCeX(namer, modifiers, presentModifiers)]);
+      return /*#__PURE__*/React__default.createElement(Component, _extends({
+        className: classes
+      }, _props));
+    };
+  };
+};
+var propsToCeX = function propsToCeX(keyEnhancer, list, modifiers) {
+  return list.reduce(function (acc, item) {
+    if (modifiers[item]) {
+      acc.push(function (_) {
+        return keyEnhancer(modifiers[item]);
+      });
+    }
+
+    return acc;
+  }, []);
+};
+var withTransformedProps = function withTransformedProps(namer, modifiers) {
+  return function (Component) {
+    return function (props) {
+      var className = props.className,
+          rest = _objectWithoutProperties(props, ["className"]); //ensure to preserve classNames
+
+
+      var _spreadObjectPresentI5 = ReactUtils_13(modifiers, rest),
+          _spreadObjectPresentI6 = _slicedToArray(_spreadObjectPresentI5, 2),
+          presentModifiers = _spreadObjectPresentI6[0],
+          _props = _spreadObjectPresentI6[1]; // console.error( enlist(presentModifiers),modifiers)
+      //console.log(propsToCeX(namer,modifiers, presentModifiers))
+
+
+      var classes = genClasses.cEx([className].concat(_toConsumableArray(propsToCeX(namer, modifiers, presentModifiers))));
+      return /*#__PURE__*/React__default.createElement(Component, _extends({
+        className: classes
+      }, _props));
+    };
+  };
+}; // apply modifiers if not in unless
+
+var applyModifiers = function applyModifiers(modifiers, unless) {
+  return function (Component) {
+    return function (props) {
+      var _m = modifiers;
+      /*
+          if(unless && unless.length>0){
+              const [presentModifiers, _props] = spreadObjectPresentIn(unless, props)
+      
+              _m = enlist(modifiers).reduce((acc,item)=>{
+                  console.log(presentModifiers)
+      
+                  return acc
+              },{})
+          }
+      */
+
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, _m, props));
+    };
+  };
+};
+
+var makePropsFilter = function makePropsFilter(prefix) {
+  return [ReactUtils_10(prefix), ReactUtils_5(prefix)];
+};
+
+var _bem = bem('layout-flex'),
+    _bem2 = _slicedToArray(_bem, 3),
+    __base_class = _bem2[0],
+    element = _bem2[1],
+    modifier = _bem2[2];
+var LayoutFlex = (function (props) {
+  var _ref;
+
+  var className = props.className,
+      cover = props.cover,
+      centered = props.centered,
+      alignCenter = props.alignCenter,
+      alignStretch = props.alignStretch,
+      alignStart = props.alignStart,
+      justStretch = props.justStretch,
+      justBetween = props.justBetween,
+      justAround = props.justAround,
+      justEvenly = props.justEvenly,
+      justCenter = props.justCenter,
+      justStart = props.justStart,
+      justEnd = props.justEnd,
+      contentStart = props.contentStart,
+      column = props.column,
+      columnReverse = props.columnReverse,
+      row = props.row,
+      rowReverse = props.rowReverse,
+      wrap = props.wrap,
+      nowrap = props.nowrap,
+      wrapReverse = props.wrapReverse,
+      rest = _objectWithoutProperties(props, ["className", "cover", "centered", "alignCenter", "alignStretch", "alignStart", "justStretch", "justBetween", "justAround", "justEvenly", "justCenter", "justStart", "justEnd", "contentStart", "column", "columnReverse", "row", "rowReverse", "wrap", "nowrap", "wrapReverse"]);
+
+  var classes = genClasses.cEx([__base_class, (_ref = {}, _defineProperty(_ref, modifier('between'), function (_) {
+    return justBetween;
+  }), _defineProperty(_ref, modifier('evenly'), function (_) {
+    return justEvenly;
+  }), _defineProperty(_ref, modifier('center'), function (_) {
+    return justCenter;
+  }), _defineProperty(_ref, modifier('stretch'), function (_) {
+    return justStretch;
+  }), _defineProperty(_ref, modifier('around'), function (_) {
+    return justAround;
+  }), _defineProperty(_ref, modifier('start'), function (_) {
+    return justStart;
+  }), _defineProperty(_ref, modifier('end'), function (_) {
+    return justEnd;
+  }), _defineProperty(_ref, modifier('column'), function (_) {
+    return column;
+  }), _defineProperty(_ref, modifier('column-reverse'), function (_) {
+    return columnReverse;
+  }), _defineProperty(_ref, modifier('row-reverse'), function (_) {
+    return rowReverse;
+  }), _defineProperty(_ref, modifier('align-stretch'), function (_) {
+    return alignStretch;
+  }), _defineProperty(_ref, modifier('align-center'), function (_) {
+    return alignCenter;
+  }), _defineProperty(_ref, modifier('align-start'), function (_) {
+    return alignStart;
+  }), _defineProperty(_ref, modifier('centered'), function (_) {
+    return centered;
+  }), _defineProperty(_ref, modifier('cover'), function (_) {
+    return cover;
+  }), _defineProperty(_ref, modifier('wrap'), function (_) {
+    return wrap;
+  }), _defineProperty(_ref, modifier('nowrap'), function (_) {
+    return nowrap;
+  }), _defineProperty(_ref, modifier('wrap-reverse'), function (_) {
+    return wrapReverse;
+  }), _defineProperty(_ref, modifier('content-start'), function (_) {
+    return contentStart;
+  }), _ref), className]);
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+    className: classes
+  }, rest), props.children));
+});
 
 var DefaultContext = {
   color: undefined,
@@ -1807,109 +2304,113 @@ function IconBase(props) {
 }
 
 // THIS FILE IS AUTO GENERATED
-var GiHamburgerMenu=function(props){return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 512 512"},"child":[{"tag":"path","attr":{"d":"M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"}}]})(props);};GiHamburgerMenu.displayName="GiHamburgerMenu";
-
-var bem = function bem(main) {
-  return [main, function (block) {
-    return "".concat(main, "__").concat(block);
-  }, function (modifier) {
-    return "".concat(main, "--").concat(modifier);
-  }];
+var TiWarning = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "version": "1.2",
+      "baseProfile": "tiny",
+      "viewBox": "0 0 24 24"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "d": "M21.171 15.398l-5.912-9.854c-.776-1.293-1.963-2.033-3.259-2.033s-2.483.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83.636 1.126 1.878 1.772 3.406 1.772h12c1.528 0 2.77-.646 3.406-1.771.637-1.125.551-2.521-.235-3.831zm-9.171 2.151c-.854 0-1.55-.695-1.55-1.549 0-.855.695-1.551 1.55-1.551s1.55.696 1.55 1.551c0 .854-.696 1.549-1.55 1.549zm1.633-7.424c-.011.031-1.401 3.468-1.401 3.468-.038.094-.13.156-.231.156s-.193-.062-.231-.156l-1.391-3.438c-.09-.233-.129-.443-.129-.655 0-.965.785-1.75 1.75-1.75s1.75.785 1.75 1.75c0 .212-.039.422-.117.625z"
+      }
+    }]
+  })(props);
 };
-var modifiersToCeX = function modifiersToCeX(keyEnhancer, list, modifiers) {
-  return list.reduce(function (acc, item) {
-    acc[keyEnhancer(item)] = function (_) {
-      return modifiers[item] === true;
-    };
+TiWarning.displayName = "TiWarning";
 
-    return acc;
-  }, {});
+// THIS FILE IS AUTO GENERATED
+var GoGear = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "viewBox": "0 0 14 16"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "fillRule": "evenodd",
+        "d": "M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"
+      }
+    }]
+  })(props);
 };
-var withBaseClass = function withBaseClass(BaseClass) {
-  return function (Component) {
-    return function (props) {
-      var className = props.className,
-          rest = _objectWithoutProperties(props, ["className"]);
-
-      var classes = genClasses.cEx([BaseClass, className]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
-        className: classes
-      }));
-    };
-  };
+GoGear.displayName = "GoGear";
+var GoKebabVertical = function (props) {
+  return GenIcon({
+    "tag": "svg",
+    "attr": {
+      "viewBox": "0 0 3 16"
+    },
+    "child": [{
+      "tag": "path",
+      "attr": {
+        "fillRule": "evenodd",
+        "d": "M0 2.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm0 5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zM1.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+      }
+    }]
+  })(props);
 };
-var withModifiers = function withModifiers(namer, modifiers) {
-  return function (Component) {
-    return function (props) {
-      var className = props.className,
-          rest = _objectWithoutProperties(props, ["className"]); //ensure to preserve classNames
+GoKebabVertical.displayName = "GoKebabVertical";
 
-
-      var _spreadObjectPresentI = ReactUtils_14(modifiers, rest),
-          _spreadObjectPresentI2 = _slicedToArray(_spreadObjectPresentI, 2),
-          presentModifiers = _spreadObjectPresentI2[0],
-          _props = _spreadObjectPresentI2[1];
-
-      var classes = genClasses.cEx([className, modifiersToCeX(namer, modifiers, presentModifiers)]);
-      return /*#__PURE__*/React__default.createElement("div", _extends({
-        className: classes
-      }, _props), /*#__PURE__*/React__default.createElement(Component, null));
-    };
-  };
+var CLASSES = {
+  BUTTON: 'button',
+  BADGE: 'badge-dot',
+  ICON: 'icon',
+  SIDEBAR: 'sidebar'
 };
-var applyModifiers = function applyModifiers(modifiers) {
-  return function (Component) {
-    return function (props) {
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, modifiers, props));
-    };
-  };
-};
+var SIZE_PROPS = ['xs', 's', 'm', 'l', 'xl'];
+var STATE_PROPS = ['red', 'orange', 'green', 'gray'];
 
-var _bem = bem('layout-flex'),
-    _bem2 = _slicedToArray(_bem, 3),
-    __base_class = _bem2[0],
-    element = _bem2[1],
-    modifier = _bem2[2];
-var LayoutFlex = (function (props) {
-  var _ref;
+var _bem$1 = bem(CLASSES.ICON),
+    _bem2$1 = _slicedToArray(_bem$1, 3),
+    __base_class$1 = _bem2$1[0],
+    element$1 = _bem2$1[1],
+    modifier$1 = _bem2$1[2];
 
-  var className = props.className,
-      cover = props.cover,
-      centered = props.centered,
-      alignCenter = props.alignCenter,
-      alignStretch = props.alignStretch,
-      alignTop = props.alignTop,
-      justBetween = props.justBetween,
-      justAround = props.justAround,
-      justEvenly = props.justEvenly,
-      justCenter = props.justCenter,
-      column = props.column,
-      rest = _objectWithoutProperties(props, ["className", "cover", "centered", "alignCenter", "alignStretch", "alignTop", "justBetween", "justAround", "justEvenly", "justCenter", "column"]);
+var withIconsModifiers = compositeJs.compose(withBaseClass(__base_class$1), withModifiers(function (x) {
+  return modifier$1(x);
+}, SIZE_PROPS), wrapComponent(LayoutFlex));
+var Hamburger = withIconsModifiers(gi.GiHamburgerMenu);
+var Warning = withIconsModifiers(TiWarning);
+var Call = withIconsModifiers(md.MdCall);
+var CallEnd = withIconsModifiers(md.MdCallEnd);
+var ArrowForward = withIconsModifiers(md.MdArrowForward);
+var ArrowBack = withIconsModifiers(md.MdArrowBack);
+var Camera = withIconsModifiers(md.MdCameraAlt);
+var AttachFile = withIconsModifiers(md.MdAttachFile);
+var Voice = withIconsModifiers(md.MdKeyboardVoice);
+var Videocam = withIconsModifiers(md.MdVideocam);
+var PersonAdd = withIconsModifiers(md.MdPersonAdd);
+var LocalPhone = withIconsModifiers(md.MdLocalPhone);
+var Trash = withIconsModifiers(fa.FaRegTrashAlt);
+var PowerOff = withIconsModifiers(fa.FaPowerOff);
+var Kebab = withIconsModifiers(GoKebabVertical);
+var Gear = withIconsModifiers(GoGear);
+var Upload = withIconsModifiers(md.MdCloudUpload);
 
-  var classes = genClasses.cEx([__base_class, (_ref = {}, _defineProperty(_ref, modifier('between'), function (_) {
-    return justBetween;
-  }), _defineProperty(_ref, modifier('evenly'), function (_) {
-    return justEvenly;
-  }), _defineProperty(_ref, modifier('center'), function (_) {
-    return justCenter;
-  }), _defineProperty(_ref, modifier('around'), function (_) {
-    return justAround;
-  }), _defineProperty(_ref, modifier('column'), function (_) {
-    return column;
-  }), _defineProperty(_ref, modifier('align-stretch'), function (_) {
-    return alignStretch;
-  }), _defineProperty(_ref, modifier('align-center'), function (_) {
-    return alignCenter;
-  }), _defineProperty(_ref, modifier('align-top'), function (_) {
-    return alignTop;
-  }), _defineProperty(_ref, modifier('centered'), function (_) {
-    return centered;
-  }), _defineProperty(_ref, modifier('cover'), function (_) {
-    return cover;
-  }), _ref), className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
-  }, rest), props.children));
+var index$1 = /*#__PURE__*/Object.freeze({
+__proto__: null,
+Warning: Warning,
+Call: Call,
+CallEnd: CallEnd,
+ArrowForward: ArrowForward,
+ArrowBack: ArrowBack,
+Camera: Camera,
+AttachFile: AttachFile,
+Voice: Voice,
+Videocam: Videocam,
+PersonAdd: PersonAdd,
+LocalPhone: LocalPhone,
+Trash: Trash,
+PowerOff: PowerOff,
+Kebab: Kebab,
+Gear: Gear,
+Hamburger: Hamburger,
+Upload: Upload
 });
 
 var Headline = withBaseClass('headline');
@@ -1918,22 +2419,6 @@ var Layout = applyModifiers({
 });
 var enhance = compositeJs.compose(Layout, Headline);
 var Header = enhance(LayoutFlex);
-
-var Content = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline__content", "flex-row", "align-center", className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, props.children);
-});
-
-var Title = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement("h2", null, props.children));
-});
 
 var Button = (function (props) {
   var className = props.className,
@@ -1986,166 +2471,867 @@ var Button = (function (props) {
   }, rest), props.children);
 });
 
-// THIS FILE IS AUTO GENERATED
-var GoGear = function (props) {
-  return GenIcon({
-    "tag": "svg",
-    "attr": {
-      "viewBox": "0 0 14 16"
-    },
-    "child": [{
-      "tag": "path",
-      "attr": {
-        "fillRule": "evenodd",
-        "d": "M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"
-      }
-    }]
-  })(props);
-};
-GoGear.displayName = "GoGear";
-var GoKebabVertical = function (props) {
-  return GenIcon({
-    "tag": "svg",
-    "attr": {
-      "viewBox": "0 0 3 16"
-    },
-    "child": [{
-      "tag": "path",
-      "attr": {
-        "fillRule": "evenodd",
-        "d": "M0 2.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm0 5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zM1.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-      }
-    }]
-  })(props);
-};
-GoKebabVertical.displayName = "GoKebabVertical";
-
-var Toolbar = (function (props) {
-  var className = props.className;
-  var classes = genClasses.cEx(["headline__tool-box", "flex-row", className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, props.children);
-});
-
 var DefaultToolbar = (function (props) {
   var className = props.className,
       handleAdd = props.handleAdd,
       handleConfig = props.handleConfig,
       handleShutdown = props.handleShutdown;
   var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(Toolbar, {
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, {
     className: classes
   }, /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
+    navbar: true,
     onClick: handleAdd
-  }, /*#__PURE__*/React__default.createElement(md.MdPersonAdd, null)), /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
+  }, /*#__PURE__*/React__default.createElement(PersonAdd, null)), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleConfig
-  }, /*#__PURE__*/React__default.createElement(GoGear, null)), /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
+  }, /*#__PURE__*/React__default.createElement(Gear, null)), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
     onClick: handleShutdown
-  }, /*#__PURE__*/React__default.createElement(fa.FaPowerOff, null)));
+  }, /*#__PURE__*/React__default.createElement(PowerOff, null)));
 });
 
-var index$1 = (function (props) {
+var Content = function Content(props) {
+  var children = props.children,
+      handleClick = props.handleClick,
+      rest = _objectWithoutProperties(props, ["children", "handleClick"]);
+
+  return /*#__PURE__*/React__default.createElement("section", rest, children, React__default.Children.toArray(children).length === 0 && /*#__PURE__*/React__default.createElement("div", {
+    className: "empty-list"
+  }, "Aucun contact", /*#__PURE__*/React__default.createElement(Button, {
+    onClick: handleClick
+  }, "Inviter un contact")));
+};
+
+var Header$1 = function Header$1(props) {
+  var className = props.className,
+      handleBack = props.handleBack,
+      title = props.title,
+      Toolbar = props.Toolbar,
+      displayToolbar = props.displayToolbar,
+      rest = _objectWithoutProperties(props, ["className", "handleBack", "title", "Toolbar", "displayToolbar"]);
+
+  return /*#__PURE__*/React__default.createElement(Header, {
+    className: className
+  }, /*#__PURE__*/React__default.createElement(LayoutFlex, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
+    onClick: handleBack
+  }, /*#__PURE__*/React__default.createElement(Hamburger, null)), /*#__PURE__*/React__default.createElement("h2", null, title)), Toolbar && displayToolbar && /*#__PURE__*/React__default.createElement(Toolbar, rest) || displayToolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar, rest));
+};
+
+var View = function View(props) {
   var title = props.title,
-      className = props.className,
       handleBack = props.handleBack,
       Toolbar = props.Toolbar,
-      defaultToolbar = props.defaultToolbar,
-      rest = _objectWithoutProperties(props, ["title", "className", "handleBack", "Toolbar", "defaultToolbar"]);
+      handleNewGuest = props.handleNewGuest,
+      displayToolbar = props.displayToolbar,
+      rest = _objectWithoutProperties(props, ["title", "handleBack", "Toolbar", "handleNewGuest", "displayToolbar"]);
 
-  var classes = genClasses.cEx(["waiting-room", className]);
+  var _filterPropStartingWi = ReactUtils_10('toolbar', rest),
+      _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
+      toolbarProps = _filterPropStartingWi2[0],
+      remaining = _filterPropStartingWi2[1];
 
-  var _spreadObjectBeginWit = ReactUtils_11('toolbar', rest),
-      _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
-      toolbarProps = _spreadObjectBeginWit2[0],
-      remaining = _spreadObjectBeginWit2[1];
-
-  return /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
-  }, remaining), /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(Content, null, /*#__PURE__*/React__default.createElement(Button, {
-    toolbar: true,
-    onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(GiHamburgerMenu, null)), /*#__PURE__*/React__default.createElement(Title, null, title)), Toolbar && /*#__PURE__*/React__default.createElement(Toolbar, toolbarProps) || defaultToolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar, toolbarProps)), /*#__PURE__*/React__default.createElement("section", {
-    className: "content"
+  return /*#__PURE__*/React__default.createElement("div", remaining, /*#__PURE__*/React__default.createElement(WaitingRoomHeader, _extends({}, toolbarProps, {
+    title: title,
+    handleBack: handleBack,
+    Toolbar: Toolbar,
+    displayToolbar: displayToolbar
+  })), /*#__PURE__*/React__default.createElement(WaitingRoomContent, {
+    handleClick: handleNewGuest
   }, props.children));
-});
+};
 
-var Badge = (function (props) {
-  var className = props.className,
-      _medium = props.medium,
-      status = props.status,
-      rest = _objectWithoutProperties(props, ["className", "medium", "status"]);
+var _bem$2 = bem('waiting-room'),
+    _bem2$2 = _slicedToArray(_bem$2, 3),
+    __base_class$2 = _bem2$2[0],
+    element$2 = _bem2$2[1],
+    modifier$2 = _bem2$2[2];
 
-  var red = rest.red,
-      orange = rest.orange,
-      green = rest.green,
-      veryRest = _objectWithoutProperties(rest, ["red", "orange", "green"]);
+var __content_class = element$2('content');
 
-  var classes = genClasses.cEx(['badge-dot', {
-    'medium': function medium(_) {
-      return _medium === true;
+var __header_class = element$2('header');
+
+var WaitingRoomContent = compositeJs.compose(withBaseClass(__content_class))(Content);
+var WaitingRoomHeader = compositeJs.compose(withBaseClass(__header_class))(Header$1);
+var WaitingRoom = compositeJs.compose(withBaseClass(__base_class$2))(View);
+
+var _bem$3 = bem(CLASSES.BADGE),
+    _bem2$3 = _slicedToArray(_bem$3, 3),
+    BASE_CLASS = _bem2$3[0],
+    element$3 = _bem2$3[1],
+    modifier$3 = _bem2$3[2];
+
+var withBadgeModifiers = compositeJs.compose(withModifiers(function (x) {
+  return modifier$3(x);
+}, STATE_PROPS), withModifiers(function (x) {
+  return modifier$3(x);
+}, SIZE_PROPS));
+var enhance$1 = compositeJs.compose(withBaseClass(BASE_CLASS), // transform status props to modifier
+withTransformedProps(function (x) {
+  return modifier$3(x);
+}, ['status']), withBadgeModifiers, applyModifiers({
+  'centered': true
+}));
+var Badge = enhance$1(LayoutFlex);
+
+var Geometry = createCommonjsModule(function (module, exports) {
+
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+
+  function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
     }
-  }, function (_) {
-    if (red) return 'red';
-    if (orange) return 'orange';
-    if (green) return 'green';
-  }, function (_) {
-    return status;
-  }, className]);
-  return /*#__PURE__*/React__default.createElement("span", _extends({
-    className: classes
-  }, veryRest), props.children);
+
+    return _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+      return arr2;
+    }
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+  /**
+   * Compose several unary function into one function. Execution is done from right to left
+   *
+   * @func
+   * @category Function
+   * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
+   * @param {...Function} ...functions The functions to compose
+   * @return {Function}
+   */
+
+
+  var compose = function compose() {
+    for (var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++) {
+      funcs[_key] = arguments[_key];
+    }
+
+    if (funcs.length === 0) {
+      return function (arg) {
+        return arg;
+      };
+    }
+
+    if (funcs.length === 1) {
+      return funcs[0];
+    }
+
+    return funcs.reduce(function (a, b) {
+      return function () {
+        return a(b.apply(void 0, arguments));
+      };
+    });
+  };
+  /**
+   * Compose several unary function into one function. Execution is done left to right
+   *
+   * @func
+   * @category Function
+   * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
+   * @param {...Function} ...functions The functions to compose
+   * @return {Function}
+   */
+
+
+  var pipe = function pipe() {
+    for (var _len2 = arguments.length, funcs = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    if (funcs.length === 0) {
+      return function (arg) {
+        return arg;
+      };
+    }
+
+    if (funcs.length === 1) {
+      return funcs[0];
+    }
+
+    return funcs.reduce(function (a, b) {
+      return function () {
+        return b(a.apply(void 0, arguments));
+      };
+    });
+  };
+  /**
+  * The core of curry
+  *
+  * @func
+  * @category Function
+  * @sig Function -> Number -> Function -> ...Arguments -> Function
+  * @param {Function}
+  * @param {Integer}
+  * @param {Function}
+  * @param {...Any}
+  * @return {Function}
+  
+  */
+
+
+  var callCurry = function callCurry(namedCurryFunction) {
+    return function (arity) {
+      return function (fn) {
+        return function () {
+          for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+            args[_key3] = arguments[_key3];
+          }
+
+          if (args.length < arity) {
+            return namedCurryFunction.bind.apply(namedCurryFunction, [null].concat(args));
+          }
+
+          return fn.call.apply(fn, [null].concat(args));
+        };
+      };
+    };
+  };
+  /**
+   * Curryify a function. Allow the function to be called with less parameters that it needs and return a function with the
+   * remaining parameters
+   *
+   * @func
+   * @category Function
+   * @sig ((a, b, ...) -> c) -> a -> b -> ... -> c
+   * @param {Function} function the function to currify
+   * @return {Function}
+   */
+
+
+  var curry = function curry(fn) {
+    var arity = fn.length;
+    return function $curry() {
+      return callCurry($curry)(arity)(fn).apply(void 0, arguments);
+    };
+  }; // curryN :: ((a, b, ...),(a, b, ...)) ->(a, b, ...) -> c) -> a -> b -> ... -> c
+
+  /**
+   * Identity function
+   *
+   * @func
+   * @category Function
+   * @sig
+   * @param {Any}
+   * @return {Any}
+   * @see compose
+   * @see diverge
+   *
+   */
+
+
+  var identity = function identity(x) {
+    return x;
+  }; // flip :: ((a,b)->c)  -> a -> b -> (b,a) -> c
+  // flip :: (a -> b -> c) -> b -> a -> c
+
+  /**
+   * flip two arguments of a function
+   *
+   * @func
+   * @category Function
+   * @sig ( FN -> b -> c)  ->
+   * @param {Function}
+   * @return {Curry}
+   * @see compose
+   * @see curry
+   *
+   */
+
+
+  var flip = curry(function (fn, a, b) {
+    return fn(b, a);
+  }); // map :: fn f => (a -> b) -> f a -> f b
+  // map :: Functor f => (a -> b) -> f a -> f b
+
+  var map = curry(function (fn, f) {
+    return f.map(fn);
+  }); // join :: Monad m => m (m a) -> m a
+
+  var maybe = curry(function (value, fn, functor) {
+    if (functor.isNothing) {
+      return value;
+    }
+
+    return fn(functor.$value);
+  });
+
+  var Maybe = /*#__PURE__*/function () {
+    _createClass(Maybe, [{
+      key: "isNothing",
+      get: function get() {
+        return this.$value === null || this.$value === undefined;
+      }
+    }, {
+      key: "isJust",
+      get: function get() {
+        return !this.isNothing;
+      }
+    }]);
+
+    function Maybe(x) {
+      _classCallCheck(this, Maybe);
+
+      this.$value = x;
+    }
+    /*[util.inspect.custom]() {
+      return this.isNothing ? 'Nothing' : `Just(${inspect(this.$value)})`;
+    }*/
+    // ----- Pointed Maybe
+
+
+    _createClass(Maybe, [{
+      key: "map",
+      // ----- Functor Maybe
+      value: function map(fn) {
+        return this.isNothing ? this : Maybe.of(fn(this.$value));
+      } // ----- Applicative Maybe
+
+    }, {
+      key: "ap",
+      value: function ap(f) {
+        return this.isNothing ? this : f.map(this.$value);
+      } // ----- Monad Maybe
+
+    }, {
+      key: "chain",
+      value: function chain(fn) {
+        return this.map(fn).join();
+      }
+    }, {
+      key: "join",
+      value: function join() {
+        return this.isNothing ? this : this.$value;
+      } // ----- Traversable Maybe
+
+    }, {
+      key: "sequence",
+      value: function sequence(of) {
+        return this.traverse(of, identity);
+      }
+    }, {
+      key: "traverse",
+      value: function traverse(of, fn) {
+        return this.isNothing ? of(this) : fn(this.$value).map(Maybe.of);
+      }
+    }], [{
+      key: "of",
+      value: function of(x) {
+        return new Maybe(x);
+      }
+    }]);
+
+    return Maybe;
+  }();
+
+  var trace = curry(function (tag, value) {
+    console.log(tag, value);
+    return value;
+  });
+  var trace_keys = curry(function (tag, value) {
+    console.log(tag, Object.keys(value));
+    return value;
+  });
+  var supertrace = curry(function (prefix, tag, value) {
+    return trace(prefix + ' ' + tag, value);
+  });
+  var trace_prop = curry(function (tag, prop, value) {
+    console.log(tag, value[prop]);
+    return value;
+  });
+
+  var _OR_ = curry(function (a, b, x) {
+    return a(x) || b(x);
+  });
+
+  var _AND_ = curry(function (a, b, x) {
+    return a(x) && b(x);
+  });
+
+  var _NOT_ = curry(function (a, x) {
+    return !a(x);
+  }); //export const isStrictlyEqual = curry((value,item)=> value===item)
+
+
+  var isStrictlyEqual = curry(function (value, item) {
+    return value === item;
+  });
+
+  var _typeof$1 = function _typeof$1(value) {
+    return _typeof(value);
+  };
+
+  var is_type = function is_type(val) {
+    return compose(isStrictlyEqual(val), _typeof$1);
+  };
+
+  var is_type_string = is_type('string');
+  var is_type_function = is_type('function');
+  var is_type_number = is_type('number');
+  var is_undefined = is_type('undefined');
+
+  var isNull = function isNull(x) {
+    return x === null;
+  };
+
+  var is_type_bool = is_type('boolean');
+
+  var isNil = _OR_(isNull, is_undefined); //fucky number test in js can suck on this shit ..!..
+
+
+  var defaultTo = function defaultTo(val) {
+    return compose(maybe(val, identity), Maybe.of);
+  };
+
+  var assign2 = curry(function (x, y) {
+    return Object.assign({}, x, y);
+  });
+
+  var _merge = curry(function (a, b) {
+    return assign2(a, b);
+  });
+
+  var prop = curry(function (prop, obj) {
+    return obj[prop];
+  });
+
+  var keys = function keys(o) {
+    return Object.keys(o);
+  }; // String => Object => Object
+
+
+  var omit_key = curry(function (_omit, obj) {
+    var o = {};
+    Object.keys(obj).map(function (key) {
+      if (key !== _omit) {
+        o[key] = obj[key];
+      }
+    });
+    return o;
+  });
+  var ensure_object_copy = assign2({});
+  /*
+    String -> String -> Object -> Object
+  */
+
+  var as_object_prop = curry(function (key, value, object) {
+    var o = _objectSpread2({}, object);
+
+    o[key] = value;
+    return o;
+  }); //  a -> b -> Object
+
+  var as_prop = curry(function (key, value) {
+    return flip(as_object_prop(key), defaultTo({}), value);
+  });
+  /*
+   Spec
+    for a given object for which values are function  returns a new object with
+  
+    {
+      x: fn(a,b),
+      y: fn(a,b,c),
+    }
+  
+    spec(obj,a)
+    => {
+      x: fn(a,b)(a)
+      y: fn(a,b,c)(a)
+    }
+  
+  */
+  //Object -> List
+
+  var enlist = curry(function (obj) {
+    return pipe(keys, map(function (x) {
+      return as_prop(x, obj[x]);
+    }))(obj);
+  });
+  var axisIntersects = curry(function (dimension, offset, length) {
+    return offset + length > 0 && offset < dimension;
+  });
+  var axisContains = curry(function (dimension, offset, length) {
+    return axisIntersects(dimension, offset, length) && offset >= 0 && offset + length <= dimension;
+  });
+  var X = prop('x');
+  var Y = prop('y');
+  var Width = prop('width');
+  var Height = prop('height');
+
+  var YDimension = function YDimension(rect) {
+    return [Y(rect), Height(rect)];
+  };
+
+  var XDimension = function XDimension(rect) {
+    return [X(rect), Width(rect)];
+  }; // returns 0 if contained -1 if overlapping on left , 1 if overlapping on right
+
+
+  var NormalizedDirection = curry(function (dimension, offset, length) {
+    return axisContains(dimension, offset, length) ? 0 : offset + length <= dimension / 2 ? -1 : 1;
+  });
+
+  var windowRect = function windowRect(window) {
+    return {
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+  };
+
+  var rectIntersectRect = curry(function (rectA, rectB) {
+    return axisIntersects.apply(void 0, [Width(rectA)].concat(_toConsumableArray(XDimension(rectB)))) && axisIntersects.apply(void 0, [Height(rectA)].concat(_toConsumableArray(YDimension(rectB))));
+  });
+  var rectContainsRect = curry(function (rectA, rectB) {
+    return axisContains.apply(void 0, [Width(rectA)].concat(_toConsumableArray(XDimension(rectB)))) && axisContains.apply(void 0, [Height(rectA)].concat(_toConsumableArray(YDimension(rectB))));
+  }); //return a new offset depending on direction , assuming that the dimension is intersecting the other
+
+  var constrainAxis = curry(function (dimension, offset, length) {
+    var normalizedDirection = NormalizedDirection(dimension, offset, length);
+    return normalizedDirection !== 0 ? normalizedDirection == -1 ? 0 : dimension - length : offset;
+  });
+  var constrainInRect = curry(function (rectA, rectB) {
+    if (!rectContainsRect(rectA, rectB)) {
+      return _objectSpread2({}, rectB, {
+        x: constrainAxis.apply(void 0, [Width(rectA)].concat(_toConsumableArray(XDimension(rectB)))),
+        y: constrainAxis.apply(void 0, [Height(rectA)].concat(_toConsumableArray(YDimension(rectB))))
+      });
+    }
+
+    return rectB;
+  });
+  exports.Height = Height;
+  exports.NormalizedDirection = NormalizedDirection;
+  exports.Width = Width;
+  exports.X = X;
+  exports.XDimension = XDimension;
+  exports.Y = Y;
+  exports.YDimension = YDimension;
+  exports.axisContains = axisContains;
+  exports.axisIntersects = axisIntersects;
+  exports.constrainAxis = constrainAxis;
+  exports.constrainInRect = constrainInRect;
+  exports.rectContainsRect = rectContainsRect;
+  exports.rectIntersectRect = rectIntersectRect;
+  exports.windowRect = windowRect;
 });
+unwrapExports(Geometry);
+var Geometry_1 = Geometry.Height;
+var Geometry_2 = Geometry.NormalizedDirection;
+var Geometry_3 = Geometry.Width;
+var Geometry_4 = Geometry.X;
+var Geometry_5 = Geometry.XDimension;
+var Geometry_6 = Geometry.Y;
+var Geometry_7 = Geometry.YDimension;
+var Geometry_8 = Geometry.axisContains;
+var Geometry_9 = Geometry.axisIntersects;
+var Geometry_10 = Geometry.constrainAxis;
+var Geometry_11 = Geometry.constrainInRect;
+var Geometry_12 = Geometry.rectContainsRect;
+var Geometry_13 = Geometry.rectIntersectRect;
+var Geometry_14 = Geometry.windowRect;
 
-var index$2 = (function (props) {
-  var status = props.status,
-      secondaryStatus = props.secondaryStatus,
-      name = props.name,
-      phone = props.phone,
-      email = props.email,
+var _bem$4 = bem('list-item'),
+    _bem2$4 = _slicedToArray(_bem$4, 3),
+    __base_class$3 = _bem2$4[0],
+    element$4 = _bem2$4[1],
+    modifier$4 = _bem2$4[2];
+
+var CellContent = compositeJs.compose(withBaseClass(element$4('content')))(LayoutFlex);
+var CellOptionalContent = compositeJs.compose(withBaseClass(element$4('optional-content')))(LayoutFlex);
+var Cell = compositeJs.compose(withBaseClass(__base_class$3), applyModifiers({
+  'justBetween': true
+}))(LayoutFlex);
+
+var Component = function Component(props) {
+  var Icon = props.Icon,
+      label = props.label,
+      Optional = props.Optional,
       handleClick = props.handleClick,
-      className = props.className,
-      handleContextual = props.handleContextual,
-      rest = _objectWithoutProperties(props, ["status", "secondaryStatus", "name", "phone", "email", "handleClick", "className", "handleContextual"]);
+      rest = _objectWithoutProperties(props, ["Icon", "label", "Optional", "handleClick"]);
 
-  var classes = genClasses.cEx(["patient-item", className]);
+  var _handleClick = function _handleClick(e) {
+    handleClick && handleClick(e);
+    e.stopPropagation();
+  };
+
+  return /*#__PURE__*/React__default.createElement(Cell, _extends({
+    onClick: _handleClick
+  }, rest), /*#__PURE__*/React__default.createElement(CellContent, null, Icon && /*#__PURE__*/React__default.createElement(Icon, null), props.children), /*#__PURE__*/React__default.createElement(CellOptionalContent, null, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
+};
+
+var ContextualMenu = function ContextualMenu(props) {
+  var me = React.useRef();
+
+  var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      visibleState = _useState2[0],
+      setVisibleState = _useState2[1];
+
+  var className = props.className,
+      handleDiscard = props.handleDiscard,
+      callback = props.callback,
+      visible = props.visible,
+      options = props.options,
+      rest = _objectWithoutProperties(props, ["className", "handleDiscard", "callback", "visible", "options"]);
+
+  var classes = genClasses.cEx([function (_) {
+    return visibleState !== true ? 'contextual-menu--state-closed' : '';
+  }, className]);
+
+  var closeme = function closeme(e) {
+    setVisibleState(false);
+    handleDiscard && handleDiscard();
+    e.stopPropagation();
+  };
+
+  React.useEffect(function () {
+    setVisibleState(visible);
+  }, [visible]);
+  React.useEffect(function () {
+    if (visibleState === true) {
+      if (me.current) {
+        var cRect = Geometry_14(window);
+        var rect = Geometry_11(cRect, me.current.getBoundingClientRect());
+        me.current.style.top = "".concat(rect.y, "px");
+        me.current.style.left = "".concat(rect.x, "px");
+      }
+
+      window.addEventListener('click', closeme);
+    } else {
+      setVisibleState(false);
+    }
+
+    return function () {
+      window.removeEventListener('click', closeme);
+    };
+  }, [visibleState]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes,
-    onClick: handleClick
-  }, rest), /*#__PURE__*/React__default.createElement(Content, null, /*#__PURE__*/React__default.createElement(Badge, {
-    className: "status",
-    medium: true,
-    status: status
-  }), /*#__PURE__*/React__default.createElement("div", {
-    className: "coord"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "name"
-  }, name), /*#__PURE__*/React__default.createElement("div", {
+    ref: me,
+    className: classes
+  }, rest), options.map(function (item) {
+    return /*#__PURE__*/React__default.createElement(Component, {
+      key: item.id,
+      Icon: item.Icon,
+      onClick: function onClick(e) {
+        if (item.callback) {
+          item.callback(item.id);
+        } else {
+          callback && callback(item.id);
+        }
+
+        e.stopPropagation();
+      }
+    }, /*#__PURE__*/React__default.createElement("h2", null, item.label));
+  }));
+};
+
+var ContextMenu = withBaseClass('contextual-menu')(ContextualMenu);
+
+var UserInfo = function UserInfo(_ref) {
+  var name = _ref.name,
+      phone = _ref.phone,
+      email = _ref.email,
+      birthdate = _ref.birthdate;
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, {
+    column: true,
+    alignStart: true
+  }, /*#__PURE__*/React__default.createElement("h2", null, name), /*#__PURE__*/React__default.createElement("div", {
     className: "phone"
   }, phone), /*#__PURE__*/React__default.createElement("div", {
     className: "email"
-  }, email))), /*#__PURE__*/React__default.createElement(Content, null, /*#__PURE__*/React__default.createElement(Badge, {
-    className: "status secondary",
-    medium: true,
-    status: secondaryStatus
+  }, email), /*#__PURE__*/React__default.createElement("div", {
+    className: "birthdate"
+  }, birthdate));
+};
+
+var LeftPart = function LeftPart(_ref2) {
+  var status = _ref2.status,
+      contact = _ref2.contact,
+      rest = _objectWithoutProperties(_ref2, ["status", "contact"]);
+
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, rest, /*#__PURE__*/React__default.createElement(Badge, {
+    m: true,
+    status: status
+  }), /*#__PURE__*/React__default.createElement(UserInfo, contact));
+};
+
+var RightPart = function RightPart(_ref3) {
+  var status = _ref3.status,
+      menu = _ref3.menu,
+      handleClick = _ref3.handleClick,
+      rest = _objectWithoutProperties(_ref3, ["status", "menu", "handleClick"]);
+
+  var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      menuVisible = _useState2[0],
+      setMenuVisible = _useState2[1];
+
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, rest, status && /*#__PURE__*/React__default.createElement(Badge, {
+    m: true,
+    status: status
+  }), menu && /*#__PURE__*/React__default.createElement(ContextMenu, {
+    options: menu,
+    handleDiscard: function handleDiscard(_) {
+      return setMenuVisible(false);
+    },
+    callback: handleClick,
+    visible: menuVisible
   }), /*#__PURE__*/React__default.createElement(Button, {
     clear: true,
     onClick: function onClick(e) {
-      handleContextual(e);
+      if (menu) {
+        setMenuVisible(!menuVisible);
+      } else {
+        handleClick && handleClick(e);
+      }
+
       e.stopPropagation();
     }
-  }, /*#__PURE__*/React__default.createElement(GoKebabVertical, null))));
-});
+  }, /*#__PURE__*/React__default.createElement(Kebab, {
+    s: true
+  })));
+};
+
+var _bem$5 = bem('patient-item'),
+    _bem2$5 = _slicedToArray(_bem$5, 3),
+    BASE_CLASS$1 = _bem2$5[0],
+    element$5 = _bem2$5[1],
+    modifier$5 = _bem2$5[2];
+
+var Container = compositeJs.compose(withBaseClass(BASE_CLASS$1), applyModifiers({
+  justBetween: true,
+  alignStretch: true
+}))(LayoutFlex);
+var ContactInfo = compositeJs.compose(withBaseClass(element$5('contact')))(LeftPart);
+var ContactMenu = compositeJs.compose(withBaseClass(element$5('toolbar')))(RightPart);
+
+var Contact = function Contact(props) {
+  var status = props.status,
+      contact = props.contact,
+      secondaryStatus = props.secondaryStatus,
+      handleClick = props.handleClick,
+      handleContextual = props.handleContextual,
+      contextualMenu = props.contextualMenu,
+      rest = _objectWithoutProperties(props, ["status", "contact", "secondaryStatus", "handleClick", "handleContextual", "contextualMenu"]);
+
+  if (handleContextual && contextualMenu) {
+    console.warn('handleContextual && contextualMenu are mutually exclusive. Menu is used in priority');
+  }
+
+  return /*#__PURE__*/React__default.createElement(Container, _extends({
+    onClick: handleClick
+  }, rest), /*#__PURE__*/React__default.createElement(ContactInfo, {
+    contact: contact,
+    status: status
+  }), /*#__PURE__*/React__default.createElement(ContactMenu, {
+    menu: contextualMenu,
+    status: secondaryStatus,
+    handleClick: handleContextual
+  }));
+};
 
 var defaultSubmit = function defaultSubmit(e) {
   console.warn('you didnt set onSubmit');
   e.preventDefault();
 };
 
-var Form = (function (props) {
+var index$2 = (function (props) {
   var className = props.className,
       onSubmit = props.onSubmit,
       rest = _objectWithoutProperties(props, ["className", "onSubmit"]);
@@ -2160,109 +3346,10 @@ var Form = (function (props) {
   }, rest), props.children);
 });
 
-var parent = bem('single-input');
-
-var _parent = _slicedToArray(parent, 3),
-    b = _parent[0],
-    e = _parent[1],
-    m = _parent[2];
-
-var bem$1 = bem(e('label'));
-
-var _bem$1 = _slicedToArray(bem$1, 3),
-    __base_class$1 = _bem$1[0],
-    element$1 = _bem$1[1],
-    modifier$1 = _bem$1[2];
-
-var Label = (function (props) {
-  var label = props.label,
-      id = props.id,
-      className = props.className,
-      error = props.error,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "error"]);
-
-  var classes = genClasses.cEx([__base_class$1, // "flex-column",
-  className, function (_) {
-    return error ? modifier$1('error') : '';
-  }]);
-  return /*#__PURE__*/React__default.createElement("label", _extends({
-    htmlFor: id,
-    className: classes
-  }, rest), label);
-});
-
-var _bem$2 = bem('single-input'),
-    _bem2$1 = _slicedToArray(_bem$2, 3),
-    __base_class$2 = _bem2$1[0],
-    element$2 = _bem2$1[1],
-    modifier$2 = _bem2$1[2];
-
-var _bem3 = bem(element$2('input')),
-    _bem4 = _slicedToArray(_bem3, 3),
-    __input_class = _bem4[0],
-    inpElement = _bem4[1],
-    inpModifier = _bem4[2];
-
-var Input = (function (props) {
-  var label = props.label,
-      id = props.id,
-      className = props.className,
-      type = props.type,
-      error = props.error,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "type", "error"]);
-
-  var _filterPropStartingWi = ReactUtils_11('label', rest),
-      _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
-      labelClassName = _filterPropStartingWi2[0].labelClassName,
-      notLabelProps = _filterPropStartingWi2[1];
-
-  var _filterPropStartingWi3 = ReactUtils_11('input', notLabelProps),
-      _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
-      inputClassName = _filterPropStartingWi4[0].inputClassName,
-      notInputProps = _filterPropStartingWi4[1]; // default type to text 
-
-
-  var _type = type || 'text';
-
-  var classes = genClasses.cEx([__base_class$2, // "flex-column",
-  className, function (_) {
-    return error ? modifier$2('error') : '';
-  }]);
-  var inputClasses = genClasses.cEx([__input_class, inputClassName, function (_) {
-    return error ? inpModifier('error') : '';
-  }]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement(Label, {
-    htmlFor: id,
-    className: labelClassName,
-    error: error,
-    label: label
-  }), type !== "checkbox" && /*#__PURE__*/React__default.createElement(InputMask, _extends({
-    className: inputClasses,
-    id: id,
-    type: _type,
-    autoComplete: "off"
-  }, rest)), type === "checkbox" && /*#__PURE__*/React__default.createElement("input", _extends({
-    className: inputClasses,
-    id: id,
-    type: _type,
-    autoComplete: "off"
-  }, rest)));
-});
-
-var InputCheckbox = (function (props) {
-  var _extends2;
-
-  var label = props.label,
-      id = props.id,
-      className = props.className,
+var Checkbox = function Checkbox(props) {
+  var className = props.className,
       checked = props.checked,
-      labelClassName = props.labelClassName,
-      inputClassName = props.inputClassName,
-      onClick = props.onClick,
-      type = props.type,
-      rest = _objectWithoutProperties(props, ["label", "id", "className", "checked", "labelClassName", "inputClassName", "onClick", "type"]);
+      rest = _objectWithoutProperties(props, ["className", "checked"]);
 
   var cb = React.useRef();
 
@@ -2270,28 +3357,119 @@ var InputCheckbox = (function (props) {
       _useState2 = _slicedToArray(_useState, 2),
       check = _useState2[0],
       setChecked = _useState2[1];
+  /*   const classes = cEx([
+       "input-checkbox",
+       className
+     ])
+   */
 
-  var classes = genClasses.cEx(["single-input --checkbox flex-column", className]);
-  var labelClasses = genClasses.cEx([labelClassName]);
-  var inputClasses = genClasses.cEx(["input", inputClassName]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, /*#__PURE__*/React__default.createElement("label", {
-    htmlFor: id,
-    className: labelClasses
-  }, label), /*#__PURE__*/React__default.createElement("div", {
-    className: "container",
-    onClick: function onClick(_) {
+
+  var handleClick = function handleClick(_) {
+    if (cb.current) {
       cb.current.click();
       setChecked(cb.current.checked);
     }
-  }, /*#__PURE__*/React__default.createElement("input", _extends((_extends2 = {
-    checked: "checked",
+  };
+
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: className
+  }, /*#__PURE__*/React__default.createElement("div", {
+    className: "container",
+    onClick: handleClick
+  }, /*#__PURE__*/React__default.createElement("input", _extends({
     ref: cb,
-    className: inputClasses
-  }, _defineProperty(_extends2, "checked", check), _defineProperty(_extends2, "id", id), _defineProperty(_extends2, "type", "checkbox"), _extends2), rest)), /*#__PURE__*/React__default.createElement("span", {
+    checked: check,
+    type: "checkbox"
+  }, rest)), /*#__PURE__*/React__default.createElement("span", {
     className: "checkmark"
   })));
+};
+var InputCheckbox = withBaseClass('input-checkbox')(Checkbox);
+
+var InputComponent = (function (props) {
+  var type = props.type,
+      id = props.id,
+      rest = _objectWithoutProperties(props, ["type", "id"]);
+
+  var _type = type || 'text';
+
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, type !== "checkbox" && /*#__PURE__*/React__default.createElement(InputMask, _extends({
+    id: id,
+    type: _type,
+    autoComplete: "off"
+  }, rest)), type === "checkbox" && /*#__PURE__*/React__default.createElement(InputCheckbox, _extends({
+    id: id
+  }, rest)));
+});
+
+/* external imports */
+
+var BEM = makeBem('single-input');
+var labelBem = BEM.element('label');
+var inputBem = BEM.element('input');
+var Label = compositeJs.compose(withBem(labelBem), withModifiers(function (x) {
+  return labelBem.modifier(x).current;
+}, ['error']))(baseElement('label'));
+var Error$1 = compositeJs.compose(withBem(BEM.element('error')))(baseElement('div'));
+var Container$1 = compositeJs.compose(withBem(BEM), withModifiers(function (x) {
+  return BEM.modifier(x).current;
+}, ['error']), withModifiers(function (k, v) {
+  return BEM.modifier("".concat(k, "-").concat(v)).current;
+}, ['checkbox']), applyModifiers({
+  column: true,
+  alignStart: true
+}))(LayoutFlex);
+var Input = compositeJs.compose(withBem(inputBem), withModifiers(function (x) {
+  return inputBem.modifier(x).current;
+}, ['error']))(InputComponent);
+var Input$1 = (function (props) {
+  var label = props.label,
+      id = props.id,
+      error = props.error,
+      checkbox = props.checkbox,
+      rest = _objectWithoutProperties(props, ["label", "id", "error", "checkbox"]);
+
+  var _makePropsFilter = makePropsFilter('flex'),
+      _makePropsFilter2 = _slicedToArray(_makePropsFilter, 2),
+      filterFlex = _makePropsFilter2[0],
+      forwardFlex = _makePropsFilter2[1];
+
+  var _makePropsFilter3 = makePropsFilter('label'),
+      _makePropsFilter4 = _slicedToArray(_makePropsFilter3, 2),
+      filterLabel = _makePropsFilter4[0],
+      forwardLabel = _makePropsFilter4[1];
+
+  var _makePropsFilter5 = makePropsFilter('input'),
+      _makePropsFilter6 = _slicedToArray(_makePropsFilter5, 2),
+      filterInput = _makePropsFilter6[0],
+      forwardInput = _makePropsFilter6[1];
+
+  var _filterFlex = filterFlex(rest),
+      _filterFlex2 = _slicedToArray(_filterFlex, 2),
+      _flexProps = _filterFlex2[0],
+      notFlexProps = _filterFlex2[1];
+
+  var _filterLabel = filterLabel(notFlexProps),
+      _filterLabel2 = _slicedToArray(_filterLabel, 2),
+      _labelProps = _filterLabel2[0],
+      notLabelProps = _filterLabel2[1];
+
+  var _filterInput = filterInput(notLabelProps),
+      _filterInput2 = _slicedToArray(_filterInput, 2),
+      _inputProps = _filterInput2[0],
+      notInputProps = _filterInput2[1]; // default type to text 
+
+
+  return /*#__PURE__*/React__default.createElement(Container$1, _extends({
+    error: error,
+    checkbox: checkbox
+  }, forwardFlex(_flexProps)), /*#__PURE__*/React__default.createElement(Label, _extends({
+    error: error,
+    htmlFor: id
+  }, forwardLabel(_labelProps)), label, error && error !== true && /*#__PURE__*/React__default.createElement(Error$1, null, error)), /*#__PURE__*/React__default.createElement(Input, _extends({
+    id: id,
+    error: error
+  }, forwardInput(_inputProps), notInputProps)));
 });
 
 var index$3 = (function (props) {
@@ -2309,124 +3487,6 @@ var index$3 = (function (props) {
   }, rest), props.children)));
 });
 
-var OrganiserConfigurationForm = (function (props) {
-  var handleSubmit = props.handleSubmit;
-  var formik$1 = formik.useFormik({
-    initialValues: {
-      server: 'broker.hermed.dev.geekagency.ch',
-      port: 8712,
-      key: 'peerjs',
-      organiser_name: '',
-      password: '',
-      secure: true
-    },
-    onSubmit: function onSubmit(values) {
-      handleSubmit(values);
-    }
-  });
-  return /*#__PURE__*/React__default.createElement(Form, {
-    className: "flex-column align-center",
-    onSubmit: formik$1.handleSubmit
-  }, /*#__PURE__*/React__default.createElement(Input, {
-    label: "Votre nom ",
-    name: "organiser_name",
-    placeholder: "Votre nom complet",
-    autoComplete: "off",
-    onChange: formik$1.handleChange,
-    value: formik$1.values.organiser_name
-  }), /*#__PURE__*/React__default.createElement(Input, {
-    label: "Serveur",
-    name: "server",
-    placeholder: "broker.cmgl.ch",
-    autoComplete: "off",
-    onChange: formik$1.handleChange,
-    value: formik$1.values.server
-  }), /*#__PURE__*/React__default.createElement("div", {
-    className: "flex-row just-start align-baseline columns-2"
-  }, /*#__PURE__*/React__default.createElement(Input, {
-    className: "grow-1",
-    label: "Port",
-    name: "port",
-    placeholder: "8712",
-    autoComplete: "off",
-    onChange: formik$1.handleChange,
-    value: formik$1.values.port
-  }), /*#__PURE__*/React__default.createElement(InputCheckbox, {
-    label: "SSL",
-    name: "secure",
-    type: "checkbox",
-    id: "secure",
-    onChange: formik$1.handleChange,
-    checked: formik$1.values.secure
-  })), /*#__PURE__*/React__default.createElement(Input, {
-    label: "Cl\xE9",
-    name: "key",
-    placeholder: "cl\xE9 du serveur",
-    autoComplete: "off",
-    onChange: formik$1.handleChange,
-    value: formik$1.values.key
-  }), /*#__PURE__*/React__default.createElement(Button, null, "Se connecter"));
-});
-
-// THIS FILE IS AUTO GENERATED
-var TiWarning = function (props) {
-  return GenIcon({
-    "tag": "svg",
-    "attr": {
-      "version": "1.2",
-      "baseProfile": "tiny",
-      "viewBox": "0 0 24 24"
-    },
-    "child": [{
-      "tag": "path",
-      "attr": {
-        "d": "M21.171 15.398l-5.912-9.854c-.776-1.293-1.963-2.033-3.259-2.033s-2.483.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83.636 1.126 1.878 1.772 3.406 1.772h12c1.528 0 2.77-.646 3.406-1.771.637-1.125.551-2.521-.235-3.831zm-9.171 2.151c-.854 0-1.55-.695-1.55-1.549 0-.855.695-1.551 1.55-1.551s1.55.696 1.55 1.551c0 .854-.696 1.549-1.55 1.549zm1.633-7.424c-.011.031-1.401 3.468-1.401 3.468-.038.094-.13.156-.231.156s-.193-.062-.231-.156l-1.391-3.438c-.09-.233-.129-.443-.129-.655 0-.965.785-1.75 1.75-1.75s1.75.785 1.75 1.75c0 .212-.039.422-.117.625z"
-      }
-    }]
-  })(props);
-};
-TiWarning.displayName = "TiWarning";
-
-var withIconsModifiers = compositeJs.compose(withBaseClass('icon'), withModifiers(function (x) {
-  return "icon--".concat(x);
-}, ['xs', 's', 'm', 'l', 'xl']));
-var Hamburger = withIconsModifiers(GiHamburgerMenu);
-var Warning = withIconsModifiers(TiWarning);
-var Call = withIconsModifiers(md.MdCall);
-var CallEnd = withIconsModifiers(md.MdCallEnd);
-var ArrowForward = withIconsModifiers(md.MdArrowForward);
-var ArrowBack = withIconsModifiers(md.MdArrowBack);
-var Camera = withIconsModifiers(md.MdCameraAlt);
-var AttachFile = withIconsModifiers(md.MdAttachFile);
-var Voice = withIconsModifiers(md.MdKeyboardVoice);
-var Videocam = withIconsModifiers(md.MdVideocam);
-var PersonAdd = withIconsModifiers(md.MdPersonAdd);
-var LocalPhone = withIconsModifiers(md.MdLocalPhone);
-var Trash = withIconsModifiers(fa.FaRegTrashAlt);
-var PowerOff = withIconsModifiers(fa.FaPowerOff);
-var Kebab = withIconsModifiers(GoKebabVertical);
-var Gear = withIconsModifiers(GoGear);
-
-var index$4 = /*#__PURE__*/Object.freeze({
-__proto__: null,
-Warning: Warning,
-Call: Call,
-CallEnd: CallEnd,
-ArrowForward: ArrowForward,
-ArrowBack: ArrowBack,
-Camera: Camera,
-AttachFile: AttachFile,
-Voice: Voice,
-Videocam: Videocam,
-PersonAdd: PersonAdd,
-LocalPhone: LocalPhone,
-Trash: Trash,
-PowerOff: PowerOff,
-Kebab: Kebab,
-Gear: Gear,
-Hamburger: Hamburger
-});
-
 var BackButton = (function (props) {
   var className = props.className,
       handleBack = props.handleBack;
@@ -2437,71 +3497,7 @@ var BackButton = (function (props) {
   }, /*#__PURE__*/React__default.createElement(ArrowBack, null)));
 });
 
-var UserStatus = function UserStatus(props) {
-  var title = props.title,
-      subtitle = props.subtitle,
-      badge = props.badge,
-      rest = _objectWithoutProperties(props, ["title", "subtitle", "badge"]);
-
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
-    alignTop: true
-  }, rest), badge && /*#__PURE__*/React__default.createElement(Badge, {
-    status: badge
-  }), /*#__PURE__*/React__default.createElement(LayoutFlex, {
-    column: true
-  }, /*#__PURE__*/React__default.createElement("h2", null, title), subtitle && /*#__PURE__*/React__default.createElement("p", null, subtitle)));
-};
-
-var ChatHeaderStatus = withBaseClass('user-status')(UserStatus);
-
-var ChatHeaderToolbar = (function (props) {
-  var handleCall = props.handleCall,
-      handleVideoCall = props.handleVideoCall;
-  return /*#__PURE__*/React__default.createElement(Toolbar, null, /*#__PURE__*/React__default.createElement(Button, {
-    navbar: true,
-    onClick: handleVideoCall,
-    disabled: typeof handleVideoCall !== 'function'
-  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button, {
-    navbar: true,
-    onClick: handleCall,
-    disabled: typeof handleCall !== 'function'
-  }, /*#__PURE__*/React__default.createElement(LocalPhone, null)));
-});
-
-var ChatHeader = (function (props) {
-  var className = props.className,
-      title = props.title,
-      subtitle = props.subtitle,
-      badge = props.badge,
-      showToolbar = props.showToolbar;
-  var handleBack = props.handleBack,
-      handleCall = props.handleCall,
-      handleVideoCall = props.handleVideoCall;
-  var callHandlers = {
-    handleCall: handleCall,
-    handleVideoCall: handleVideoCall
-  };
-  /*
-      const {doctor,patient} = props
-      const isDoctor= doctor===true || (!doctor && !patient);
-  */
-
-  var classes = genClasses.cEx(["headline", className
-  /*  {
-      "headline--patient":  _=> isDoctor !== true,
-      "headline--doctor":   _=> isDoctor === true,
-    }*/
-  ]);
-  return /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(Content, null, /*#__PURE__*/React__default.createElement(BackButton, {
-    handleBack: handleBack
-  }), /*#__PURE__*/React__default.createElement(ChatHeaderStatus, {
-    badge: badge,
-    title: title,
-    subtitle: subtitle
-  })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
-});
-
-var index$5 = (function (props) {
+var index$4 = (function (props) {
   var label = props.label,
       type = props.type,
       centered = props.centered,
@@ -2526,7 +3522,14 @@ var index$5 = (function (props) {
   }));
 });
 
-var index$6 = (function (props) {
+var Footer = withBaseClass('footer');
+var Layout$1 = applyModifiers({
+  'justEvenly': true
+});
+var enhance$2 = compositeJs.compose(Layout$1, Footer);
+enhance$2(LayoutFlex);
+
+var index$5 = (function (props) {
   var incoming = props.incoming,
       handleAnswer = props.handleAnswer,
       handleDiscard = props.handleDiscard,
@@ -2577,7 +3580,7 @@ var Video = (function (props) {
   }, rest));
 });
 
-var index$7 = (function (props) {
+var index$6 = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -2587,7 +3590,7 @@ var index$7 = (function (props) {
   }, rest), props.children);
 });
 
-var index$8 = (function (props) {
+var index$7 = (function (props) {
   var HiddenComponent = props.HiddenComponent,
       VisibleComponent = props.VisibleComponent;
 
@@ -2620,56 +3623,97 @@ var index$8 = (function (props) {
   })));
 });
 
-var index$9 = (function (props) {
-  var className = props.className,
-      closed = props.closed,
-      rest = _objectWithoutProperties(props, ["className", "closed"]);
-  /*  const [visible,setVisible] = useState(closed || true)
-  
-    useEffect(()=>{
-      setVisible(closed || true)
-    },[closed])
-  */
+var _bem$6 = bem('sidebar'),
+    _bem2$6 = _slicedToArray(_bem$6, 3),
+    __base_class$4 = _bem2$6[0],
+    element$6 = _bem2$6[1],
+    modifier$6 = _bem2$6[2];
 
+var Component$1 = compositeJs.compose(withBaseClass(__base_class$4), withModifiers(function (x) {
+  return modifier$6(x);
+}, ['closed']))(baseElement('aside'));
 
-  var classes = genClasses.cEx(['sidebar', function (_) {
-    return closed === true ? 'sidebar--state-closed' : '';
-  }, className]);
-  return /*#__PURE__*/React__default.createElement("aside", _extends({
-    className: classes
-  }, rest), props.children);
+var _bem$7 = bem('list'),
+    _bem2$7 = _slicedToArray(_bem$7, 3),
+    __base_class$5 = _bem2$7[0],
+    element$7 = _bem2$7[1],
+    modifier$7 = _bem2$7[2];
+
+var index$8 = compositeJs.compose(withBaseClass(__base_class$5), applyModifiers({
+  column: true
+}))(LayoutFlex);
+
+var _bem$8 = bem('user_status'),
+    _bem2$8 = _slicedToArray(_bem$8, 3),
+    __base_class$6 = _bem2$8[0],
+    element$8 = _bem2$8[1],
+    modifier$8 = _bem2$8[2];
+
+var UserStatusContainer = compositeJs.compose(applyModifiers({
+  'alignStart': true
+}), withBaseClass(__base_class$6))(LayoutFlex);
+var UserBadge = withBaseClass(element$8('badge'))(Badge);
+var UserNameAndStatus = compositeJs.compose(applyModifiers({
+  'column': true,
+  'alignStart': true
+}), withBaseClass(element$8('name')))(LayoutFlex);
+
+var UserStatusComponent = function UserStatusComponent(props) {
+  var title = props.title,
+      subtitle = props.subtitle,
+      badge = props.badge,
+      rest = _objectWithoutProperties(props, ["title", "subtitle", "badge"]);
+
+  return /*#__PURE__*/React__default.createElement(UserStatusContainer, rest, badge && /*#__PURE__*/React__default.createElement(UserBadge, {
+    status: badge
+  }), /*#__PURE__*/React__default.createElement(UserNameAndStatus, null, /*#__PURE__*/React__default.createElement("h2", null, title), subtitle && /*#__PURE__*/React__default.createElement("p", null, subtitle)));
+};
+
+var ChatHeaderToolbar = (function (props) {
+  var handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall;
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, null, /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
+    onClick: handleVideoCall,
+    disabled: typeof handleVideoCall !== 'function'
+  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+    navbar: true,
+    onClick: handleCall,
+    disabled: typeof handleCall !== 'function'
+  }, /*#__PURE__*/React__default.createElement(LocalPhone, null)));
 });
 
-var index$a = (function (props) {
+var ChatHeader = (function (props) {
   var className = props.className,
-      rest = _objectWithoutProperties(props, ["className"]);
-
-  var classes = genClasses.cEx(['list', className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, props.children);
+      title = props.title,
+      subtitle = props.subtitle,
+      badge = props.badge,
+      showToolbar = props.showToolbar;
+  var handleBack = props.handleBack,
+      handleCall = props.handleCall,
+      handleVideoCall = props.handleVideoCall;
+  var callHandlers = {
+    handleCall: handleCall,
+    handleVideoCall: handleVideoCall
+  };
+  var classes = genClasses.cEx([className]);
+  return /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(LayoutFlex, null, /*#__PURE__*/React__default.createElement(BackButton, {
+    handleBack: handleBack
+  }), /*#__PURE__*/React__default.createElement(UserStatusComponent, {
+    badge: badge,
+    title: title,
+    subtitle: subtitle
+  })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
 });
+/*
+import LayoutFlex from 'layouts/Flex'
+import {compose,applyModifiers,withBaseClass} from 'utils'; 
 
-var index$b = (function (props) {
-  var className = props.className,
-      Icon = props.Icon,
-      label = props.label,
-      Optional = props.Optional,
-      rest = _objectWithoutProperties(props, ["className", "Icon", "label", "Optional"]);
+const Headline = withBaseClass('headline')
+const Layout = applyModifiers({'justBetween':true})
+const enhance = compose(Layout,Headline)
 
-  var classes = genClasses.cEx(['list-item', className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
-  }, rest), /*#__PURE__*/React__default.createElement("div", {
-    className: "list-item-content"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "list-item__icon"
-  }, Icon && /*#__PURE__*/React__default.createElement(Icon, null)), /*#__PURE__*/React__default.createElement("div", {
-    className: "list-item__title"
-  }, props.children)), /*#__PURE__*/React__default.createElement("div", {
-    className: "list-item__optional"
-  }, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
-});
+export default enhance(LayoutFlex)*/
 
 var ChatInput = (function (props) {
   var className = props.className,
@@ -2684,7 +3728,7 @@ var ChatInput = (function (props) {
     onSubmit: handleSubmit
   }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
     alignStretch: true
-  }, /*#__PURE__*/React__default.createElement(Input, {
+  }, /*#__PURE__*/React__default.createElement(Input$1, {
     name: "message",
     placeholder: "message",
     autoComplete: "off",
@@ -2695,1319 +3739,32 @@ var ChatInput = (function (props) {
     text: true,
     navbar: true,
     className: "button--send  flex align-center just-center"
+  }, /*#__PURE__*/React__default.createElement(ArrowForward, null))));
+});
+
+var ChatRecord = (function (props) {
+  var className = props.className,
+      recording = props.recording,
+      handleDelete = props.handleDelete,
+      handleSend = props.handleSend,
+      record = props.record,
+      rest = _objectWithoutProperties(props, ["className", "recording", "handleDelete", "handleSend", "record"]);
+
+  var classes = genClasses.cEx(['chat-footer__message-input', 'flex-row', 'align-stretch', className]);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: classes
+  }, recording && /*#__PURE__*/React__default.createElement("div", null, "Enregistrement"), !recording && record && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("audio", {
+    src: record,
+    controls: true,
+    preload: 'metadata'
+  }), /*#__PURE__*/React__default.createElement("button", {
+    onClick: handleDelete,
+    className: "button button--send text icon--32 flex align-center just-center"
+  }, /*#__PURE__*/React__default.createElement(fa.FaRegTrashAlt, null)), /*#__PURE__*/React__default.createElement("button", {
+    onClick: handleSend,
+    className: "button button--send text icon--32 flex align-center just-center"
   }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
 });
-
-var build = createCommonjsModule(function (module, exports) {
-  !function (V, e) {
-    module.exports = e(React__default);
-  }(commonjsGlobal, function (V) {
-    return function (V) {
-      function e(n) {
-        if (t[n]) return t[n].exports;
-        var r = t[n] = {
-          i: n,
-          l: !1,
-          exports: {}
-        };
-        return V[n].call(r.exports, r, r.exports, e), r.l = !0, r.exports;
-      }
-
-      var t = {};
-      return e.m = V, e.c = t, e.d = function (V, t, n) {
-        e.o(V, t) || Object.defineProperty(V, t, {
-          configurable: !1,
-          enumerable: !0,
-          get: n
-        });
-      }, e.n = function (V) {
-        var t = V && V.__esModule ? function () {
-          return V.default;
-        } : function () {
-          return V;
-        };
-        return e.d(t, "a", t), t;
-      }, e.o = function (V, e) {
-        return Object.prototype.hasOwnProperty.call(V, e);
-      }, e.p = "", e(e.s = 3);
-    }([function (e, t) {
-      e.exports = V;
-    }, function (V, e, t) {
-      V.exports = t(7)();
-    }, function (V, e, t) {
-      !function (e, t) {
-        V.exports = t();
-      }(0, function () {
-        return function (V) {
-          function e(n) {
-            if (t[n]) return t[n].exports;
-            var r = t[n] = {
-              i: n,
-              l: !1,
-              exports: {}
-            };
-            return V[n].call(r.exports, r, r.exports, e), r.l = !0, r.exports;
-          }
-
-          var t = {};
-          return e.m = V, e.c = t, e.d = function (V, t, n) {
-            e.o(V, t) || Object.defineProperty(V, t, {
-              configurable: !1,
-              enumerable: !0,
-              get: n
-            });
-          }, e.n = function (V) {
-            var t = V && V.__esModule ? function () {
-              return V.default;
-            } : function () {
-              return V;
-            };
-            return e.d(t, "a", t), t;
-          }, e.o = function (V, e) {
-            return Object.prototype.hasOwnProperty.call(V, e);
-          }, e.p = "", e(e.s = 1);
-        }([function (V, e, t) {
-
-          function n(V, e, t) {
-            return e in V ? Object.defineProperty(V, e, {
-              value: t,
-              enumerable: !0,
-              configurable: !0,
-              writable: !0
-            }) : V[e] = t, V;
-          }
-
-          t.d(e, "e", function () {
-            return o;
-          }), t.d(e, "a", function () {
-            return i;
-          }), t.d(e, "f", function () {
-            return a;
-          }), t.d(e, "c", function () {
-            return A;
-          }), t.d(e, "b", function () {
-            return c;
-          }), t.d(e, "d", function () {
-            return u;
-          });
-          var r,
-              o = ["user", "environment"],
-              i = {
-            USER: "user",
-            ENVIRONMENT: "environment"
-          },
-              a = ["jpg", "png"],
-              A = {
-            PNG: "png",
-            JPG: "jpg"
-          },
-              c = (r = {}, n(r, "jpg", "image/jpeg"), n(r, "png", "image/png"), r),
-              u = {
-            audio: !1,
-            video: !0
-          };
-        }, function (V, e, t) {
-          V.exports = t(2);
-        }, function (V, e, t) {
-
-          function n(V, e) {
-            if (!(V instanceof e)) throw new TypeError("Cannot call a class as a function");
-          }
-
-          Object.defineProperty(e, "__esModule", {
-            value: !0
-          }), t.d(e, "FACING_MODES", function () {
-            return c;
-          }), t.d(e, "IMAGE_TYPES", function () {
-            return u;
-          });
-
-          var r = t(3),
-              o = t(5),
-              i = function () {
-            function V(V, e) {
-              for (var t = 0; t < e.length; t++) {
-                var n = e[t];
-                n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(V, n.key, n);
-              }
-            }
-
-            return function (e, t, n) {
-              return t && V(e.prototype, t), n && V(e, n), e;
-            };
-          }(),
-              a = r.a.IMAGE_TYPES.PNG,
-              A = function () {
-            function V(e) {
-              n(this, V), this.videoElement = e, this.stream = null, this.numberOfMaxResolutionTry = 1, this.settings = null, this.windowURL = r.a.getWindowURL(), this.mediaDevices = r.a.getNavigatorMediaDevices();
-            }
-
-            return i(V, [{
-              key: "_getStreamDevice",
-              value: function (V, e) {
-                var t = this;
-                return new Promise(function (n, o) {
-                  var i = r.a.getIdealConstraints(V, e);
-                  t.mediaDevices.getUserMedia(i).then(function (V) {
-                    t._gotStream(V), n(V);
-                  }).catch(function (V) {
-                    o(V);
-                  });
-                });
-              }
-            }, {
-              key: "_getStreamDeviceMaxResolution",
-              value: function (V) {
-                var e = this,
-                    t = r.a.getMaxResolutionConstraints(V, this.numberOfMaxResolutionTry);
-
-                if (null == t) {
-                  var n = {};
-                  return this._getStreamDevice(V, n);
-                }
-
-                return new Promise(function (n, r) {
-                  e.mediaDevices.getUserMedia(t).then(function (V) {
-                    e._gotStream(V), n(V);
-                  }).catch(function (t) {
-                    setTimeout(function () {
-                      e.numberOfMaxResolutionTry += 1, e._getStreamDeviceMaxResolution(V).catch(function () {
-                        r(t);
-                      });
-                    }, 20);
-                  });
-                });
-              }
-            }, {
-              key: "_setVideoSrc",
-              value: function (V) {
-                if ("srcObject" in this.videoElement) this.videoElement.srcObject = V;else {
-                  var e = this.windowURL.createObjectURL(V);
-                  this.videoElement.src = e;
-                }
-              }
-            }, {
-              key: "_setSettings",
-              value: function (V) {
-                this.settings = null;
-                var e = V && V.getTracks ? V.getTracks() : [];
-                e.length > 0 && e[0].getSettings && (this.settings = e[0].getSettings());
-              }
-            }, {
-              key: "_gotStream",
-              value: function (V) {
-                this.stream = V, this._setSettings(V), this._setVideoSrc(V);
-              }
-            }, {
-              key: "getCameraSettings",
-              value: function () {
-                return this.settings;
-              }
-            }, {
-              key: "startCamera",
-              value: function (V, e) {
-                var t = this;
-                return this.stopCamera().then(function () {}).catch(function () {}).then(function () {
-                  return t._getStreamDevice(V, e);
-                });
-              }
-            }, {
-              key: "startCameraMaxResolution",
-              value: function () {
-                var V = this,
-                    e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-                return this.stopCamera().then(function () {}).catch(function () {}).then(function () {
-                  return V._getStreamDeviceMaxResolution(e);
-                });
-              }
-            }, {
-              key: "getDataUri",
-              value: function (V) {
-                var e = {
-                  sizeFactor: void 0 === V.sizeFactor ? o.c : V.sizeFactor,
-                  imageType: void 0 === V.imageType ? a : V.imageType,
-                  imageCompression: void 0 === V.imageCompression ? o.a : V.imageCompression,
-                  isImageMirror: void 0 === V.isImageMirror ? o.b : V.isImageMirror
-                };
-                return r.a.getDataUri(this.videoElement, e);
-              }
-            }, {
-              key: "stopCamera",
-              value: function () {
-                var V = this;
-                return new Promise(function (e, t) {
-                  V.stream && (V.stream.getTracks().forEach(function (V) {
-                    V.stop();
-                  }), V.videoElement.src = "", V.stream = null, V._setSettings(null), e()), t(Error("no stream to stop!"));
-                });
-              }
-            }]), V;
-          }(),
-              c = r.a.FACING_MODES,
-              u = r.a.IMAGE_TYPES;
-
-          e.default = A;
-        }, function (V, e, t) {
-
-          function n(V, e) {
-            if (!(V instanceof e)) throw new TypeError("Cannot call a class as a function");
-          }
-
-          var r = t(4),
-              o = t(0),
-              i = function () {
-            function V(V, e) {
-              for (var t = 0; t < e.length; t++) {
-                var n = e[t];
-                n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(V, n.key, n);
-              }
-            }
-
-            return function (e, t, n) {
-              return t && V(e.prototype, t), n && V(e, n), e;
-            };
-          }(),
-              a = function () {
-            function V() {
-              n(this, V);
-            }
-
-            return i(V, null, [{
-              key: "getDataUri",
-              value: function (V, e) {
-                var t = e.sizeFactor,
-                    n = e.imageType,
-                    o = e.imageCompression,
-                    i = e.isImageMirror,
-                    a = V.videoWidth,
-                    A = V.videoHeight,
-                    c = Object(r.b)(a, A, t),
-                    u = c.imageWidth,
-                    s = c.imageHeight,
-                    l = document.createElement("canvas");
-                l.width = u, l.height = s;
-                var f = l.getContext("2d");
-                return i && f.setTransform(-1, 0, 0, 1, l.width, 0), f.drawImage(V, 0, 0, u, s), Object(r.a)(l, n, o);
-              }
-            }, {
-              key: "getWindowURL",
-              value: function () {
-                return window.URL || window.webkitURL || window.mozURL || window.msURL;
-              }
-            }, {
-              key: "getNavigatorMediaDevices",
-              value: function () {
-                var V = null,
-                    e = !(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia),
-                    t = !(!navigator.mozGetUserMedia && !navigator.webkitGetUserMedia);
-                if (e) V = navigator.mediaDevices;else if (t) {
-                  var n = navigator.mozGetUserMedia || navigator.webkitGetUserMedia,
-                      r = {
-                    getUserMedia: function (V) {
-                      return new Promise(function (e, t) {
-                        n.call(navigator, V, e, t);
-                      });
-                    }
-                  };
-                  V = Object.assign(n, r);
-                }
-                return V;
-              }
-            }, {
-              key: "isSupportedFacingMode",
-              value: function () {
-                return V.getNavigatorMediaDevices().getSupportedConstraints().facingMode;
-              }
-            }, {
-              key: "getIdealConstraints",
-              value: function (V, e) {
-                var t = {
-                  audio: !1,
-                  video: {}
-                };
-                if (Object(r.c)(V, e)) return o.d;
-                var n = navigator.mediaDevices.getSupportedConstraints();
-                return n.width && n.height && n.facingMode ? (V && o.e.includes(V) && (t.video.facingMode = V), e && e.width && (t.video.width = e.width), e && e.height && (t.video.height = e.height), t) : (console.error("Constraint width height or facingMode not supported!"), o.d);
-              }
-            }, {
-              key: "getMaxResolutionConstraints",
-              value: function () {
-                var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-                    t = arguments[1],
-                    n = V.getIdealConstraints(e),
-                    r = n.video.facingMode,
-                    o = [{
-                  width: {
-                    min: 640
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 800
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 900
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 1024
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 1080
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 1280
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 1920
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 2560
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }, {
-                  width: {
-                    min: 3840
-                  },
-                  ideal: {
-                    facingMode: r
-                  }
-                }];
-                if (t >= o.length) return null;
-                var i = o.slice(0, -t);
-                return n.video.advanced = i, n;
-              }
-            }, {
-              key: "FACING_MODES",
-              get: function () {
-                return o.a;
-              }
-            }, {
-              key: "IMAGE_TYPES",
-              get: function () {
-                return o.c;
-              }
-            }]), V;
-          }();
-
-          e.a = a;
-        }, function (V, e, t) {
-
-          function n(V, e) {
-            if (!(e >= 0 && e <= 1)) throw new Error(e + " is invalid imageCompression, choose between: [0, 1]");
-            if (!c.f.includes(V)) throw new Error(V + " is invalid imageType, choose between: " + c.f.join(", "));
-            return !0;
-          }
-
-          function r(V, e) {
-            var t = {};
-
-            try {
-              n(V, e), t.imageType = V, t.imageCompression = e;
-            } catch (V) {
-              console.error(V), console.error("default value of " + c.c.PNG + " is used"), t.imageType = c.c.PNG, t.imageCompression = null;
-            }
-
-            return t;
-          }
-
-          function o(V, e, t) {
-            var n = V * parseFloat(t);
-            return {
-              imageWidth: n,
-              imageHeight: e / (V / n)
-            };
-          }
-
-          function i(V, e, t) {
-            return r(e, t).imageType === c.c.JPG ? t ? V.toDataURL(c.b[c.c.JPG], t) : V.toDataURL(c.b[c.c.JPG]) : V.toDataURL(c.b[e]);
-          }
-
-          function a(V) {
-            if ("object" === ("undefined" === typeof V ? "undefined" : u(V))) for (var e in V) if (V.hasOwnProperty(e)) return !1;
-            return !0;
-          }
-
-          function A(V, e) {
-            return !(V || e && !a(e));
-          }
-
-          e.b = o, e.a = i, e.c = A;
-          var c = t(0),
-              u = "function" === typeof Symbol && "symbol" === typeof Symbol.iterator ? function (V) {
-            return typeof V;
-          } : function (V) {
-            return V && "function" === typeof Symbol && V.constructor === Symbol && V !== Symbol.prototype ? "symbol" : typeof V;
-          };
-        }, function (V, e, t) {
-
-          t.d(e, "c", function () {
-            return n;
-          }), t.d(e, "a", function () {
-            return r;
-          }), t.d(e, "b", function () {
-            return o;
-          });
-          var n = 1,
-              r = null,
-              o = !1;
-        }]);
-      });
-    }, function (V, e, t) {
-      V.exports = t(4);
-    }, function (V, e, t) {
-
-      Object.defineProperty(e, "__esModule", {
-        value: !0
-      });
-      var n = t(5);
-      t.d(e, "Camera", function () {
-        return n.c;
-      }), t.d(e, "FACING_MODES", function () {
-        return n.a;
-      }), t.d(e, "IMAGE_TYPES", function () {
-        return n.b;
-      }), e.default = n.c;
-    }, function (V, e, t) {
-
-      var n = t(6);
-      t.d(e, "a", function () {
-        return n.a;
-      }), t.d(e, "b", function () {
-        return n.b;
-      }), e.c = n.c;
-    }, function (V, e, t) {
-
-      function n(V) {
-        function e() {
-          p && clearTimeout(p);
-        }
-
-        function t() {
-          var t = {
-            sizeFactor: V.sizeFactor,
-            imageType: V.imageType,
-            imageCompression: V.imageCompression,
-            isImageMirror: V.isImageMirror
-          },
-              n = j(t);
-          V.isSilentMode || Object(f.c)(), "function" === typeof V.onTakePhoto && V.onTakePhoto(n), A(n), v(!1), e(), p = setTimeout(function () {
-            v(!0), "function" === typeof V.onTakePhotoAnimationDone && V.onTakePhotoAnimationDone(n);
-          }, 900);
-        }
-
-        var n = Object(r.useState)(""),
-            i = g(n, 2),
-            a = i[0],
-            A = i[1],
-            h = Object(r.useState)(!0),
-            d = g(h, 2),
-            m = d[0],
-            v = d[1],
-            y = Object(r.useState)(""),
-            k = g(y, 2),
-            b = k[0],
-            E = k[1],
-            w = Object(r.useRef)(null),
-            C = Object(c.a)(w, V.idealFacingMode, V.idealResolution, V.isMaxResolution),
-            U = g(C, 4),
-            S = U[0],
-            x = U[1],
-            I = U[2],
-            j = U[3];
-        Object(r.useEffect)(function () {
-          S ? "function" === typeof V.onCameraStart && V.onCameraStart(S) : "function" === typeof V.onCameraStop && V.onCameraStop();
-        }, [S]), Object(r.useEffect)(function () {
-          x && (E(x.name + " " + x.message), "function" === typeof V.onCameraError && V.onCameraError(x));
-        }, [x]), Object(r.useEffect)(function () {
-          I && Object(f.d)(I.message);
-        }, [I]);
-        var T = Object(f.b)(m, V.isImageMirror),
-            R = Object(f.a)(!m),
-            L = V.isFullscreen ? "react-html5-camera-photo-fullscreen" : "";
-        return o.a.createElement("div", {
-          className: "react-html5-camera-photo " + L
-        }, o.a.createElement(l.a, {
-          cssClass: "display-error",
-          isDisplayError: V.isDisplayStartCameraError,
-          errorMsg: b
-        }), o.a.createElement(s.a, {
-          isShowWhiteFlash: !m
-        }), o.a.createElement("img", {
-          style: R,
-          alt: "camera",
-          src: a
-        }), o.a.createElement("video", {
-          style: T,
-          ref: w,
-          autoPlay: !0,
-          muted: "muted",
-          playsInline: !0
-        }), o.a.createElement(u.a, {
-          isClicked: !m,
-          onClick: t
-        }));
-      }
-
-      var r = t(0),
-          o = t.n(r),
-          i = t(1),
-          a = t.n(i),
-          A = t(2),
-          c = (t.n(A), t(9)),
-          u = t(13),
-          s = t(15),
-          l = t(17),
-          f = t(19),
-          h = t(21);
-      t.n(h);
-      t.o(A, "FACING_MODES") && t.d(e, "a", function () {
-        return A.FACING_MODES;
-      }), t.o(A, "IMAGE_TYPES") && t.d(e, "b", function () {
-        return A.IMAGE_TYPES;
-      });
-
-      var g = function () {
-        function V(V, e) {
-          var t = [],
-              n = !0,
-              r = !1,
-              o = void 0;
-
-          try {
-            for (var i, a = V[Symbol.iterator](); !(n = (i = a.next()).done) && (t.push(i.value), !e || t.length !== e); n = !0);
-          } catch (V) {
-            r = !0, o = V;
-          } finally {
-            try {
-              !n && a.return && a.return();
-            } finally {
-              if (r) throw o;
-            }
-          }
-
-          return t;
-        }
-
-        return function (e, t) {
-          if (Array.isArray(e)) return e;
-          if (Symbol.iterator in Object(e)) return V(e, t);
-          throw new TypeError("Invalid attempt to destructure non-iterable instance");
-        };
-      }(),
-          p = null;
-
-      e.c = n, n.propTypes = {
-        onTakePhoto: a.a.func,
-        onTakePhotoAnimationDone: a.a.func,
-        onCameraError: a.a.func,
-        idealFacingMode: a.a.string,
-        idealResolution: a.a.object,
-        imageType: a.a.string,
-        isImageMirror: a.a.bool,
-        isSilentMode: a.a.bool,
-        isDisplayStartCameraError: a.a.bool,
-        imageCompression: a.a.number,
-        isMaxResolution: a.a.bool,
-        isFullscreen: a.a.bool,
-        sizeFactor: a.a.number,
-        onCameraStart: a.a.func,
-        onCameraStop: a.a.func
-      }, n.defaultProps = {
-        isImageMirror: !0,
-        isDisplayStartCameraError: !0
-      };
-    }, function (V, e, t) {
-
-      function n() {}
-
-      function r() {}
-
-      var o = t(8);
-      r.resetWarningCache = n, V.exports = function () {
-        function V(V, e, t, n, r, i) {
-          if (i !== o) {
-            var a = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");
-            throw a.name = "Invariant Violation", a;
-          }
-        }
-
-        function e() {
-          return V;
-        }
-
-        V.isRequired = V;
-        var t = {
-          array: V,
-          bool: V,
-          func: V,
-          number: V,
-          object: V,
-          string: V,
-          symbol: V,
-          any: V,
-          arrayOf: e,
-          element: V,
-          elementType: V,
-          instanceOf: e,
-          node: V,
-          objectOf: e,
-          oneOf: e,
-          oneOfType: e,
-          shape: e,
-          exact: e,
-          checkPropTypes: r,
-          resetWarningCache: n
-        };
-        return t.PropTypes = t, t;
-      };
-    }, function (V, e, t) {
-
-      V.exports = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
-    }, function (V, e, t) {
-
-      function n(V) {
-        return function () {
-          var e = V.apply(this, arguments);
-          return new Promise(function (V, t) {
-            function n(r, o) {
-              try {
-                var i = e[r](o),
-                    a = i.value;
-              } catch (V) {
-                return void t(V);
-              }
-
-              if (!i.done) return Promise.resolve(a).then(function (V) {
-                n("next", V);
-              }, function (V) {
-                n("throw", V);
-              });
-              V(a);
-            }
-
-            return n("next");
-          });
-        };
-      }
-
-      function r(V, e, t, r) {
-        function o(V) {
-          return s.getDataUri(V);
-        }
-
-        var A = Object(a.useState)(null),
-            f = u(A, 2),
-            h = f[0],
-            g = f[1],
-            p = Object(a.useState)(null),
-            d = u(p, 2),
-            m = d[0],
-            v = d[1],
-            y = Object(a.useState)(null),
-            k = u(y, 2),
-            b = k[0],
-            E = k[1];
-        return Object(a.useEffect)(function () {
-          V && V.current && (s = new c.a(V.current));
-        }, [V]), Object(a.useEffect)(function () {
-          var o = function () {
-            var V = n(i.a.mark(function V() {
-              var n;
-              return i.a.wrap(function (V) {
-                for (;;) switch (V.prev = V.next) {
-                  case 0:
-                    if (l = !0, V.prev = 1, n = null, !r) {
-                      V.next = 9;
-                      break;
-                    }
-
-                    return V.next = 6, s.startCameraMaxResolution(e);
-
-                  case 6:
-                    n = V.sent, V.next = 12;
-                    break;
-
-                  case 9:
-                    return V.next = 11, s.startCamera(e, t);
-
-                  case 11:
-                    n = V.sent;
-
-                  case 12:
-                    g(n), v(null), V.next = 19;
-                    break;
-
-                  case 16:
-                    V.prev = 16, V.t0 = V.catch(1), v(V.t0);
-
-                  case 19:
-                  case "end":
-                    return V.stop();
-                }
-              }, V, this, [[1, 16]]);
-            }));
-            return function () {
-              return V.apply(this, arguments);
-            };
-          }();
-
-          if (h) return function () {
-            function e() {
-              return t.apply(this, arguments);
-            }
-
-            var t = n(i.a.mark(function e() {
-              return i.a.wrap(function (e) {
-                for (;;) switch (e.prev = e.next) {
-                  case 0:
-                    if (e.prev = 0, !l) {
-                      e.next = 5;
-                      break;
-                    }
-
-                    return l = !1, e.next = 5, s.stopCamera();
-
-                  case 5:
-                    V && V.current && (g(null), E(null)), e.next = 11;
-                    break;
-
-                  case 8:
-                    e.prev = 8, e.t0 = e.catch(0), E(e.t0);
-
-                  case 11:
-                  case "end":
-                    return e.stop();
-                }
-              }, e, this, [[0, 8]]);
-            }));
-            return e;
-          }();
-          o();
-        }, [V, h, e, t, r]), [h, m, b, o];
-      }
-
-      e.a = r;
-
-      var o = t(10),
-          i = t.n(o),
-          a = t(0),
-          A = (t.n(a), t(2)),
-          c = t.n(A),
-          u = function () {
-        function V(V, e) {
-          var t = [],
-              n = !0,
-              r = !1,
-              o = void 0;
-
-          try {
-            for (var i, a = V[Symbol.iterator](); !(n = (i = a.next()).done) && (t.push(i.value), !e || t.length !== e); n = !0);
-          } catch (V) {
-            r = !0, o = V;
-          } finally {
-            try {
-              !n && a.return && a.return();
-            } finally {
-              if (r) throw o;
-            }
-          }
-
-          return t;
-        }
-
-        return function (e, t) {
-          if (Array.isArray(e)) return e;
-          if (Symbol.iterator in Object(e)) return V(e, t);
-          throw new TypeError("Invalid attempt to destructure non-iterable instance");
-        };
-      }(),
-          s = null,
-          l = !1;
-    }, function (V, e, t) {
-      V.exports = t(11);
-    }, function (V, e, t) {
-      var n = function () {
-        return this;
-      }() || Function("return this")(),
-          r = n.regeneratorRuntime && Object.getOwnPropertyNames(n).indexOf("regeneratorRuntime") >= 0,
-          o = r && n.regeneratorRuntime;
-
-      if (n.regeneratorRuntime = void 0, V.exports = t(12), r) n.regeneratorRuntime = o;else try {
-        delete n.regeneratorRuntime;
-      } catch (V) {
-        n.regeneratorRuntime = void 0;
-      }
-    }, function (V, e) {
-      !function (e) {
-
-        function t(V, e, t, n) {
-          var o = e && e.prototype instanceof r ? e : r,
-              i = Object.create(o.prototype),
-              a = new f(n || []);
-          return i._invoke = c(V, t, a), i;
-        }
-
-        function n(V, e, t) {
-          try {
-            return {
-              type: "normal",
-              arg: V.call(e, t)
-            };
-          } catch (V) {
-            return {
-              type: "throw",
-              arg: V
-            };
-          }
-        }
-
-        function r() {}
-
-        function o() {}
-
-        function i() {}
-
-        function a(V) {
-          ["next", "throw", "return"].forEach(function (e) {
-            V[e] = function (V) {
-              return this._invoke(e, V);
-            };
-          });
-        }
-
-        function A(V) {
-          function e(t, r, o, i) {
-            var a = n(V[t], V, r);
-
-            if ("throw" !== a.type) {
-              var A = a.arg,
-                  c = A.value;
-              return c && "object" === typeof c && m.call(c, "__await") ? Promise.resolve(c.__await).then(function (V) {
-                e("next", V, o, i);
-              }, function (V) {
-                e("throw", V, o, i);
-              }) : Promise.resolve(c).then(function (V) {
-                A.value = V, o(A);
-              }, i);
-            }
-
-            i(a.arg);
-          }
-
-          function t(V, t) {
-            function n() {
-              return new Promise(function (n, r) {
-                e(V, t, n, r);
-              });
-            }
-
-            return r = r ? r.then(n, n) : n();
-          }
-
-          var r;
-          this._invoke = t;
-        }
-
-        function c(V, e, t) {
-          var r = C;
-          return function (o, i) {
-            if (r === S) throw new Error("Generator is already running");
-
-            if (r === x) {
-              if ("throw" === o) throw i;
-              return g();
-            }
-
-            for (t.method = o, t.arg = i;;) {
-              var a = t.delegate;
-
-              if (a) {
-                var A = u(a, t);
-
-                if (A) {
-                  if (A === I) continue;
-                  return A;
-                }
-              }
-
-              if ("next" === t.method) t.sent = t._sent = t.arg;else if ("throw" === t.method) {
-                if (r === C) throw r = x, t.arg;
-                t.dispatchException(t.arg);
-              } else "return" === t.method && t.abrupt("return", t.arg);
-              r = S;
-              var c = n(V, e, t);
-
-              if ("normal" === c.type) {
-                if (r = t.done ? x : U, c.arg === I) continue;
-                return {
-                  value: c.arg,
-                  done: t.done
-                };
-              }
-
-              "throw" === c.type && (r = x, t.method = "throw", t.arg = c.arg);
-            }
-          };
-        }
-
-        function u(V, e) {
-          var t = V.iterator[e.method];
-
-          if (t === p) {
-            if (e.delegate = null, "throw" === e.method) {
-              if (V.iterator.return && (e.method = "return", e.arg = p, u(V, e), "throw" === e.method)) return I;
-              e.method = "throw", e.arg = new TypeError("The iterator does not provide a 'throw' method");
-            }
-
-            return I;
-          }
-
-          var r = n(t, V.iterator, e.arg);
-          if ("throw" === r.type) return e.method = "throw", e.arg = r.arg, e.delegate = null, I;
-          var o = r.arg;
-          return o ? o.done ? (e[V.resultName] = o.value, e.next = V.nextLoc, "return" !== e.method && (e.method = "next", e.arg = p), e.delegate = null, I) : o : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, I);
-        }
-
-        function s(V) {
-          var e = {
-            tryLoc: V[0]
-          };
-          1 in V && (e.catchLoc = V[1]), 2 in V && (e.finallyLoc = V[2], e.afterLoc = V[3]), this.tryEntries.push(e);
-        }
-
-        function l(V) {
-          var e = V.completion || {};
-          e.type = "normal", delete e.arg, V.completion = e;
-        }
-
-        function f(V) {
-          this.tryEntries = [{
-            tryLoc: "root"
-          }], V.forEach(s, this), this.reset(!0);
-        }
-
-        function h(V) {
-          if (V) {
-            var e = V[y];
-            if (e) return e.call(V);
-            if ("function" === typeof V.next) return V;
-
-            if (!isNaN(V.length)) {
-              var t = -1,
-                  n = function e() {
-                for (; ++t < V.length;) if (m.call(V, t)) return e.value = V[t], e.done = !1, e;
-
-                return e.value = p, e.done = !0, e;
-              };
-
-              return n.next = n;
-            }
-          }
-
-          return {
-            next: g
-          };
-        }
-
-        function g() {
-          return {
-            value: p,
-            done: !0
-          };
-        }
-
-        var p,
-            d = Object.prototype,
-            m = d.hasOwnProperty,
-            v = "function" === typeof Symbol ? Symbol : {},
-            y = v.iterator || "@@iterator",
-            k = v.asyncIterator || "@@asyncIterator",
-            b = v.toStringTag || "@@toStringTag",
-            E = "object" === typeof V,
-            w = e.regeneratorRuntime;
-        if (w) return void (E && (V.exports = w));
-        w = e.regeneratorRuntime = E ? V.exports : {}, w.wrap = t;
-        var C = "suspendedStart",
-            U = "suspendedYield",
-            S = "executing",
-            x = "completed",
-            I = {},
-            j = {};
-
-        j[y] = function () {
-          return this;
-        };
-
-        var T = Object.getPrototypeOf,
-            R = T && T(T(h([])));
-        R && R !== d && m.call(R, y) && (j = R);
-        var L = i.prototype = r.prototype = Object.create(j);
-        o.prototype = L.constructor = i, i.constructor = o, i[b] = o.displayName = "GeneratorFunction", w.isGeneratorFunction = function (V) {
-          var e = "function" === typeof V && V.constructor;
-          return !!e && (e === o || "GeneratorFunction" === (e.displayName || e.name));
-        }, w.mark = function (V) {
-          return Object.setPrototypeOf ? Object.setPrototypeOf(V, i) : (V.__proto__ = i, b in V || (V[b] = "GeneratorFunction")), V.prototype = Object.create(L), V;
-        }, w.awrap = function (V) {
-          return {
-            __await: V
-          };
-        }, a(A.prototype), A.prototype[k] = function () {
-          return this;
-        }, w.AsyncIterator = A, w.async = function (V, e, n, r) {
-          var o = new A(t(V, e, n, r));
-          return w.isGeneratorFunction(e) ? o : o.next().then(function (V) {
-            return V.done ? V.value : o.next();
-          });
-        }, a(L), L[b] = "Generator", L[y] = function () {
-          return this;
-        }, L.toString = function () {
-          return "[object Generator]";
-        }, w.keys = function (V) {
-          var e = [];
-
-          for (var t in V) e.push(t);
-
-          return e.reverse(), function t() {
-            for (; e.length;) {
-              var n = e.pop();
-              if (n in V) return t.value = n, t.done = !1, t;
-            }
-
-            return t.done = !0, t;
-          };
-        }, w.values = h, f.prototype = {
-          constructor: f,
-          reset: function (V) {
-            if (this.prev = 0, this.next = 0, this.sent = this._sent = p, this.done = !1, this.delegate = null, this.method = "next", this.arg = p, this.tryEntries.forEach(l), !V) for (var e in this) "t" === e.charAt(0) && m.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = p);
-          },
-          stop: function () {
-            this.done = !0;
-            var V = this.tryEntries[0],
-                e = V.completion;
-            if ("throw" === e.type) throw e.arg;
-            return this.rval;
-          },
-          dispatchException: function (V) {
-            function e(e, n) {
-              return o.type = "throw", o.arg = V, t.next = e, n && (t.method = "next", t.arg = p), !!n;
-            }
-
-            if (this.done) throw V;
-
-            for (var t = this, n = this.tryEntries.length - 1; n >= 0; --n) {
-              var r = this.tryEntries[n],
-                  o = r.completion;
-              if ("root" === r.tryLoc) return e("end");
-
-              if (r.tryLoc <= this.prev) {
-                var i = m.call(r, "catchLoc"),
-                    a = m.call(r, "finallyLoc");
-
-                if (i && a) {
-                  if (this.prev < r.catchLoc) return e(r.catchLoc, !0);
-                  if (this.prev < r.finallyLoc) return e(r.finallyLoc);
-                } else if (i) {
-                  if (this.prev < r.catchLoc) return e(r.catchLoc, !0);
-                } else {
-                  if (!a) throw new Error("try statement without catch or finally");
-                  if (this.prev < r.finallyLoc) return e(r.finallyLoc);
-                }
-              }
-            }
-          },
-          abrupt: function (V, e) {
-            for (var t = this.tryEntries.length - 1; t >= 0; --t) {
-              var n = this.tryEntries[t];
-
-              if (n.tryLoc <= this.prev && m.call(n, "finallyLoc") && this.prev < n.finallyLoc) {
-                var r = n;
-                break;
-              }
-            }
-
-            r && ("break" === V || "continue" === V) && r.tryLoc <= e && e <= r.finallyLoc && (r = null);
-            var o = r ? r.completion : {};
-            return o.type = V, o.arg = e, r ? (this.method = "next", this.next = r.finallyLoc, I) : this.complete(o);
-          },
-          complete: function (V, e) {
-            if ("throw" === V.type) throw V.arg;
-            return "break" === V.type || "continue" === V.type ? this.next = V.arg : "return" === V.type ? (this.rval = this.arg = V.arg, this.method = "return", this.next = "end") : "normal" === V.type && e && (this.next = e), I;
-          },
-          finish: function (V) {
-            for (var e = this.tryEntries.length - 1; e >= 0; --e) {
-              var t = this.tryEntries[e];
-              if (t.finallyLoc === V) return this.complete(t.completion, t.afterLoc), l(t), I;
-            }
-          },
-          catch: function (V) {
-            for (var e = this.tryEntries.length - 1; e >= 0; --e) {
-              var t = this.tryEntries[e];
-
-              if (t.tryLoc === V) {
-                var n = t.completion;
-
-                if ("throw" === n.type) {
-                  var r = n.arg;
-                  l(t);
-                }
-
-                return r;
-              }
-            }
-
-            throw new Error("illegal catch attempt");
-          },
-          delegateYield: function (V, e, t) {
-            return this.delegate = {
-              iterator: h(V),
-              resultName: e,
-              nextLoc: t
-            }, "next" === this.method && (this.arg = p), I;
-          }
-        };
-      }(function () {
-        return this;
-      }() || Function("return this")());
-    }, function (V, e, t) {
-
-      var n = t(0),
-          r = t.n(n),
-          o = t(1),
-          i = t.n(o),
-          a = t(14),
-          A = (t.n(a), function (V) {
-        var e = V.onClick,
-            t = V.isClicked,
-            n = t ? "is-clicked" : "";
-        return r.a.createElement("div", {
-          id: "container-circles"
-        }, r.a.createElement("div", {
-          id: "outer-circle",
-          onClick: function (V) {
-            t || e();
-          }
-        }, r.a.createElement("div", {
-          id: "inner-circle",
-          className: n
-        })));
-      });
-      A.propTypes = {
-        onClick: i.a.func.isRequired,
-        isClicked: i.a.bool.isRequired
-      }, e.a = A;
-    }, function (V, e) {}, function (V, e, t) {
-
-      var n = t(0),
-          r = t.n(n),
-          o = t(1),
-          i = t.n(o),
-          a = t(16),
-          A = (t.n(a), function (V) {
-        var e = V.isShowWhiteFlash,
-            t = e ? "do-transition" : "",
-            n = t + " normal";
-        return r.a.createElement("div", {
-          id: "white-flash",
-          className: n
-        });
-      });
-      A.propTypes = {
-        isShowWhiteFlash: i.a.bool.isRequired
-      }, e.a = A;
-    }, function (V, e) {}, function (V, e, t) {
-
-      function n(V, e) {
-        return V && e && e.length > 0;
-      }
-
-      var r = t(0),
-          o = t.n(r),
-          i = t(1),
-          a = t.n(i),
-          A = t(18),
-          c = (t.n(A), function (V) {
-        var e = V.isDisplayError,
-            t = V.errorMsg,
-            r = V.cssClass;
-        return n(e, t) ? (console.log("cssClass", r), o.a.createElement("div", {
-          className: r,
-          id: "display-error"
-        }, o.a.createElement("h1", null, "Camera error: ", t))) : null;
-      });
-      c.propTypes = {
-        isDisplayError: a.a.bool,
-        errorMsg: a.a.string,
-        cssClass: a.a.string
-      }, e.a = c;
-    }, function (V, e) {}, function (V, e, t) {
-
-      function n(V) {
-        return V ? {
-          display: "inline-block"
-        } : {
-          display: "none"
-        };
-      }
-
-      function r(V) {
-        return V ? {
-          transform: "rotateY(180deg)"
-        } : {
-          transform: "none"
-        };
-      }
-
-      function o(V, e) {
-        return Object.assign({}, r(e), n(V));
-      }
-
-      function i() {
-        new Audio("data:audio/mp3;base64," + c.a.base64).play();
-      }
-
-      function a(V) {
-        console.info("react-html5-camera-photo info:", V);
-      }
-
-      e.a = n, e.b = o, e.c = i, e.d = a;
-      var A = t(20),
-          c = t.n(A);
-    }, function (V, e) {
-      V.exports = {
-        base64: "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Oau1+DczWWohH8L0eh/nWTbo8/OvyZ/ccZuEf/+Rn/l/L/M//+ZEqKpH+ZFToqJ+iqi+i/yoi+ip9yhgYMh27OZUWpgoIEd1ITFaxUllRQWcDAaskNCYwCgJAlEQaBsJgsBQSlREGgbCYLBUBAUSiINB2dKnUZK3kSJ1948Y9LNCn/I9c763Wf1AVct8rUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5REtg5yOQ+/ACAYIkLiWBAEIy5G6UjKQIBcAPWAH5ARjShVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVACCU025+ZGfywyOy3//ksyP+XMmstIyNWCggQNHI1ls////WWRyMmVgYME6GTLJZ///2WWxyNWWSoZGrWyzL/9WVqCBOhkyhgYMI6GrBQUqFpoVFP9bDILCzOLiv/rFRYk//qF+LCrDKm/4o2sVFtbP6hdmLCsyoXUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5Rkjg/ygl8ruCAaQiiABWAAAAAAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+5RkUY/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU="
-      };
-    }, function (V, e) {}]);
-  });
-});
-var Camera$1 = unwrapExports(build);
 
 var DefaultToolbar$1 = (function (props) {
   var className = props.className,
@@ -4051,6 +3808,7 @@ var DefaultToolbar$1 = (function (props) {
     }
   }, /*#__PURE__*/React__default.createElement(Camera, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button, {
     navbar: true,
+    disabled: true,
     onClick: function onClick(_) {
       return fileUploader.current.click();
     }
@@ -4060,64 +3818,45 @@ var DefaultToolbar$1 = (function (props) {
   }, /*#__PURE__*/React__default.createElement(Voice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
 });
 
-var ChatRecord = (function (props) {
-  var className = props.className,
-      recording = props.recording,
-      handleDelete = props.handleDelete,
-      handleSend = props.handleSend,
-      record = props.record,
-      rest = _objectWithoutProperties(props, ["className", "recording", "handleDelete", "handleSend", "record"]);
-
-  var classes = genClasses.cEx(['chat-footer__message-input', 'flex-row', 'align-stretch', className]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: classes
-  }, recording && /*#__PURE__*/React__default.createElement("div", null, "Enregistrement"), !recording && record && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("audio", {
-    src: record,
-    controls: true,
-    preload: 'metadata'
-  }), /*#__PURE__*/React__default.createElement("button", {
-    onClick: handleDelete,
-    className: "button button--send text icon--32 flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(fa.FaRegTrashAlt, null)), /*#__PURE__*/React__default.createElement("button", {
-    onClick: handleSend,
-    className: "button button--send text icon--32 flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
-});
-
 var __toolbar_prefix = 'toolbar';
 var __input_prefix = 'input';
 var __record_prefix = 'record';
-var ChatFooter = (function (props) {
+
+var ChatFooter = function ChatFooter(props) {
   var className = props.className,
       recording = props.recording,
       record = props.record,
       afterMainComponent = _objectWithoutProperties(props, ["className", "recording", "record"]);
 
-  var classes = genClasses.cEx(['chat-footer', className]);
-
-  var _spreadObjectBeginWit = ReactUtils_11(__toolbar_prefix, afterMainComponent),
+  var _spreadObjectBeginWit = ReactUtils_10(__toolbar_prefix, afterMainComponent),
       _spreadObjectBeginWit2 = _slicedToArray(_spreadObjectBeginWit, 2),
       toolbarProps = _spreadObjectBeginWit2[0],
       notSuitableForToolbar = _spreadObjectBeginWit2[1];
 
-  var _spreadObjectBeginWit3 = ReactUtils_11(__input_prefix, notSuitableForToolbar),
+  var _spreadObjectBeginWit3 = ReactUtils_10(__input_prefix, notSuitableForToolbar),
       _spreadObjectBeginWit4 = _slicedToArray(_spreadObjectBeginWit3, 2),
       inputProps = _spreadObjectBeginWit4[0],
       notSuitableForInput = _spreadObjectBeginWit4[1];
 
-  var _spreadObjectBeginWit5 = ReactUtils_11(__record_prefix, notSuitableForInput),
+  var _spreadObjectBeginWit5 = ReactUtils_10(__record_prefix, notSuitableForInput),
       _spreadObjectBeginWit6 = _slicedToArray(_spreadObjectBeginWit5, 2),
       recordProps = _spreadObjectBeginWit6[0],
       rest = _spreadObjectBeginWit6[1];
 
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
-    column: true,
-    className: classes
+    className: className
   }, rest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_prefix, toolbarProps)), !recording && !record && /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_prefix, inputProps)), (recording || record) && /*#__PURE__*/React__default.createElement(ChatRecord, _extends({
     recording: recording,
     record: record
   }, ReactUtils_5(__record_prefix, recordProps))));
+};
+
+var ClassedComponent = withBaseClass('chat-footer');
+var Layout$2 = applyModifiers({
+  'column': true
 });
+var enhance$3 = compositeJs.compose(ClassedComponent, Layout$2);
+var ChatFooter$1 = enhance$3(ChatFooter);
 
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
@@ -4226,7 +3965,7 @@ const useVoiceRecorder = cb => {
   };
 };
 
-var index$c = (function (props) {
+var index$9 = (function (props) {
   var autoscroll = props.autoscroll,
       dragAndDrop = props.dragAndDrop,
       handleChange = props.handleChange,
@@ -4366,7 +4105,7 @@ var index$c = (function (props) {
     return dragging ? 'drop' : '';
   }]);
   var classesOverlay = genClasses.cEx(["drop_overlay", function (_) {
-    return dragging ? 'drop' : '';
+    return dragging ? 'drop_overlay--visible' : '';
   }]);
   return /*#__PURE__*/React__default.createElement("div", {
     className: "hermed-chat"
@@ -4381,9 +4120,11 @@ var index$c = (function (props) {
     onTouchEnd: releaseScroll,
     onMouseDown: holdScroll,
     onMouseUp: releaseScroll
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, props.children, /*#__PURE__*/React__default.createElement("div", {
     className: classesOverlay
-  }, " ", /*#__PURE__*/React__default.createElement("h2", null, " lachez pour envoyer "), " ", /*#__PURE__*/React__default.createElement(md.MdCloudUpload, null)), props.children), /*#__PURE__*/React__default.createElement(ChatFooter, {
+  }, " ", /*#__PURE__*/React__default.createElement("h2", null, " lachez pour envoyer "), " ", /*#__PURE__*/React__default.createElement(Upload, {
+    xl: true
+  }))), /*#__PURE__*/React__default.createElement(ChatFooter$1, {
     recording: isRecording,
     record: record,
     toolbarHandleAudio: handleAudio,
@@ -4402,7 +4143,7 @@ var index$c = (function (props) {
   }));
 });
 
-var Landing = (function (props) {
+var index$a = (function (props) {
   var className = props.className,
       organiser = props.organiser,
       customer = props.customer;
@@ -4428,46 +4169,6 @@ var Landing = (function (props) {
   }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
 });
 
-var index$d = (function (props) {
-  var handleClick = props.handleClick,
-      identity = props.identity;
-
-  var _useState = React.useState(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
-
-  var _handleClick = function _handleClick(e) {
-    handleClick && handleClick(value);
-    e.preventDefault();
-  };
-
-  return /*#__PURE__*/React__default.createElement(Landing, {
-    customer: true
-  }, /*#__PURE__*/React__default.createElement("p", {
-    className: "text--center"
-  }, identity || 'Votre docteur', " vous invite \xE0 rejoindre sa salle d'attente pour une consultation \xE0 distance. Lorsque vous \xEAtes pr\xEAts, cliquez sur le bouton ci-dessous pour la rejoindre."), /*#__PURE__*/React__default.createElement(Form, {
-    onSubmit: _handleClick
-  }, /*#__PURE__*/React__default.createElement(Input, {
-    mask: "99.99.9999",
-    label: "Votre date de naissance",
-    name: "birthday",
-    placeholder: "JJ.MM.YYYY",
-    onChange: function onChange(e) {
-      return setValue(e.target.value);
-    },
-    value: value,
-    autoComplete: "off"
-  }), /*#__PURE__*/React__default.createElement(Button, null, "JE SUIS PR\xCAT !")));
-});
-
-var index$e = (function (props) {
-  var handleSubmit = props.handleSubmit;
-  return /*#__PURE__*/React__default.createElement(Landing, null, /*#__PURE__*/React__default.createElement(OrganiserConfigurationForm, {
-    handleSubmit: handleSubmit
-  }));
-});
-
 var LayoutGrid = (function (props) {
   var className = props.className,
       layout3 = props.layout3,
@@ -4484,11 +4185,11 @@ var LayoutGrid = (function (props) {
   }, rest), props.children));
 });
 
-var _bem$3 = bem('video-call__toolbar'),
-    _bem2$2 = _slicedToArray(_bem$3, 3),
-    __base_class$3 = _bem2$2[0],
-    element$3 = _bem2$2[1],
-    modifier$3 = _bem2$2[2];
+var _bem$9 = bem('video-call__toolbar'),
+    _bem2$9 = _slicedToArray(_bem$9, 3),
+    __base_class$7 = _bem2$9[0],
+    element$9 = _bem2$9[1],
+    modifier$9 = _bem2$9[2];
 
 var DefaultToolbar$2 = (function (props) {
   var className = props.className,
@@ -4523,7 +4224,7 @@ var DefaultToolbar$2 = (function (props) {
     handleCamera && handleCamera(newState);
   };
 
-  var classes = genClasses.cEx([__base_class$3, className]);
+  var classes = genClasses.cEx([__base_class$7, className]);
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
     justEvenly: true,
     className: classes
@@ -4550,12 +4251,7 @@ var DefaultToolbar$2 = (function (props) {
   }, /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Switch")));
 });
 
-var _bem$4 = bem('video-call'),
-    _bem2$3 = _slicedToArray(_bem$4, 3),
-    __base_class$4 = _bem2$3[0],
-    element$4 = _bem2$3[1],
-    modifier$4 = _bem2$3[2];
-var index$f = (function (_ref) {
+var VideoCall = function VideoCall(_ref) {
   var className = _ref.className,
       Toolbar = _ref.Toolbar,
       handleAnswer = _ref.handleAnswer,
@@ -4563,25 +4259,23 @@ var index$f = (function (_ref) {
       incoming = _ref.incoming,
       rest = _objectWithoutProperties(_ref, ["className", "Toolbar", "handleAnswer", "handleDiscard", "incoming"]);
 
-  var classes = genClasses.cEx([__base_class$4, className]);
-
-  var _filterPropStartingWi = ReactUtils_11('video', rest),
+  var _filterPropStartingWi = ReactUtils_10('video', rest),
       _filterPropStartingWi2 = _slicedToArray(_filterPropStartingWi, 2),
       mainVideoProps = _filterPropStartingWi2[0],
       notSuitableForVp = _filterPropStartingWi2[1];
 
-  var _filterPropStartingWi3 = ReactUtils_11('feedback', notSuitableForVp),
+  var _filterPropStartingWi3 = ReactUtils_10('feedback', notSuitableForVp),
       _filterPropStartingWi4 = _slicedToArray(_filterPropStartingWi3, 2),
       feedbackVideoProps = _filterPropStartingWi4[0],
       notSuitableForFb = _filterPropStartingWi4[1];
 
-  var _filterPropStartingWi5 = ReactUtils_11('toolbar', notSuitableForFb),
+  var _filterPropStartingWi5 = ReactUtils_10('toolbar', notSuitableForFb),
       _filterPropStartingWi6 = _slicedToArray(_filterPropStartingWi5, 2),
       toolbarProps = _filterPropStartingWi6[0],
       notSuitableForToolbar = _filterPropStartingWi6[1];
 
   return /*#__PURE__*/React__default.createElement("div", _extends({
-    className: classes
+    className: className
   }, notSuitableForToolbar), /*#__PURE__*/React__default.createElement(LayoutGrid, {
     className: "layout-video-call"
   }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
@@ -4591,7 +4285,7 @@ var index$f = (function (_ref) {
     loop: true
   }, ReactUtils_5('video', mainVideoProps))), /*#__PURE__*/React__default.createElement(LayoutFlex, {
     justEvenly: true,
-    className: "".concat(__base_class$4, "__controls")
+    className: "".concat(__base_class$8, "__controls")
   }, incoming && /*#__PURE__*/React__default.createElement(Button, {
     round: true,
     success: true,
@@ -4601,26 +4295,35 @@ var index$f = (function (_ref) {
     failure: true,
     onClick: handleDiscard
   }, /*#__PURE__*/React__default.createElement(md.MdCallEnd, null)))), !Toolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar$2, ReactUtils_5('toolbar', toolbarProps))), /*#__PURE__*/React__default.createElement(Draggable, {
-    bounds: '.' + __base_class$4
+    bounds: '.' + __base_class$8
   }, /*#__PURE__*/React__default.createElement(Video, _extends({
     preview: true,
     autoPlay: true,
     loop: true,
     muted: true
   }, ReactUtils_5('feedback', feedbackVideoProps)))));
-});
+};
 
-var _bem$5 = bem('container-fullscreen'),
-    _bem2$4 = _slicedToArray(_bem$5, 3),
-    __base_class$5 = _bem2$4[0],
-    element$5 = _bem2$4[1],
-    modifier$5 = _bem2$4[2];
+var _bem$a = bem('video-call'),
+    _bem2$a = _slicedToArray(_bem$a, 3),
+    __base_class$8 = _bem2$a[0],
+    element$a = _bem2$a[1],
+    modifier$a = _bem2$a[2];
+var enhance$4 = withBaseClass(__base_class$8);
+var index$b = enhance$4(VideoCall);
 
-var index$g = (function (props) {
+var _bem$b = bem('container-fullscreen'),
+    _bem2$b = _slicedToArray(_bem$b, 3),
+    __base_class$9 = _bem2$b[0],
+    element$b = _bem2$b[1],
+    modifier$b = _bem2$b[2];
+
+var index$c = (function (props) {
   var offset = props.offset,
+      overflowY = props.overflowY,
       className = props.className,
       otherStyle = props.style,
-      rest = _objectWithoutProperties(props, ["offset", "className", "style"]);
+      rest = _objectWithoutProperties(props, ["offset", "overflowY", "className", "style"]);
 
   if (!offset) {
     offset = 0;
@@ -4644,7 +4347,9 @@ var index$g = (function (props) {
       window.removeEventListener('resize', adapt);
     };
   }, []);
-  var classes = genClasses.cEx([__base_class$5, className]);
+  var classes = genClasses.cEx([__base_class$9, function (_) {
+    return overflowY ? modifier$b('overflow-y') : '';
+  }, className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
     className: classes,
     style: _objectSpread2({
@@ -4653,29 +4358,29 @@ var index$g = (function (props) {
   }, rest), props.children);
 });
 
-var _bem$6 = bem('container-stack'),
-    _bem2$5 = _slicedToArray(_bem$6, 3),
-    __base_class$6 = _bem2$5[0],
-    element$6 = _bem2$5[1],
-    modifier$6 = _bem2$5[2];
+var _bem$c = bem('container-stack'),
+    _bem2$c = _slicedToArray(_bem$c, 3),
+    __base_class$a = _bem2$c[0],
+    element$c = _bem2$c[1],
+    modifier$c = _bem2$c[2];
 
-var index$h = (function (props) {
+var index$d = (function (props) {
   var className = props.className,
       baseKey = props.baseKey,
       baseIndex = props.baseIndex,
       rest = _objectWithoutProperties(props, ["className", "baseKey", "baseIndex"]);
 
-  var classes = genClasses.cEx([__base_class$6, className]);
+  var classes = genClasses.cEx([__base_class$a, className]);
 
   var _baseIndex = baseIndex || 1000;
 
   return /*#__PURE__*/React__default.createElement("div", {
     className: classes
   }, React__default.Children.toArray(props.children).map(function (children, idx) {
-    return React__default.cloneElement(children, {
-      className: genClasses.cEx([children.props.className, element$6('stacked')]),
+    return /*#__PURE__*/React__default.cloneElement(children, {
+      className: genClasses.cEx([children.props.className, element$c('stacked')]),
       key: "".concat(baseKey).concat(idx),
-      style: _objectSpread2({}, children.props.style, {
+      style: _objectSpread2(_objectSpread2({}, children.props.style), {}, {
         position: 'absolute',
         zIndex: _baseIndex + idx
       })
@@ -4683,12 +4388,12 @@ var index$h = (function (props) {
   }));
 });
 
-var _bem$7 = bem('container-modal'),
-    _bem2$6 = _slicedToArray(_bem$7, 3),
-    __base_class$7 = _bem2$6[0],
-    element$7 = _bem2$6[1],
-    modifier$7 = _bem2$6[2];
-var index$i = (function (_ref) {
+var _bem$d = bem('container-modal'),
+    _bem2$d = _slicedToArray(_bem$d, 3),
+    __base_class$b = _bem2$d[0],
+    element$d = _bem2$d[1],
+    modifier$d = _bem2$d[2];
+var Modal = (function (_ref) {
   var _ref2;
 
   var children = _ref.children,
@@ -4775,11 +4480,11 @@ var index$i = (function (_ref) {
       document.removeEventListener('load', adapt);
     };
   }, []);
-  var classes = genClasses.cEx([__base_class$7, (_ref2 = {}, _defineProperty(_ref2, modifier$7('cover'), function (_) {
+  var classes = genClasses.cEx([__base_class$b, (_ref2 = {}, _defineProperty(_ref2, modifier$d('cover'), function (_) {
     return cover;
-  }), _defineProperty(_ref2, modifier$7('centered'), function (_) {
+  }), _defineProperty(_ref2, modifier$d('centered'), function (_) {
     return centered;
-  }), _defineProperty(_ref2, modifier$7('bottom'), function (_) {
+  }), _defineProperty(_ref2, modifier$d('bottom'), function (_) {
     return bottom;
   }), _ref2), className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
@@ -4788,7 +4493,7 @@ var index$i = (function (_ref) {
   }, rest), children);
 });
 
-var index$j = (function (props) {
+var index$e = (function (props) {
   var className = props.className,
       rest = _objectWithoutProperties(props, ["className"]);
 
@@ -4798,81 +4503,79 @@ var index$j = (function (props) {
   }, rest), props.children);
 });
 
-var _bem$8 = bem('card'),
-    _bem2$7 = _slicedToArray(_bem$8, 3),
-    __base_class$8 = _bem2$7[0],
-    element$8 = _bem2$7[1],
-    modifier$8 = _bem2$7[2];
-var index$k = (function (_ref) {
-  var className = _ref.className,
-      children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ["className", "children"]);
+var _bem$e = bem('card'),
+    _bem2$e = _slicedToArray(_bem$e, 3),
+    __base_class$c = _bem2$e[0],
+    element$e = _bem2$e[1],
+    modifier$e = _bem2$e[2];
 
-  var classes = genClasses.cEx([__base_class$8, className]);
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
-    justBetween: true,
-    column: true,
-    className: classes
-  }, rest), children);
+var Card = compositeJs.compose(withBaseClass(__base_class$c), applyModifiers({
+  justBetween: true,
+  column: true
+}))(LayoutFlex);
+
+var _bem$f = bem('background-overlay'),
+    _bem2$f = _slicedToArray(_bem$f, 3),
+    __base_class$d = _bem2$f[0],
+    element$f = _bem2$f[1],
+    modifier$f = _bem2$f[2];
+
+var BackgroundOverlay = compositeJs.compose(withBaseClass(__base_class$d), applyModifiers({
+  cover: true
+}))(LayoutFlex);
+
+var index$f = (function (_ref) {
+  var children = _ref.children,
+      rest = _objectWithoutProperties(_ref, ["children"]);
+
+  return /*#__PURE__*/React__default.createElement(Modal, {
+    cover: true
+  }, /*#__PURE__*/React__default.createElement(BackgroundOverlay, {
+    centered: true
+  }, /*#__PURE__*/React__default.createElement(Card, rest, children)));
 });
 
-var _bem$9 = bem('card-container'),
-    _bem2$8 = _slicedToArray(_bem$9, 3),
-    __base_class$9 = _bem2$8[0],
-    element$9 = _bem2$8[1],
-    modifier$9 = _bem2$8[2];
-var index$l = (function (_ref) {
-  var className = _ref.className,
-      children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ["className", "children"]);
+var _bem$g = bem('drop-overlay'),
+    _bem2$g = _slicedToArray(_bem$g, 3),
+    __base_class$e = _bem2$g[0],
+    element$g = _bem2$g[1],
+    modifier$g = _bem2$g[2];
 
-  var classes = genClasses.cEx([__base_class$9, className]);
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
-    cover: true,
-    centered: true,
-    className: classes
-  }, rest), children);
-});
+var Component$2 = compositeJs.compose(withBaseClass(__base_class$e), withModifiers(function (x) {
+  return modifier$g(x);
+}, ['visible']))(divElement);
 
-exports.ActiveCallBar = index$7;
+exports.ActiveCallBar = index$6;
 exports.Badge = Badge;
 exports.Button = Button;
-exports.Calling = index$6;
-exports.Card = index$k;
-exports.CardContainer = index$l;
-exports.Chat = index$c;
+exports.Calling = index$5;
+exports.Card = Card;
+exports.CardContainer = index$f;
+exports.Chat = index$9;
 exports.ChatBubble = index;
-exports.ChatHeader = ChatHeader;
-exports.ChatHeaderStatus = ChatHeaderStatus;
-exports.ChatHeaderToolbar = ChatHeaderToolbar;
-exports.Container = index$j;
-exports.CustomerLanding = index$d;
-exports.DebugPanel = index$8;
-exports.Form = Form;
-exports.Fullscreen = index$g;
+exports.Container = index$e;
+exports.DebugPanel = index$7;
+exports.DropzoneOverlay = Component$2;
+exports.Form = index$2;
+exports.Fullscreen = index$c;
 exports.Header = Header;
 exports.HeaderBackButton = BackButton;
-exports.HeaderTitle = Title;
-exports.HeaderToolbar = Toolbar;
-exports.Icons = index$4;
-exports.Input = Input;
-exports.InputCheckbox = InputCheckbox;
-exports.Landing = Landing;
+exports.Icons = index$1;
+exports.Input = Input$1;
+exports.Landing = index$a;
 exports.LayoutFlex = LayoutFlex;
 exports.LayoutGrid = LayoutGrid;
-exports.Loading = index$5;
-exports.MobileVHAdapter = index$g;
-exports.Modal = index$i;
-exports.OrganiserConfigurationForm = OrganiserConfigurationForm;
-exports.OrganiserLanding = index$e;
-exports.Patient = index$2;
+exports.Loading = index$4;
+exports.MobileVHAdapter = index$c;
+exports.Modal = Modal;
+exports.Patient = Contact;
 exports.Select = index$3;
-exports.Sidebar = index$9;
-exports.SidebarList = index$a;
-exports.SidebarListItem = index$b;
-exports.Stack = index$h;
+exports.Sidebar = Component$1;
+exports.SidebarList = index$8;
+exports.SidebarListItem = Component;
+exports.Stack = index$d;
 exports.Video = Video;
-exports.VideoCall = index$f;
+exports.VideoCall = index$b;
 exports.VideoPreview = Video;
-exports.WaitingRoom = index$1;
+exports.WaitingRoom = WaitingRoom;
 //# sourceMappingURL=index.js.map

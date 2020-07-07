@@ -7,7 +7,6 @@ import { Camera as CamIcon,AttachFile,Voice } from "components/Icons";
 import Button from 'components/Button'
 
 import Camera from 'react-html5-camera-photo';
-import 'react-html5-camera-photo/build/css/index.css';
 
 export default props => {
   const {className,handlePhoto,handleFile,handleAudio,...rest} = props

@@ -123,7 +123,7 @@ export default props => {
   ])
   const classesOverlay = cEx([
     "drop_overlay",
-    _ => dragging ? 'drop' : ''
+    _ => dragging ? 'drop_overlay--visible' : ''
   ])
   return (
     <div className="hermed-chat">

@@ -7,6 +7,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import scss from 'rollup-plugin-scss'
+import sass from 'rollup-plugin-sass'
 import includePaths from 'rollup-plugin-includepaths';
 let includePathOptions = {
     include: {},
@@ -25,8 +26,9 @@ export default [
       exports: 'named',
     },
     external: ['is-dom', 'prop-types',
+    'react-html5-camera-photo',
     'react','@geekagency/composite-js','@geekagency/gen-classes',
-    'formik','react-input-mask','react-icons','react-icons/fa',
+    'formik','react-input-mask','react-icons','react-icons/fa','react-icons/gi',
     'react-icons/md','react-icons/libs','react-loading','react-draggable','react-icons/lib'],
     plugins: [
       nodeResolve({
@@ -36,7 +38,9 @@ export default [
         include: 'node_modules/**',
       }),
       babel({ runtimeHelpers: true }),
-      scss(),
+      scss({
+        failOnError:true
+      }),
       includePaths(includePathOptions)
     ],
   }/*, {
