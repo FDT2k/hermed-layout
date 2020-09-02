@@ -5,15 +5,21 @@ import { filterPropStartingWith, forwardProps, bem, cEx, modifiersToCeX } from '
 const [__base_class, element,modifier]= bem('container-fullscreen')
 
 export default props => {
-  let { offset,overflowY, className, style:otherStyle, ...rest } = props;
+  let { offset,overflowY, stretch,className, style:otherStyle, ...rest } = props;
   if (!offset) {
     offset = 0;
   }
+
+  const ref = useRef();
   const [vh, setVh] = useState();
+  const [_height, setHeight] = useState();
 
   const adapt = () => {
-    setVh((window.innerHeight - offset) * 0.01)
+    setVh((window.innerHeight - offset) * 0.01);
+
+    setHeight(ref.current.getBoundingClientRect().height)
   }
+
 
   useEffect(() => {
     adapt();
@@ -29,11 +35,11 @@ export default props => {
   const classes = cEx([
     __base_class,
     _=> overflowY ? modifier('overflow-y'): '',
+    _=> stretch && _height > window.innerHeight ? modifier('adapt'): '',
     className,
   ])
-
   return (
-    <div className={classes} style={{ '--vh': `${vh}px` ,...otherStyle}} {...rest}>
+    <div ref={ref} className={classes} style={{ '--vh': `${vh}px` ,...otherStyle}} {...rest}>
       {props.children}
     </div>
   )

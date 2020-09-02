@@ -24,9 +24,13 @@ const bem = main => {
 export const makeBem = current => {
     return {
         current,
-        block: block => makeBem(`${current}-${block}`),
-        element: element=> makeBem(`${current}__${element}`),
-        modifier:modifier => makeBem(`${current}--${modifier}`)
+        make: {
+            block: block => makeBem(`${current}-${block}`),
+            element: element=> makeBem(`${current}__${element}`),
+            modifier:modifier => makeBem(`${current}--${modifier}`)
+        },
+        block :block => `${current}-${block}`,
+        modifier: modifier => `${current}--${modifier}`
     }
 }
 
@@ -64,7 +68,7 @@ export const withBem = bem => Component => props=>{
         bem.current,
         className
     ])
-    return <Component {...rest} className={classes} />
+    return <Component {...rest} parentBEM={bem} className={classes} />
 
 }
 
@@ -130,21 +134,27 @@ export const withTransformedProps = (namer, modifiers) => Component => props => 
     return <Component className={classes} {..._props}/>
 }
 
-// apply modifiers if not in unless
+// apply modifiers if none of unless is present in props
 export const applyModifiers = (modifiers,unless) => Component => props => {
 
-    let _m = modifiers;
-/*
+    let _m ;
+
     if(unless && unless.length>0){
-        const [presentModifiers, _props] = spreadObjectPresentIn(unless, props)
-
-        _m = enlist(modifiers).reduce((acc,item)=>{
-            console.log(presentModifiers)
-
-            return acc
-        },{})
+        let __m = {};
+        let found = false;
+        
+        for(let prop of Object.keys(props)){
+            if(unless.indexOf(prop) !==-1){
+                found = true
+            }
+        }
+        if(!found){
+            _m = modifiers
+        }
+    }else{
+        _m = modifiers
     }
-*/
+
     return <Component {..._m} {...props} />
 }
 

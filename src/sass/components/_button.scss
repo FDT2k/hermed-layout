@@ -6,90 +6,111 @@
   padding: 1em 1.5em;
 }
 
-.button {
+.flexbutton{
 
+  &--row{
+    @include flex();
+    @include flex-just(center);
+    @include flex-align(center);
+   
+  }
+  &--row-reverse{
+    @include flex();
+    @include flex-direction(row-reverse);
+    @include flex-just(center);
+    @include flex-align(center);
+   
+  }
+  &--spread{
+    @include flex-just(space-between);
+  }
+
+
+}
+
+.button {
   max-width: 500px;
   cursor: pointer;
   text-transform: uppercase;
-	@include themify($themes) {
-		@include themed_font('secondaryFont', 'semi-bold');
-	}
 
-  &.round{
+
+  @include themify($themes) {
+    @include themed_font("secondaryFont", "semi-bold");
+  }
+
+
+  &--round {
     border-radius: 50%;
     padding: 1em 1.25em;
     margin: 0px;
     @include themify($themes) {
-      border:0px solid themed('primaryColor');
+      border: 0px solid themed("primaryColor");
     }
 
     svg {
       width: 32px;
       height: 32px;
-      @include mq-width-and-lower(425px){
+      @include mq-width-and-lower(425px) {
         width: 24px;
         height: 24px;
-
       }
     }
   }
 
-
-
-  &.success{
+  &--success {
     @include themify($themes) {
-      background-color: themed('statusGreen');
+      background-color: themed("statusGreen");
       color: white;
     }
   }
-  &.failure{
+  &--failure {
     @include themify($themes) {
-      background-color: themed('statusRed');
+      background-color: themed("statusRed");
       color: white;
     }
   }
-  &.fit{
-    width:auto;
+  &--fit {
+    width: auto;
   }
 
-	&.contained,
-	&.outlined
-	{
+  &--contained,
+  &--outlined {
     @extend %block;
-		@include themify($themes) {
-			color: themed('secondaryBasic');
-			border: 1px solid themed('primaryColor');
-		}
-	}
+    @include themify($themes) {
+      color: themed("secondaryBasic");
+      border: 1px solid themed("primaryColor");
+    }
+  }
 
-	&.contained {
-		@include themify($themes) {
-			background-color:themed('primaryColor');
-		}
-	}
-
-	&.outlined {
-		background-color: transparent;
-		@include themify($themes) {
-			color:themed('primaryColor');
-		}
-	}
-
-	&.text {
-		background-color: transparent;
-		border: none;
-		@include themify($themes) {
-			color:themed('primaryColor');
-		}
-	}
+  &--contained {
+    @include themify($themes) {
+      background-color: themed("primaryColor");
+    }
 
 
-  &.navbar {
+  }
+
+  &--outlined {
+    background-color: transparent;
+    @include themify($themes) {
+      color: themed("primaryColor");
+    }
+  }
+
+  &--text {
+    background-color: transparent;
+    border: none;
+    @include themify($themes) {
+      color: themed("primaryColor");
+    }
+  }
+
+  &--navbar {
     background-color: transparent;
     border: none;
 
     @include themify($themes) {
-      color:themed('secondaryBasic');
+      color: themed("secondaryBasic");
     }
   }
 
@@ -103,22 +124,26 @@
     }
   }
 
-  &.clear{
+  &--clear {
     background-color: transparent;
     border-color: transparent;
   }
 
   /* :hover */
-	&:hover, &:focus {
-		@include themify($themes) {
-			color: themed('primaryBasic');
-		}
-	}
-
-  &.outlined:hover, &.outlined:focus,&.contained:hover, &.contained:focus {
+  &:hover,
+  &:focus {
     @include themify($themes) {
-      border: 1px solid themed('primaryColorDark');
-      background-color:themed('primaryColorDark');
+      color: themed("primaryBasic");
+    }
+  }
+
+  &--outlined:hover,
+  &--outlined:focus,
+  &--contained:hover,
+  &--contained:focus {
+    @include themify($themes) {
+      border: 1px solid themed("primaryColorDark");
+      background-color: themed("primaryColorDark");
     }
   }
 
@@ -126,27 +151,28 @@
     transform: scale(1.1);
     transition: transform 0.1s;
     @include themify($themes) {
-      color:themed('primaryColor');
+      color: themed("primaryColor");
     }
     .icon {
       @include themify($themes) {
-  			background-color: themed('secondaryBasic');
-  		}
+        background-color: themed("secondaryBasic");
+      }
     }
   }
 
   /* :active */
-  &:active{
+  &:active {
     @include themify($themes) {
-			color: themed('primaryColor');
-		}
+      color: themed("primaryColor");
+    }
   }
 
-  &.outlined:active, &.contained:active{
+  &--outlined:active,
+  &--contained:active {
     @include themify($themes) {
-      color: themed('secondaryBasic');
-      border: 1px solid themed('primaryColor');
-      background-color:themed('primaryColor');
+      color: themed("secondaryBasic");
+      border: 1px solid themed("primaryColor");
+      background-color: themed("primaryColor");
     }
   }
 
@@ -154,58 +180,64 @@
     transform: scale(0.9);
     transition: transform 0.1s;
     @include themify($themes) {
-      color:themed('secondaryBasic');
+      color: themed("secondaryBasic");
     }
     h2 {
       @include themify($themes) {
-        color:themed('primaryColorLDarker');
+        color: themed("primaryColorLDarker");
       }
     }
     .icon {
       @include themify($themes) {
-        background-color: themed('primaryColorLDarker');
+        background-color: themed("primaryColorLDarker");
       }
     }
   }
 
   /* Disabled */
-  &.contained:disabled {
+  &--contained:disabled {
     @include themify($themes) {
-      background-color: themed('grayLight');
-      color: themed('light');
+      background-color: themed("grayLight");
+      color: themed("light");
     }
   }
-  &.outlined:disabled {
+  &--outlined:disabled {
     @include themify($themes) {
-      color: themed('grayLight');
+      color: themed("grayLight");
       background-color: inherit;
     }
   }
-  &.contained:disabled, &.outlined:disabled {
+  &--contained:disabled,
+  &--outlined:disabled {
     @include themify($themes) {
-      border: solid 1px themed('grayLight');
+      border: solid 1px themed("grayLight");
     }
   }
-  &.text:disabled {
+  &--text:disabled {
     @include themify($themes) {
-      color: themed('grayLight');
+      color: themed("grayLight");
     }
   }
   &--icon:disabled:not(.button--send) {
     @include themify($themes) {
-      color:themed('grayLight');
+      color: themed("grayLight");
     }
     h2 {
       @include themify($themes) {
-        color:themed('grayLight');
+        color: themed("grayLight");
       }
     }
     .icon {
-        background-color:inherit;
+      background-color: inherit;
     }
+  }
+
+  &:disabled{
+    cursor: not-allowed;
   }
 }
 
-.button, .button:active{
-	outline: none;
+.button,
+.button:active {
+  outline: none;
 }

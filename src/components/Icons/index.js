@@ -28,7 +28,7 @@ const [__base_class,element,modifier] = bem (CLASSES.ICON)
 const withIconsModifiers = compose(
     withBaseClass(__base_class),
     withModifiers(x => modifier(x), SIZE_PROPS),
-    wrapComponent(LayoutFlex)
+    wrapComponent(divElement)
 )
 
 

@@ -1,28 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react';
 import 'sass/projects/gka/style.scss';
-import 'sass/projects/hermod/style.scss';
 
-import LayoutFlex from 'layouts/Flex'
-import Fullscreen from 'containers/Fullscreen'
 import { withKnobs, text, boolean, number, optionsKnob as options } from "@storybook/addon-knobs";
 import { makeThemeSelect } from 'stories/theme-knobs'
 import { bem, compose, baseElement, applyModifiers, withVariables, withModifiers, wrapComponent, asideElement, divElement, withBaseClass, cEx } from 'utils'
 import { camelToSnakeCase, trace } from '@geekagency/composite-js'
+
+
+import TiledSection from 'components/TiledSection'
+
 
 export default {
     title: 'GeekAgency/Website',
     decorators: [withKnobs]
 };
 
-const [__base_class, element, modifier] = bem('tiled-section')
-
-const TiledSection = compose(
-   
-    withBaseClass(__base_class),
-
-    applyModifiers({column:true, justCenter: true, alignCenter: true, cover: true }),
-
-)(LayoutFlex)
 
 
 const DemoContent = props => {
@@ -76,7 +68,7 @@ export const Tile = props => {
         <div className={makeThemeSelect()}>
              <TiledSection>
              <header>
-                    <h1 class="page-title">Projets en cours</h1>
+                    <h1 class="main-title">Projets en cours</h1>
                 </header>
              </TiledSection>
             <TiledSection>

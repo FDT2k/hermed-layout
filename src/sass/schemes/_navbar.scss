@@ -14,7 +14,7 @@
   }
 
   .button {
-    &.text {
+    &.text { 
       @include themify($themes) {
         color: themed("secondaryBasic");
       }

@@ -1,26 +1,43 @@
 .tiled-section {
-    @include themify($themes) {
-        color: themed("textColor");
-        background-color: themed("backgroundColor");
-    }
+    @extend .scheme-normal;
 
     height: 100%;
-    min-height:100vh;
-    
-    > header {
-        padding-bottom: 50px;
-        @include mq-width-and-lower(500px) {
-            padding-bottom: 5px;
-        }
-    }
+    min-height: 100%;
 
-    > :not(header) {
-        padding-bottom: 10px;
+    &--debug{
+        @include mod__debug();
     }
-
-    padding: 120px rem(20);
+    padding: 120px rem16(20);
 
     @include mq-width-and-lower(768px) {
         padding: 5em 1.25rem 3em;
+    }
+
+    &__title {
+        &--animate {
+            opacity: 0;
+        }
+        &--page {
+            text-transform: uppercase;
+        }
+    }
+
+    &__content {
+        vertical-align: baseline;
+        width: 100%;
+        &--grid {
+            @include flex-direction(row);
+            @include flex-wrap-parent(wrap);
+            @include flex-just(space-between);
+            @include flex-align();
+        }
+
+        article {
+            margin: 2.5%;
+            min-width: 33%;
+            width: auto;
+            max-width: 45%;
+            @include flex-grow-children(1);
+        }
     }
 }

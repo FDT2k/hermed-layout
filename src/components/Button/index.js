@@ -1,8 +1,34 @@
 import React from 'react'
-import {cEx} from '@geekagency/gen-classes'
+
+import { divElement, compose, applyModifiers, withModifiers,withTransformedProps, withBaseClass, cEx,bem } from 'utils';
 
 
-export default props => {
+const [BASE_CLASS, element, modifier] = bem('button')
+
+const button_styles = ['text','navbar','outlined','clear','round']
+const button_default_style = 'contained'
+
+const withBaseButtonsModifiers = compose(
+  withModifiers(x => modifier(x), [button_default_style,...button_styles,'fit','success','failure'])
+)
+
+
+export const Button = props => {
+  const {children,...rest} = props
+  return (
+    <button {...rest}>{children}</button>
+  )
+}
+
+const enhance = compose(
+  withBaseClass(BASE_CLASS),
+  applyModifiers({[button_default_style]:true},button_styles), // if no style, we want it to be contained
+  withBaseButtonsModifiers 
+)
+
+export default enhance(Button)
+/*
+export default  props => {
   const {className,contained,clear,round,text,outlined,navbar,success,failure,fit, ...rest} = props
   const classes = cEx([
     "button",
@@ -27,3 +53,4 @@ export default props => {
     <button className={classes} {...rest}>{props.children}</button>
   )
 }
+*/

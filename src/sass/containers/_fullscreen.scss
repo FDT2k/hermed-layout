@@ -11,6 +11,11 @@
   &--overflow-y{
     overflow-y:scroll;
   }
+
+  &--adapt{
+    min-height: calc(var(--vh, 1vh) * 100);
+    height:auto;
+  }
 /*  @include mq-width-and-upper(768px){
     max-width:768px;
     width: 768px;

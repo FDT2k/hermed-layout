@@ -8,19 +8,19 @@ import LayoutFlex from 'layouts/Flex'
 
 const BEM = makeBem('single-input')
 
-const labelBem = BEM.element('label');
-const inputBem = BEM.element('input');
+const labelBem = BEM.make.element('label');
+const inputBem = BEM.make.element('input');
 
 
 const Label = compose(
   withBem(labelBem),
-  withModifiers(x => labelBem.modifier(x).current, ['error'])
+  withModifiers(x => labelBem.modifier(x), ['error'])
 )(baseElement('label'))
 
 
 
 const Error = compose(
-  withBem(BEM.element('error')),
+  withBem(BEM.make.element('error')),
 
 )(baseElement('div'))
 
@@ -28,14 +28,14 @@ const Error = compose(
 
 const Container = compose(
   withBem(BEM),
-  withModifiers(x => BEM.modifier(x).current, ['error']),
-  withModifiers((k,v) => BEM.modifier(`${k}-${v}`).current, ['checkbox']),
+  withModifiers(x => BEM.modifier(x), ['error']),
+  withModifiers((k,v) => BEM.modifier(`${k}-${v}`), ['checkbox']),
   applyModifiers({column:true, alignStart:true})
 )(LayoutFlex)
 
 const Input = compose(
   withBem(inputBem),
-  withModifiers(x => inputBem.modifier(x).current, ['error'])
+  withModifiers(x => inputBem.modifier(x), ['error'])
 
 )(InputComponent)
 

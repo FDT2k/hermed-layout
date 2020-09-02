@@ -40,6 +40,10 @@ import CardContainer from 'components/Card/Modal'
 
 import DropzoneOverlay from 'components/DropzoneOverlay'
 
+
+import TiledSection from 'components/TiledSection'
+
+
 import * as Icons from 'components/Icons'
 export {
   Chat,
@@ -79,5 +83,6 @@ export {
   Card,
   CardContainer,
   Icons,
-  DropzoneOverlay
+  DropzoneOverlay,
+  TiledSection
 }

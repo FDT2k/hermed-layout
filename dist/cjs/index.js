@@ -2003,14 +2003,22 @@ var bem = function bem(main) {
 var makeBem = function makeBem(current) {
   return {
     current: current,
-    block: function block(_block) {
-      return makeBem("".concat(current, "-").concat(_block));
+    make: {
+      block: function block(_block) {
+        return makeBem("".concat(current, "-").concat(_block));
+      },
+      element: function element(_element) {
+        return makeBem("".concat(current, "__").concat(_element));
+      },
+      modifier: function modifier(_modifier) {
+        return makeBem("".concat(current, "--").concat(_modifier));
+      }
     },
-    element: function element(_element) {
-      return makeBem("".concat(current, "__").concat(_element));
+    block: function block(_block2) {
+      return "".concat(current, "-").concat(_block2);
     },
-    modifier: function modifier(_modifier) {
-      return makeBem("".concat(current, "--").concat(_modifier));
+    modifier: function modifier(_modifier2) {
+      return "".concat(current, "--").concat(_modifier2);
     }
   };
 };
@@ -2068,6 +2076,7 @@ var withBem = function withBem(bem) {
 
       var classes = genClasses.cEx([bem.current, className]);
       return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+        parentBEM: bem,
         className: classes
       }));
     };
@@ -2123,23 +2132,30 @@ var withTransformedProps = function withTransformedProps(namer, modifiers) {
       }, _props));
     };
   };
-}; // apply modifiers if not in unless
+}; // apply modifiers if none of unless is present in props
 
 var applyModifiers = function applyModifiers(modifiers, unless) {
   return function (Component) {
     return function (props) {
-      var _m = modifiers;
-      /*
-          if(unless && unless.length>0){
-              const [presentModifiers, _props] = spreadObjectPresentIn(unless, props)
-      
-              _m = enlist(modifiers).reduce((acc,item)=>{
-                  console.log(presentModifiers)
-      
-                  return acc
-              },{})
+      var _m;
+
+      if (unless && unless.length > 0) {
+        var found = false;
+
+        for (var _i = 0, _Object$keys = Object.keys(props); _i < _Object$keys.length; _i++) {
+          var prop = _Object$keys[_i];
+
+          if (unless.indexOf(prop) !== -1) {
+            found = true;
           }
-      */
+        }
+
+        if (!found) {
+          _m = modifiers;
+        }
+      } else {
+        _m = modifiers;
+      }
 
       return /*#__PURE__*/React__default.createElement(Component, _extends({}, _m, props));
     };
@@ -2373,7 +2389,7 @@ var _bem$1 = bem(CLASSES.ICON),
 
 var withIconsModifiers = compositeJs.compose(withBaseClass(__base_class$1), withModifiers(function (x) {
   return modifier$1(x);
-}, SIZE_PROPS), wrapComponent(LayoutFlex));
+}, SIZE_PROPS), wrapComponent(divElement));
 var Hamburger = withIconsModifiers(gi.GiHamburgerMenu);
 var Warning = withIconsModifiers(TiWarning);
 var Call = withIconsModifiers(md.MdCall);
@@ -2420,56 +2436,53 @@ var Layout = applyModifiers({
 var enhance = compositeJs.compose(Layout, Headline);
 var Header = enhance(LayoutFlex);
 
-var Button = (function (props) {
-  var className = props.className,
-      _contained = props.contained,
-      _clear = props.clear,
-      _round = props.round,
-      _text = props.text,
-      _outlined = props.outlined,
-      _navbar = props.navbar,
-      _success = props.success,
-      _failure = props.failure,
-      _fit = props.fit,
-      rest = _objectWithoutProperties(props, ["className", "contained", "clear", "round", "text", "outlined", "navbar", "success", "failure", "fit"]);
+var _bem$2 = bem('button'),
+    _bem2$2 = _slicedToArray(_bem$2, 3),
+    BASE_CLASS = _bem2$2[0],
+    element$2 = _bem2$2[1],
+    modifier$2 = _bem2$2[2];
 
-  var classes = genClasses.cEx(["button", className, function (_) {
-    return !_contained && !_text && !_clear && !_round && !_outlined && !_navbar ? "contained" : "";
-  }, {
-    'contained': function contained(_) {
-      return _contained === true;
+var button_styles = ['text', 'navbar', 'outlined', 'clear', 'round'];
+var button_default_style = 'contained';
+var withBaseButtonsModifiers = compositeJs.compose(withModifiers(function (x) {
+  return modifier$2(x);
+}, [button_default_style].concat(button_styles, ['fit', 'success', 'failure'])));
+var Button = function Button(props) {
+  var children = props.children,
+      rest = _objectWithoutProperties(props, ["children"]);
+
+  return /*#__PURE__*/React__default.createElement("button", rest, children);
+};
+var enhance$1 = compositeJs.compose(withBaseClass(BASE_CLASS), applyModifiers(_defineProperty({}, button_default_style, true), button_styles), // if no style, we want it to be contained
+withBaseButtonsModifiers);
+var Button$1 = enhance$1(Button);
+/*
+export default  props => {
+  const {className,contained,clear,round,text,outlined,navbar,success,failure,fit, ...rest} = props
+  const classes = cEx([
+    "button",
+    className,
+    _=> (!contained&&!text && !clear&& !round && !outlined  && !navbar) ? "contained": "",
+    {
+      'contained':_=>contained === true,
+      'text':_=>text === true ,
+      'navbar': _=> navbar===true,
+      'outlined':_=>outlined === true,
+      'fit':_=>fit === true,
+      'round': _=> round ===true,
+      'success': _=> success ===true,
+      'failure': _=> failure ===true,
+      'clear': _=> clear ===true
     },
-    'text': function text(_) {
-      return _text === true;
-    },
-    'navbar': function navbar(_) {
-      return _navbar === true;
-    },
-    'outlined': function outlined(_) {
-      return _outlined === true;
-    },
-    'fit': function fit(_) {
-      return _fit === true;
-    },
-    'round': function round(_) {
-      return _round === true;
-    },
-    'success': function success(_) {
-      return _success === true;
-    },
-    'failure': function failure(_) {
-      return _failure === true;
-    },
-    'clear': function clear(_) {
-      return _clear === true;
-    }
-  }, function (_) {
-    return _navbar === true ? 'button--icon' : '';
-  }]);
-  return /*#__PURE__*/React__default.createElement("button", _extends({
-    className: classes
-  }, rest), props.children);
-});
+    _=> (navbar === true ) ? 'button--icon': '',
+
+
+  ])
+  return (
+    <button className={classes} {...rest}>{props.children}</button>
+  )
+}
+*/
 
 var DefaultToolbar = (function (props) {
   var className = props.className,
@@ -2479,13 +2492,13 @@ var DefaultToolbar = (function (props) {
   var classes = genClasses.cEx([className]);
   return /*#__PURE__*/React__default.createElement(LayoutFlex, {
     className: classes
-  }, /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleAdd
-  }, /*#__PURE__*/React__default.createElement(PersonAdd, null)), /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(PersonAdd, null)), /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleConfig
-  }, /*#__PURE__*/React__default.createElement(Gear, null)), /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(Gear, null)), /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleShutdown
   }, /*#__PURE__*/React__default.createElement(PowerOff, null)));
@@ -2498,7 +2511,7 @@ var Content = function Content(props) {
 
   return /*#__PURE__*/React__default.createElement("section", rest, children, React__default.Children.toArray(children).length === 0 && /*#__PURE__*/React__default.createElement("div", {
     className: "empty-list"
-  }, "Aucun contact", /*#__PURE__*/React__default.createElement(Button, {
+  }, "Aucun contact", /*#__PURE__*/React__default.createElement(Button$1, {
     onClick: handleClick
   }, "Inviter un contact")));
 };
@@ -2513,7 +2526,7 @@ var Header$1 = function Header$1(props) {
 
   return /*#__PURE__*/React__default.createElement(Header, {
     className: className
-  }, /*#__PURE__*/React__default.createElement(LayoutFlex, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(LayoutFlex, null, handleBack && /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleBack
   }, /*#__PURE__*/React__default.createElement(Hamburger, null)), /*#__PURE__*/React__default.createElement("h2", null, title)), Toolbar && displayToolbar && /*#__PURE__*/React__default.createElement(Toolbar, rest) || displayToolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar, rest));
@@ -2542,38 +2555,38 @@ var View = function View(props) {
   }, props.children));
 };
 
-var _bem$2 = bem('waiting-room'),
-    _bem2$2 = _slicedToArray(_bem$2, 3),
-    __base_class$2 = _bem2$2[0],
-    element$2 = _bem2$2[1],
-    modifier$2 = _bem2$2[2];
+var _bem$3 = bem('waiting-room'),
+    _bem2$3 = _slicedToArray(_bem$3, 3),
+    __base_class$2 = _bem2$3[0],
+    element$3 = _bem2$3[1],
+    modifier$3 = _bem2$3[2];
 
-var __content_class = element$2('content');
+var __content_class = element$3('content');
 
-var __header_class = element$2('header');
+var __header_class = element$3('header');
 
 var WaitingRoomContent = compositeJs.compose(withBaseClass(__content_class))(Content);
 var WaitingRoomHeader = compositeJs.compose(withBaseClass(__header_class))(Header$1);
 var WaitingRoom = compositeJs.compose(withBaseClass(__base_class$2))(View);
 
-var _bem$3 = bem(CLASSES.BADGE),
-    _bem2$3 = _slicedToArray(_bem$3, 3),
-    BASE_CLASS = _bem2$3[0],
-    element$3 = _bem2$3[1],
-    modifier$3 = _bem2$3[2];
+var _bem$4 = bem(CLASSES.BADGE),
+    _bem2$4 = _slicedToArray(_bem$4, 3),
+    BASE_CLASS$1 = _bem2$4[0],
+    element$4 = _bem2$4[1],
+    modifier$4 = _bem2$4[2];
 
 var withBadgeModifiers = compositeJs.compose(withModifiers(function (x) {
-  return modifier$3(x);
+  return modifier$4(x);
 }, STATE_PROPS), withModifiers(function (x) {
-  return modifier$3(x);
+  return modifier$4(x);
 }, SIZE_PROPS));
-var enhance$1 = compositeJs.compose(withBaseClass(BASE_CLASS), // transform status props to modifier
+var enhance$2 = compositeJs.compose(withBaseClass(BASE_CLASS$1), // transform status props to modifier
 withTransformedProps(function (x) {
-  return modifier$3(x);
+  return modifier$4(x);
 }, ['status']), withBadgeModifiers, applyModifiers({
   'centered': true
 }));
-var Badge = enhance$1(LayoutFlex);
+var Badge = enhance$2(LayoutFlex);
 
 var Geometry = createCommonjsModule(function (module, exports) {
 
@@ -3126,14 +3139,14 @@ var Geometry_12 = Geometry.rectContainsRect;
 var Geometry_13 = Geometry.rectIntersectRect;
 var Geometry_14 = Geometry.windowRect;
 
-var _bem$4 = bem('list-item'),
-    _bem2$4 = _slicedToArray(_bem$4, 3),
-    __base_class$3 = _bem2$4[0],
-    element$4 = _bem2$4[1],
-    modifier$4 = _bem2$4[2];
+var _bem$5 = bem('list-item'),
+    _bem2$5 = _slicedToArray(_bem$5, 3),
+    __base_class$3 = _bem2$5[0],
+    element$5 = _bem2$5[1],
+    modifier$5 = _bem2$5[2];
 
-var CellContent = compositeJs.compose(withBaseClass(element$4('content')))(LayoutFlex);
-var CellOptionalContent = compositeJs.compose(withBaseClass(element$4('optional-content')))(LayoutFlex);
+var CellContent = compositeJs.compose(withBaseClass(element$5('content')))(LayoutFlex);
+var CellOptionalContent = compositeJs.compose(withBaseClass(element$5('optional-content')))(LayoutFlex);
 var Cell = compositeJs.compose(withBaseClass(__base_class$3), applyModifiers({
   'justBetween': true
 }))(LayoutFlex);
@@ -3272,7 +3285,7 @@ var RightPart = function RightPart(_ref3) {
     },
     callback: handleClick,
     visible: menuVisible
-  }), /*#__PURE__*/React__default.createElement(Button, {
+  }), /*#__PURE__*/React__default.createElement(Button$1, {
     clear: true,
     onClick: function onClick(e) {
       if (menu) {
@@ -3288,18 +3301,18 @@ var RightPart = function RightPart(_ref3) {
   })));
 };
 
-var _bem$5 = bem('patient-item'),
-    _bem2$5 = _slicedToArray(_bem$5, 3),
-    BASE_CLASS$1 = _bem2$5[0],
-    element$5 = _bem2$5[1],
-    modifier$5 = _bem2$5[2];
+var _bem$6 = bem('patient-item'),
+    _bem2$6 = _slicedToArray(_bem$6, 3),
+    BASE_CLASS$2 = _bem2$6[0],
+    element$6 = _bem2$6[1],
+    modifier$6 = _bem2$6[2];
 
-var Container = compositeJs.compose(withBaseClass(BASE_CLASS$1), applyModifiers({
+var Container = compositeJs.compose(withBaseClass(BASE_CLASS$2), applyModifiers({
   justBetween: true,
   alignStretch: true
 }))(LayoutFlex);
-var ContactInfo = compositeJs.compose(withBaseClass(element$5('contact')))(LeftPart);
-var ContactMenu = compositeJs.compose(withBaseClass(element$5('toolbar')))(RightPart);
+var ContactInfo = compositeJs.compose(withBaseClass(element$6('contact')))(LeftPart);
+var ContactMenu = compositeJs.compose(withBaseClass(element$6('toolbar')))(RightPart);
 
 var Contact = function Contact(props) {
   var status = props.status,
@@ -3405,22 +3418,22 @@ var InputComponent = (function (props) {
 /* external imports */
 
 var BEM = makeBem('single-input');
-var labelBem = BEM.element('label');
-var inputBem = BEM.element('input');
+var labelBem = BEM.make.element('label');
+var inputBem = BEM.make.element('input');
 var Label = compositeJs.compose(withBem(labelBem), withModifiers(function (x) {
-  return labelBem.modifier(x).current;
+  return labelBem.modifier(x);
 }, ['error']))(baseElement('label'));
-var Error$1 = compositeJs.compose(withBem(BEM.element('error')))(baseElement('div'));
+var Error$1 = compositeJs.compose(withBem(BEM.make.element('error')))(baseElement('div'));
 var Container$1 = compositeJs.compose(withBem(BEM), withModifiers(function (x) {
-  return BEM.modifier(x).current;
+  return BEM.modifier(x);
 }, ['error']), withModifiers(function (k, v) {
-  return BEM.modifier("".concat(k, "-").concat(v)).current;
+  return BEM.modifier("".concat(k, "-").concat(v));
 }, ['checkbox']), applyModifiers({
   column: true,
   alignStart: true
 }))(LayoutFlex);
 var Input = compositeJs.compose(withBem(inputBem), withModifiers(function (x) {
-  return inputBem.modifier(x).current;
+  return inputBem.modifier(x);
 }, ['error']))(InputComponent);
 var Input$1 = (function (props) {
   var label = props.label,
@@ -3491,7 +3504,7 @@ var BackButton = (function (props) {
   var className = props.className,
       handleBack = props.handleBack;
   var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button, {
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleBack
   }, /*#__PURE__*/React__default.createElement(ArrowBack, null)));
@@ -3526,8 +3539,8 @@ var Footer = withBaseClass('footer');
 var Layout$1 = applyModifiers({
   'justEvenly': true
 });
-var enhance$2 = compositeJs.compose(Layout$1, Footer);
-enhance$2(LayoutFlex);
+var enhance$3 = compositeJs.compose(Layout$1, Footer);
+enhance$3(LayoutFlex);
 
 var index$5 = (function (props) {
   var incoming = props.incoming,
@@ -3543,12 +3556,12 @@ var index$5 = (function (props) {
     className: "children"
   }, props.children), /*#__PURE__*/React__default.createElement("div", {
     className: "toolbox"
-  }, incoming && /*#__PURE__*/React__default.createElement(Button, {
+  }, incoming && /*#__PURE__*/React__default.createElement(Button$1, {
     round: true,
     success: true,
     onClick: handleAnswer,
     fit: true
-  }, " ", /*#__PURE__*/React__default.createElement(md.MdCall, null), " "), /*#__PURE__*/React__default.createElement(Button, {
+  }, " ", /*#__PURE__*/React__default.createElement(md.MdCall, null), " "), /*#__PURE__*/React__default.createElement(Button$1, {
     round: true,
     fit: true,
     failure: true,
@@ -3623,40 +3636,40 @@ var index$7 = (function (props) {
   })));
 });
 
-var _bem$6 = bem('sidebar'),
-    _bem2$6 = _slicedToArray(_bem$6, 3),
-    __base_class$4 = _bem2$6[0],
-    element$6 = _bem2$6[1],
-    modifier$6 = _bem2$6[2];
-
-var Component$1 = compositeJs.compose(withBaseClass(__base_class$4), withModifiers(function (x) {
-  return modifier$6(x);
-}, ['closed']))(baseElement('aside'));
-
-var _bem$7 = bem('list'),
+var _bem$7 = bem('sidebar'),
     _bem2$7 = _slicedToArray(_bem$7, 3),
-    __base_class$5 = _bem2$7[0],
+    __base_class$4 = _bem2$7[0],
     element$7 = _bem2$7[1],
     modifier$7 = _bem2$7[2];
+
+var Component$1 = compositeJs.compose(withBaseClass(__base_class$4), withModifiers(function (x) {
+  return modifier$7(x);
+}, ['closed']))(baseElement('aside'));
+
+var _bem$8 = bem('list'),
+    _bem2$8 = _slicedToArray(_bem$8, 3),
+    __base_class$5 = _bem2$8[0],
+    element$8 = _bem2$8[1],
+    modifier$8 = _bem2$8[2];
 
 var index$8 = compositeJs.compose(withBaseClass(__base_class$5), applyModifiers({
   column: true
 }))(LayoutFlex);
 
-var _bem$8 = bem('user_status'),
-    _bem2$8 = _slicedToArray(_bem$8, 3),
-    __base_class$6 = _bem2$8[0],
-    element$8 = _bem2$8[1],
-    modifier$8 = _bem2$8[2];
+var _bem$9 = bem('user_status'),
+    _bem2$9 = _slicedToArray(_bem$9, 3),
+    __base_class$6 = _bem2$9[0],
+    element$9 = _bem2$9[1],
+    modifier$9 = _bem2$9[2];
 
 var UserStatusContainer = compositeJs.compose(applyModifiers({
   'alignStart': true
 }), withBaseClass(__base_class$6))(LayoutFlex);
-var UserBadge = withBaseClass(element$8('badge'))(Badge);
+var UserBadge = withBaseClass(element$9('badge'))(Badge);
 var UserNameAndStatus = compositeJs.compose(applyModifiers({
   'column': true,
   'alignStart': true
-}), withBaseClass(element$8('name')))(LayoutFlex);
+}), withBaseClass(element$9('name')))(LayoutFlex);
 
 var UserStatusComponent = function UserStatusComponent(props) {
   var title = props.title,
@@ -3672,11 +3685,11 @@ var UserStatusComponent = function UserStatusComponent(props) {
 var ChatHeaderToolbar = (function (props) {
   var handleCall = props.handleCall,
       handleVideoCall = props.handleVideoCall;
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, null, /*#__PURE__*/React__default.createElement(Button, {
+  return /*#__PURE__*/React__default.createElement(LayoutFlex, null, /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleVideoCall,
     disabled: typeof handleVideoCall !== 'function'
-  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleCall,
     disabled: typeof handleCall !== 'function'
@@ -3734,7 +3747,7 @@ var ChatInput = (function (props) {
     autoComplete: "off",
     onChange: handleChange,
     value: value
-  }), /*#__PURE__*/React__default.createElement(Button, {
+  }), /*#__PURE__*/React__default.createElement(Button$1, {
     fit: true,
     text: true,
     navbar: true,
@@ -3801,18 +3814,18 @@ var DefaultToolbar$1 = (function (props) {
     style: {
       display: "none"
     }
-  }), /*#__PURE__*/React__default.createElement(Button, {
+  }), /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: function onClick(x) {
       return setCapturePic(true);
     }
-  }, /*#__PURE__*/React__default.createElement(Camera, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(Camera, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     disabled: true,
     onClick: function onClick(_) {
       return fileUploader.current.click();
     }
-  }, /*#__PURE__*/React__default.createElement(AttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(AttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button$1, {
     navbar: true,
     onClick: handleAudio
   }, /*#__PURE__*/React__default.createElement(Voice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
@@ -3855,8 +3868,8 @@ var ClassedComponent = withBaseClass('chat-footer');
 var Layout$2 = applyModifiers({
   'column': true
 });
-var enhance$3 = compositeJs.compose(ClassedComponent, Layout$2);
-var ChatFooter$1 = enhance$3(ChatFooter);
+var enhance$4 = compositeJs.compose(ClassedComponent, Layout$2);
+var ChatFooter$1 = enhance$4(ChatFooter);
 
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
@@ -4185,11 +4198,11 @@ var LayoutGrid = (function (props) {
   }, rest), props.children));
 });
 
-var _bem$9 = bem('video-call__toolbar'),
-    _bem2$9 = _slicedToArray(_bem$9, 3),
-    __base_class$7 = _bem2$9[0],
-    element$9 = _bem2$9[1],
-    modifier$9 = _bem2$9[2];
+var _bem$a = bem('video-call__toolbar'),
+    _bem2$a = _slicedToArray(_bem$a, 3),
+    __base_class$7 = _bem2$a[0],
+    element$a = _bem2$a[1],
+    modifier$a = _bem2$a[2];
 
 var DefaultToolbar$2 = (function (props) {
   var className = props.className,
@@ -4228,22 +4241,22 @@ var DefaultToolbar$2 = (function (props) {
   return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
     justEvenly: true,
     className: classes
-  }, rest), /*#__PURE__*/React__default.createElement(Button, {
+  }, rest), /*#__PURE__*/React__default.createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: handleChat
-  }, " ", /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Chat")), /*#__PURE__*/React__default.createElement(Button, {
+  }, " ", /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Chat")), /*#__PURE__*/React__default.createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: _toggleMicro
-  }, _microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophone, null), !_microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophoneSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Micro")), /*#__PURE__*/React__default.createElement(Button, {
+  }, _microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophone, null), !_microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophoneSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Micro")), /*#__PURE__*/React__default.createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: _toggleCamera
-  }, _cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideo, null), !_cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideoSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Camera")), /*#__PURE__*/React__default.createElement(Button, {
+  }, _cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideo, null), !_cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideoSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Camera")), /*#__PURE__*/React__default.createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
@@ -4286,11 +4299,11 @@ var VideoCall = function VideoCall(_ref) {
   }, ReactUtils_5('video', mainVideoProps))), /*#__PURE__*/React__default.createElement(LayoutFlex, {
     justEvenly: true,
     className: "".concat(__base_class$8, "__controls")
-  }, incoming && /*#__PURE__*/React__default.createElement(Button, {
+  }, incoming && /*#__PURE__*/React__default.createElement(Button$1, {
     round: true,
     success: true,
     onClick: handleAnswer
-  }, /*#__PURE__*/React__default.createElement(md.MdCall, null)), /*#__PURE__*/React__default.createElement(Button, {
+  }, /*#__PURE__*/React__default.createElement(md.MdCall, null)), /*#__PURE__*/React__default.createElement(Button$1, {
     round: true,
     failure: true,
     onClick: handleDiscard
@@ -4304,38 +4317,47 @@ var VideoCall = function VideoCall(_ref) {
   }, ReactUtils_5('feedback', feedbackVideoProps)))));
 };
 
-var _bem$a = bem('video-call'),
-    _bem2$a = _slicedToArray(_bem$a, 3),
-    __base_class$8 = _bem2$a[0],
-    element$a = _bem2$a[1],
-    modifier$a = _bem2$a[2];
-var enhance$4 = withBaseClass(__base_class$8);
-var index$b = enhance$4(VideoCall);
-
-var _bem$b = bem('container-fullscreen'),
+var _bem$b = bem('video-call'),
     _bem2$b = _slicedToArray(_bem$b, 3),
-    __base_class$9 = _bem2$b[0],
+    __base_class$8 = _bem2$b[0],
     element$b = _bem2$b[1],
     modifier$b = _bem2$b[2];
+var enhance$5 = withBaseClass(__base_class$8);
+var index$b = enhance$5(VideoCall);
+
+var _bem$c = bem('container-fullscreen'),
+    _bem2$c = _slicedToArray(_bem$c, 3),
+    __base_class$9 = _bem2$c[0],
+    element$c = _bem2$c[1],
+    modifier$c = _bem2$c[2];
 
 var index$c = (function (props) {
   var offset = props.offset,
       overflowY = props.overflowY,
+      stretch = props.stretch,
       className = props.className,
       otherStyle = props.style,
-      rest = _objectWithoutProperties(props, ["offset", "overflowY", "className", "style"]);
+      rest = _objectWithoutProperties(props, ["offset", "overflowY", "stretch", "className", "style"]);
 
   if (!offset) {
     offset = 0;
   }
+
+  var ref = React.useRef();
 
   var _useState = React.useState(),
       _useState2 = _slicedToArray(_useState, 2),
       vh = _useState2[0],
       setVh = _useState2[1];
 
+  var _useState3 = React.useState(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      _height = _useState4[0],
+      setHeight = _useState4[1];
+
   var adapt = function adapt() {
     setVh((window.innerHeight - offset) * 0.01);
+    setHeight(ref.current.getBoundingClientRect().height);
   };
 
   React.useEffect(function () {
@@ -4348,9 +4370,12 @@ var index$c = (function (props) {
     };
   }, []);
   var classes = genClasses.cEx([__base_class$9, function (_) {
-    return overflowY ? modifier$b('overflow-y') : '';
+    return overflowY ? modifier$c('overflow-y') : '';
+  }, function (_) {
+    return stretch && _height > window.innerHeight ? modifier$c('adapt') : '';
   }, className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
+    ref: ref,
     className: classes,
     style: _objectSpread2({
       '--vh': "".concat(vh, "px")
@@ -4358,11 +4383,11 @@ var index$c = (function (props) {
   }, rest), props.children);
 });
 
-var _bem$c = bem('container-stack'),
-    _bem2$c = _slicedToArray(_bem$c, 3),
-    __base_class$a = _bem2$c[0],
-    element$c = _bem2$c[1],
-    modifier$c = _bem2$c[2];
+var _bem$d = bem('container-stack'),
+    _bem2$d = _slicedToArray(_bem$d, 3),
+    __base_class$a = _bem2$d[0],
+    element$d = _bem2$d[1],
+    modifier$d = _bem2$d[2];
 
 var index$d = (function (props) {
   var className = props.className,
@@ -4378,7 +4403,7 @@ var index$d = (function (props) {
     className: classes
   }, React__default.Children.toArray(props.children).map(function (children, idx) {
     return /*#__PURE__*/React__default.cloneElement(children, {
-      className: genClasses.cEx([children.props.className, element$c('stacked')]),
+      className: genClasses.cEx([children.props.className, element$d('stacked')]),
       key: "".concat(baseKey).concat(idx),
       style: _objectSpread2(_objectSpread2({}, children.props.style), {}, {
         position: 'absolute',
@@ -4388,11 +4413,11 @@ var index$d = (function (props) {
   }));
 });
 
-var _bem$d = bem('container-modal'),
-    _bem2$d = _slicedToArray(_bem$d, 3),
-    __base_class$b = _bem2$d[0],
-    element$d = _bem2$d[1],
-    modifier$d = _bem2$d[2];
+var _bem$e = bem('container-modal'),
+    _bem2$e = _slicedToArray(_bem$e, 3),
+    __base_class$b = _bem2$e[0],
+    element$e = _bem2$e[1],
+    modifier$e = _bem2$e[2];
 var Modal = (function (_ref) {
   var _ref2;
 
@@ -4480,11 +4505,11 @@ var Modal = (function (_ref) {
       document.removeEventListener('load', adapt);
     };
   }, []);
-  var classes = genClasses.cEx([__base_class$b, (_ref2 = {}, _defineProperty(_ref2, modifier$d('cover'), function (_) {
+  var classes = genClasses.cEx([__base_class$b, (_ref2 = {}, _defineProperty(_ref2, modifier$e('cover'), function (_) {
     return cover;
-  }), _defineProperty(_ref2, modifier$d('centered'), function (_) {
+  }), _defineProperty(_ref2, modifier$e('centered'), function (_) {
     return centered;
-  }), _defineProperty(_ref2, modifier$d('bottom'), function (_) {
+  }), _defineProperty(_ref2, modifier$e('bottom'), function (_) {
     return bottom;
   }), _ref2), className]);
   return /*#__PURE__*/React__default.createElement("div", _extends({
@@ -4503,22 +4528,22 @@ var index$e = (function (props) {
   }, rest), props.children);
 });
 
-var _bem$e = bem('card'),
-    _bem2$e = _slicedToArray(_bem$e, 3),
-    __base_class$c = _bem2$e[0],
-    element$e = _bem2$e[1],
-    modifier$e = _bem2$e[2];
+var _bem$f = bem('card'),
+    _bem2$f = _slicedToArray(_bem$f, 3),
+    __base_class$c = _bem2$f[0],
+    element$f = _bem2$f[1],
+    modifier$f = _bem2$f[2];
 
 var Card = compositeJs.compose(withBaseClass(__base_class$c), applyModifiers({
   justBetween: true,
   column: true
 }))(LayoutFlex);
 
-var _bem$f = bem('background-overlay'),
-    _bem2$f = _slicedToArray(_bem$f, 3),
-    __base_class$d = _bem2$f[0],
-    element$f = _bem2$f[1],
-    modifier$f = _bem2$f[2];
+var _bem$g = bem('background-overlay'),
+    _bem2$g = _slicedToArray(_bem$g, 3),
+    __base_class$d = _bem2$g[0],
+    element$g = _bem2$g[1],
+    modifier$g = _bem2$g[2];
 
 var BackgroundOverlay = compositeJs.compose(withBaseClass(__base_class$d), applyModifiers({
   cover: true
@@ -4535,19 +4560,30 @@ var index$f = (function (_ref) {
   }, /*#__PURE__*/React__default.createElement(Card, rest, children)));
 });
 
-var _bem$g = bem('drop-overlay'),
-    _bem2$g = _slicedToArray(_bem$g, 3),
-    __base_class$e = _bem2$g[0],
-    element$g = _bem2$g[1],
-    modifier$g = _bem2$g[2];
+var _bem$h = bem('drop-overlay'),
+    _bem2$h = _slicedToArray(_bem$h, 3),
+    __base_class$e = _bem2$h[0],
+    element$h = _bem2$h[1],
+    modifier$h = _bem2$h[2];
 
 var Component$2 = compositeJs.compose(withBaseClass(__base_class$e), withModifiers(function (x) {
-  return modifier$g(x);
+  return modifier$h(x);
 }, ['visible']))(divElement);
+
+var BEM$1 = makeBem('tiled-section');
+var current = BEM$1.current;
+var TiledSection = compositeJs.compose(withBaseClass(current), applyModifiers({
+  column: true,
+  justCenter: true,
+  alignCenter: true,
+  cover: true
+}), withModifiers(function (x) {
+  return BEM$1.modifier(x);
+}, ['debug']))(LayoutFlex);
 
 exports.ActiveCallBar = index$6;
 exports.Badge = Badge;
-exports.Button = Button;
+exports.Button = Button$1;
 exports.Calling = index$5;
 exports.Card = Card;
 exports.CardContainer = index$f;
@@ -4574,6 +4610,7 @@ exports.Sidebar = Component$1;
 exports.SidebarList = index$8;
 exports.SidebarListItem = Component;
 exports.Stack = index$d;
+exports.TiledSection = TiledSection;
 exports.Video = Video;
 exports.VideoCall = index$b;
 exports.VideoPreview = Video;
