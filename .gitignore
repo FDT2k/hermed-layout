@@ -25,3 +25,4 @@ yarn-error.log*
 public/img/demo_galery/
 
 public/img/_demo_galery/
+/__node_modules

@@ -1,0 +1,73 @@
+.horizontal-tile-group{
+    position:relative;
+    
+    &--container{
+      overflow: hidden;
+      position:relative;
+      scroll-behavior: smooth;
+      transition: clip-path 500ms;
+      &__right{
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%);
+      }
+      &__left{
+        clip-path: polygon(30% 0, 0 50%, 30% 100%);
+      }
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      &__visible{
+          opacity: 1;
+      }
+
+
+    }
+    
+
+
+    
+    &--content{
+      width:auto;
+      min-width:100%;
+      display:flex;
+      align-items: stretch;
+      justify-content: stretch;
+      & > div{
+        min-width: 100%;
+        width: 100vw;
+        min-height:100%;
+        height:auto;
+      }
+
+      
+    }
+    
+    &--dots{
+      color:white;
+      mix-blend-mode: difference;
+      width:100vw;
+      display:flex;
+      justify-content: center;
+      position:absolute;
+      bottom:0px;
+  
+      &> * {
+        padding:5px;
+      }
+  
+      .active{
+        font-weight: bold;
+      }
+    }
+
+    &--overlay{
+       
+        opacity:0;
+        width:100%;
+        height:100%;
+        min-height:100%;
+        position: absolute;
+        background-color:rgba(255,0,0,0.5);
+        top:0px;
+        pointer-events: none;
+        backdrop-filter: opacity(50%);
+
+    }
+  }
