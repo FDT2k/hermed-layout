@@ -11,7 +11,7 @@ const TiledSection = compose(
    
     withBaseClass(current),
 
-    applyModifiers({column:true, justCenter: true, alignCenter: true, cover: true }),
+    applyModifiers({column:true, justCenter: true, alignCenter: true}),
     withModifiers(x=>BEM.modifier(x),['debug'])
 )(LayoutFlex)
 

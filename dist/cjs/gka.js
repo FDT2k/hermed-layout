@@ -2979,8 +2979,7 @@ var current = BEM$1.current;
 var TiledSection = compositeJs.compose(withBaseClass(current), applyModifiers({
   column: true,
   justCenter: true,
-  alignCenter: true,
-  cover: true
+  alignCenter: true
 }), withModifiers(function (x) {
   return BEM$1.modifier(x);
 }, ['debug']))(LayoutFlex);

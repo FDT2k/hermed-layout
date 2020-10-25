@@ -3,9 +3,10 @@
     
     &--container{
       overflow: hidden;
+      min-height:100%;
       position:relative;
       scroll-behavior: smooth;
-      transition: clip-path 500ms;
+     /* transition: clip-path 500ms;
       &__right{
         clip-path: polygon(75% 0%, 100% 50%, 75% 100%);
       }
@@ -16,7 +17,7 @@
       &__visible{
           opacity: 1;
       }
-
+*/
 
     }
     

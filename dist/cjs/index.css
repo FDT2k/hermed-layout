@@ -629,8 +629,8 @@ footer {
     height: 100%;
     min-height: 100%; }
   .container-modal--debug {
-    background-color: #af23e9 !important;
-    outline: 2px solid #e678c7 !important; }
+    background-color: #33d3ed !important;
+    outline: 2px solid #327a30 !important; }
   .container-modal--bottom {
     bottom: 0px; }
 
@@ -2096,8 +2096,8 @@ textarea.floating-label-field {
   min-height: 100%; }
 
 .list--debug {
-  background-color: #b27289 !important;
-  outline: 2px solid #fa254e !important; }
+  background-color: #090cd0 !important;
+  outline: 2px solid #ab4718 !important; }
 
 .list-item:hover {
   transition: background-color 0.2s ease-out; }
@@ -2203,12 +2203,11 @@ textarea.floating-label-field {
     border-radius: 20px 0px 20px 0px; }
 
 .tiled-section {
-  height: 100%;
   min-height: 100%;
   padding: 120px 1.25rem; }
   .tiled-section--debug {
-    background-color: #68175d !important;
-    outline: 2px solid #99f28c !important; }
+    background-color: #f3d256 !important;
+    outline: 2px solid #797a04 !important; }
   @media screen and (max-width: 768px) {
     .tiled-section {
       padding: 5em 1.25rem 3em; } }
@@ -2254,16 +2253,21 @@ textarea.floating-label-field {
   position: relative; }
   .horizontal-tile-group--container {
     overflow: hidden;
+    min-height: 100%;
     position: relative;
     scroll-behavior: smooth;
-    transition: clip-path 500ms;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-    .horizontal-tile-group--container__right {
-      clip-path: polygon(75% 0%, 100% 50%, 75% 100%); }
-    .horizontal-tile-group--container__left {
-      clip-path: polygon(30% 0, 0 50%, 30% 100%); }
-    .horizontal-tile-group--container__visible {
-      opacity: 1; }
+    /* transition: clip-path 500ms;
+      &__right{
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%);
+      }
+      &__left{
+        clip-path: polygon(30% 0, 0 50%, 30% 100%);
+      }
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      &__visible{
+          opacity: 1;
+      }
+*/ }
   .horizontal-tile-group--content {
     width: auto;
     min-width: 100%;
