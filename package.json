@@ -1,6 +1,6 @@
 {
   "name": "hermed-layout",
-  "version": "0.9.22",
+  "version": "0.9.23",
   "private": false,
   "main": "dist/cjs/index.js",
   "dependencies": {
@@ -23,7 +23,7 @@
   "scripts": {
     "prepare": "install-peers",
     "start": "yarn storybook",
-    "build": "rollup -c",
+    "build": "rollup -c -w",
     "storybook": "start-storybook -p 9009 -s ./public ",
     "build-storybook": "build-storybook -s public"
   },
