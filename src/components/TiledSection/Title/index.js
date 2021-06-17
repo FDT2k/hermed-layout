@@ -20,7 +20,7 @@ const titleModifiers= ['main'];
 const withTitleModifiers = compose(
     withBaseClass(current),
     applyModifiers({['page']:true},titleModifiers),
-    withModifiers(x => modifier(x), ['page',...titleModifiers]),
+    withModifiers(x => modifier(x), ['page','animate',...titleModifiers]),
 )
 
 export default withTitleModifiers(Title);

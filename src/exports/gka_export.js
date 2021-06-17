@@ -32,7 +32,6 @@ import SectionContentLayout from 'components/TiledSection/ContentLayout'
 import ServiceCard from 'components/TiledSection/ServiceCard'
 import ServiceItem from 'components/TiledSection/ServiceCard/ServiceItem'
 import HorizontalTileGroup from 'components/TiledSection/HorizontalTileGroup'
-
 import * as Icons from 'components/Icons'
 
 
@@ -54,7 +53,6 @@ export {
   Fullscreen,
   Stack,
   Modal,
-  
   LayoutGrid,
   LayoutFlex,
   Card,
@@ -66,4 +64,5 @@ export {
   ServiceCard,
   ServiceItem,
   HorizontalTileGroup
+  
 }

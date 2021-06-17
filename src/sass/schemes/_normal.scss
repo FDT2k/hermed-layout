@@ -3,13 +3,13 @@
     @include themed_font("primaryFont", "bold");
     color: themed("secondaryBasic");
     background-color: themed("backgroundColor");
-    @include themed_font("mainFont", "light");
+    @include themed_font("primaryFont", "light");
   }
 
   h1 {
     @include themify($themes) {
       color: themed("textColor");
-      @include themed_font("titleFont", "thin");
+      @include themed_font("secondaryFont", "thin");
     }
     //font-size: rem(70);
     @include fluid-type(font-size, 320px, 1366px, 34px, 70px);
@@ -18,7 +18,7 @@
   h2 {
     @include themify($themes) {
       color: themed("textColor");
-      @include themed_font("mainFont", "thin");
+      @include themed_font("primaryFont", "thin");
     }
     @include fluid-type(font-size, 320px, 1366px, 32px, 40px);
     text-align: center;
@@ -27,7 +27,7 @@
   h3 {
     @include themify($themes) {
       color: themed("textColor");
-      @include themed_font("mainFont", "bold");
+      @include themed_font("primaryFont", "bold");
     }
     @include fluid-type(font-size, 320px, 1366px, 18px, 38px);
   }

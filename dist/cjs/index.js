@@ -2,19 +2,24 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var React = require('react');
-var React__default = _interopDefault(React);
 var genClasses = require('@geekagency/gen-classes');
 var compositeJs = require('@geekagency/composite-js');
 var md = require('react-icons/md');
 var fa = require('react-icons/fa');
 var gi = require('react-icons/gi');
-var InputMask = _interopDefault(require('react-input-mask'));
-var ReactLoading = _interopDefault(require('react-loading'));
-var Camera$1 = _interopDefault(require('react-html5-camera-photo'));
-var Draggable = _interopDefault(require('react-draggable'));
+var InputMask = require('react-input-mask');
+var ReactLoading = require('react-loading');
+var Camera$1 = require('react-html5-camera-photo');
+var Draggable = require('react-draggable');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+var InputMask__default = /*#__PURE__*/_interopDefaultLegacy(InputMask);
+var ReactLoading__default = /*#__PURE__*/_interopDefaultLegacy(ReactLoading);
+var Camera__default = /*#__PURE__*/_interopDefaultLegacy(Camera$1);
+var Draggable__default = /*#__PURE__*/_interopDefaultLegacy(Draggable);
 
 var index = (function (props) {
   var message = props.message,
@@ -32,9 +37,9 @@ var index = (function (props) {
       return !_left && !_right;
     }
   }]);
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, /*#__PURE__*/React__default.createElement("p", null, message || ''), /*#__PURE__*/React__default.createElement("span", {
+  }, /*#__PURE__*/React__default['default'].createElement("p", null, message || ''), /*#__PURE__*/React__default['default'].createElement("span", {
     className: "chat-bubble__date"
   }, date || '-'));
 });
@@ -1990,7 +1995,7 @@ var ObjectUtils_10 = ObjectUtils.propMatch;
 var ObjectUtils_11 = ObjectUtils.spec;
 var ObjectUtils_12 = ObjectUtils.spreadFilterByKey;
 
-var e = React__default.createElement;
+var e = React__default['default'].createElement;
 
 var bem = function bem(main) {
   return [main, function (block) {
@@ -2028,7 +2033,7 @@ var wrapComponent = function wrapComponent(Wrap) {
       var children = _ref.children,
           rest = _objectWithoutProperties(_ref, ["children"]);
 
-      return /*#__PURE__*/React__default.createElement(Wrap, rest, /*#__PURE__*/React__default.createElement(Component, null, children));
+      return /*#__PURE__*/React__default['default'].createElement(Wrap, rest, /*#__PURE__*/React__default['default'].createElement(Component, null, children));
     };
   };
 };
@@ -2036,7 +2041,7 @@ var divElement = function divElement(_ref2) {
   var children = _ref2.children,
       rest = _objectWithoutProperties(_ref2, ["children"]);
 
-  return /*#__PURE__*/React__default.createElement("div", rest, children);
+  return /*#__PURE__*/React__default['default'].createElement("div", rest, children);
 };
 var baseElement = compositeJs.curry(function (_e, _ref5) {
   var children = _ref5.children,
@@ -2062,7 +2067,7 @@ var withBaseClass = function withBaseClass(BaseClass) {
           rest = _objectWithoutProperties(props, ["className"]);
 
       var classes = genClasses.cEx([BaseClass, className]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({}, rest, {
         className: classes
       }));
     };
@@ -2074,9 +2079,9 @@ var withBem = function withBem(bem) {
       var className = props.className,
           rest = _objectWithoutProperties(props, ["className"]);
 
-      var classes = genClasses.cEx([bem.current, className]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
-        parentBEM: bem,
+      var classes = genClasses.cEx([bem.current, className]); //   return <Component {...rest} parentBEM={bem} className={classes} />
+
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({}, rest, {
         className: classes
       }));
     };
@@ -2095,7 +2100,7 @@ var withModifiers = function withModifiers(namer, modifiers) {
           _props = _spreadObjectPresentI2[1];
 
       var classes = genClasses.cEx([className, modifiersToCeX(namer, modifiers, presentModifiers)]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({
         className: classes
       }, _props));
     };
@@ -2127,7 +2132,7 @@ var withTransformedProps = function withTransformedProps(namer, modifiers) {
 
 
       var classes = genClasses.cEx([className].concat(_toConsumableArray(propsToCeX(namer, modifiers, presentModifiers))));
-      return /*#__PURE__*/React__default.createElement(Component, _extends({
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({
         className: classes
       }, _props));
     };
@@ -2157,7 +2162,7 @@ var applyModifiers = function applyModifiers(modifiers, unless) {
         _m = modifiers;
       }
 
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, _m, props));
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({}, _m, props));
     };
   };
 };
@@ -2236,7 +2241,7 @@ var LayoutFlex = (function (props) {
   }), _defineProperty(_ref, modifier('content-start'), function (_) {
     return contentStart;
   }), _ref), className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children));
 });
@@ -2320,7 +2325,7 @@ function IconBase(props) {
 }
 
 // THIS FILE IS AUTO GENERATED
-var TiWarning = function (props) {
+function TiWarning(props) {
   return GenIcon({
     "tag": "svg",
     "attr": {
@@ -2335,11 +2340,10 @@ var TiWarning = function (props) {
       }
     }]
   })(props);
-};
-TiWarning.displayName = "TiWarning";
+}
 
 // THIS FILE IS AUTO GENERATED
-var GoGear = function (props) {
+function GoGear(props) {
   return GenIcon({
     "tag": "svg",
     "attr": {
@@ -2353,9 +2357,8 @@ var GoGear = function (props) {
       }
     }]
   })(props);
-};
-GoGear.displayName = "GoGear";
-var GoKebabVertical = function (props) {
+}
+function GoKebabVertical(props) {
   return GenIcon({
     "tag": "svg",
     "attr": {
@@ -2369,8 +2372,7 @@ var GoKebabVertical = function (props) {
       }
     }]
   })(props);
-};
-GoKebabVertical.displayName = "GoKebabVertical";
+}
 
 var CLASSES = {
   BUTTON: 'button',
@@ -2451,7 +2453,7 @@ var Button = function Button(props) {
   var children = props.children,
       rest = _objectWithoutProperties(props, ["children"]);
 
-  return /*#__PURE__*/React__default.createElement("button", rest, children);
+  return /*#__PURE__*/React__default['default'].createElement("button", rest, children);
 };
 var enhance$1 = compositeJs.compose(withBaseClass(BASE_CLASS), applyModifiers(_defineProperty({}, button_default_style, true), button_styles), // if no style, we want it to be contained
 withBaseButtonsModifiers);
@@ -2490,18 +2492,18 @@ var DefaultToolbar = (function (props) {
       handleConfig = props.handleConfig,
       handleShutdown = props.handleShutdown;
   var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     className: classes
-  }, /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleAdd
-  }, /*#__PURE__*/React__default.createElement(PersonAdd, null)), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(PersonAdd, null)), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleConfig
-  }, /*#__PURE__*/React__default.createElement(Gear, null)), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(Gear, null)), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleShutdown
-  }, /*#__PURE__*/React__default.createElement(PowerOff, null)));
+  }, /*#__PURE__*/React__default['default'].createElement(PowerOff, null)));
 });
 
 var Content = function Content(props) {
@@ -2509,9 +2511,9 @@ var Content = function Content(props) {
       handleClick = props.handleClick,
       rest = _objectWithoutProperties(props, ["children", "handleClick"]);
 
-  return /*#__PURE__*/React__default.createElement("section", rest, children, React__default.Children.toArray(children).length === 0 && /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("section", rest, children, React__default['default'].Children.toArray(children).length === 0 && /*#__PURE__*/React__default['default'].createElement("div", {
     className: "empty-list"
-  }, "Aucun contact", /*#__PURE__*/React__default.createElement(Button$1, {
+  }, "Aucun contact", /*#__PURE__*/React__default['default'].createElement(Button$1, {
     onClick: handleClick
   }, "Inviter un contact")));
 };
@@ -2524,12 +2526,12 @@ var Header$1 = function Header$1(props) {
       displayToolbar = props.displayToolbar,
       rest = _objectWithoutProperties(props, ["className", "handleBack", "title", "Toolbar", "displayToolbar"]);
 
-  return /*#__PURE__*/React__default.createElement(Header, {
+  return /*#__PURE__*/React__default['default'].createElement(Header, {
     className: className
-  }, /*#__PURE__*/React__default.createElement(LayoutFlex, null, handleBack && /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(LayoutFlex, null, handleBack && /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(Hamburger, null)), /*#__PURE__*/React__default.createElement("h2", null, title)), Toolbar && displayToolbar && /*#__PURE__*/React__default.createElement(Toolbar, rest) || displayToolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar, rest));
+  }, /*#__PURE__*/React__default['default'].createElement(Hamburger, null)), /*#__PURE__*/React__default['default'].createElement("h2", null, title)), Toolbar && displayToolbar && /*#__PURE__*/React__default['default'].createElement(Toolbar, rest) || displayToolbar && /*#__PURE__*/React__default['default'].createElement(DefaultToolbar, rest));
 };
 
 var View = function View(props) {
@@ -2545,12 +2547,12 @@ var View = function View(props) {
       toolbarProps = _filterPropStartingWi2[0],
       remaining = _filterPropStartingWi2[1];
 
-  return /*#__PURE__*/React__default.createElement("div", remaining, /*#__PURE__*/React__default.createElement(WaitingRoomHeader, _extends({}, toolbarProps, {
+  return /*#__PURE__*/React__default['default'].createElement("div", remaining, /*#__PURE__*/React__default['default'].createElement(WaitingRoomHeader, _extends({}, toolbarProps, {
     title: title,
     handleBack: handleBack,
     Toolbar: Toolbar,
     displayToolbar: displayToolbar
-  })), /*#__PURE__*/React__default.createElement(WaitingRoomContent, {
+  })), /*#__PURE__*/React__default['default'].createElement(WaitingRoomContent, {
     handleClick: handleNewGuest
   }, props.children));
 };
@@ -3163,9 +3165,9 @@ var Component = function Component(props) {
     e.stopPropagation();
   };
 
-  return /*#__PURE__*/React__default.createElement(Cell, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(Cell, _extends({
     onClick: _handleClick
-  }, rest), /*#__PURE__*/React__default.createElement(CellContent, null, Icon && /*#__PURE__*/React__default.createElement(Icon, null), props.children), /*#__PURE__*/React__default.createElement(CellOptionalContent, null, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
+  }, rest), /*#__PURE__*/React__default['default'].createElement(CellContent, null, Icon && /*#__PURE__*/React__default['default'].createElement(Icon, null), props.children), /*#__PURE__*/React__default['default'].createElement(CellOptionalContent, null, Optional && /*#__PURE__*/React__default['default'].createElement(Optional, null)));
 };
 
 var ContextualMenu = function ContextualMenu(props) {
@@ -3214,11 +3216,11 @@ var ContextualMenu = function ContextualMenu(props) {
       window.removeEventListener('click', closeme);
     };
   }, [visibleState]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     ref: me,
     className: classes
   }, rest), options.map(function (item) {
-    return /*#__PURE__*/React__default.createElement(Component, {
+    return /*#__PURE__*/React__default['default'].createElement(Component, {
       key: item.id,
       Icon: item.Icon,
       onClick: function onClick(e) {
@@ -3230,7 +3232,7 @@ var ContextualMenu = function ContextualMenu(props) {
 
         e.stopPropagation();
       }
-    }, /*#__PURE__*/React__default.createElement("h2", null, item.label));
+    }, /*#__PURE__*/React__default['default'].createElement("h2", null, item.label));
   }));
 };
 
@@ -3241,14 +3243,14 @@ var UserInfo = function UserInfo(_ref) {
       phone = _ref.phone,
       email = _ref.email,
       birthdate = _ref.birthdate;
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     column: true,
     alignStart: true
-  }, /*#__PURE__*/React__default.createElement("h2", null, name), /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("h2", null, name), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "phone"
-  }, phone), /*#__PURE__*/React__default.createElement("div", {
+  }, phone), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "email"
-  }, email), /*#__PURE__*/React__default.createElement("div", {
+  }, email), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "birthdate"
   }, birthdate));
 };
@@ -3258,10 +3260,10 @@ var LeftPart = function LeftPart(_ref2) {
       contact = _ref2.contact,
       rest = _objectWithoutProperties(_ref2, ["status", "contact"]);
 
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, rest, /*#__PURE__*/React__default.createElement(Badge, {
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, rest, /*#__PURE__*/React__default['default'].createElement(Badge, {
     m: true,
     status: status
-  }), /*#__PURE__*/React__default.createElement(UserInfo, contact));
+  }), /*#__PURE__*/React__default['default'].createElement(UserInfo, contact));
 };
 
 var RightPart = function RightPart(_ref3) {
@@ -3275,17 +3277,17 @@ var RightPart = function RightPart(_ref3) {
       menuVisible = _useState2[0],
       setMenuVisible = _useState2[1];
 
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, rest, status && /*#__PURE__*/React__default.createElement(Badge, {
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, rest, status && /*#__PURE__*/React__default['default'].createElement(Badge, {
     m: true,
     status: status
-  }), menu && /*#__PURE__*/React__default.createElement(ContextMenu, {
+  }), menu && /*#__PURE__*/React__default['default'].createElement(ContextMenu, {
     options: menu,
     handleDiscard: function handleDiscard(_) {
       return setMenuVisible(false);
     },
     callback: handleClick,
     visible: menuVisible
-  }), /*#__PURE__*/React__default.createElement(Button$1, {
+  }), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     clear: true,
     onClick: function onClick(e) {
       if (menu) {
@@ -3296,7 +3298,7 @@ var RightPart = function RightPart(_ref3) {
 
       e.stopPropagation();
     }
-  }, /*#__PURE__*/React__default.createElement(Kebab, {
+  }, /*#__PURE__*/React__default['default'].createElement(Kebab, {
     s: true
   })));
 };
@@ -3327,12 +3329,12 @@ var Contact = function Contact(props) {
     console.warn('handleContextual && contextualMenu are mutually exclusive. Menu is used in priority');
   }
 
-  return /*#__PURE__*/React__default.createElement(Container, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(Container, _extends({
     onClick: handleClick
-  }, rest), /*#__PURE__*/React__default.createElement(ContactInfo, {
+  }, rest), /*#__PURE__*/React__default['default'].createElement(ContactInfo, {
     contact: contact,
     status: status
-  }), /*#__PURE__*/React__default.createElement(ContactMenu, {
+  }), /*#__PURE__*/React__default['default'].createElement(ContactMenu, {
     menu: contextualMenu,
     status: secondaryStatus,
     handleClick: handleContextual
@@ -3351,7 +3353,7 @@ var index$2 = (function (props) {
 
   var _onSubmit = onSubmit || defaultSubmit;
 
-  return /*#__PURE__*/React__default.createElement("form", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("form", _extends({
     className: genClasses.cEx(["basic-form", function (_) {
       return className;
     }]),
@@ -3384,16 +3386,16 @@ var Checkbox = function Checkbox(props) {
     }
   };
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: className
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "container",
     onClick: handleClick
-  }, /*#__PURE__*/React__default.createElement("input", _extends({
+  }, /*#__PURE__*/React__default['default'].createElement("input", _extends({
     ref: cb,
     checked: check,
     type: "checkbox"
-  }, rest)), /*#__PURE__*/React__default.createElement("span", {
+  }, rest)), /*#__PURE__*/React__default['default'].createElement("span", {
     className: "checkmark"
   })));
 };
@@ -3406,11 +3408,11 @@ var InputComponent = (function (props) {
 
   var _type = type || 'text';
 
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, type !== "checkbox" && /*#__PURE__*/React__default.createElement(InputMask, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, type !== "checkbox" && /*#__PURE__*/React__default['default'].createElement(InputMask__default['default'], _extends({
     id: id,
     type: _type,
     autoComplete: "off"
-  }, rest)), type === "checkbox" && /*#__PURE__*/React__default.createElement(InputCheckbox, _extends({
+  }, rest)), type === "checkbox" && /*#__PURE__*/React__default['default'].createElement(InputCheckbox, _extends({
     id: id
   }, rest)));
 });
@@ -3473,13 +3475,13 @@ var Input$1 = (function (props) {
       notInputProps = _filterInput2[1]; // default type to text 
 
 
-  return /*#__PURE__*/React__default.createElement(Container$1, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(Container$1, _extends({
     error: error,
     checkbox: checkbox
-  }, forwardFlex(_flexProps)), /*#__PURE__*/React__default.createElement(Label, _extends({
+  }, forwardFlex(_flexProps)), /*#__PURE__*/React__default['default'].createElement(Label, _extends({
     error: error,
     htmlFor: id
-  }, forwardLabel(_labelProps)), label, error && error !== true && /*#__PURE__*/React__default.createElement(Error$1, null, error)), /*#__PURE__*/React__default.createElement(Input, _extends({
+  }, forwardLabel(_labelProps)), label, error && error !== true && /*#__PURE__*/React__default['default'].createElement(Error$1, null, error)), /*#__PURE__*/React__default['default'].createElement(Input, _extends({
     id: id,
     error: error
   }, forwardInput(_inputProps), notInputProps)));
@@ -3491,11 +3493,11 @@ var index$3 = (function (props) {
       className = props.className,
       rest = _objectWithoutProperties(props, ["label", "id", "className"]);
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: "single-select"
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "single-select__select"
-  }, /*#__PURE__*/React__default.createElement("select", _extends({
+  }, /*#__PURE__*/React__default['default'].createElement("select", _extends({
     id: id
   }, rest), props.children)));
 });
@@ -3504,10 +3506,10 @@ var BackButton = (function (props) {
   var className = props.className,
       handleBack = props.handleBack;
   var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button$1, {
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, handleBack && /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(ArrowBack, null)));
+  }, /*#__PURE__*/React__default['default'].createElement(ArrowBack, null)));
 });
 
 var index$4 = (function (props) {
@@ -3527,9 +3529,9 @@ var index$4 = (function (props) {
       return inverse === true;
     }
   }, className]);
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, label && /*#__PURE__*/React__default.createElement("h3", null, label), /*#__PURE__*/React__default.createElement(ReactLoading, {
+  }, label && /*#__PURE__*/React__default['default'].createElement("h3", null, label), /*#__PURE__*/React__default['default'].createElement(ReactLoading__default['default'], {
     color: "",
     type: type || "bubbles"
   }));
@@ -3550,23 +3552,23 @@ var index$5 = (function (props) {
       rest = _objectWithoutProperties(props, ["incoming", "handleAnswer", "handleDiscard", "className"]);
 
   var classes = genClasses.cEx(['answer_call', className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
-  }, rest), /*#__PURE__*/React__default.createElement("div", {
+  }, rest), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "children"
-  }, props.children), /*#__PURE__*/React__default.createElement("div", {
+  }, props.children), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "toolbox"
-  }, incoming && /*#__PURE__*/React__default.createElement(Button$1, {
+  }, incoming && /*#__PURE__*/React__default['default'].createElement(Button$1, {
     round: true,
     success: true,
     onClick: handleAnswer,
     fit: true
-  }, " ", /*#__PURE__*/React__default.createElement(md.MdCall, null), " "), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, " ", /*#__PURE__*/React__default['default'].createElement(md.MdCall, null), " "), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     round: true,
     fit: true,
     failure: true,
     onClick: handleDiscard
-  }, " ", /*#__PURE__*/React__default.createElement(md.MdCallEnd, null), " ")));
+  }, " ", /*#__PURE__*/React__default['default'].createElement(md.MdCallEnd, null), " ")));
 });
 
 var Video = (function (props) {
@@ -3587,7 +3589,7 @@ var Video = (function (props) {
       myRef.current.srcObject = srcObject;
     }
   }, [srcObject]);
-  return /*#__PURE__*/React__default.createElement("video", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("video", _extends({
     ref: myRef,
     className: classes
   }, rest));
@@ -3598,7 +3600,7 @@ var index$6 = (function (props) {
       rest = _objectWithoutProperties(props, ["className"]);
 
   var classes = genClasses.cEx(['active-call', className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children);
 });
@@ -3612,7 +3614,7 @@ var index$7 = (function (props) {
       _visible = _useState2[0],
       setVisible = _useState2[1];
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: genClasses.cEx(['debug-panel', {
       'visible': function visible(_) {
         return _visible === true;
@@ -3621,15 +3623,15 @@ var index$7 = (function (props) {
         return _visible !== true;
       }
     }])
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "content-closed"
-  }, /*#__PURE__*/React__default.createElement(HiddenComponent, {
+  }, /*#__PURE__*/React__default['default'].createElement(HiddenComponent, {
     openHandler: function openHandler(_) {
       return setVisible(true);
     }
-  })), /*#__PURE__*/React__default.createElement("div", {
+  })), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "content"
-  }, /*#__PURE__*/React__default.createElement(VisibleComponent, {
+  }, /*#__PURE__*/React__default['default'].createElement(VisibleComponent, {
     closeHandler: function closeHandler(_) {
       return setVisible(false);
     }
@@ -3677,23 +3679,23 @@ var UserStatusComponent = function UserStatusComponent(props) {
       badge = props.badge,
       rest = _objectWithoutProperties(props, ["title", "subtitle", "badge"]);
 
-  return /*#__PURE__*/React__default.createElement(UserStatusContainer, rest, badge && /*#__PURE__*/React__default.createElement(UserBadge, {
+  return /*#__PURE__*/React__default['default'].createElement(UserStatusContainer, rest, badge && /*#__PURE__*/React__default['default'].createElement(UserBadge, {
     status: badge
-  }), /*#__PURE__*/React__default.createElement(UserNameAndStatus, null, /*#__PURE__*/React__default.createElement("h2", null, title), subtitle && /*#__PURE__*/React__default.createElement("p", null, subtitle)));
+  }), /*#__PURE__*/React__default['default'].createElement(UserNameAndStatus, null, /*#__PURE__*/React__default['default'].createElement("h2", null, title), subtitle && /*#__PURE__*/React__default['default'].createElement("p", null, subtitle)));
 };
 
 var ChatHeaderToolbar = (function (props) {
   var handleCall = props.handleCall,
       handleVideoCall = props.handleVideoCall;
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, null, /*#__PURE__*/React__default.createElement(Button$1, {
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, null, /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleVideoCall,
     disabled: typeof handleVideoCall !== 'function'
-  }, /*#__PURE__*/React__default.createElement(Videocam, null)), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(Videocam, null)), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleCall,
     disabled: typeof handleCall !== 'function'
-  }, /*#__PURE__*/React__default.createElement(LocalPhone, null)));
+  }, /*#__PURE__*/React__default['default'].createElement(LocalPhone, null)));
 });
 
 var ChatHeader = (function (props) {
@@ -3710,13 +3712,13 @@ var ChatHeader = (function (props) {
     handleVideoCall: handleVideoCall
   };
   var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(Header, null, /*#__PURE__*/React__default.createElement(LayoutFlex, null, /*#__PURE__*/React__default.createElement(BackButton, {
+  return /*#__PURE__*/React__default['default'].createElement(Header, null, /*#__PURE__*/React__default['default'].createElement(LayoutFlex, null, /*#__PURE__*/React__default['default'].createElement(BackButton, {
     handleBack: handleBack
-  }), /*#__PURE__*/React__default.createElement(UserStatusComponent, {
+  }), /*#__PURE__*/React__default['default'].createElement(UserStatusComponent, {
     badge: badge,
     title: title,
     subtitle: subtitle
-  })), showToolbar && /*#__PURE__*/React__default.createElement(ChatHeaderToolbar, callHandlers));
+  })), showToolbar && /*#__PURE__*/React__default['default'].createElement(ChatHeaderToolbar, callHandlers));
 });
 /*
 import LayoutFlex from 'layouts/Flex'
@@ -3736,23 +3738,23 @@ var ChatInput = (function (props) {
       rest = _objectWithoutProperties(props, ["className", "handleChange", "handleSubmit", "value"]);
 
   var classes = genClasses.cEx(['chat-footer__message-input', className]);
-  return /*#__PURE__*/React__default.createElement("form", {
+  return /*#__PURE__*/React__default['default'].createElement("form", {
     className: classes,
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  }, /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     alignStretch: true
-  }, /*#__PURE__*/React__default.createElement(Input$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(Input$1, {
     name: "message",
     placeholder: "message",
     autoComplete: "off",
     onChange: handleChange,
     value: value
-  }), /*#__PURE__*/React__default.createElement(Button$1, {
+  }), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     fit: true,
     text: true,
     navbar: true,
     className: "button--send  flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(ArrowForward, null))));
+  }, /*#__PURE__*/React__default['default'].createElement(ArrowForward, null))));
 });
 
 var ChatRecord = (function (props) {
@@ -3764,19 +3766,19 @@ var ChatRecord = (function (props) {
       rest = _objectWithoutProperties(props, ["className", "recording", "handleDelete", "handleSend", "record"]);
 
   var classes = genClasses.cEx(['chat-footer__message-input', 'flex-row', 'align-stretch', className]);
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, recording && /*#__PURE__*/React__default.createElement("div", null, "Enregistrement"), !recording && record && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("audio", {
+  }, recording && /*#__PURE__*/React__default['default'].createElement("div", null, "Enregistrement"), !recording && record && /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("audio", {
     src: record,
     controls: true,
     preload: 'metadata'
-  }), /*#__PURE__*/React__default.createElement("button", {
+  }), /*#__PURE__*/React__default['default'].createElement("button", {
     onClick: handleDelete,
     className: "button button--send text icon--32 flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(fa.FaRegTrashAlt, null)), /*#__PURE__*/React__default.createElement("button", {
+  }, /*#__PURE__*/React__default['default'].createElement(fa.FaRegTrashAlt, null)), /*#__PURE__*/React__default['default'].createElement("button", {
     onClick: handleSend,
     className: "button button--send text icon--32 flex align-center just-center"
-  }, /*#__PURE__*/React__default.createElement(md.MdArrowForward, null))));
+  }, /*#__PURE__*/React__default['default'].createElement(md.MdArrowForward, null))));
 });
 
 var DefaultToolbar$1 = (function (props) {
@@ -3798,15 +3800,15 @@ var DefaultToolbar$1 = (function (props) {
   };
 
   var classes = genClasses.cEx(["chat-footer__toolbar", className]);
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, _extends({
     justBetween: true,
     className: classes
-  }, rest), capturePic && /*#__PURE__*/React__default.createElement(Camera$1, {
+  }, rest), capturePic && /*#__PURE__*/React__default['default'].createElement(Camera__default['default'], {
     onTakePhoto: function onTakePhoto(x) {
       handlePhoto && handlePhoto(x);
       setCapturePic(false);
     }
-  }), /*#__PURE__*/React__default.createElement("input", {
+  }), /*#__PURE__*/React__default['default'].createElement("input", {
     type: "file",
     id: "file",
     ref: fileUploader,
@@ -3814,21 +3816,21 @@ var DefaultToolbar$1 = (function (props) {
     style: {
       display: "none"
     }
-  }), /*#__PURE__*/React__default.createElement(Button$1, {
+  }), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: function onClick(x) {
       return setCapturePic(true);
     }
-  }, /*#__PURE__*/React__default.createElement(Camera, null), /*#__PURE__*/React__default.createElement("h2", null, "photo")), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(Camera, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "photo")), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     disabled: true,
     onClick: function onClick(_) {
       return fileUploader.current.click();
     }
-  }, /*#__PURE__*/React__default.createElement(AttachFile, null), /*#__PURE__*/React__default.createElement("h2", null, "Fichier")), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(AttachFile, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "Fichier")), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleAudio
-  }, /*#__PURE__*/React__default.createElement(Voice, null), /*#__PURE__*/React__default.createElement("h2", null, "audio")));
+  }, /*#__PURE__*/React__default['default'].createElement(Voice, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "audio")));
 });
 
 var __toolbar_prefix = 'toolbar';
@@ -3856,9 +3858,9 @@ var ChatFooter = function ChatFooter(props) {
       recordProps = _spreadObjectBeginWit6[0],
       rest = _spreadObjectBeginWit6[1];
 
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, _extends({
     className: className
-  }, rest), /*#__PURE__*/React__default.createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_prefix, toolbarProps)), !recording && !record && /*#__PURE__*/React__default.createElement(ChatInput, ReactUtils_5(__input_prefix, inputProps)), (recording || record) && /*#__PURE__*/React__default.createElement(ChatRecord, _extends({
+  }, rest), /*#__PURE__*/React__default['default'].createElement(DefaultToolbar$1, ReactUtils_5(__toolbar_prefix, toolbarProps)), !recording && !record && /*#__PURE__*/React__default['default'].createElement(ChatInput, ReactUtils_5(__input_prefix, inputProps)), (recording || record) && /*#__PURE__*/React__default['default'].createElement(ChatRecord, _extends({
     recording: recording,
     record: record
   }, ReactUtils_5(__record_prefix, recordProps))));
@@ -4120,24 +4122,24 @@ var index$9 = (function (props) {
   var classesOverlay = genClasses.cEx(["drop_overlay", function (_) {
     return dragging ? 'drop_overlay--visible' : '';
   }]);
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: "hermed-chat"
-  }, /*#__PURE__*/React__default.createElement(ChatHeader, _extends({
+  }, /*#__PURE__*/React__default['default'].createElement(ChatHeader, _extends({
     subtitle: remoteStatus,
     title: remoteName,
     badge: remoteBadge
-  }, headerProps)), /*#__PURE__*/React__default.createElement("section", {
+  }, headerProps)), /*#__PURE__*/React__default['default'].createElement("section", {
     ref: chatRef,
     className: classes,
     onTouchStart: holdScroll,
     onTouchEnd: releaseScroll,
     onMouseDown: holdScroll,
     onMouseUp: releaseScroll
-  }, props.children, /*#__PURE__*/React__default.createElement("div", {
+  }, props.children, /*#__PURE__*/React__default['default'].createElement("div", {
     className: classesOverlay
-  }, " ", /*#__PURE__*/React__default.createElement("h2", null, " lachez pour envoyer "), " ", /*#__PURE__*/React__default.createElement(Upload, {
+  }, " ", /*#__PURE__*/React__default['default'].createElement("h2", null, " lachez pour envoyer "), " ", /*#__PURE__*/React__default['default'].createElement(Upload, {
     xl: true
-  }))), /*#__PURE__*/React__default.createElement(ChatFooter$1, {
+  }))), /*#__PURE__*/React__default['default'].createElement(ChatFooter$1, {
     recording: isRecording,
     record: record,
     toolbarHandleAudio: handleAudio,
@@ -4172,14 +4174,14 @@ var index$a = (function (props) {
   var styles = {
     '--bg-position': isOrganiser ? 'right' : 'left'
   };
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, /*#__PURE__*/React__default.createElement("header", {
+  }, /*#__PURE__*/React__default['default'].createElement("header", {
     className: "grow-5",
     style: styles
-  }), /*#__PURE__*/React__default.createElement("section", {
+  }), /*#__PURE__*/React__default['default'].createElement("section", {
     className: "grow-2 flex-column just-center align-center content-container"
-  }, /*#__PURE__*/React__default.createElement("h1", null, "Bienvenue"), props.children));
+  }, /*#__PURE__*/React__default['default'].createElement("h1", null, "Bienvenue"), props.children));
 });
 
 var LayoutGrid = (function (props) {
@@ -4193,7 +4195,7 @@ var LayoutGrid = (function (props) {
   }, function (_) {
     return layout2 ? 'layout-grid--2r' : '';
   }]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children));
 });
@@ -4238,30 +4240,30 @@ var DefaultToolbar$2 = (function (props) {
   };
 
   var classes = genClasses.cEx([__base_class$7, className]);
-  return /*#__PURE__*/React__default.createElement(LayoutFlex, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(LayoutFlex, _extends({
     justEvenly: true,
     className: classes
-  }, rest), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, rest), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: handleChat
-  }, " ", /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Chat")), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, " ", /*#__PURE__*/React__default['default'].createElement(md.MdChat, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "Chat")), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: _toggleMicro
-  }, _microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophone, null), !_microEnabled && /*#__PURE__*/React__default.createElement(fa.FaMicrophoneSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Micro")), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, _microEnabled && /*#__PURE__*/React__default['default'].createElement(fa.FaMicrophone, null), !_microEnabled && /*#__PURE__*/React__default['default'].createElement(fa.FaMicrophoneSlash, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "Micro")), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: _toggleCamera
-  }, _cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideo, null), !_cameraEnabled && /*#__PURE__*/React__default.createElement(fa.FaVideoSlash, null), /*#__PURE__*/React__default.createElement("h2", null, "Camera")), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, _cameraEnabled && /*#__PURE__*/React__default['default'].createElement(fa.FaVideo, null), !_cameraEnabled && /*#__PURE__*/React__default['default'].createElement(fa.FaVideoSlash, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "Camera")), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     fit: true,
     navbar: true,
     className: "icon--s",
     onClick: handleSwitch
-  }, /*#__PURE__*/React__default.createElement(md.MdChat, null), /*#__PURE__*/React__default.createElement("h2", null, "Switch")));
+  }, /*#__PURE__*/React__default['default'].createElement(md.MdChat, null), /*#__PURE__*/React__default['default'].createElement("h2", null, "Switch")));
 });
 
 var VideoCall = function VideoCall(_ref) {
@@ -4287,29 +4289,29 @@ var VideoCall = function VideoCall(_ref) {
       toolbarProps = _filterPropStartingWi6[0],
       notSuitableForToolbar = _filterPropStartingWi6[1];
 
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: className
-  }, notSuitableForToolbar), /*#__PURE__*/React__default.createElement(LayoutGrid, {
+  }, notSuitableForToolbar), /*#__PURE__*/React__default['default'].createElement(LayoutGrid, {
     className: "layout-video-call"
-  }, /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  }, /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     className: "position-relative"
-  }, /*#__PURE__*/React__default.createElement(Video, _extends({
+  }, /*#__PURE__*/React__default['default'].createElement(Video, _extends({
     autoPlay: true,
     loop: true
-  }, ReactUtils_5('video', mainVideoProps))), /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  }, ReactUtils_5('video', mainVideoProps))), /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     justEvenly: true,
     className: "".concat(__base_class$8, "__controls")
-  }, incoming && /*#__PURE__*/React__default.createElement(Button$1, {
+  }, incoming && /*#__PURE__*/React__default['default'].createElement(Button$1, {
     round: true,
     success: true,
     onClick: handleAnswer
-  }, /*#__PURE__*/React__default.createElement(md.MdCall, null)), /*#__PURE__*/React__default.createElement(Button$1, {
+  }, /*#__PURE__*/React__default['default'].createElement(md.MdCall, null)), /*#__PURE__*/React__default['default'].createElement(Button$1, {
     round: true,
     failure: true,
     onClick: handleDiscard
-  }, /*#__PURE__*/React__default.createElement(md.MdCallEnd, null)))), !Toolbar && /*#__PURE__*/React__default.createElement(DefaultToolbar$2, ReactUtils_5('toolbar', toolbarProps))), /*#__PURE__*/React__default.createElement(Draggable, {
+  }, /*#__PURE__*/React__default['default'].createElement(md.MdCallEnd, null)))), !Toolbar && /*#__PURE__*/React__default['default'].createElement(DefaultToolbar$2, ReactUtils_5('toolbar', toolbarProps))), /*#__PURE__*/React__default['default'].createElement(Draggable__default['default'], {
     bounds: '.' + __base_class$8
-  }, /*#__PURE__*/React__default.createElement(Video, _extends({
+  }, /*#__PURE__*/React__default['default'].createElement(Video, _extends({
     preview: true,
     autoPlay: true,
     loop: true,
@@ -4374,7 +4376,7 @@ var index$c = (function (props) {
   }, function (_) {
     return stretch && _height > window.innerHeight ? modifier$c('adapt') : '';
   }, className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     ref: ref,
     className: classes,
     style: _objectSpread2({
@@ -4399,10 +4401,10 @@ var index$d = (function (props) {
 
   var _baseIndex = baseIndex || 1000;
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, React__default.Children.toArray(props.children).map(function (children, idx) {
-    return /*#__PURE__*/React__default.cloneElement(children, {
+  }, React__default['default'].Children.toArray(props.children).map(function (children, idx) {
+    return /*#__PURE__*/React__default['default'].cloneElement(children, {
       className: genClasses.cEx([children.props.className, element$d('stacked')]),
       key: "".concat(baseKey).concat(idx),
       style: _objectSpread2(_objectSpread2({}, children.props.style), {}, {
@@ -4512,7 +4514,7 @@ var Modal = (function (_ref) {
   }), _defineProperty(_ref2, modifier$e('bottom'), function (_) {
     return bottom;
   }), _ref2), className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes,
     ref: modalRef
   }, rest), children);
@@ -4523,7 +4525,7 @@ var index$e = (function (props) {
       rest = _objectWithoutProperties(props, ["className"]);
 
   var classes = genClasses.cEx(['container', className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children);
 });
@@ -4553,11 +4555,11 @@ var index$f = (function (_ref) {
   var children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["children"]);
 
-  return /*#__PURE__*/React__default.createElement(Modal, {
+  return /*#__PURE__*/React__default['default'].createElement(Modal, {
     cover: true
-  }, /*#__PURE__*/React__default.createElement(BackgroundOverlay, {
+  }, /*#__PURE__*/React__default['default'].createElement(BackgroundOverlay, {
     centered: true
-  }, /*#__PURE__*/React__default.createElement(Card, rest, children)));
+  }, /*#__PURE__*/React__default['default'].createElement(Card, rest, children)));
 });
 
 var _bem$h = bem('drop-overlay'),

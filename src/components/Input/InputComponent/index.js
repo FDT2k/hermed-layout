@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 
 import InputMask from 'react-input-mask'
 import InputCheckbox from 'components/Input/InputCheckbox'

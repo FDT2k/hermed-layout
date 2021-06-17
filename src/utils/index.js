@@ -68,7 +68,8 @@ export const withBem = bem => Component => props=>{
         bem.current,
         className
     ])
-    return <Component {...rest} parentBEM={bem} className={classes} />
+ //   return <Component {...rest} parentBEM={bem} className={classes} />
+    return <Component {...rest}  className={classes} />
 
 }
 

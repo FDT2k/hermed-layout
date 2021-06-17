@@ -94,7 +94,7 @@ $themes: (
     mainFont: 'soleil',
     textColor: $gray-99,
     textColorSecondary: $OuterSpace,
-
+    primaryBasic:$white,
     backgroundColorSecondary: $OasisLight,
     backgroundColor: $OuterSpace,
 
@@ -114,5 +114,17 @@ $themes: (
     buttonColor: $Coral,
     buttonBorder: 2px solid $Coral,
     buttonHoverColor: $SeaBuckthorn,
+
+    primaryColor: $gray-99,
+    primaryColorLight: $gray-99,
+    primaryColorDark:$gray-99,
+
+    secondaryColor: $OuterSpace,
+    secondaryColorLight: $OuterSpace,
+    secondaryColorDark: $OuterSpace,
+
+    thirdColor:green,
+    thirdColorLight:blue,
+    thirdColorDark:red,
   ),
 );

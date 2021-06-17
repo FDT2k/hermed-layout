@@ -2,17 +2,20 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var React = require('react');
-var React__default = _interopDefault(React);
 var compositeJs = require('@geekagency/composite-js');
 var genClasses = require('@geekagency/gen-classes');
-var InputMask = _interopDefault(require('react-input-mask'));
+var InputMask = require('react-input-mask');
 var md = require('react-icons/md');
 var fa = require('react-icons/fa');
 var gi = require('react-icons/gi');
-var ReactLoading = _interopDefault(require('react-loading'));
+var ReactLoading = require('react-loading');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+var InputMask__default = /*#__PURE__*/_interopDefaultLegacy(InputMask);
+var ReactLoading__default = /*#__PURE__*/_interopDefaultLegacy(ReactLoading);
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -1965,7 +1968,7 @@ var ObjectUtils_10 = ObjectUtils.propMatch;
 var ObjectUtils_11 = ObjectUtils.spec;
 var ObjectUtils_12 = ObjectUtils.spreadFilterByKey;
 
-var e = React__default.createElement;
+var e = React__default['default'].createElement;
 
 var bem = function bem(main) {
   return [main, function (block) {
@@ -2003,7 +2006,7 @@ var wrapComponent = function wrapComponent(Wrap) {
       var children = _ref.children,
           rest = _objectWithoutProperties(_ref, ["children"]);
 
-      return /*#__PURE__*/React__default.createElement(Wrap, rest, /*#__PURE__*/React__default.createElement(Component, null, children));
+      return /*#__PURE__*/React__default['default'].createElement(Wrap, rest, /*#__PURE__*/React__default['default'].createElement(Component, null, children));
     };
   };
 };
@@ -2011,7 +2014,7 @@ var divElement = function divElement(_ref2) {
   var children = _ref2.children,
       rest = _objectWithoutProperties(_ref2, ["children"]);
 
-  return /*#__PURE__*/React__default.createElement("div", rest, children);
+  return /*#__PURE__*/React__default['default'].createElement("div", rest, children);
 };
 var baseElement = compositeJs.curry(function (_e, _ref5) {
   var children = _ref5.children,
@@ -2037,7 +2040,7 @@ var withBaseClass = function withBaseClass(BaseClass) {
           rest = _objectWithoutProperties(props, ["className"]);
 
       var classes = genClasses.cEx([BaseClass, className]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({}, rest, {
         className: classes
       }));
     };
@@ -2049,9 +2052,9 @@ var withBem = function withBem(bem) {
       var className = props.className,
           rest = _objectWithoutProperties(props, ["className"]);
 
-      var classes = genClasses.cEx([bem.current, className]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, rest, {
-        parentBEM: bem,
+      var classes = genClasses.cEx([bem.current, className]); //   return <Component {...rest} parentBEM={bem} className={classes} />
+
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({}, rest, {
         className: classes
       }));
     };
@@ -2070,7 +2073,7 @@ var withModifiers = function withModifiers(namer, modifiers) {
           _props = _spreadObjectPresentI2[1];
 
       var classes = genClasses.cEx([className, modifiersToCeX(namer, modifiers, presentModifiers)]);
-      return /*#__PURE__*/React__default.createElement(Component, _extends({
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({
         className: classes
       }, _props));
     };
@@ -2102,7 +2105,7 @@ var withTransformedProps = function withTransformedProps(namer, modifiers) {
 
 
       var classes = genClasses.cEx([className].concat(_toConsumableArray(propsToCeX(namer, modifiers, presentModifiers))));
-      return /*#__PURE__*/React__default.createElement(Component, _extends({
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({
         className: classes
       }, _props));
     };
@@ -2132,7 +2135,7 @@ var applyModifiers = function applyModifiers(modifiers, unless) {
         _m = modifiers;
       }
 
-      return /*#__PURE__*/React__default.createElement(Component, _extends({}, _m, props));
+      return /*#__PURE__*/React__default['default'].createElement(Component, _extends({}, _m, props));
     };
   };
 };
@@ -2156,7 +2159,7 @@ var Button = function Button(props) {
   var children = props.children,
       rest = _objectWithoutProperties(props, ["children"]);
 
-  return /*#__PURE__*/React__default.createElement("button", rest, children);
+  return /*#__PURE__*/React__default['default'].createElement("button", rest, children);
 };
 var enhance = compositeJs.compose(withBaseClass(BASE_CLASS), applyModifiers(_defineProperty({}, button_default_style, true), button_styles), // if no style, we want it to be contained
 withBaseButtonsModifiers);
@@ -2201,7 +2204,7 @@ var index = (function (props) {
 
   var _onSubmit = onSubmit || defaultSubmit;
 
-  return /*#__PURE__*/React__default.createElement("form", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("form", _extends({
     className: genClasses.cEx(["basic-form", function (_) {
       return className;
     }]),
@@ -2234,16 +2237,16 @@ var Checkbox = function Checkbox(props) {
     }
   };
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: className
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "container",
     onClick: handleClick
-  }, /*#__PURE__*/React__default.createElement("input", _extends({
+  }, /*#__PURE__*/React__default['default'].createElement("input", _extends({
     ref: cb,
     checked: check,
     type: "checkbox"
-  }, rest)), /*#__PURE__*/React__default.createElement("span", {
+  }, rest)), /*#__PURE__*/React__default['default'].createElement("span", {
     className: "checkmark"
   })));
 };
@@ -2256,11 +2259,11 @@ var InputComponent = (function (props) {
 
   var _type = type || 'text';
 
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, type !== "checkbox" && /*#__PURE__*/React__default.createElement(InputMask, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, type !== "checkbox" && /*#__PURE__*/React__default['default'].createElement(InputMask__default['default'], _extends({
     id: id,
     type: _type,
     autoComplete: "off"
-  }, rest)), type === "checkbox" && /*#__PURE__*/React__default.createElement(InputCheckbox, _extends({
+  }, rest)), type === "checkbox" && /*#__PURE__*/React__default['default'].createElement(InputCheckbox, _extends({
     id: id
   }, rest)));
 });
@@ -2335,7 +2338,7 @@ var LayoutFlex = (function (props) {
   }), _defineProperty(_ref, modifier$1('content-start'), function (_) {
     return contentStart;
   }), _ref), className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children));
 });
@@ -2398,13 +2401,13 @@ var index$1 = (function (props) {
       notInputProps = _filterInput2[1]; // default type to text 
 
 
-  return /*#__PURE__*/React__default.createElement(Container, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(Container, _extends({
     error: error,
     checkbox: checkbox
-  }, forwardFlex(_flexProps)), /*#__PURE__*/React__default.createElement(Label, _extends({
+  }, forwardFlex(_flexProps)), /*#__PURE__*/React__default['default'].createElement(Label, _extends({
     error: error,
     htmlFor: id
-  }, forwardLabel(_labelProps)), label, error && error !== true && /*#__PURE__*/React__default.createElement(Error$1, null, error)), /*#__PURE__*/React__default.createElement(Input, _extends({
+  }, forwardLabel(_labelProps)), label, error && error !== true && /*#__PURE__*/React__default['default'].createElement(Error$1, null, error)), /*#__PURE__*/React__default['default'].createElement(Input, _extends({
     id: id,
     error: error
   }, forwardInput(_inputProps), notInputProps)));
@@ -2416,11 +2419,11 @@ var index$2 = (function (props) {
       className = props.className,
       rest = _objectWithoutProperties(props, ["label", "id", "className"]);
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: "single-select"
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "single-select__select"
-  }, /*#__PURE__*/React__default.createElement("select", _extends({
+  }, /*#__PURE__*/React__default['default'].createElement("select", _extends({
     id: id
   }, rest), props.children)));
 });
@@ -2511,7 +2514,7 @@ function IconBase(props) {
 }
 
 // THIS FILE IS AUTO GENERATED
-var TiWarning = function (props) {
+function TiWarning(props) {
   return GenIcon({
     "tag": "svg",
     "attr": {
@@ -2526,11 +2529,10 @@ var TiWarning = function (props) {
       }
     }]
   })(props);
-};
-TiWarning.displayName = "TiWarning";
+}
 
 // THIS FILE IS AUTO GENERATED
-var GoGear = function (props) {
+function GoGear(props) {
   return GenIcon({
     "tag": "svg",
     "attr": {
@@ -2544,9 +2546,8 @@ var GoGear = function (props) {
       }
     }]
   })(props);
-};
-GoGear.displayName = "GoGear";
-var GoKebabVertical = function (props) {
+}
+function GoKebabVertical(props) {
   return GenIcon({
     "tag": "svg",
     "attr": {
@@ -2560,8 +2561,7 @@ var GoKebabVertical = function (props) {
       }
     }]
   })(props);
-};
-GoKebabVertical.displayName = "GoKebabVertical";
+}
 
 var CLASSES = {
   BUTTON: 'button',
@@ -2624,10 +2624,10 @@ var index$5 = (function (props) {
   var className = props.className,
       handleBack = props.handleBack;
   var classes = genClasses.cEx([className]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, handleBack && /*#__PURE__*/React__default.createElement(Button$1, {
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, handleBack && /*#__PURE__*/React__default['default'].createElement(Button$1, {
     navbar: true,
     onClick: handleBack
-  }, /*#__PURE__*/React__default.createElement(ArrowBack, null)));
+  }, /*#__PURE__*/React__default['default'].createElement(ArrowBack, null)));
 });
 
 var index$6 = (function (props) {
@@ -2647,9 +2647,9 @@ var index$6 = (function (props) {
       return inverse === true;
     }
   }, className]);
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, label && /*#__PURE__*/React__default.createElement("h3", null, label), /*#__PURE__*/React__default.createElement(ReactLoading, {
+  }, label && /*#__PURE__*/React__default['default'].createElement("h3", null, label), /*#__PURE__*/React__default['default'].createElement(ReactLoading__default['default'], {
     color: "",
     type: type || "bubbles"
   }));
@@ -2718,9 +2718,9 @@ var Component$1 = function Component(props) {
     e.stopPropagation();
   };
 
-  return /*#__PURE__*/React__default.createElement(Cell, _extends({
+  return /*#__PURE__*/React__default['default'].createElement(Cell, _extends({
     onClick: _handleClick
-  }, rest), /*#__PURE__*/React__default.createElement(CellContent, null, Icon && /*#__PURE__*/React__default.createElement(Icon, null), props.children), /*#__PURE__*/React__default.createElement(CellOptionalContent, null, Optional && /*#__PURE__*/React__default.createElement(Optional, null)));
+  }, rest), /*#__PURE__*/React__default['default'].createElement(CellContent, null, Icon && /*#__PURE__*/React__default['default'].createElement(Icon, null), props.children), /*#__PURE__*/React__default['default'].createElement(CellOptionalContent, null, Optional && /*#__PURE__*/React__default['default'].createElement(Optional, null)));
 };
 
 var _bem$7 = bem('container-fullscreen'),
@@ -2772,7 +2772,7 @@ var index$9 = (function (props) {
   }, function (_) {
     return stretch && _height > window.innerHeight ? modifier$7('adapt') : '';
   }, className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     ref: ref,
     className: classes,
     style: _objectSpread2({
@@ -2797,10 +2797,10 @@ var index$a = (function (props) {
 
   var _baseIndex = baseIndex || 1000;
 
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes
-  }, React__default.Children.toArray(props.children).map(function (children, idx) {
-    return /*#__PURE__*/React__default.cloneElement(children, {
+  }, React__default['default'].Children.toArray(props.children).map(function (children, idx) {
+    return /*#__PURE__*/React__default['default'].cloneElement(children, {
       className: genClasses.cEx([children.props.className, element$8('stacked')]),
       key: "".concat(baseKey).concat(idx),
       style: _objectSpread2(_objectSpread2({}, children.props.style), {}, {
@@ -2910,7 +2910,7 @@ var Modal = (function (_ref) {
   }), _defineProperty(_ref2, modifier$9('bottom'), function (_) {
     return bottom;
   }), _ref2), className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes,
     ref: modalRef
   }, rest), children);
@@ -2921,7 +2921,7 @@ var index$b = (function (props) {
       rest = _objectWithoutProperties(props, ["className"]);
 
   var classes = genClasses.cEx(['container', className]);
-  return /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children);
 });
@@ -2937,7 +2937,7 @@ var index$c = (function (props) {
   }, function (_) {
     return layout2 ? 'layout-grid--2r' : '';
   }]);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes
   }, rest), props.children));
 });
@@ -2967,11 +2967,11 @@ var index$d = (function (_ref) {
   var children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["children"]);
 
-  return /*#__PURE__*/React__default.createElement(Modal, {
+  return /*#__PURE__*/React__default['default'].createElement(Modal, {
     cover: true
-  }, /*#__PURE__*/React__default.createElement(BackgroundOverlay, {
+  }, /*#__PURE__*/React__default['default'].createElement(BackgroundOverlay, {
     centered: true
-  }, /*#__PURE__*/React__default.createElement(Card, rest, children)));
+  }, /*#__PURE__*/React__default['default'].createElement(Card, rest, children)));
 });
 
 var BEM$1 = makeBem('tiled-section');
@@ -2987,9 +2987,9 @@ var TiledSection = compositeJs.compose(withBaseClass(current), applyModifiers({
 var Title = function Title(props) {
   var className = props.className,
       title = props.title;
-  return /*#__PURE__*/React__default.createElement("header", {
+  return /*#__PURE__*/React__default['default'].createElement("header", {
     className: className
-  }, /*#__PURE__*/React__default.createElement("h1", null, title));
+  }, /*#__PURE__*/React__default['default'].createElement("h1", null, title));
 };
 
 var _ParentBem$make$eleme = BEM$1.make.element('title'),
@@ -2999,7 +2999,7 @@ var _ParentBem$make$eleme = BEM$1.make.element('title'),
 var titleModifiers = ['main'];
 var withTitleModifiers = compositeJs.compose(withBaseClass(current$1), applyModifiers(_defineProperty({}, 'page', true), titleModifiers), withModifiers(function (x) {
   return modifier$c(x);
-}, ['page'].concat(titleModifiers)));
+}, ['page', 'animate'].concat(titleModifiers)));
 var index$e = withTitleModifiers(Title);
 
 var _ParentBem$make$eleme$1 = BEM$1.make.element('content'),
@@ -3025,20 +3025,20 @@ var ServiceCard = function ServiceCard(_ref) {
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["title", "hint", "buttonLabel", "handleClick", "children"]);
 
-  return /*#__PURE__*/React__default.createElement("article", rest, /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("article", rest, /*#__PURE__*/React__default['default'].createElement("div", {
     className: BEM$2.block("title")
-  }, /*#__PURE__*/React__default.createElement("h3", null, title)), /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  }, /*#__PURE__*/React__default['default'].createElement("h3", null, title)), /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     column: true
-  }, children), /*#__PURE__*/React__default.createElement(LayoutFlex, {
+  }, children), /*#__PURE__*/React__default['default'].createElement(LayoutFlex, {
     column: true,
     justEnd: true
-  }, /*#__PURE__*/React__default.createElement("p", {
+  }, /*#__PURE__*/React__default['default'].createElement("p", {
     className: BEM$2.block('hint')
   }, hint && hint.map(function (item) {
-    return /*#__PURE__*/React__default.createElement(React__default.Fragment, {
+    return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, {
       key: item
-    }, item, /*#__PURE__*/React__default.createElement("br", null));
-  })), /*#__PURE__*/React__default.createElement("button", {
+    }, item, /*#__PURE__*/React__default['default'].createElement("br", null));
+  })), /*#__PURE__*/React__default['default'].createElement("button", {
     onClick: handleClick
   }, buttonLabel)));
 };
@@ -3057,7 +3057,7 @@ var ServiceItemHeader = function ServiceItemHeader(_ref) {
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["title", "price", "children"]);
 
-  return /*#__PURE__*/React__default.createElement("header", rest, /*#__PURE__*/React__default.createElement("h4", null, title, ":"), /*#__PURE__*/React__default.createElement("p", {
+  return /*#__PURE__*/React__default['default'].createElement("header", rest, /*#__PURE__*/React__default['default'].createElement("h4", null, title, ":"), /*#__PURE__*/React__default['default'].createElement("p", {
     className: block('price')
   }, price));
 };
@@ -3069,11 +3069,11 @@ var ServiceItem = function ServiceItem(_ref2) {
       hint = _ref2.hint,
       rest = _objectWithoutProperties(_ref2, ["title", "priceLabel", "label", "hint"]);
 
-  return /*#__PURE__*/React__default.createElement("div", rest, /*#__PURE__*/React__default.createElement(ServiceItemHeader, {
+  return /*#__PURE__*/React__default['default'].createElement("div", rest, /*#__PURE__*/React__default['default'].createElement(ServiceItemHeader, {
     title: title,
     price: priceLabel,
     className: block('title')
-  }), /*#__PURE__*/React__default.createElement("p", null, label), /*#__PURE__*/React__default.createElement("p", null, /*#__PURE__*/React__default.createElement("i", null, hint)));
+  }), /*#__PURE__*/React__default['default'].createElement("p", null, label), /*#__PURE__*/React__default['default'].createElement("p", null, /*#__PURE__*/React__default['default'].createElement("i", null, hint)));
 };
 
 var enhance$4 = compositeJs.compose(withBaseClass(current$4));
@@ -3113,8 +3113,8 @@ var index$i = (function (props) {
   };
 
   React.useEffect(function () {
-    React__default.Children.forEach(children, function (element, idx) {
-      if (! /*#__PURE__*/React__default.isValidElement(element)) return;
+    React__default['default'].Children.forEach(children, function (element, idx) {
+      if (! /*#__PURE__*/React__default['default'].isValidElement(element)) return;
       var anchor = element.props.anchor;
       console.log(anchor, idx);
       console.log(window.location.hash);
@@ -3131,18 +3131,18 @@ var index$i = (function (props) {
       window.removeEventListener('hashchange', hashListener);
     };
   }, []);
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: "horizontal-tile-group"
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     ref: ref2,
     className: "horizontal-tile-group--container "
-  }, /*#__PURE__*/React__default.createElement("div", {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
     ref: ref,
     className: "horizontal-tile-group--content"
-  }, props.children)), /*#__PURE__*/React__default.createElement("div", {
+  }, props.children)), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "horizontal-tile-group--dots"
   }, dots.map(function (item, i) {
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: genClasses.cEx([{
         active: function active(_) {
           return index === i;
@@ -3152,7 +3152,7 @@ var index$i = (function (props) {
         return goto(item);
       }
     }, "o");
-  })), /*#__PURE__*/React__default.createElement("div", {
+  })), /*#__PURE__*/React__default['default'].createElement("div", {
     className: "horizontal-tile-group--overlay horizontal-tile-group--overlay__left"
   }));
 });

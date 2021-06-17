@@ -29,6 +29,9 @@
 @mixin themed_font($key,$var) {
   $_font_family: map-get($theme-map, $key);
   @extend #{'%'+$_font_family};
+  @debug "key: #{$key}";
+  @debug "key: #{$_font_family}";
+  @debug "key: #{$var}";
 
   //$_font_variant: map-get($theme-map, $var);
   //@extend #{'%'+$_font_variant};

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import {applyModifiers, baseElement, withBem, withModifiers, compose, makeBem, filterPropStartingWith, forwardProps, bem, cEx, makePropsFilter } from 'utils'
 import InputComponent from './InputComponent'
 import LayoutFlex from 'layouts/Flex'
